@@ -9,9 +9,14 @@ class Principal extends CI_Controller {
 		
 		$header['titulo'] = "Inicio";
 		
+		$this->load->model("escuela_md");
+		
+		$params["escuelas"] = $this->escuela_md->GetAll();
+		
 		$this->load->view('template/header', $header);
-		$this->load->view('inicio');
+		$this->load->view('inicio', $params);
 		$this->load->view('usuarios/modal_alta');
+		$this->load->view('coordinador/modal_alta');
 		$this->load->view('template/footer');
 	}
 }

@@ -1,7 +1,5 @@
 function Init() {
-	$(".datepicker").datetimepicker({
-		format: "DD/MM/YYYY"
-	});
+	$("#fechaNac, #fechaNacC").datepicker();
 	
 	$(window).load(function() {
         $('#slider').nivoSlider({
@@ -15,7 +13,7 @@ function Init() {
 		e.preventDefault();
 	});
 	
-	$("#curp, #rfc, #curpA").displayAsUppercase();
+	$("#curp, #rfc, #curpA, #curpC").displayAsUppercase();
 	
 	$("#password, #passwordConf, #passA").password({
 		message: "Haga click aquí para ver u ocultar la contraseña"
@@ -50,7 +48,39 @@ function OpenNewUserModal() {
 		$("#btnSiguiente").css("display", "inline");
 		$("#btnGuardar").css("display", "none");
 		
-		$("#modalNuevo").modal("show");
+		jQuery("#modalNuevo").modal("show");
+	});
+}
+
+function OpenNewOrganizerModal() {
+	$("#btnNuevoCoordinador").click(function(e) {
+		e.preventDefault();
+		
+		$('#formNuevo input[type="text"]').each(function() {
+			$(this).val("");
+		});
+		
+		$('#formNuevo input[type="password"]').each(function() {
+			$(this).val("");
+		});
+		
+		$("#formNuevo select").each(function() {
+			$(this).val("");
+		});
+		
+		$(".radio-perfil input").each(function() {
+			$(this).prop("checked", false);
+			$(this).parent().children("div").removeClass("active");
+		});
+		
+		$("#perfil").addClass("active");
+		$("#registro").removeClass("active");
+		
+		$("#btnAnterior").css("display", "none");
+		$("#btnSiguiente").css("display", "inline");
+		$("#btnGuardar").css("display", "none");
+		
+		jQuery("#modalCoordinador").modal("show");
 	});
 }
 
@@ -111,7 +141,7 @@ function Validate() {
 	
 	$("#formLoginA").validate({
 		ignore: [],
-		errorElement: "span",
+		errorElement: "small",
 		errorClass: "help-block",
 		errorPlacement: function(error, element) {
 			if ( element.parent(".input-group").length ) {
@@ -142,13 +172,48 @@ function Validate() {
 		}
 	});
 	
+	$("#formLoginC").validate({
+		ignore: [],
+		errorElement: "small",
+		errorClass: "help-block",
+		errorPlacement: function(error, element) {
+			if ( element.parent(".input-group").length ) {
+				error.insertAfter(element.parent());
+			} else {
+				error.insertAfter(element);
+			}
+		},
+		highlight: function(element) {
+			$(element).closest(".form-group").addClass("has-error");
+		},
+		unhighlight: function(element) {
+			$(element).closest(".form-group").removeClass("has-error");
+		},
+		rules: {
+			curpC: {
+				required: true,
+				minlength: 18
+			},
+			escuelaC: {
+				required: true
+			}
+		},
+		messages: {
+			curpC: {
+				minlength: "El CURP es incorrecto"
+			}
+		}
+	});
+	
 	$("#formNuevo").validate({
 		ignore: [],
-		errorElement: "span",
+		errorElement: "small",
 		errorClass: "help-block",
 		errorPlacement: function(error, element) {
 			if ( element.attr("name") == "rPerfil" ) {
 		        error.insertAfter(".tipo-perfil");
+			} else if ( element.attr("type") == "radio" ) {
+				error.insertAfter(element.parent().parent());
 			} else if ( element.parent(".input-group").length ) {
 				error.insertAfter(element.parent());
 			} else {
@@ -198,16 +263,20 @@ function Validate() {
 			emailConf: {
 				equalTo: "#email"
 			},
+			lada: {
+				required: true,
+				digits: true,
+				minlength: 2
+			},
 			telefono: {
 				required: true,
 				digits: true,
-				minlength: 10
+				minlength: 7
 			},
 			extension: {
 				required: true,
 				digits: true,
-				minlength: 3,
-				maxlength: 6
+				minlength: 5
 			},
 			escuela: {
 				required: true
@@ -231,20 +300,110 @@ function Validate() {
 				email: "El correo es incorrecto"
 			},
 			emailConf: "El correo no coincide",
+			lada: {
+				minlength: "La lada debe tener 2 o 3 dígitos",
+			},
 			telefono: {
-				minlength: "El número telefónico debe ser de por lo menos 10 dígitos"
+				minlength: "El número telefónico debe ser de 7 dígitos"
 			},
 			extension: {
-				minlength: "La extensión debe ser de 3 a 6 dígitos"
+				minlength: "La extensión debe ser de 5 dígitos"
 			},
 			passwordConf: "La contraseña no coincide"
 		}
 	});
+	
+	$("#formNuevoCoordinador").validate({
+		ignore: [],
+		errorElement: "small",
+		errorClass: "help-block",
+		errorPlacement: function(error, element) {
+			if ( element.attr("type") == "radio" ) {
+				error.insertAfter(element.parent().parent());
+			} else if ( element.parent(".input-group").length ) {
+				error.insertAfter(element.parent());
+			} else {
+				error.insertAfter(element);
+			}
+		},
+		highlight: function(element) {
+			$(element).closest(".form-group").addClass("has-error");
+		},
+		unhighlight: function(element) {
+			$(element).closest(".form-group").removeClass("has-error");
+		},
+		rules: {
+			nombreC: {
+				required: true
+			},
+			apPaternoC: {
+				required: true
+			},
+			apMaternoC: {
+				required: true
+			},
+			fechaNacC: {
+				required: true
+			},
+			curpC: {
+				required: true,
+				minlength: 18
+			},
+			sexoC: {
+				required: true
+			},
+			emailC: {
+				required: true,
+				email: true
+			},
+			emailConfC: {
+				equalTo: "#emailC"
+			},
+			ladaC: {
+				required: true,
+				digits: true,
+				minlength: 2
+			},
+			telefonoC: {
+				required: true,
+				digits: true,
+				minlength: 7
+			},
+			extensionC: {
+				required: true,
+				digits: true,
+				minlength: 5
+			},
+			escuelaC: {
+				required: true
+			}
+		},
+		messages: {
+			curpC: {
+				minlength: "El CURP es incorrecto"
+			},
+			emailC: {
+				email: "El correo es incorrecto"
+			},
+			emailConfC: "El correo no coincide",
+			ladaC: {
+				minlength: "La lada debe tener 2 o 3 dígitos",
+			},
+			telefonoC: {
+				minlength: "El número telefónico debe ser de 7 dígitos"
+			},
+			extensionC: {
+				minlength: "La extensión debe ser de 5 dígitos"
+			}
+		}
+	});
 }
 
-$(function() {
+$gmx(document).ready(function() {
+	/*$.noConflict();*/
 	Init();
 	OpenNewUserModal();
+	OpenNewOrganizerModal();
 	ChooseProfile();
 	Navigate();
 	Validate();

@@ -1,13 +1,17 @@
 function Init() {
-	$(".datepicker").datetimepicker({
-		format: "DD/MM/YYYY"
-	});
+	$(".datepicker").datepicker();
 	
 	$("#emailConf, #passwordConf").on("cut copy paste", function(e) {
 		e.preventDefault();
 	});
 	
 	$("#curp, #rfc").displayAsUppercase();
+	
+	$("#password, #passwordConf").password({
+		message: "Haga click aquí para ver u ocultar la contraseña"
+	});
+	
+	$("#panel-base, #panel-interinato, #panel-sabatico, #panel-sueldo").css("display", "none");
 }
 
 function Validate() {
@@ -22,11 +26,11 @@ function Validate() {
 	
 	$("#formUsuario").validate({
 		ignore: [],
-		errorElement: "span",
+		errorElement: "small",
 		errorClass: "help-block",
 		errorPlacement: function(error, element) {
-			if ( element.attr("name") == "rPerfil" ) {
-		        error.insertAfter(".tipo-perfil");
+			if ( element.attr("type") == "radio" ) {
+				error.insertAfter(element.parent().parent());
 			} else if ( element.parent(".input-group").length ) {
 				error.insertAfter(element.parent());
 			} else {
@@ -76,21 +80,22 @@ function Validate() {
 			emailConf: {
 				equalTo: "#email"
 			},
+			lada: {
+				required: true,
+				digits: true,
+				minlength: 2
+			},
 			telefono: {
 				required: true,
 				digits: true,
-				minlength: 10
+				minlength: 7
 			},
 			extension: {
 				required: true,
 				digits: true,
-				minlength: 3,
-				maxlength: 6
+				minlength: 5
 			},
 			escuela: {
-				required: true
-			},
-			password: {
 				required: true
 			},
 			passwordConf: {
@@ -109,6 +114,12 @@ function Validate() {
 				number: true
 			},
 			materiasCursa: {
+				required: true
+			},
+			pifi: {
+				required: true
+			},
+			conacyt: {
 				required: true
 			},
 			numSIP: {
@@ -151,11 +162,14 @@ function Validate() {
 				email: "El correo es incorrecto"
 			},
 			emailConf: "El correo no coincide",
+			lada: {
+				minlength: "La lada debe tener 2 o 3 dígitos",
+			},
 			telefono: {
-				minlength: "El número telefónico debe ser de por lo menos 10 dígitos"
+				minlength: "El número telefónico debe ser de 7 dígitos"
 			},
 			extension: {
-				minlength: "La extensión debe ser de 3 a 6 dígitos"
+				minlength: "La extensión debe ser de 5 dígitos"
 			},
 			passwordConf: "La contraseña no coincide",
 			semestre: {

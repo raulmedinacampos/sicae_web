@@ -25,6 +25,19 @@ h3.titulo {
 	border-radius: 20px 0;
 }
 
+.glyphicon {
+	font-family: "Glyphicons Halflings" !important;
+}
+
+.obligatorio:after {
+	content: "*";
+	margin-left: 5px;
+}
+
+.placeholder {
+	color: #999999;
+}
+
 .radio-perfil > input {
 	visibility: hidden;
 }
@@ -93,6 +106,39 @@ h3.titulo {
 }
 
 
+/********** Barra de menú **********/
+
+#mainWrapper .navbar {
+	border-radius: 16px 0 16px 0;
+}
+
+#mainWrapper .navbar-default {
+	background-color: #6C1D45;
+}
+
+#mainWrapper .navbar-nav > li > a {
+	text-decoration: none;
+}
+
+#mainWrapper .navbar-default .navbar-nav > li > a, 
+#mainWrapper .navbar-default .navbar-text {
+	color: #FFFFFF;
+}
+
+#mainWrapper .navbar-default .navbar-nav > li > a:focus, 
+#mainWrapper .navbar-default .navbar-nav > li > a:hover {
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+
+#mainWrapper .navbar-default .navbar-nav > .active > a, 
+#mainWrapper .navbar-default .navbar-nav > .active > a:focus, 
+#mainWrapper .navbar-default .navbar-nav > .active > a:hover {
+	background-color: #8C5069;
+	color: #FFFFFF;
+}
+
+
 /********** Botones switch **********/
 
 .btn-switch {
@@ -114,6 +160,34 @@ h3.titulo {
 }
 
 
+/********** Datatables **********/
+
+.dataTable {
+	width: 100%;
+}
+
+.dataTable td, 
+.dataTable th {
+	padding: 3px 5px; 
+}
+
+.dataTable th {
+	white-space: nowrap; 
+}
+
+.dataTable img {
+	max-width: 30px;
+}
+
+.dataTable .even {
+	background-color: #DADADA;
+}
+
+.dataTables_filter {
+	display: none;
+}
+
+
 /********** Páneles **********/
 
 .panel-title {
@@ -128,6 +202,17 @@ h3.titulo {
 	margin-bottom: 80px;
 	background-color: #EAEAEA;
 	color: #656565;
+}
+
+
+/********** Modal alta usuario **********/
+
+#perfil ol {
+	padding-left: 25px;
+}
+
+#perfil li {
+	padding-left: 10px;
 }
 
 /********** Tabs **********/
@@ -171,4 +256,13 @@ h3.titulo {
 
 .nav-tabs > li > a:hover {
 	border-bottom-color: #8C5069;
+}
+
+.wizard-steps li a {
+	text-decoration: none;
+	color: #000000;
+}
+
+.wizard-steps li.completed a {
+	color: #FFFFFF;
 }

@@ -1,21 +1,22 @@
-<h3 class="titulo"><?php echo "Alta de ".$perfilC; ?></h3>
+<h3><?php echo "Alta de ".$perfilC; ?></h3>
+<hr class="red" />
 <form id="formUsuario" name="formUsuario" method="post" action="">
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" role="tablist">
 		<li role="presentation" class="active"><a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">Información personal</a></li>
 		<?php
-			if ( $perfil == "p") {
+			if ( $perfil == "1") {  // Profesor
 		?>
-		<li role="presentation"><a href="#profesor" aria-controls="profesor" role="tab" data-toggle="tab">Profesor</a></li>
+		<li role="presentation"><a href="#profesor" aria-controls="profesor" role="tab" data-toggle="tab">Datos laborales</a></li>
 		<li role="presentation"><a href="#grados" aria-controls="grados" role="tab" data-toggle="tab">Grados académicos</a></li>
 		<li role="presentation"><a href="#productividad" aria-controls="productividad" role="tab" data-toggle="tab">Productividad <?php echo (date('Y')-2)."-".(date('Y')-1); ?></a></li>
 		<li role="presentation"><a href="#proyectos" aria-controls="proyectos" role="tab" data-toggle="tab">Proyectos</a></li>
 		<?php
 			}
 			
-			if ( $perfil == "a") {
+			if ( $perfil == "3") {  // Alumno
 		?>
-		<li role="presentation"><a href="#alumno" aria-controls="alumno" role="tab" data-toggle="tab">Alumno</a></li>
+		<li role="presentation"><a href="#alumno" aria-controls="alumno" role="tab" data-toggle="tab">Datos escolares</a></li>
 		<li role="presentation"><a href="#grados" aria-controls="grados" role="tab" data-toggle="tab">Grados académicos</a></li>
 		<?php
 			}
@@ -27,88 +28,107 @@
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="personal">
 			<div class="row">
-				<div class="form-group col-sm-6">
-					<label>Nombre</label>
-					<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingrese su nombre" />
+				<div class="form-group col-sm-4">
+					<label class="obligatorio">CURP:</label>
+					<input type="text" id="curp" name="curp" maxlength="18" class="form-control" placeholder="Ingresa tu CURP" value="<?php if(isset($persona)) {echo $persona["CURP"];} ?>" />
 				</div>
-				<div class="form-group col-sm-6">
-					<label>Apellido paterno</label>
-					<input type="text" id="apPaterno" name="apPaterno" class="form-control" placeholder="Ingrese su apellido paterno" />
+				<div class="form-group col-sm-4">
+					<label class="obligatorio">RFC:</label>
+					<input type="text" id="rfc" name="rfc" maxlength="13" class="form-control" placeholder="Ingresa tu RFC" value="<?php if(isset($persona)) {echo $persona["RFC"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
-					<label>Apellido materno</label>
-					<input type="text" id="apMaterno" name="apMaterno" class="form-control" placeholder="Ingrese su apellido materno" />
+				<div class="form-group col-sm-4">
+					<label class="obligatorio">Nombre(s):</label>
+					<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingresa tu nombre" value="<?php if(isset($persona)) {echo $persona["NOMBRE"];} ?>" />
 				</div>
-				<div class="form-group col-sm-6">
-					<label>Fecha de nacimiento</label>
-					<div class="input-group date datepicker">
-						<input type="text" id="fechaNac" name="fechaNac" class="form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-						<div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+				<div class="form-group col-sm-4">
+					<label class="obligatorio">Primer apellido:</label>
+					<input type="text" id="apPaterno" name="apPaterno" class="form-control" placeholder="Ingresa tu primer apellido" value="<?php if(isset($persona)) {echo $persona["APELLIDO_P"];} ?>" />
+				</div>
+				<div class="form-group col-sm-4">
+					<label class="obligatorio">Segundo apellido:</label>
+					<input type="text" id="apMaterno" name="apMaterno" class="form-control" placeholder="Ingresa tu segundo apellido" value="<?php if(isset($persona)) {echo $persona["APELLIDO_M"];} ?>" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-4">
+					<label class="obligatorio">Sexo:</label>
+					<div>
+						<label class="radio-inline">
+							<input type="radio" id="rdbH" name="sexo" <?php if ( isset($persona) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="M" /> Hombre
+						</label>
+						<label class="radio-inline">
+							<input type="radio" id="rdbM" name="sexo" <?php if ( isset($persona) && $persona["GENERO"] == "F" ) {echo 'checked="checked"'; } ?> value="F" /> Mujer
+						</label>
+					</div>
+				</div>
+				<div class="form-group col-sm-4">
+					<label class="obligatorio">Nacionalidad:</label>
+					<div>
+						<label class="radio-inline">
+							<input type="radio" id="rdbMex" name="nacionalidad" <?php if ( isset($persona) && preg_match("/(mex).*/i", $persona["NACIONALIDAD"]) == 1 ) {echo 'checked="checked"'; } ?> value="Mexicano" /> Mexicano
+						</label>
+						<label class="radio-inline">
+							<input type="radio" id="rdbExt" name="nacionalidad" <?php if ( isset($persona) && preg_match("/(mex).*/i", $persona["NACIONALIDAD"]) == 0 ) {echo 'checked="checked"'; } ?> value="Extranjero" /> Extranjero
+						</label>
+					</div>
+				</div>
+				<div class="form-group col-sm-4">
+					<div class="datepicker-group">
+						<label class="obligatorio">Fecha de nacimiento:</label>
+						<input type="text" id="fechaNac" name="fechaNac" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de nacimiento" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" />
+						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
-					<label>CURP</label>
-					<input type="text" id="curp" name="curp" maxlength="18" class="form-control" placeholder="Ingrese su CURP" />
+				<div class="form-group col-sm-2">
+					<label class="obligatorio">Lada:</label>
+					<input type="text" id="lada" name="lada" maxlength="3" class="form-control" value="<?php if(isset($persona)) {echo $persona["LADA"];} ?>" placeholder="Lada" />
 				</div>
-				<div class="form-group col-sm-6">
-					<label>RFC</label>
-					<input type="text" id="rfc" name="rfc" maxlength="13" class="form-control" placeholder="Ingrese su RFC" />
+				<div class="form-group col-sm-4">
+					<label class="obligatorio">Teléfono fijo:</label>
+					<input type="text" id="telefono" name="telefono" maxlength="15" class="form-control" data-mask="9999999" value="<?php if(isset($persona)) {echo $persona["TELEFONO"];} ?>" placeholder="Teléfono fijo" />
 				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-sm-6">
-					<label>Sexo</label>
-					<select id="sexo" name="sexo" class="form-control">
-						<option value="">Seleccione su sexo</option>
-						<option value="h">Hombre</option>
-						<option value="m">Mujer</option>
-					</select>
-				</div>
-				<div class="form-group col-sm-6">
-					<label>Nacionalidad</label>
-					<input type="text" id="nacionalidad" name="nacionalidad" class="form-control" placeholder="Ingrese su nacionalidad de origen" />
+				<div class="form-group col-sm-2">
+					<label class="obligatorio">Extensión:</label>
+					<input type="text" id="extension" name="extension" maxlength="5" class="form-control" data-mask="99999" value="<?php if(isset($persona)) {echo $persona["EXTENSION"];} ?>" placeholder="Extensión" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
-					<label>Correo electrónico</label>
-					<input type="text" id="email" name="email" class="form-control" placeholder="Ingrese su email para recibir notificación de dictamen" />
+				<div class="form-group col-sm-4">
+					<label class="obligatorio">Correo electrónico:</label>
+					<input type="text" id="email" name="email" class="form-control" placeholder="Email para recibir notificación de dictamen" value="<?php if(isset($persona)) {echo $persona["EMAIL"];} ?>" />
 				</div>
-				<div class="form-group col-sm-6">
-					<label>Confirmar correo electrónico</label>
-					<input type="text" id="emailConf" name="emailConf" class="form-control" placeholder="Confirme el correo electrónico" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-sm-6">
-					<label>Teléfono</label>
-					<input type="text" id="telefono" name="telefono" maxlength="15" class="form-control" data-mask="9999999999" placeholder="Ingrese su teléfono incluyendo lada" />
-				</div>
-				<div class="form-group col-sm-6">
-					<label>Extensión</label>
-					<input type="text" id="extension" name="extension" maxlength="6" class="form-control" data-mask="999?999" placeholder="Ingrese su extensión. Mínimo 3 y máximo 6 dígitos" />
+				<div class="form-group col-sm-4">
+					<label class="obligatorio">Confirmar correo electrónico:</label>
+					<input type="text" id="emailConf" name="emailConf" class="form-control" placeholder="Confirma el correo electrónico" value="<?php if(isset($persona)) {echo $persona["EMAIL"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>Escuela</label>
+					<label class="obligatorio">Escuela:</label>
 					<select id="escuela" name="escuela" class="form-control">
-						<option value="">Seleccione su centro de adscripción</option>
+						<option value="">Selecciona tu centro de adscripción</option>
+						<?php
+						foreach ( $escuelas as $val ) {
+						?>
+						<option <?php if ( isset($persona) && $persona["CENTRO_ADSCRIPCION"] == $val->ID ) {echo 'selected="selected"'; } ?> value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE_CORTO; ?></option>
+						<?php
+						}
+						?>
 					</select>
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
-					<label>Contraseña</label>
-					<input type="password" id="password" name="password" class="form-control" placeholder="Ingrese una contraseña" />
+				<div class="form-group col-sm-4">
+					<label>Contraseña:</label>
+					<input type="password" id="password" name="password" class="form-control" placeholder="<?php if(isset($persona)) {echo 'Nueva contraseña';} else {echo 'Ingresa una contraseña';} ?>" />
 				</div>
-				<div class="form-group col-sm-6">
-					<label>Confirmar contraseña</label>
-					<input type="password" id="passwordConf" name="passwordConf" class="form-control" placeholder="Confirme la contraseña" />
+				<div class="form-group col-sm-4">
+					<label>Confirmar contraseña:</label>
+					<input type="password" id="passwordConf" name="passwordConf" class="form-control" placeholder="<?php if(isset($persona)) {echo 'Confirma la nueva contraseña';} else {echo 'Confirma la contraseña';} ?>" />
 				</div>
 			</div>
 		</div>
@@ -116,7 +136,9 @@
 			<div class="row">
 				<div class="form-group col-sm-6">
 					<label>Tipo de nombramiento</label>
-					<input type="text" id="" name="" class="form-control" placeholder="Ingrese su nombre" />
+					<select id="tipoNombramiento" name="tipoNombramiento" class="form-control">
+						<option value="">Seleccione su tipo de nombramiento</option>
+					</select>
 				</div>
 				<div class="form-group col-sm-6">
 					<label>Número de empleado</label>
@@ -125,10 +147,10 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-6">
-					<label>Fecha de ingreso</label>
-					<div class="input-group date datepicker">
-						<input type="text" class="form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-						<div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+					<div class="datepicker-group">
+						<label>Fecha de ingreso</label>
+						<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="form-group col-sm-6">
@@ -147,17 +169,17 @@
 					</div>
 				</div>
 			</div>
-			<div class="panel panel-default">
+			<div id="panel-base" class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Base</h3>
 				</div>
 				<div class="panel-body">
 					<div class="row">
 						<div class="form-group col-sm-6">
-							<label>Fecha en que obtuvo la base</label>
-							<div class="input-group date datepicker">
-								<input type="text" class="form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+							<div class="datepicker-group">
+								<label>Fecha en que obtuvo la base</label>
+								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
 						<div class="form-group col-sm-6">
@@ -179,30 +201,30 @@
 					</div>
 				</div>
 			</div>
-			<div class="panel panel-default">
+			<div id="panel-interinato" class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Interinato</h3>
 				</div>
 				<div class="panel-body">
 					<div class="row">
 						<div class="form-group col-sm-6">
-							<label>Fecha de inicio de interinato</label>
-							<div class="input-group date datepicker">
-								<input type="text" class="form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+							<div class="datepicker-group">
+								<label>Fecha de inicio de interinato</label>
+								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
 						<div class="form-group col-sm-6">
-							<label>Fecha de término de interinato</label>
-							<div class="input-group date datepicker">
-								<input type="text" class="form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+							<div class="datepicker-group">
+								<label>Fecha de término de interinato</label>
+								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="panel panel-default">
+			<div id="panel-sabatico" class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Sabático</h3>
 				</div>
@@ -230,17 +252,17 @@
 							</select>
 						</div>
 						<div class="form-group col-sm-4">
-							<label>Fecha de inicio de sabático</label>
-							<div class="input-group date datepicker">
-								<input type="text" class="form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+							<div class="datepicker-group">
+								<label>Fecha de inicio de sabático</label>
+								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
 						<div class="form-group col-sm-4">
-							<label>Fecha de término de sabático</label>
-							<div class="input-group date datepicker">
-								<input type="text" class="form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+							<div class="datepicker-group">
+								<label>Fecha de término de sabático</label>
+								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
 					</div>
@@ -261,7 +283,7 @@
 						</div>
 				</div>
 			</div>
-			<div class="panel panel-default">
+			<div id="panel-sueldo" class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title pull-left">¿Cuenta con licencia de goce de sueldo?</h3>
 					<div class="btn-group" data-toggle="buttons">
@@ -278,17 +300,17 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="form-group col-sm-4">
-							<label>Fecha de inicio del periodo</label>
-							<div class="input-group date datepicker">
-								<input type="text" class="form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+							<div class="datepicker-group">
+								<label>Fecha de inicio del periodo</label>
+								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
 						<div class="form-group col-sm-4">
-							<label>Fecha de término del periodo</label>
-							<div class="input-group date datepicker">
-								<input type="text" class="form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+							<div class="datepicker-group">
+								<label>Fecha de término del periodo</label>
+								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
 					</div>
@@ -309,17 +331,17 @@
 							</div>
 						</div>
 						<div class="form-group col-sm-4">
-							<label>Fecha de inicio de prórroga</label>
-							<div class="input-group date datepicker">
-								<input type="text" class="form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+							<div class="datepicker-group">
+								<label>Fecha de inicio de prórroga</label>
+								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
 						<div class="form-group col-sm-4">
-							<label>Fecha de término de prórroga</label>
-							<div class="input-group date datepicker">
-								<input type="text" class="form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+							<div class="datepicker-group">
+								<label>Fecha de término de prórroga</label>
+								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
 					</div>
@@ -363,56 +385,55 @@
 		</div>
 		<div role="tabpanel" class="tab-pane" id="alumno">
 			<div class="row">
-				<div class="form-group col-sm-6">
-					<label>Boleta</label>
-					<input type="text" id="boleta" name="boleta" class="form-control" placeholder="Ingrese su número de boleta" />
+				<div class="form-group col-sm-3">
+					<label class="obligatorio">Boleta:</label>
+					<input type="text" id="boleta" name="boleta" class="form-control" placeholder="Ingresa tu número de boleta" />
 				</div>
-				<div class="form-group col-sm-6">
-					<label>Semestre</label>
-					<input type="text" id="semestre" name="semestre" class="form-control" placeholder="Ingrese el semestre que cursa actualmente" />
+				<div class="form-group col-sm-3">
+					<label class="obligatorio">Semestre:</label>
+					<input type="text" id="semestre" name="semestre" class="form-control" placeholder="Ingresa el semestre que cursas actualmente" />
+				</div>
+				<div class="form-group col-sm-3">
+					<label class="obligatorio">Promedio:</label>
+					<input type="text" id="promedio" name="promedio" class="form-control" placeholder="Ingresa tu promedio con dos decimales" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-6">
-					<label>Promedio</label>
-					<input type="text" id="promedio" name="promedio" class="form-control" placeholder="Ingrese su promedio con dos decimales" />
-				</div>
-				<div class="form-group col-sm-6">
-					<label>Las materias que cursa actualmente son de</label>
+					<label class="obligatorio">Las materias que cursas actualmente son de:</label>
 					<select id="materiasCursa" name="materiasCursa" class="form-control">
-						<option value="">Seleccione el nivel que cursa</option>
+						<option value="">Selecciona el nivel que cursas</option>
+						<?php
+						foreach ( $niveles_academicos as $val ) {
+						?>
+						<option value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE; ?></option>
+						<?php
+						}
+						?>
 					</select>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-3">
-					<label>¿Es becario PIFI?</label>
+					<label class="obligatorio">¿Eres becario BEIFI?</label>
 					<div>
-						<div class="btn-group" data-toggle="buttons">
-							<label class="btn btn-switch">
-								<input type="radio" id="" name="" value="1" /> 
-								Sí
-							</label>
-							<label class="btn btn-switch active">
-								<input type="radio" id="" name="" value="0" checked="checked" /> 
-								No
-							</label>
-						</div>
+						<label class="radio-inline">
+							<input type="radio" id="pifiS" name="pifi" <?php if ( isset($alumno) && $alumno["PIFI"] == "1" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
+						</label>
+						<label class="radio-inline">
+							<input type="radio" id="pifiN" name="pifi" <?php if ( isset($alumno) && $alumno["PIFI"] == "0" ) {echo 'checked="checked"'; } ?> value="0" /> No
+						</label>
 					</div>
 				</div>
 				<div class="form-group col-sm-3">
-					<label>¿Es becario CONACYT?</label>
+					<label class="obligatorio">¿Eres becario CONACYT?</label>
 					<div>
-						<div class="btn-group" data-toggle="buttons">
-							<label class="btn btn-switch">
-								<input type="radio" id="" name="" value="1" /> 
-								Sí
-							</label>
-							<label class="btn btn-switch active">
-								<input type="radio" id="" name="" value="0" checked="checked" /> 
-								No
-							</label>
-						</div>
+						<label class="radio-inline">
+							<input type="radio" id="conacytS" name="conacyt" <?php if ( isset($alumno) && $alumno["CONACYT"] == "1" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
+						</label>
+						<label class="radio-inline">
+							<input type="radio" id="conacytN" name="conacyt" <?php if ( isset($alumno) && $alumno["CONACYT"] == "0" ) {echo 'checked="checked"'; } ?> value="0" /> No
+						</label>
 					</div>
 				</div>
 			</div>
@@ -422,25 +443,32 @@
 				</div>
 				<div class="panel-body">
 					<div class="row">
-						<div class="form-group col-sm-6">
-							<label>Número de registro</label>
-							<input type="text" id="numSIP" name="numSIP" class="form-control" placeholder="Ingrese el número de registro del proyecto SIP" />
+						<div class="form-group col-sm-4">
+							<label class="obligatorio">Número de registro:</label>
+							<input type="text" id="numSIP" name="numSIP" class="form-control" placeholder="Ingresa el número de registro del proyecto SIP" />
 						</div>
-						<div class="form-group col-sm-6">
-							<label>Nombre del proyecto</label>
-							<input type="text" id="nombreSIP" name="nombreSIP" class="form-control" placeholder="Ingrese el nombre del proyecto SIP" />
+						<div class="form-group col-sm-8">
+							<label class="obligatorio">Nombre del proyecto:</label>
+							<input type="text" id="nombreSIP" name="nombreSIP" class="form-control" placeholder="Ingresa el nombre del proyecto SIP" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-6">
-							<label>Escuela</label>
+							<label class="obligatorio">Escuela:</label>
 							<select id="escuelaSIP" name="escuelaSIP" class="form-control">
-								<option value="">Seleccione la escuela en donde está inscrito el proyecto SIP</option>
+								<option value="">Selecciona la escuela en donde está inscrito el proyecto SIP</option>
+								<?php
+								foreach ( $escuelas as $val ) {
+								?>
+								<option value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE_CORTO; ?></option>
+								<?php
+								}
+								?>
 							</select>
 						</div>
 						<div class="form-group col-sm-6">
-							<label>Director del proyecto</label>
-							<input type="text" id="directorSIP" name="directorSIP" class="form-control" placeholder="Ingrese el nombre del director del proyecto SIP" />
+							<label class="obligatorio">Director del proyecto:</label>
+							<input type="text" id="directorSIP" name="directorSIP" class="form-control" placeholder="Ingresa el nombre del director del proyecto SIP" />
 						</div>
 					</div>
 				</div>
@@ -449,32 +477,26 @@
 		<div role="tabpanel" class="tab-pane" id="grados">
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>Carreras técnicas</label>
-					<input type="text" id="" name="" class="form-control" placeholder='Ingrese las carreras separadas por comas, Ej: "en Informática, en Comunicaciones"' />
+					<label>Nivel licenciatura:</label>
+					<input type="text" id="" name="" class="form-control" placeholder='Ingresa las carreras separadas por comas, Ej: "en Economía, Ing. Industrial"' />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>Nivel licenciatura</label>
-					<input type="text" id="" name="" class="form-control" placeholder='Ingrese las carreras separadas por comas, Ej: "en Economía, Ing. Industrial"' />
+					<label>Nivel maestría:</label>
+					<input type="text" id="" name="" class="form-control" placeholder='Ingresa las carreras separadas por comas, Ej: "en Computación"' />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>Nivel maestría</label>
-					<input type="text" id="" name="" class="form-control" placeholder='Ingrese las carreras separadas por comas, Ej: "en Computación"' />
+					<label>Nivel doctorado:</label>
+					<input type="text" id="" name="" class="form-control" placeholder='Ingresa las carreras separadas por comas, Ej: "en Ciencias Marinas"' />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>Nivel doctorado</label>
-					<input type="text" id="" name="" class="form-control" placeholder='Ingrese las carreras separadas por comas, Ej: "en Ciencias Marinas"' />
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-sm-12">
-					<label>Otros estudios</label>
-					<input type="text" id="" name="" class="form-control" placeholder="Si no cuenta con algún nivel, deje en blanco" />
+					<label>Otros estudios:</label>
+					<input type="text" id="" name="" class="form-control" placeholder="Si no cuentas con algún nivel, deja en blanco" />
 				</div>
 			</div>
 		</div>
@@ -527,11 +549,14 @@
 									<label>Tipo de proyecto</label>
 									<select class="form-control">
 										<option value="">Seleccione el tipo de proyecto</option>
+										<option value="SIP">SIP</option>
+										<option value="CONACYT">CONACYT</option>
+										<option value="Otros">Otros</option>
 									</select>
 								</div>
 								<div class="form-group col-sm-6">
 									<label>Especifique el tipo de proyecto</label>
-									<input type="text" id="" name="" class="form-control" placeholder='Especifique si el tipo de proyecto es "Otros"' />
+									<input type="text" id="" name="" class="form-control" disabled="disabled" placeholder='Especifique si el tipo de proyecto es "Otros"' />
 								</div>
 							</div>
 							<div class="row">
@@ -642,22 +667,22 @@
 		<div role="tabpanel" class="tab-pane" id="bancarios">
 			<div class="row">
 				<div class="form-group col-sm-6">
-					<label>Banco</label>
-					<input type="text" id="banco" name="banco" class="form-control" placeholder="Ingrese el nombre del banco" />
+					<label class="obligatorio">Banco:</label>
+					<input type="text" id="banco" name="banco" class="form-control" placeholder="Ingresa el nombre del banco" />
 				</div>
 				<div class="form-group col-sm-6">
-					<label>Número de sucursal</label>
-					<input type="text" id="sucursal" name="sucursal" class="form-control" placeholder="Ingrese su número de sucursal" />
+					<label class="obligatorio">Número de sucursal:</label>
+					<input type="text" id="sucursal" name="sucursal" class="form-control" placeholder="Ingresa el número de sucursal" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-6">
-					<label>Número de cuenta</label>
-					<input type="text" id="cuentaBanco" name="cuentaBanco" maxlength="12" class="form-control" placeholder="Ingrese su número de cuenta" />
+					<label class="obligatorio">Número de cuenta:</label>
+					<input type="text" id="cuentaBanco" name="cuentaBanco" maxlength="12" class="form-control" placeholder="Ingresa tu número de cuenta" />
 				</div>
 				<div class="form-group col-sm-6">
-					<label>CLABE Interbancaria</label>
-					<input type="text" id="clabe" name="clabe" maxlength="18" class="form-control" data-mask="999 999 99999999999 9" placeholder="Ingrese la CLABE interbancaria (18 dígitos)" />
+					<label class="obligatorio">CLABE Interbancaria:</label>
+					<input type="text" id="clabe" name="clabe" maxlength="18" class="form-control" data-mask="999 999 99999999999 9" placeholder="Ingresa la CLABE interbancaria (18 dígitos)" />
 				</div>
 			</div>
 		</div>

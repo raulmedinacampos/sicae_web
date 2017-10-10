@@ -33,13 +33,12 @@
 				<h3 class="panel-title text-center">Asistencia</h3>
 			</div>
 			<div class="panel-body">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-					eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-					reprehenderit in voluptate velit esse cillum dolore eu fugiat
-					nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-					sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<p>Evento de Participación individual para Docentes o alumnos 
+					del Instituto Politécnico Nacional con la finalidad de que 
+					asistan a difundir sus conocimientos a través de Ponencias,
+					Publicaciones o Estancias de Investigación en foros 
+					Nacionales o Internacionales y que compartan el resultado, 
+					producto de sus investigaciones</p>
 				<div class="text-center col-sm-6 col-sm-offset-3">
 					<p><a href="#" class="btn btn-block btn-default" data-toggle="modal" data-target="#loginAsistente">Iniciar sesión</a></p>
 					<p><a id="btnNuevoUsuario" href="#" class="btn btn-block btn-default">Nuevo usuario</a></p>
@@ -53,16 +52,15 @@
 				<h3 class="panel-title text-center">Realización</h3>
 			</div>
 			<div class="panel-body">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-					eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-					reprehenderit in voluptate velit esse cillum dolore eu fugiat
-					nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-					sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<p>Evento de Participación Grupal dirigido principalmente a 
+					Docentes y alumnos del Instituto Politécnico Nacional, 
+					organizado por las Dependencias Politécnicas, y cuyo 
+					objetivo es actualizar y proporcionar nuevas herramientas 
+					para la investigación a través de conferencistas 
+					reconocidos en su área de competencia.</p>
 				<div class="text-center col-sm-6 col-sm-offset-3">
 					<p><a href="#" class="btn btn-block btn-default" data-toggle="modal" data-target="#loginCoordinador">Iniciar sesión</a></p>
-					<p><a href="<?php echo base_url('coordinador'); ?>" class="btn btn-block btn-default">Nuevo coordinador</a></p>
+					<p><a id="btnNuevoCoordinador" href="#" class="btn btn-block btn-default">Nuevo coordinador</a></p>
 				</div>
 			</div>
 		</div>
@@ -72,7 +70,7 @@
 <!-- Modal inicio de sesión como asistente -->
 <div class="modal fade" id="loginAsistente" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
-		<form id="formLoginA" name="formLoginA" method="post" action="">
+		<form id="formLoginA" name="formLoginA" method="post" action="<?php echo base_url('login/validarprs'); ?>">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -80,13 +78,13 @@
 				</div>
 				<div class="modal-body">
 					<div class="row">
-						<div class="form-group col-sm-8 col-sm-offset-2">
+						<div class="form-group col-sm-10 col-sm-offset-1">
 							<label>CURP</label>
 							<input type="text" id="curpA" name="curpA" maxlength="18" class="form-control" placeholder="Ingrese el CURP que registró" />
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-sm-8 col-sm-offset-2">
+						<div class="form-group col-sm-10 col-sm-offset-1">
 							<label>Contraseña</label>
 							<input type="password" id="passA" name="passA" class="form-control" placeholder="Contraseña" />
 						</div>
@@ -111,7 +109,7 @@
 <!-- Modal inicio de sesión como coordinador -->
 <div class="modal fade" id="loginCoordinador" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
-		<form id="formLoginC" name="formLoginC" method="post" action="">
+		<form id="formLoginC" name="formLoginC" method="post" action="<?php echo base_url('login/validarcoord'); ?>">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -119,28 +117,35 @@
 				</div>
 				<div class="modal-body">
 					<div class="row">
-						<div class="form-group col-sm-8 col-sm-offset-2">
+						<div class="form-group col-sm-10 col-sm-offset-1">
 							<label>CURP</label>
-							<input type="text" id="" name="" class="form-control" placeholder="Ingrese su CURP con el que registró el evento" />
+							<input type="text" id="curpC" name="curpC" maxlength="18" class="form-control" placeholder="Ingrese su CURP con el que registró el evento" />
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-sm-8 col-sm-offset-2">
+						<div class="form-group col-sm-10 col-sm-offset-1">
 							<label>Escuela</label>
-							<select id="" name="" class="form-control">
+							<select id="escuelaC" name="escuelaC" class="form-control">
 								<option value="">Seleccione el centro de adscripción</option>
+								<?php
+								foreach ( $escuelas as $val ) {
+								?>
+								<option value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE_CORTO; ?></option>
+								<?php
+								}
+								?>
 							</select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-8 col-sm-offset-2">
-							<a href="#" class="recuperar pull-right">¿Problemas para ingresar?</a>
+							<a href="<?php echo base_url('login/recuperar-contrasena'); ?>" class="recuperar pull-right">¿Problemas para ingresar?</a>
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-8 col-sm-offset-2">
 							<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-							<button type="button" class="btn btn-block btn-primary">Iniciar sesión</button>
+							<button type="submit" class="btn btn-block btn-primary">Iniciar sesión</button>
 						</div>
 					</div>
 				</div>
