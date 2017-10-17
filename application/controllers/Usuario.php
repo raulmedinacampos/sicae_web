@@ -7,9 +7,11 @@ class Usuario extends CI_Controller {
 	
 	public function index() {
 		$header['js'][] = "bootstrap-show-password.min";
+		$header["js"][] = "jquery.placeholder.min";
 		$header["js"][] = "usuario";
 		
 		$this->load->model("escuela_md");
+		$this->load->model("nombramiento_md");
 		$this->load->model("nivel_academico_md");
 		
 		$perfil = $this->session->rol;
@@ -34,6 +36,7 @@ class Usuario extends CI_Controller {
 		}
 		
 		$params["escuelas"] = $this->escuela_md->GetAll();
+		$params["nombramientos"] = $this->nombramiento_md->GetAll();
 		$params["niveles_academicos"] = $this->nivel_academico_md->GetAll();
 		
 		$this->load->view('template/header', $header);

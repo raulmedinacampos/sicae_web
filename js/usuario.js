@@ -12,6 +12,44 @@ function Init() {
 	});
 	
 	$("#panel-base, #panel-interinato, #panel-sabatico, #panel-sueldo").css("display", "none");
+	
+	$('textarea[placeholder]').placeholder();
+}
+
+function ToggleProfData() {
+	$("#tipoNombramiento").change(function() {
+		var val = $(this).val();
+		
+		if ( val == 1 || val == 3 ) {
+			$("#panel-base").css("display", "block");
+			$("#panel-interinato").css("display", "none");
+		}
+		
+		if ( val == 2 ) {
+			$("#panel-base").css("display", "none");
+			$("#panel-interinato").css("display", "block");
+		}
+	});
+	
+	$('input[name="sabatico"]').change(function() {
+		var val = $(this).val();
+		
+		if ( val == 1 ) {
+			$("#panel-sabatico").css("display", "block");
+		} else {
+			$("#panel-sabatico").css("display", "none");
+		}
+	});
+	
+	$('input[name="sueldo"]').change(function() {
+		var val = $(this).val();
+		
+		if ( val == 1 ) {
+			$("#panel-sueldo").css("display", "block");
+		} else {
+			$("#panel-sueldo").css("display", "none");
+		}
+	});
 }
 
 function Validate() {
@@ -187,5 +225,6 @@ function Validate() {
 
 $(function() {
 	Init();
+	ToggleProfData();
 	Validate();
 });

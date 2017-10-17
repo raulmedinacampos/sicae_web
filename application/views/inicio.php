@@ -33,7 +33,7 @@
 				<h3 class="panel-title text-center">Asistencia</h3>
 			</div>
 			<div class="panel-body">
-				<p>Evento de Participación individual para Docentes o alumnos 
+				<p class="text-justify">Evento de Participación individual para Docentes o alumnos 
 					del Instituto Politécnico Nacional con la finalidad de que 
 					asistan a difundir sus conocimientos a través de Ponencias,
 					Publicaciones o Estancias de Investigación en foros 
@@ -52,7 +52,7 @@
 				<h3 class="panel-title text-center">Realización</h3>
 			</div>
 			<div class="panel-body">
-				<p>Evento de Participación Grupal dirigido principalmente a 
+				<p class="text-justify">Evento de Participación Grupal dirigido principalmente a 
 					Docentes y alumnos del Instituto Politécnico Nacional, 
 					organizado por las Dependencias Politécnicas, y cuyo 
 					objetivo es actualizar y proporcionar nuevas herramientas 
@@ -80,7 +80,7 @@
 					<div class="row">
 						<div class="form-group col-sm-10 col-sm-offset-1">
 							<label>CURP</label>
-							<input type="text" id="curpA" name="curpA" maxlength="18" class="form-control" placeholder="Ingrese el CURP que registró" />
+							<input type="text" id="curpA" name="curpA" maxlength="18" class="form-control" placeholder="Ingresa el CURP que registraste" />
 						</div>
 					</div>
 					<div class="row">
@@ -91,7 +91,7 @@
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-8 col-sm-offset-2">
-							<a href="<?php echo base_url('login/recuperar-contrasena'); ?>" class="recuperar pull-right">¿Olvidó su contraseña?</a>
+							<a href="<?php echo base_url('login/recuperar-contrasena'); ?>" class="recuperar pull-right">¿Olvidaste tu contraseña?</a>
 						</div>
 					</div>
 					<div class="row">
@@ -119,14 +119,14 @@
 					<div class="row">
 						<div class="form-group col-sm-10 col-sm-offset-1">
 							<label>CURP</label>
-							<input type="text" id="curpC" name="curpC" maxlength="18" class="form-control" placeholder="Ingrese su CURP con el que registró el evento" />
+							<input type="text" id="curpC" name="curpC" maxlength="18" class="form-control" placeholder="Ingresa tu CURP con el que registraste el evento" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-10 col-sm-offset-1">
 							<label>Escuela</label>
 							<select id="escuelaC" name="escuelaC" class="form-control">
-								<option value="">Seleccione el centro de adscripción</option>
+								<option value="">Selecciona el centro de adscripción</option>
 								<?php
 								foreach ( $escuelas as $val ) {
 								?>

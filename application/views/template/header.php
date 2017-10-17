@@ -94,18 +94,18 @@
       <?php
       if ( $this->session->rol== "1" ) {  // Profesor
 		?>
-		<li class="active"><a href="<?php echo base_url('usuario'); ?>">Actualizar datos</a></li>
-        <li class="dropdown">
+		<li<?php if(uri_string() == "usuario") {echo ' class="active"';}?>><a href="<?php echo base_url('usuario'); ?>">Actualizar datos</a></li>
+        <li class="dropdown<?php if(uri_string() == 'estancia-de-investigacion'||uri_string() == 'obtencion-de-grado'||uri_string() == 'ponencia'||uri_string() == 'publicaciones'||uri_string() == 'seminario') {echo ' active';}?>">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Eventos <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Estancia de investigación</a></li>
-            <li><a href="#">Obtención de grado</a></li>
+            <li><a href="<?php echo base_url('estancia-de-investigacion'); ?>">Estancia de investigación</a></li>
+            <li><a href="<?php echo base_url('obtencion-de-grado'); ?>">Obtención de grado</a></li>
             <li><a href="<?php echo base_url('ponencia'); ?>">Ponencia</a></li>
-            <li><a href="#">Publicaciones</a></li>
-            <li><a href="#">Seminarios y otros</a></li>
+            <li><a href="<?php echo base_url('publicaciones'); ?>">Publicaciones</a></li>
+            <li><a href="<?php echo base_url('seminario'); ?>">Seminarios y otros</a></li>
           </ul>
         </li>
-        <li><a href="<?php echo base_url('historial'); ?>">Formato</a></li>
+        <li<?php if(uri_string() == "historial") {echo ' class="active"';}?>><a href="<?php echo base_url('historial'); ?>">Formato</a></li>
         <li><a href="<?php echo base_url('uploads/encuesta_2016.pdf'); ?>" target="_blank">Encuesta de calidad</a></li>
 		<?php
 			}
@@ -113,10 +113,9 @@
 		<?php
 		if ( $this->session->rol== "2" ) {  // Coordinador
 		?>
-        <li class="active"><a href="<?php echo base_url('coordinador'); ?>">Actualizar datos</a></li>
-        <li><a href="<?php echo base_url('ponencia'); ?>">Realización</a></li>
-        </li>
-        <li><a href="<?php echo base_url('historial'); ?>">Formato</a></li>
+        <li<?php if(uri_string() == "coordinador") {echo ' class="active"';}?>><a href="<?php echo base_url('coordinador'); ?>">Actualizar datos</a></li>
+        <li<?php if(uri_string() == "realizacion") {echo ' class="active"';}?>><a href="<?php echo base_url('realizacion'); ?>">Realización</a></li>
+        <li<?php if(uri_string() == "historial") {echo ' class="active"';}?>><a href="<?php echo base_url('historial'); ?>">Formato</a></li>
         <li><a href="<?php echo base_url('uploads/encuesta_2016.pdf'); ?>" target="_blank">Encuesta de calidad</a></li>
         <?php
 			}
@@ -124,15 +123,15 @@
 		<?php
         if ( $this->session->rol== "3" ) {  // Alumno
 		?>
-		<li class="active"><a href="<?php echo base_url('usuario'); ?>">Actualizar datos</a></li>
-        <li class="dropdown">
+		<li<?php if(uri_string() == "usuario") {echo ' class="active"';}?>><a href="<?php echo base_url('usuario'); ?>">Actualizar datos</a></li>
+        <li class="dropdown<?php if(uri_string() == 'estancia-de-investigacion'||uri_string() == 'ponencia') {echo ' active';}?>">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Eventos <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Estancia de investigación</a></li>
+            <li><a href="<?php echo base_url('estancia-de-investigacion'); ?>">Estancia de investigación</a></li>
             <li><a href="<?php echo base_url('ponencia'); ?>">Ponencia</a></li>
           </ul>
         </li>
-        <li><a href="<?php echo base_url('historial'); ?>">Formato</a></li>
+        <li<?php if(uri_string() == "historial") {echo ' class="active"';}?>><a href="<?php echo base_url('historial'); ?>">Formato</a></li>
         <li><a href="<?php echo base_url('uploads/encuesta_2016.pdf'); ?>" target="_blank">Encuesta de calidad</a></li>
 		<?php
 			}

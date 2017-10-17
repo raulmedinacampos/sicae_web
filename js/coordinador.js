@@ -17,7 +17,7 @@ function AddOrganizer() {
 		var exp;
 		var elem = $(this).parents(".tab-pane").children(".ficha-collapse").last();
 		
-		if ( i < 4 ) {
+		if ( i < 11 ) {
 			exp = '<div class="panel-group ficha-collapse" id="accordion'+i+'">';
 			exp += '<div class="panel panel-default">';
 			exp += '<div class="panel-heading">';

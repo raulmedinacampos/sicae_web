@@ -134,135 +134,167 @@
 		</div>
 		<div role="tabpanel" class="tab-pane" id="profesor">
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label>Tipo de nombramiento</label>
 					<select id="tipoNombramiento" name="tipoNombramiento" class="form-control">
-						<option value="">Seleccione su tipo de nombramiento</option>
+						<option value="">Selecciona tu tipo de nombramiento</option>
+						<?php
+						foreach ( $nombramientos as $val ) {
+						?>
+						<option <?php if ( isset($profesor) ) {echo 'selected="selected"'; } ?> value="<?php echo $val->ID; ?>"><?php echo $val->DESCRIPCION; ?></option>
+						<?php
+						}
+						?>
 					</select>
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label>Número de empleado</label>
-					<input type="text" id="" name="" class="form-control" placeholder="Ingrese su apellido paterno" />
+					<input type="text" id="numEmpleado" name="numEmpleado" class="form-control" placeholder="Ingresa tu número de empleado" />
 				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
 						<label>Fecha de ingreso</label>
-						<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+						<input type="text" id="fechaIngreso" name="fechaIngreso" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de ingreso" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
-				<div class="form-group col-sm-6">
-					<label>¿Fue contratado dentro del programa de profesor de excelencia?</label>
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-12">
+					<label>¿Fuiste contratado dentro del programa de profesor de excelencia?</label>
 					<div>
-						<div class="btn-group" data-toggle="buttons">
-							<label class="btn btn-switch">
-								<input type="radio" id="" name="" value="1" /> 
-								Sí
-							</label>
-							<label class="btn btn-switch active">
-								<input type="radio" id="" name="" value="0" checked="checked" /> 
-								No
-							</label>
-						</div>
+						<label class="radio-inline">
+							<input type="radio" id="rdbES" name="excelencia" <?php if ( isset($profesor) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
+						</label>
+						<label class="radio-inline">
+							<input type="radio" id="rdbEN" name="excelencia" <?php if ( isset($profesor) && $persona["GENERO"] == "F" ) {echo 'checked="checked"'; } ?> value="0" /> No
+						</label>
 					</div>
 				</div>
 			</div>
-			<div id="panel-base" class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Base</h3>
-				</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="form-group col-sm-6">
-							<div class="datepicker-group">
-								<label>Fecha en que obtuvo la base</label>
-								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-							</div>
-						</div>
-						<div class="form-group col-sm-6">
-							<label>Categoría</label>
-							<input type="text" id="" name="" class="form-control" placeholder="Ingrese su categoría" />
-						</div>
+			<div class="panel-group ficha-collapse" id="accordion1">
+				<div id="panel-base" class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-parent="#accordion1" data-toggle="collapse" href="#panel-1" aria-expanded="true" aria-controls="panel-1">
+								Base
+							</a>
+						</h4>
+						<button type="button" class="collpase-button" data-parent="#accordion1" data-toggle="collapse" href="#panel-1"></button>
 					</div>
-					<div class="row">
-						<div class="form-group col-sm-6">
-							<label>Plaza</label>
-							<input type="text" id="" name="" class="form-control" placeholder="Ingrese su plaza" />
-						</div>
-						<div class="form-group col-sm-6">
-							<label>Horas de plaza</label>
-							<select class="form-control">
-								<option value="">Seleccione el número de horas</option>
-							</select>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="panel-interinato" class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Interinato</h3>
-				</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="form-group col-sm-6">
-							<div class="datepicker-group">
-								<label>Fecha de inicio de interinato</label>
-								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-							</div>
-						</div>
-						<div class="form-group col-sm-6">
-							<div class="datepicker-group">
-								<label>Fecha de término de interinato</label>
-								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div id="panel-sabatico" class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Sabático</h3>
-				</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="form-group col-sm-6">
-							<label>¿Cuenta con sabático?</label>
-								<div class="btn-group" data-toggle="buttons">
-									<label class="btn btn-switch">
-										<input type="radio" id="" name="" value="1" /> 
-										Sí
-									</label>
-									<label class="btn btn-switch active">
-										<input type="radio" id="" name="" value="0" checked="checked" /> 
-										No
-									</label>
+					<div class="panel-collapse collapse in" id="panel-1">
+						<div class="panel-body">
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<div class="datepicker-group">
+										<label>Fecha en que obtuviste la base</label>
+										<input type="text" id="fechaBase" name="fechaBase" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha en que obtuvo la base" />
+										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+									</div>
 								</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-sm-4">
-							<label>Tipo de sabático</label>
-							<select class="form-control">
-								<option value="">Seleccione una opción</option>
-							</select>
-						</div>
-						<div class="form-group col-sm-4">
-							<div class="datepicker-group">
-								<label>Fecha de inicio de sabático</label>
-								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+								<div class="form-group col-sm-4">
+									<label>Categoría</label>
+									<input type="text" id="categoria" name="categoria" class="form-control" placeholder="Ingresa tu categoría" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<label>Plaza</label>
+									<input type="text" id="plaza" name="plaza" class="form-control" placeholder="Ingresa tu plaza" />
+								</div>
+								<div class="form-group col-sm-4">
+									<label>Horas de plaza</label>
+									<select id="horas" name="horas" class="form-control">
+										<option value="">Selecciona el número de horas</option>
+										<option value="20">20</option>
+										<option value="30">30</option>
+										<option value="40">40</option>
+									</select>
+								</div>
 							</div>
 						</div>
-						<div class="form-group col-sm-4">
-							<div class="datepicker-group">
-								<label>Fecha de término de sabático</label>
-								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+					</div>
+				</div>
+			</div>
+			<div class="panel-group ficha-collapse" id="accordion2">
+				<div id="panel-interinato" class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-parent="#accordion2" data-toggle="collapse" href="#panel-2" aria-expanded="true" aria-controls="panel-2">
+								Interinato
+							</a>
+						</h4>
+						<button type="button" class="collpase-button" data-parent="#accordion2" data-toggle="collapse" href="#panel-2"></button>
+					</div>
+					<div class="panel-collapse collapse in" id="panel-2">
+						<div class="panel-body">
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<div class="datepicker-group">
+										<label>Fecha de inicio de interinato</label>
+										<input type="text" id="FechaInicioInt" name="FechaInicioInt" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de inicio" />
+										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group col-sm-4">
+									<div class="datepicker-group">
+										<label>Fecha de término de interinato</label>
+										<input type="text" id="FechaFinInt" name="FechaFinInt" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de término" />
+										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group col-sm-6">
+					<label>¿Cuentas con sabático?</label>
+					<div>
+						<label class="radio-inline">
+							<input type="radio" id="rdbES" name="sabatico" <?php if ( isset($profesor) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
+						</label>
+						<label class="radio-inline">
+							<input type="radio" id="rdbEN" name="sabatico" <?php if ( isset($profesor) && $persona["GENERO"] == "F" ) {echo 'checked="checked"'; } ?> value="0" /> No
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="panel-group ficha-collapse" id="accordion3">
+				<div id="panel-sabatico" class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-parent="#accordion3" data-toggle="collapse" href="#panel-3" aria-expanded="true" aria-controls="panel-3">
+								Sabático
+							</a>
+						</h4>
+						<button type="button" class="collpase-button" data-parent="#accordion3" data-toggle="collapse" href="#panel-3"></button>
+					</div>
+					<div class="panel-collapse collapse in" id="panel-3">
+						<div class="panel-body">
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<label>Tipo de sabático</label>
+									<select id="tipoSabatico" name="tipoSabatico" class="form-control">
+										<option value="">Seleccione una opción</option>
+									</select>
+								</div>
+								<div class="form-group col-sm-4">
+									<div class="datepicker-group">
+										<label>Fecha de inicio de sabático</label>
+										<input type="text" id="fechaInicioSab" name="fechaInicioSab" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group col-sm-4">
+									<div class="datepicker-group">
+										<label>Fecha de término de sabático</label>
+										<input type="text" id="fechaFinSab" name="fechaFinSab" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -271,113 +303,115 @@
 			<div class="row">
 				<div class="form-group col-sm-6">
 					<label>¿Cuenta con licencia con goce de sueldo?</label>
-						<div class="btn-group" data-toggle="buttons">
-							<label class="btn btn-switch">
-								<input type="radio" id="" name="" value="1" /> 
-								Sí
-							</label>
-							<label class="btn btn-switch active">
-								<input type="radio" id="" name="" value="0" checked="checked" /> 
-								No
-							</label>
-						</div>
+					<div>
+						<label class="radio-inline">
+							<input type="radio" id="rdbSS" name="sueldo" <?php if ( isset($profesor) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
+						</label>
+						<label class="radio-inline">
+							<input type="radio" id="rdbSN" name="sueldo" <?php if ( isset($profesor) && $persona["GENERO"] == "F" ) {echo 'checked="checked"'; } ?> value="0" /> No
+						</label>
+					</div>
 				</div>
 			</div>
-			<div id="panel-sueldo" class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title pull-left">¿Cuenta con licencia de goce de sueldo?</h3>
-					<div class="btn-group" data-toggle="buttons">
-						<label class="btn btn-switch">
-							<input type="radio" id="" name="" value="1" /> 
-							Sí
-						</label>
-						<label class="btn btn-switch active">
-							<input type="radio" id="" name="" value="0" checked="checked" /> 
-							No
-						</label>
+			<div class="panel-group ficha-collapse" id="accordion4">
+				<div id="panel-sueldo" class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-parent="#accordion4" data-toggle="collapse" href="#panel-4" aria-expanded="true" aria-controls="panel-4">
+								Goce de sueldo
+							</a>
+						</h4>
+						<button type="button" class="collpase-button" data-parent="#accordion4" data-toggle="collapse" href="#panel-4"></button>
 					</div>
-				</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="form-group col-sm-4">
-							<div class="datepicker-group">
-								<label>Fecha de inicio del periodo</label>
-								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+					<div class="panel-collapse collapse in" id="panel-4">
+						<div class="panel-body">
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<div class="datepicker-group">
+										<label>Fecha de inicio del periodo</label>
+										<input type="text" id="fechaInicioGoce" name="fechaInicioGoce" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group col-sm-4">
+									<div class="datepicker-group">
+										<label>Fecha de término del periodo</label>
+										<input type="text" id="fechaFinGoce" name="fechaFinGoce" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+									</div>
+								</div>
 							</div>
-						</div>
-						<div class="form-group col-sm-4">
-							<div class="datepicker-group">
-								<label>Fecha de término del periodo</label>
-								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-sm-4">
-							<label>¿Cuenta usted con prórroga?</label>
-							<div>
-								<div class="btn-group" data-toggle="buttons">
-									<label class="btn btn-switch">
-										<input type="radio" id="" name="" value="1" /> 
-										Sí
-									</label>
-									<label class="btn btn-switch active">
-										<input type="radio" id="" name="" value="0" checked="checked" /> 
-										No
-									</label>
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<label>¿Cuenta usted con prórroga?</label>
+									<div>
+										<label class="radio-inline">
+											<input type="radio" id="rdbSS" name="prorroga" <?php if ( isset($profesor) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
+										</label>
+										<label class="radio-inline">
+											<input type="radio" id="rdbSN" name="prorroga" <?php if ( isset($profesor) && $persona["GENERO"] == "F" ) {echo 'checked="checked"'; } ?> value="0" /> No
+										</label>
+									</div>
+								</div>
+								<div class="form-group col-sm-4">
+									<div class="datepicker-group">
+										<label>Fecha de inicio de prórroga</label>
+										<input type="text" id="fechaInicioProrroga" name="fechaInicioProrroga" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+									</div>
+								</div>
+								<div class="form-group col-sm-4">
+									<div class="datepicker-group">
+										<label>Fecha de término de prórroga</label>
+										<input type="text" id="fechaFinProrroga" name="fechaFinProrroga" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+									</div>
 								</div>
 							</div>
 						</div>
-						<div class="form-group col-sm-4">
-							<div class="datepicker-group">
-								<label>Fecha de inicio de prórroga</label>
-								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-							</div>
-						</div>
-						<div class="form-group col-sm-4">
-							<div class="datepicker-group">
-								<label>Fecha de término de prórroga</label>
-								<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
-								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Becas</h3>
-				</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="form-group col-sm-6">
-							<label>¿Es becario EDD?</label>
-							<select class="form-control">
-								<option value="">Seleccione su situación</option>
-							</select>
-						</div>
-						<div class="form-group col-sm-6">
-							<label>¿Es becario por exclusividad?</label>
-							<select class="form-control">
-								<option value="">Seleccione su situación</option>
-							</select>
-						</div>
+			<div class="panel-group ficha-collapse" id="accordion5">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-parent="#accordion5" data-toggle="collapse" href="#panel-5" aria-expanded="true" aria-controls="panel-5">
+								Becas
+							</a>
+						</h4>
+						<button type="button" class="collpase-button" data-parent="#accordion5" data-toggle="collapse" href="#panel-5"></button>
 					</div>
-					<div class="row">
-						<div class="form-group col-sm-6">
-							<label>¿Es becario EDI?</label>
-							<select class="form-control">
-								<option value="">Seleccione su situación</option>
-							</select>
-						</div>
-						<div class="form-group col-sm-6">
-							<label>¿Es becario SNI?</label>
-							<select class="form-control">
-								<option value="">Seleccione su situación</option>
-							</select>
+					<div class="panel-collapse collapse in" id="panel-5">
+						<div class="panel-body">
+							<div class="row">
+								<div class="form-group col-sm-6">
+									<label>¿Es becario EDD?</label>
+									<select id="edd" name="edd" class="form-control">
+										<option value="">Seleccione su situación</option>
+									</select>
+								</div>
+								<div class="form-group col-sm-6">
+									<label>¿Es becario por exclusividad?</label>
+									<select id="exclusividad" name="exclusividad" class="form-control">
+										<option value="">Seleccione su situación</option>
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-6">
+									<label>¿Es becario EDI?</label>
+									<select id="edi" name="edi" class="form-control">
+										<option value="">Seleccione su situación</option>
+									</select>
+								</div>
+								<div class="form-group col-sm-6">
+									<label>¿Es becario SNI?</label>
+									<select id="sni" name="sni" class="form-control">
+										<option value="">Seleccione su situación</option>
+									</select>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -478,185 +512,290 @@
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Nivel licenciatura:</label>
-					<input type="text" id="" name="" class="form-control" placeholder='Ingresa las carreras separadas por comas, Ej: "en Economía, Ing. Industrial"' />
+					<input type="text" id="nLicenciatura" name="nLicenciatura" class="form-control" placeholder='Ingresa las carreras separadas por comas, Ej: "en Economía, Ing. Industrial"' />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Nivel maestría:</label>
-					<input type="text" id="" name="" class="form-control" placeholder='Ingresa las carreras separadas por comas, Ej: "en Computación"' />
+					<input type="text" id="nMaestria" name="nMaestria" class="form-control" placeholder='Ingresa las carreras separadas por comas, Ej: "en Computación"' />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Nivel doctorado:</label>
-					<input type="text" id="" name="" class="form-control" placeholder='Ingresa las carreras separadas por comas, Ej: "en Ciencias Marinas"' />
+					<input type="text" id="nDoctorado" name="nDoctorado" class="form-control" placeholder='Ingresa las carreras separadas por comas, Ej: "en Ciencias Marinas"' />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Otros estudios:</label>
-					<input type="text" id="" name="" class="form-control" placeholder="Si no cuentas con algún nivel, deja en blanco" />
+					<input type="text" id="nOtros" name="nOtros" class="form-control" placeholder="Si no cuentas con algún nivel, deja en blanco" />
 				</div>
 			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="productividad">
+			<p>A continuación, ingresa el total de direcciones de tesis concluidas 
+				en <?php echo date('Y')-2; ?> y <?php echo date('Y')-1; ?> por nivel, 
+				seguido de cuantas de estas están concluidas y cuantas son institucionales</p>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h5 class="panel-title">Direcciones de tesis de licenciatura:</h5>
+				</div>
+				<div class="panel-body form-horizontal">
+					<div class="form-group col-sm-4">
+						<label class="col-sm-8 control-label">Total:</label>
+						<div class="col-sm-4">
+							<input type="text" id="tTLicenciatura" name="tTLicenciatura" maxlength="3" class="form-control text-center" placeholder="0" />
+						</div>
+					</div>
+					<div class="form-group col-sm-4">
+						<label class="col-sm-8 control-label">Concluidas:</label>
+						<div class="col-sm-4">
+							<input type="text" id="cTLicenciatura" name="cTLicenciatura" maxlength="3" class="form-control text-center" placeholder="0" />
+						</div>
+					</div>
+					<div class="form-group col-sm-4">
+						<label class="col-sm-8 control-label">Institucionales:</label>
+						<div class="col-sm-4">
+							<input type="text" id="iTLicenciatura" name="iTLicenciatura" maxlength="3" class="form-control text-center" placeholder="0" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h5 class="panel-title">Direcciones de tesis de maestría:</h5>
+				</div>
+				<div class="panel-body form-horizontal">
+					<div class="form-group col-sm-4">
+						<label class="col-sm-8 control-label">Total:</label>
+						<div class="col-sm-4">
+							<input type="text" id="tTMaestria" name="tTMaestria" maxlength="3" class="form-control text-center" placeholder="0" />
+						</div>
+					</div>
+					<div class="form-group col-sm-4">
+						<label class="col-sm-8 control-label">Concluidas:</label>
+						<div class="col-sm-4">
+							<input type="text" id="cTMaestria" name="cTMaestria" maxlength="3" class="form-control text-center" placeholder="0" />
+						</div>
+					</div>
+					<div class="form-group col-sm-4">
+						<label class="col-sm-8 control-label">Institucionales:</label>
+						<div class="col-sm-4">
+							<input type="text" id="iTMaestria" name="iTMaestria" maxlength="3" class="form-control text-center" placeholder="0" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h5 class="panel-title">Direcciones de tesis de doctorado:</h5>
+				</div>
+				<div class="panel-body form-horizontal">
+					<div class="form-group col-sm-4">
+						<label class="col-sm-8 control-label">Total:</label>
+						<div class="col-sm-4">
+							<input type="text" id="tTDoctorado" name="tTDoctorado" maxlength="3" class="form-control text-center" placeholder="0" />
+						</div>
+					</div>
+					<div class="form-group col-sm-4">
+						<label class="col-sm-8 control-label">Concluidas:</label>
+						<div class="col-sm-4">
+							<input type="text" id="cTDoctorado" name="cTDoctorado" maxlength="3" class="form-control text-center" placeholder="0" />
+						</div>
+					</div>
+					<div class="form-group col-sm-4">
+						<label class="col-sm-8 control-label">Institucionales:</label>
+						<div class="col-sm-4">
+							<input type="text" id="iTDoctorado" name="iTDoctorado" maxlength="3" class="form-control text-center" placeholder="0" />
+						</div>
+					</div>
+				</div>
+			</div>
 			<div class="row">
 				<div class="form-group col-sm-6">
-					<label>Las materias que imparte corresponden a</label>
+					<label>Las materias que impartes corresponden a:</label>
 					<select class="form-control">
-						<option value="">Seleccione el nivel que imparte</option>
+						<option value="">Selecciona el nivel que impartes</option>
 					</select>
 				</div>
 				<div class="form-group col-sm-6">
-					<label>Publicaciones nacionales realizadas</label>
+					<label>Publicaciones nacionales realizadas:</label>
 					<select class="form-control">
-						<option value="">Seleccione el número de publicaciones nacionales</option>
+						<option value="">Selecciona el número de publicaciones nacionales</option>
+						<?php
+						for ( $i=0; $i<=50; $i++) {
+						?>
+						<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+						<?php
+						}
+						?>
 					</select>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-6">
-					<label>Publicaciones internacionales realizadas</label>
+					<label>Publicaciones internacionales realizadas:</label>
 					<select class="form-control">
-						<option value="">Seleccione el número de publicaciones internacionales</option>
+						<option value="">Selecciona el número de publicaciones internacionales</option>
+						<?php
+						for ( $i=0; $i<=50; $i++) {
+						?>
+						<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+						<?php
+						}
+						?>
 					</select>
 				</div>
 				<div class="form-group col-sm-6">
-					<label>Unidades de aprendizaje impartidas en el instituto</label>
-					<input type="text" id="" name="" class="form-control" placeholder='Ingrese materias separadas por comas, Ej. "Economía, Bases de datos, Cálculo"' />
+					<label>Unidades de aprendizaje impartidas en el instituto:</label>
+					<input type="text" id="" name="" class="form-control" placeholder='Ingresa materias separadas por comas, Ej. "Economía, Bases de datos, Cálculo"' />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>Patentes y/o publicaciones de libros</label>
-					<textarea id="" name="" rows="5" class="form-control" placeholder="Ingrese, si considera tener más productividad, la descripción y año del producto, sepárelos por coma (,) y por cada diferente producto inicie en una nueva línea; ejemplo: Producto uno, YYYY (representa el año)&#10;Producto dos, YYYY"></textarea>
+					<label>Patentes y/o publicaciones de libros:</label>
+					<textarea id="" name="" rows="5" class="form-control" placeholder="Ingresa, si consideras tener más productividad, la descripción y año del producto, sepáralos por coma (,) y por cada diferente producto inicia en una nueva línea; ejemplo:\nProducto uno, YYYY (representa el año)\nProducto dos, YYYY"></textarea>
 				</div>
 			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="proyectos">
-			<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			<div class="panel-group ficha-collapse" id="accordion6">
 				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="headingOne">
+					<div class="panel-heading">
 						<h4 class="panel-title">
-							<a role="button" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Proyecto <?php echo date('Y'); ?></a>
+						<a data-parent="#accordion6" data-toggle="collapse" href="#panel-6" aria-expanded="true" aria-controls="panel-6">
+							Proyecto <?php echo date('Y'); ?>
+						</a>
 						</h4>
+						<button type="button" class="collpase-button" data-parent="#accordion6" data-toggle="collapse" href="#panel-6"></button>
 					</div>
-					<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+				</div>
+				<div class="panel-collapse collapse in" id="panel-6">
+					<div class="panel-body">
+						<div class="row">
+							<div class="form-group col-sm-6">
+								<label>Tipo de proyecto</label>
+								<select class="form-control">
+									<option value="">Selecciona el tipo de proyecto</option>
+									<option value="SIP">SIP</option>
+									<option value="CONACYT">CONACYT</option>
+									<option value="Otros">Otros</option>
+								</select>
+							</div>
+							<div class="form-group col-sm-6">
+								<label>Especifica el tipo de proyecto</label>
+								<input type="text" id="" name="" class="form-control" disabled="disabled" placeholder='Especifica si el tipo de proyecto es "Otros"' />
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-sm-6">
+								<label>Número de registro</label>
+								<input type="text" id="" name="" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
+							</div>
+							<div class="form-group col-sm-6">
+								<label>Tipo de participacion</label>
+								<select class="form-control">
+									<option value="">Selecciona la actividad que desempeñaste dentro del proyecto</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-sm-12">
+								<label>Nombre del proyecto</label>
+								<input type="text" id="" name="" class="form-control" placeholder="Ingresa el nombre del proyecto" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel-group ficha-collapse" id="accordion7">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+						<a data-parent="#accordion7" data-toggle="collapse" href="#panel-7" aria-expanded="true" aria-controls="panel-7">
+							Proyecto <?php echo (date('Y')-1); ?>
+						</a>
+						</h4>
+						<button type="button" class="collpase-button collapsed" data-parent="#accordion7" data-toggle="collapse" href="#panel-7"></button>
+					</div>
+					<div class="panel-collapse collapse" id="panel-7">
 						<div class="panel-body">
 							<div class="row">
 								<div class="form-group col-sm-6">
 									<label>Tipo de proyecto</label>
 									<select class="form-control">
-										<option value="">Seleccione el tipo de proyecto</option>
-										<option value="SIP">SIP</option>
-										<option value="CONACYT">CONACYT</option>
-										<option value="Otros">Otros</option>
+										<option value="">Selecciona el tipo de proyecto</option>
 									</select>
 								</div>
 								<div class="form-group col-sm-6">
-									<label>Especifique el tipo de proyecto</label>
-									<input type="text" id="" name="" class="form-control" disabled="disabled" placeholder='Especifique si el tipo de proyecto es "Otros"' />
+									<label>Especifica el tipo de proyecto</label>
+									<input type="text" id="" name="" class="form-control" placeholder='Especifica si el tipo de proyecto es "Otros"' />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-6">
 									<label>Número de registro</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Ingrese el número de registro del proyecto" />
+									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
 								</div>
 								<div class="form-group col-sm-6">
 									<label>Tipo de participacion</label>
 									<select class="form-control">
-										<option value="">Seleccione la actividad que desempeño dentro del proyecto</option>
+										<option value="">Selecciona la actividad que desempeñaste dentro del proyecto</option>
 									</select>
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-12">
 									<label>Nombre del proyecto</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Ingrese el nombre del proyecto" />
+									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el nombre del proyecto" />
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="panel-group ficha-collapse" id="accordion8">
 				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="headingTwo">
+					<div class="panel-heading">
 						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Proyecto <?php echo (date('Y')-1); ?></a>
+						<a data-parent="#accordion8" data-toggle="collapse" href="#panel-8" aria-expanded="true" aria-controls="panel-8">
+							Proyecto <?php echo (date('Y')-2); ?>
+						</a>
 						</h4>
+						<button type="button" class="collpase-button collapsed" data-parent="#accordion8" data-toggle="collapse" href="#panel-8"></button>
 					</div>
-					<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+					<div class="panel-collapse collapse" id="panel-8">
 						<div class="panel-body">
 							<div class="row">
 								<div class="form-group col-sm-6">
 									<label>Tipo de proyecto</label>
 									<select class="form-control">
-										<option value="">Seleccione el tipo de proyecto</option>
+										<option value="">Selecciona el tipo de proyecto</option>
 									</select>
 								</div>
 								<div class="form-group col-sm-6">
-									<label>Especifique el tipo de proyecto</label>
-									<input type="text" id="" name="" class="form-control" placeholder='Especifique si el tipo de proyecto es "Otros"' />
+									<label>Especifica el tipo de proyecto</label>
+									<input type="text" id="" name="" class="form-control" placeholder='Especifica si el tipo de proyecto es "Otros"' />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-6">
 									<label>Número de registro</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Ingrese el número de registro del proyecto" />
+									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
 								</div>
 								<div class="form-group col-sm-6">
 									<label>Tipo de participacion</label>
 									<select class="form-control">
-										<option value="">Seleccione la actividad que desempeño dentro del proyecto</option>
+										<option value="">Selecciona la actividad que desempeño dentro del proyecto</option>
 									</select>
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-12">
 									<label>Nombre del proyecto</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Ingrese el nombre del proyecto" />
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading" role="tab" id="headingThree">
-						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Proyecto <?php echo (date('Y')-2); ?></a>
-						</h4>
-					</div>
-					<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-						<div class="panel-body">
-							<div class="row">
-								<div class="form-group col-sm-6">
-									<label>Tipo de proyecto</label>
-									<select class="form-control">
-										<option value="">Seleccione el tipo de proyecto</option>
-									</select>
-								</div>
-								<div class="form-group col-sm-6">
-									<label>Especifique el tipo de proyecto</label>
-									<input type="text" id="" name="" class="form-control" placeholder='Especifique si el tipo de proyecto es "Otros"' />
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-sm-6">
-									<label>Número de registro</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Ingrese el número de registro del proyecto" />
-								</div>
-								<div class="form-group col-sm-6">
-									<label>Tipo de participacion</label>
-									<select class="form-control">
-										<option value="">Seleccione la actividad que desempeño dentro del proyecto</option>
-									</select>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-sm-12">
-									<label>Nombre del proyecto</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Ingrese el nombre del proyecto" />
+									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el nombre del proyecto" />
 								</div>
 							</div>
 						</div>
@@ -664,6 +803,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<div role="tabpanel" class="tab-pane" id="bancarios">
 			<div class="row">
 				<div class="form-group col-sm-6">

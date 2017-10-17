@@ -17,7 +17,7 @@ function AddSpeechTitle() {
 			input = '<div class="row">';
 			input += '<div class="form-group col-sm-12">';
 			input += '<label>Ponencia '+i+'. Título de la ponencia en inglés y español</label>';
-			input += '<textarea id="tituloPonencia'+i+'" name="tituloPonencia'+i+'" rows="3" class="form-control" placeholder="Anote el nombre de su ponencia en inglés y en español separados por un salto de línea."></textarea>';
+			input += '<textarea id="tituloPonencia'+i+'" name="tituloPonencia[]" rows="3" class="form-control" placeholder="Anota el nombre de tu ponencia en inglés y en español separados por un salto de línea."></textarea>';
 			input += '</div></div>';
 			elem.after(input);
 			i++;
@@ -62,15 +62,15 @@ function DrawCoauthor() {
 			panel += '<div class="row">';
 			panel += '<div class="form-group col-sm-4">';
 			panel += '<label>Nombre(s):</label>';
-			panel += '<input type="text" id="coNombre'+x+'_1" name="coNombre'+x+'_1" class="form-control" placeholder="Nombre del autor" />';
+			panel += '<input type="text" id="coNombre'+x+'_1" name="coNombre_1[]" class="form-control" placeholder="Nombre del autor" />';
 			panel += '</div>';
 			panel += '<div class="form-group col-sm-4">';
 			panel += '<label>Primer apellido:</label>';
-			panel += '<input type="text" id="coApP'+x+'_1" name="coApP'+x+'_1" class="form-control" placeholder="Primer apellido del autor" />';
+			panel += '<input type="text" id="coApP'+x+'_1" name="coApP_1[]" class="form-control" placeholder="Primer apellido del autor" />';
 			panel += '</div>';
 			panel += '<div class="form-group col-sm-4">';
 			panel += '<label>Segundo apellido:</label>';
-			panel += '<input type="text" id="coApM'+x+'_1" name="coApM'+x+'_1" class="form-control" placeholder="Segundo apellido del autor" />';
+			panel += '<input type="text" id="coApM'+x+'_1" name="coApM_1[]" class="form-control" placeholder="Segundo apellido del autor" />';
 			panel += '</div></div>';  //.row
 			panel += '</div></div>';  // .panel-body y .collapse
 			panel += '</div>';  // .panel
@@ -92,15 +92,15 @@ function DrawCoauthor() {
 				coautor += '<div class="row">';
 				coautor += '<div class="form-group col-sm-4">';
 				coautor += '<label>Nombre(s):</label>';
-				coautor += '<input type="text" id="coNombre'+idC+'_'+z[(idC)]+'" name="coNombre'+idC+'_'+z[(idC)]+'" class="form-control" placeholder="Nombre del autor" />';
+				coautor += '<input type="text" id="coNombre'+idC+'_'+z[(idC)]+'" name="coNombre_'+idC+'[]" class="form-control" placeholder="Nombre del autor" />';
 				coautor += '</div>';
 				coautor += '<div class="form-group col-sm-4">';
 				coautor += '<label>Primer apellido:</label>';
-				coautor += '<input type="text" id="coApP'+idC+'_'+z[(idC)]+'" name="coApP'+idC+'_'+z[(idC)]+'" class="form-control" placeholder="Primer apellido del autor" />';
+				coautor += '<input type="text" id="coApP'+idC+'_'+z[(idC)]+'" name="coApP_'+idC+'[]" class="form-control" placeholder="Primer apellido del autor" />';
 				coautor += '</div>';
 				coautor += '<div class="form-group col-sm-4">';
 				coautor += '<label>Segundo apellido:</label>';
-				coautor += '<input type="text" id="coApM'+idC+'_'+z[(idC)]+'" name="coApM'+idC+'_'+z[(idC)]+'" class="form-control" placeholder="Segundo apellido del autor" />';
+				coautor += '<input type="text" id="coApM'+idC+'_'+z[(idC)]+'" name="coApM_'+idC+'[]" class="form-control" placeholder="Segundo apellido del autor" />';
 				coautor += '</div></div>';  //.row
 				
 				$(elem).append(coautor);
@@ -110,8 +110,63 @@ function DrawCoauthor() {
 	});
 }
 
+function Validate() {
+	$.extend($.validator.messages, {
+		  required: "Este campo es obligatorio.",
+		  digits: "Deben ser solo números"
+	});
+	
+	$("#formPonencia").validate({
+		ignore: [],
+		errorElement: "small",
+		errorClass: "help-block",
+		errorPlacement: function(error, element) {
+			if ( element.attr("type") == "radio" ) {
+				error.insertAfter(element.parent().parent());
+			} else if ( element.parent(".input-group").length ) {
+				error.insertAfter(element.parent());
+			} else {
+				error.insertAfter(element);
+			}
+		},
+		highlight: function(element) {
+			$(element).closest(".form-group").addClass("has-error");
+		},
+		unhighlight: function(element) {
+			$(element).closest(".form-group").removeClass("has-error");
+		},
+		rules: {
+			evento: {
+				required: true
+			},
+			idioma: {
+				required: true
+			},
+			sede: {
+				required: true
+			},
+			institucion: {
+				required: true
+			},
+			fechaInicio: {
+				required: true
+			},
+			fechaFin: {
+				required: true
+			},
+			itinerario: {
+				required: true
+			}
+		},
+		messages: {
+			
+		}
+	});
+}
+
 $(function() {
 	Init();
 	AddSpeechTitle();
 	DrawCoauthor();
+	Validate();
 });

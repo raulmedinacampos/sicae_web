@@ -138,6 +138,12 @@ h3.titulo {
 	color: #FFFFFF;
 }
 
+#mainWrapper .navbar-default .navbar-nav > .open > a, 
+#mainWrapper .navbar-default .navbar-nav > .open > a:focus, 
+#mainWrapper .navbar-default .navbar-nav > .open > a:hover {
+	color: #262626 !important;
+}
+
 
 /********** Botones switch **********/
 

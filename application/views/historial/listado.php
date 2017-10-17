@@ -1,3 +1,5 @@
+<h3>Historial de asistencia</h3>
+<hr class="red" />
 <table id="registros">
 	<thead>
 		<tr>
