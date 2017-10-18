@@ -1,3 +1,4 @@
+<!-- 
 <div class="row" style="margin-bottom: 50px;">
 	<div class="col-sm-12">
 		<div class="slider-wrapper theme-default">
@@ -25,7 +26,15 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
+<h5 class="text-justify" style="font-weight:normal;">El apoyo económico es una 
+aportación de recurso que asigna la Comisión para que el docente, alumno o Unidad 
+Académica del IPN cubra una parte significativa del costo total que se origina 
+para asistir o realizar un evento académico, así como para la publicación de un 
+artículo*. <strong>El Programa de Apoyos Económicos no contempla el financiamiento 
+total de los gastos que se generen para dicho rubro.</strong></h5>
+<p style="margin-bottom:50px;">*Solo en los casos cuya convocatoria contemple 
+apoyar la modalidad de publicación de artículos.</p>
 <div class="row">
 	<div class="col-sm-6">
 		<div class="panel panel-primary">

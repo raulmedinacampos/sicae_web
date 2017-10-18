@@ -17,7 +17,11 @@
 				</div>
 				<div class="form-group col-sm-6">
 					<label class="obligatorio">Grado a obtener:</label>
-					<input type="text" id="grado" name="grado" class="form-control" placeholder="Grado a obtener" />
+					<select id="grado" name="grado" class="form-control">
+						<option value="">Selecciona el grado a obtener</option>
+						<option value="Maestría">Maestría</option>
+						<option value="Doctorado">Doctorado</option>
+					</select>
 				</div>
 			</div>
 			<div class="row">

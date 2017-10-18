@@ -13,6 +13,7 @@ class Usuario extends CI_Controller {
 		$this->load->model("escuela_md");
 		$this->load->model("nombramiento_md");
 		$this->load->model("nivel_academico_md");
+		$this->load->model("participacion_md");
 		
 		$perfil = $this->session->rol;
 		$params["perfil"] = $perfil;
@@ -38,6 +39,7 @@ class Usuario extends CI_Controller {
 		$params["escuelas"] = $this->escuela_md->GetAll();
 		$params["nombramientos"] = $this->nombramiento_md->GetAll();
 		$params["niveles_academicos"] = $this->nivel_academico_md->GetAll();
+		$params["tipos_participacion"] = $this->participacion_md->GetAll();
 		
 		$this->load->view('template/header', $header);
 		$this->load->view('usuarios/nuevo', $params);

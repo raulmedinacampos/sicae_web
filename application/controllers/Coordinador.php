@@ -17,7 +17,7 @@ class Coordinador extends CI_Controller {
 		$this->load->model("escuela_md");
 		
 		$params["escuelas"] = $this->escuela_md->GetAll();
-		$params["tipos_evento"] = $this->tipo_evento_md->GetAll();
+		$params["tipos_evento"] = $this->tipo_evento_md->GetAllOrganizer();
 		
 		if ( $this->session->rol ) {
 			$params["persona"] = $this->persona_md->GetById($this->session->id);

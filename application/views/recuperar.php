@@ -9,7 +9,7 @@
 			<h4 class="form-group">Ingresa el CURP que registraste y la contraseña te será enviada a tu correo electrónico.</h4>
 			<div class="row">
 				<div class="form-group col-sm-5">
-					<input type="text" id="curp" name="curp" maxlength="18" class="form-control" placeholder="Ingrese el CURP que registró" />
+					<input type="text" id="curp" name="curp" maxlength="18" class="form-control" placeholder="Ingresa el CURP que registraste" />
 				</div>
 			</div>
 			<div class="row">
@@ -19,13 +19,10 @@
 			</div>
 			<div class="panel panel-default panel-sm">
 				<div class="panel-body">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-						eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-						enim ad minim veniam, quis nostrud exercitation ullamco laboris
-						nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-						reprehenderit in voluptate velit esse cillum dolore eu fugiat
-						nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-						sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					<p>Es un mecanismo de recuperación de clave de acceso para que 
+					los docentes, alumnos y Unidades Académicas del IPN ingresen a 
+					los servicios que brinda el Programa de Apoyos Económicos de la 
+					COFAA.</p>
 				</div>
 			</div>
 		</div>

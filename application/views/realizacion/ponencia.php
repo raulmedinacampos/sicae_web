@@ -128,6 +128,9 @@
 					<label>Especifique</label>
 					<input type="text" id="espTAereo" name="espTAereo" class="form-control" placeholder="Indica el itinerario de viaje, en clase turista" />
 				</div>
+				<?php
+				if ( $this->session->rol != "1" ) {  // No se muestra para profesor
+				?>
 				<div class="form-group col-sm-4">
 					<label>Seguro de viaje internacional</label>
 					<div class="input-group">
@@ -135,6 +138,9 @@
 						<input type="text" id="seguroViaje" name="seguroViaje" class="form-control" placeholder="Solo aplica a alumnos en viajes internacionales" />
 					</div>
 				</div>
+				<?php
+				}
+				?>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">

@@ -10,9 +10,17 @@ class Tipo_evento_md extends CI_Model {
     }
 	
 	function GetAll() {
+		$this->db->where_in("ID", array(1, 2, 7, 8));
 		$this->db->order_by("DESCRIPCION");
 		$query = $this->db->get(self::tabla);
 		return $query->result();
+    }
+    
+    function GetAllOrganizer() {
+    	$this->db->where_in("ID", array(1, 2, 7, 8, 10, 11, 12, 13, 14));
+    	$this->db->order_by("DESCRIPCION");
+    	$query = $this->db->get(self::tabla);
+    	return $query->result();
     }
     
     function GetById($id) {

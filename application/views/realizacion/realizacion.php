@@ -28,72 +28,65 @@
 				</div>
 				<div class="form-group col-sm-6">
 					<label class="obligatorio">Nombre del evento</label>
-					<input type="text" id="" name="" class="form-control" placeholder="" />
+					<input type="text" id="evento" name="evento" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-6">
 					<label class="obligatorio">Idioma del evento (Inglés, español, otro)</label>
-					<input type="text" id="" name="" class="form-control" placeholder="" />
+					<input type="text" id="idioma" name="idioma" class="form-control" placeholder="" />
 				</div>
 				<div class="form-group col-sm-6">
 					<label class="obligatorio">Sede</label>
-					<select id="" name="" class="form-control">
-						<option value="">Selecciona tu centro de adscripción</option>
-						<?php
-						foreach ( $escuelas as $val ) {
-						?>
-						<option value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE_CORTO; ?></option>
-						<?php
-						}
-						?>
-					</select>
+					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-6">
 					<div class="datepicker-group">
 						<label class="obligatorio">Fecha de inicio</label>
-						<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" />
+						<input type="text" id="fechaInicio" name="fechaInicio" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="form-group col-sm-6">
 					<div class="datepicker-group">
 						<label class="obligatorio">Fecha de término</label>
-						<input type="text" id="" name="" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" />
+						<input type="text" id="fechaFin" name="fechaFin" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Total de participantes</label>
-					<input type="text" id="" name="" class="form-control" placeholder="" />
+					<input type="text" id="tParticipantes" name="tParticipantes" class="form-control" placeholder="" />
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Total de expositores</label>
-					<input type="text" id="" name="" class="form-control" placeholder="" />
+					<input type="text" id="tExpositores" name="tExpositores" class="form-control" placeholder="" />
+				</div>
+				<div class="form-group col-sm-4">
+					<label class="obligatorio">Horas de duración del evento</label>
+					<input type="text" id="duracion" name="duracion" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
-					<label class="obligatorio">Horas totales</label>
-					<input type="text" id="" name="" class="form-control" placeholder="" />
-				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-12">
 					<label class="obligatorio">A quién va dirigido el evento</label>
-					<input type="text" id="" name="" class="form-control" placeholder="" />
+					<input type="text" id="dirigido" name="dirigido" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-12">
 					<label class="obligatorio">Objetivo</label>
-					<textarea cols="3" class="form-control" placeholder=""></textarea>
+					<textarea id="objetivo" name="objetivo" cols="3" class="form-control" placeholder=""></textarea>
 				</div>
-				<div class="form-group col-sm-6">
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-12">
 					<label class="obligatorio">Beneficio institucional</label>
-					<textarea cols="3" class="form-control" placeholder=""></textarea>
+					<textarea id="beneficio" name="beneficio" cols="3" class="form-control" placeholder=""></textarea>
 				</div>
 			</div>
 		</div>
@@ -186,18 +179,27 @@
 		<div role="tabpanel" class="tab-pane" id="monto">
 			<div class="row">
 				<div class="form-group col-sm-6">
-					<label class="obligatorio">Pago a expositores</label>
-					<input type="text" id="" name="" class="form-control" placeholder="" />
+					<label class="obligatorio">Pago de honorarios a expositores</label>
+					<div class="input-group">
+						<div class="input-group-addon">$</div>
+						<input type="text" id="" name="" class="form-control" placeholder="" />
+					</div>
 				</div>
 				<div class="form-group col-sm-6">
 					<label class="obligatorio">Viáticos a expositores</label>
-					<input type="text" id="" name="" class="form-control" placeholder="" />
+					<div class="input-group">
+						<div class="input-group-addon">$</div>
+						<input type="text" id="" name="" class="form-control" placeholder="" />
+					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-6">
 					<label class="obligatorio">Transporte aéreo</label>
-					<input type="text" id="" name="" class="form-control" placeholder="" />
+					<div class="input-group">
+						<div class="input-group-addon">$</div>
+						<input type="text" id="" name="" class="form-control" placeholder="" />
+					</div>
 				</div>
 				<div class="form-group col-sm-6">
 					<label class="obligatorio">+ Especifique</label>
@@ -207,7 +209,10 @@
 			<div class="row">
 				<div class="form-group col-sm-6">
 					<label class="obligatorio">Transporte terrestre</label>
-					<input type="text" id="" name="" class="form-control" placeholder="" />
+					<div class="input-group">
+						<div class="input-group-addon">$</div>
+						<input type="text" id="" name="" class="form-control" placeholder="" />
+					</div>
 				</div>
 				<div class="form-group col-sm-6">
 					<label class="obligatorio">+ Especifique</label>
@@ -216,18 +221,27 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-6">
-					<label class="obligatorio">Material</label>
-					<input type="text" id="" name="" class="form-control" placeholder="" />
+					<label class="obligatorio">Material didáctico</label>
+					<div class="input-group">
+						<div class="input-group-addon">$</div>
+						<input type="text" id="" name="" class="form-control" placeholder="" />
+					</div>
 				</div>
 				<div class="form-group col-sm-6">
-					<label class="obligatorio">Cafetería</label>
-					<input type="text" id="" name="" class="form-control" placeholder="" />
+					<label class="obligatorio">Servicio de cafetería</label>
+					<div class="input-group">
+						<div class="input-group-addon">$</div>
+						<input type="text" id="" name="" class="form-control" placeholder="" />
+					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-6">
 					<label class="obligatorio">Otros gastos</label>
-					<input type="text" id="" name="" class="form-control" placeholder="" />
+					<div class="input-group">
+						<div class="input-group-addon">$</div>
+						<input type="text" id="" name="" class="form-control" placeholder="" />
+					</div>
 				</div>
 				<div class="form-group col-sm-6">
 					<label class="obligatorio">Especifique sus otros gastos</label>
@@ -235,43 +249,71 @@
 				</div>
 			</div>
 			
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Otras aportaciones
-				</div>
-			</div>
-			<div class="panel-body">
-				<div class="row">
-					<div class="form-group col-sm-4">
-						<label class="obligatorio">¿Cuenta con otros apoyos?</label>
-						
+			<div class="panel-group ficha-collapse" id="accordion2">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-parent="#accordion100" data-toggle="collapse" href="#panel-100" aria-expanded="true" aria-controls="panel-100">
+								Otras aportaciones
+							</a>
+						</h4>
+						<button type="button" class="collpase-button" data-parent="#accordion100" data-toggle="collapse" href="#panel-100"></button>
 					</div>
-				</div>
-				<div class="row">
-					<div class="form-group col-sm-4">
-						<label class="obligatorio">Institución que apoya</label>
-						<input type="text" id="" name="" class="form-control" placeholder="" />
-					</div>
-					<div class="form-group col-sm-4">
-						<label class="obligatorio">Monto con el que apoya</label>
-						<input type="text" id="" name="" class="form-control" placeholder="" />
-					</div>
-					<div class="form-group col-sm-4">
-						<label class="obligatorio">Tipo de moneda</label>
-						<select class="form-control">
-							<option value="">Selecciona</option>
-						</select>
-					</div>
-				</div>
-				<div class="row">
-					<div class="form-group col-sm-8">
-						<label class="obligatorio">Especificación del apoyo</label>
-						<textarea rows="3" class="form-control"></textarea>
+					<div class="panel-collapse collapse in" id="panel-100">
+						<div class="panel-body">
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<label class="obligatorio">¿Cuenta con otros apoyos?</label>
+									<div>
+										<label class="radio-inline">
+											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($persona) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
+										</label>
+										<label class="radio-inline">
+											<input type="radio" id="rdbApN" name="apoyo" <?php if ( isset($persona) && $persona["GENERO"] == "F" ) {echo 'checked="checked"'; } ?> value="0" /> No
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<label class="obligatorio">Institución que apoya</label>
+									<input type="text" id="" name="" class="form-control" placeholder="" />
+								</div>
+								<div class="form-group col-sm-4">
+									<label class="obligatorio">Monto con el que apoya</label>
+									<div class="input-group">
+										<div class="input-group-addon">$</div>
+										<input type="text" id="" name="" class="form-control" placeholder="" />
+									</div>
+								</div>
+								<div class="form-group col-sm-4">
+									<label class="obligatorio">Tipo de moneda</label>
+									<select class="form-control">
+										<option value="">Selecciona</option>
+										<?php
+										foreach ( $monedas as $val ) {
+										?>
+										<option value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE; ?></option>
+										<?php
+										}
+										?>
+									</select>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-12">
+									<label class="obligatorio">Especificación del apoyo</label>
+									<textarea rows="3" class="form-control"></textarea>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="bancarios">
+			<h5 class="text-justify">Los datos bancarios que se ingresen deben 
+				corresponder a la cuenta de la escuela o centro solicitante.</h5>
 			<div class="row">
 				<div class="form-group col-sm-6">
 					<label class="obligatorio">Banco</label>

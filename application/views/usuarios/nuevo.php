@@ -9,7 +9,7 @@
 		?>
 		<li role="presentation"><a href="#profesor" aria-controls="profesor" role="tab" data-toggle="tab">Datos laborales</a></li>
 		<li role="presentation"><a href="#grados" aria-controls="grados" role="tab" data-toggle="tab">Grados académicos</a></li>
-		<li role="presentation"><a href="#productividad" aria-controls="productividad" role="tab" data-toggle="tab">Productividad <?php echo (date('Y')-2)."-".(date('Y')-1); ?></a></li>
+		<li role="presentation"><a href="#productividad" aria-controls="productividad" role="tab" data-toggle="tab">Productividad <?php echo (date('Y')-1)."-".date('Y'); ?></a></li>
 		<li role="presentation"><a href="#proyectos" aria-controls="proyectos" role="tab" data-toggle="tab">Proyectos</a></li>
 		<?php
 			}
@@ -161,7 +161,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>¿Fuiste contratado dentro del programa de profesor de excelencia?</label>
+					<label>¿Fuiste contratado dentro del Personal Académico Extraordinario?</label>
 					<div>
 						<label class="radio-inline">
 							<input type="radio" id="rdbES" name="excelencia" <?php if ( isset($profesor) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
@@ -388,13 +388,29 @@
 								<div class="form-group col-sm-6">
 									<label>¿Es becario EDD?</label>
 									<select id="edd" name="edd" class="form-control">
-										<option value="">Seleccione su situación</option>
+										<option value="">Selecciona tu situación</option>
+										<option value="0">No soy becario EDD</option>
+										<?php
+										for ( $i=1; $i<10; $i++ ) {
+										?>
+										<option value="<?php echo $i; ?>"><?php echo "Nivel ".$i; ?></option>
+										<?php
+										}
+										?>
 									</select>
 								</div>
 								<div class="form-group col-sm-6">
 									<label>¿Es becario por exclusividad?</label>
 									<select id="exclusividad" name="exclusividad" class="form-control">
-										<option value="">Seleccione su situación</option>
+										<option value="">Selecciona tu situación</option>
+										<option value="0">No soy becario por exclusividad</option>
+										<?php
+										for ( $i=1; $i<4; $i++ ) {
+										?>
+										<option value="<?php echo $i; ?>"><?php echo "Nivel ".$i; ?></option>
+										<?php
+										}
+										?>
 									</select>
 								</div>
 							</div>
@@ -402,13 +418,26 @@
 								<div class="form-group col-sm-6">
 									<label>¿Es becario EDI?</label>
 									<select id="edi" name="edi" class="form-control">
-										<option value="">Seleccione su situación</option>
+										<option value="">Selecciona tu situación</option>
+										<option value="0">No soy becario EDI</option>
+										<?php
+										for ( $i=1; $i<10; $i++ ) {
+										?>
+										<option value="<?php echo $i; ?>"><?php echo "Nivel ".$i; ?></option>
+										<?php
+										}
+										?>
 									</select>
 								</div>
 								<div class="form-group col-sm-6">
 									<label>¿Es becario SNI?</label>
 									<select id="sni" name="sni" class="form-control">
-										<option value="">Seleccione su situación</option>
+										<option value="">Selecciona tu situación</option>
+										<option value="0">No soy becario SNI</option>
+										<option value="1">Investigador 1er nivel</option>
+										<option value="2">Investigador 2do nivel</option>
+										<option value="3">Investigador 3er nivel</option>
+										<option value="4">Candidato</option>
 									</select>
 								</div>
 							</div>
@@ -618,6 +647,13 @@
 					<label>Las materias que impartes corresponden a:</label>
 					<select class="form-control">
 						<option value="">Selecciona el nivel que impartes</option>
+						<?php
+						foreach ( $niveles_academicos as $val ) {
+						?>
+						<option value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE; ?></option>
+						<?php
+						}
+						?>
 					</select>
 				</div>
 				<div class="form-group col-sm-6">
@@ -677,7 +713,7 @@
 						<div class="row">
 							<div class="form-group col-sm-6">
 								<label>Tipo de proyecto</label>
-								<select class="form-control">
+								<select id="tipoProyecto6" name="tipoProyecto[]" class="form-control tipoProy">
 									<option value="">Selecciona el tipo de proyecto</option>
 									<option value="SIP">SIP</option>
 									<option value="CONACYT">CONACYT</option>
@@ -686,25 +722,32 @@
 							</div>
 							<div class="form-group col-sm-6">
 								<label>Especifica el tipo de proyecto</label>
-								<input type="text" id="" name="" class="form-control" disabled="disabled" placeholder='Especifica si el tipo de proyecto es "Otros"' />
+								<input type="text" id="espTP6" name="espTP[]" class="form-control otro" disabled="disabled" placeholder='Especifica si el tipo de proyecto es "Otros"' />
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-group col-sm-6">
 								<label>Número de registro</label>
-								<input type="text" id="" name="" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
+								<input type="text" id="registro6" name="registro[]" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
 							</div>
 							<div class="form-group col-sm-6">
 								<label>Tipo de participacion</label>
-								<select class="form-control">
+								<select id="tParticipacion6" name="tParticipacion[]" class="form-control">
 									<option value="">Selecciona la actividad que desempeñaste dentro del proyecto</option>
+									<?php
+									foreach ( $tipos_participacion as $val ) {
+									?>
+									<option value="<?php echo $val->ID; ?>"><?php echo $val->DESCRIPCION; ?></option>
+									<?php
+									}
+									?>
 								</select>
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-group col-sm-12">
 								<label>Nombre del proyecto</label>
-								<input type="text" id="" name="" class="form-control" placeholder="Ingresa el nombre del proyecto" />
+								<input type="text" id="proyecto6" name="proyecto[]" class="form-control" placeholder="Ingresa el nombre del proyecto" />
 							</div>
 						</div>
 					</div>
@@ -725,31 +768,41 @@
 							<div class="row">
 								<div class="form-group col-sm-6">
 									<label>Tipo de proyecto</label>
-									<select class="form-control">
+									<select id="tipoProyecto7" name="tipoProyecto[]" class="form-control tipoProy">
 										<option value="">Selecciona el tipo de proyecto</option>
+										<option value="SIP">SIP</option>
+										<option value="CONACYT">CONACYT</option>
+										<option value="Otros">Otros</option>
 									</select>
 								</div>
 								<div class="form-group col-sm-6">
 									<label>Especifica el tipo de proyecto</label>
-									<input type="text" id="" name="" class="form-control" placeholder='Especifica si el tipo de proyecto es "Otros"' />
+									<input type="text" id="espTP7" name="espTP[]" class="form-control otro" disabled="disabled" placeholder='Especifica si el tipo de proyecto es "Otros"' />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-6">
 									<label>Número de registro</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
+									<input type="text" id="registro7" name="registro[]" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
 								</div>
 								<div class="form-group col-sm-6">
 									<label>Tipo de participacion</label>
-									<select class="form-control">
+									<select id="tParticipacion7" name="tParticipacion[]" class="form-control">
 										<option value="">Selecciona la actividad que desempeñaste dentro del proyecto</option>
+										<?php
+										foreach ( $tipos_participacion as $val ) {
+										?>
+										<option value="<?php echo $val->ID; ?>"><?php echo $val->DESCRIPCION; ?></option>
+										<?php
+										}
+										?>
 									</select>
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-12">
 									<label>Nombre del proyecto</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el nombre del proyecto" />
+									<input type="text" id="proyecto7" name="proyecto[]" class="form-control" placeholder="Ingresa el nombre del proyecto" />
 								</div>
 							</div>
 						</div>
@@ -771,31 +824,41 @@
 							<div class="row">
 								<div class="form-group col-sm-6">
 									<label>Tipo de proyecto</label>
-									<select class="form-control">
+									<select id="tipoProyecto8" name="tipoProyecto[]" class="form-control tipoProy">
 										<option value="">Selecciona el tipo de proyecto</option>
+										<option value="SIP">SIP</option>
+										<option value="CONACYT">CONACYT</option>
+										<option value="Otros">Otros</option>
 									</select>
 								</div>
 								<div class="form-group col-sm-6">
 									<label>Especifica el tipo de proyecto</label>
-									<input type="text" id="" name="" class="form-control" placeholder='Especifica si el tipo de proyecto es "Otros"' />
+									<input type="text" id="espTP8" name="espTP[]" class="form-control otro" disabled="disabled" placeholder='Especifica si el tipo de proyecto es "Otros"' />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-6">
 									<label>Número de registro</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
+									<input type="text" id="registro8" name="registro[]" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
 								</div>
 								<div class="form-group col-sm-6">
 									<label>Tipo de participacion</label>
-									<select class="form-control">
-										<option value="">Selecciona la actividad que desempeño dentro del proyecto</option>
+									<select id="tParticipacion8" name="tParticipacion[]" class="form-control">
+										<option value="">Selecciona la actividad que desempeñaste dentro del proyecto</option>
+										<?php
+										foreach ( $tipos_participacion as $val ) {
+										?>
+										<option value="<?php echo $val->ID; ?>"><?php echo $val->DESCRIPCION; ?></option>
+										<?php
+										}
+										?>
 									</select>
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-12">
 									<label>Nombre del proyecto</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el nombre del proyecto" />
+									<input type="text" id="proyecto8" name="proyecto[]" class="form-control" placeholder="Ingresa el nombre del proyecto" />
 								</div>
 							</div>
 						</div>

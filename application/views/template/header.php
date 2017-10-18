@@ -60,7 +60,7 @@
 							<div class="col-xs-4"><img id="logoCOFAA" alt="COFAA" src="<?php echo base_url("images/cofaa.png"); ?>" class="img-responsive" /></div>
 							<div class="col-xs-4 text-right">
 								<h6 class="hidden-xs hidden-md hidden-sm">Dirección de Especialización Docente e Investigación Científica y Tecnológica</h6>
-								<h7 class="hidden-xs hidden-md hidden-sm">Departamento de Apoyos económicos</h7>
+								<h7 class="hidden-xs hidden-md hidden-sm">Departamento de Apoyos Económicos</h7>
 							</div>
 						</div>
 					</div>

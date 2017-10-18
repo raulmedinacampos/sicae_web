@@ -15,9 +15,11 @@ class Realizacion extends CI_Controller {
 		
 		$this->load->model("tipo_evento_md");
 		$this->load->model("escuela_md");
+		$this->load->model("moneda_md");
 		
 		$params["escuelas"] = $this->escuela_md->GetAll();
-		$params["tipos_evento"] = $this->tipo_evento_md->GetAll();
+		$params["tipos_evento"] = $this->tipo_evento_md->GetAllOrganizer();
+		$params["monedas"] = $this->moneda_md->GetAll();
 		
 		if ( $this->session->rol ) {
 			$params["persona"] = $this->persona_md->GetById($this->session->id);

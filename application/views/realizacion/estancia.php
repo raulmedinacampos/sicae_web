@@ -11,13 +11,26 @@
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="estancia">
 			<div class="row">
-				<div class="form-group col-sm-6">
-					<label>Nombre de la universidad:</label>
+				<div class="form-group col-sm-12">
+					<label>Institución donde se realizará la estancia:</label>
 					<input type="text" id="universidad" name="universidad" class="form-control" placeholder="Ingresa el nombre de la universidad donde realizarás la estadía" />
 				</div>
+			</div>
+			<div class="row">
 				<div class="form-group col-sm-6">
 					<label class="obligatorio">Sede:</label>
 					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" />
+				</div>
+				<div class="form-group col-sm-6">
+					<label class="obligatorio">Lugar donde se llevará a cabo el evento:</label>
+					<div>
+						<label class="radio-inline">
+							<input type="radio" id="rdbLN" name="lugar" <?php if ( isset($persona) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="N" /> Nacional
+						</label>
+						<label class="radio-inline">
+							<input type="radio" id="rdbLI" name="lugar" <?php if ( isset($persona) && $persona["GENERO"] == "F" ) {echo 'checked="checked"'; } ?> value="I" /> Internacional
+						</label>
+					</div>
 				</div>
 			</div>
 			<div class="row">
@@ -111,6 +124,9 @@
 					<label>Especifique</label>
 					<input type="text" id="espTAereo" name="espTAereo" class="form-control" placeholder="Indica el itinerario de viaje, en clase turista" />
 				</div>
+				<?php
+				if ( $this->session->rol != "1" ) {  // No se muestra para profesor
+				?>
 				<div class="form-group col-sm-4">
 					<label>Seguro de viaje internacional</label>
 					<div class="input-group">
@@ -118,6 +134,9 @@
 						<input type="text" id="seguroViaje" name="seguroViaje" class="form-control" placeholder="Solo aplica a alumnos en viajes internacionales" />
 					</div>
 				</div>
+				<?php
+				}
+				?>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
