@@ -52,6 +52,19 @@ function ToggleProfData() {
 	});
 }
 
+function EnableProjectDesc() {
+	$(".tipoProy").change(function() {
+		var p = $(this).parents(".panel-body");
+		var input = p.find(".otro");
+		
+		if ( $(this).val() == "Otros" ) {
+			input.prop("disabled", false);
+		} else {
+			input.prop("disabled", true);
+		}
+	});
+}
+
 function Validate() {
 	$.validator.methods.email = function( value, element ) {
 		return this.optional( element ) || /[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-z]+/.test( value );
@@ -103,7 +116,7 @@ function Validate() {
 			},
 			rfc: {
 				required: true,
-				minlength: 13
+				minlength: 10
 			},
 			sexo: {
 				required: true
@@ -118,15 +131,10 @@ function Validate() {
 			emailConf: {
 				equalTo: "#email"
 			},
-			lada: {
-				required: true,
-				digits: true,
-				minlength: 2
-			},
 			telefono: {
 				required: true,
 				digits: true,
-				minlength: 7
+				minlength: 10
 			},
 			extension: {
 				required: true,
@@ -200,11 +208,8 @@ function Validate() {
 				email: "El correo es incorrecto"
 			},
 			emailConf: "El correo no coincide",
-			lada: {
-				minlength: "La lada debe tener 2 o 3 dígitos",
-			},
 			telefono: {
-				minlength: "El número telefónico debe ser de 7 dígitos"
+				minlength: "El número telefónico debe ser de 10 dígitos"
 			},
 			extension: {
 				minlength: "La extensión debe ser de 5 dígitos"
@@ -226,5 +231,6 @@ function Validate() {
 $(function() {
 	Init();
 	ToggleProfData();
+	EnableProjectDesc();
 	Validate();
 });

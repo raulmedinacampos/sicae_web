@@ -31,6 +31,9 @@ function Validate() {
 			sede: {
 				required: true
 			},
+			lugar: {
+				required: true
+			},
 			fechaInicio: {
 				required: true
 			},
@@ -39,6 +42,11 @@ function Validate() {
 			},
 			itinerario: {
 				required: true
+			},
+			seguroViaje: {
+				required: function(element) {
+					return $('input[name="lugar"]:checked').val() == "I";
+				}
 			}
 		},
 		messages: {

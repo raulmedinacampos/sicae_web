@@ -49,13 +49,9 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-sm-3">
-							<label class="obligatorio">Lada:</label>
-							<input type="text" id="ladaC" name="ladaC" maxlength="3" class="form-control" placeholder="Lada" />
-						</div>
 						<div class="form-group col-sm-6">
 							<label class="obligatorio">Teléfono fijo:</label>
-							<input type="text" id="telefonoC" name="telefonoC" maxlength="7" class="form-control" data-mask="9999999" placeholder="Teléfono fijo" />
+							<input type="text" id="telefonoC" name="telefonoC" maxlength="7" class="form-control" data-mask="9999999999" placeholder="Teléfono fijo" />
 						</div>
 						<div class="form-group col-sm-3">
 							<label class="obligatorio">Extensión:</label>

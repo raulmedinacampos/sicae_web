@@ -20,9 +20,6 @@ class Usuario extends CI_Controller {
 		
 		if ( $this->session->rol ) {
 			$params["persona"] = $this->persona_md->GetById($this->session->id);
-			$this->load->helper("telefono");
-			$telefono = SepareteLada($params["persona"]["TELEFONO"]);
-			list($params["persona"]["LADA"], $params["persona"]["TELEFONO"]) = $telefono;
 		}
 		
 		switch ( $perfil ) {

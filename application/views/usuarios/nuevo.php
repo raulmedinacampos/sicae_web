@@ -83,13 +83,9 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-2">
-					<label class="obligatorio">Lada:</label>
-					<input type="text" id="lada" name="lada" maxlength="3" class="form-control" value="<?php if(isset($persona)) {echo $persona["LADA"];} ?>" placeholder="Lada" />
-				</div>
 				<div class="form-group col-sm-4">
 					<label class="obligatorio">Teléfono fijo:</label>
-					<input type="text" id="telefono" name="telefono" maxlength="15" class="form-control" data-mask="9999999" value="<?php if(isset($persona)) {echo $persona["TELEFONO"];} ?>" placeholder="Teléfono fijo" />
+					<input type="text" id="telefono" name="telefono" maxlength="15" class="form-control" data-mask="9999999999" value="<?php if(isset($persona)) {echo $persona["TELEFONO"];} ?>" placeholder="Teléfono fijo" />
 				</div>
 				<div class="form-group col-sm-2">
 					<label class="obligatorio">Extensión:</label>
