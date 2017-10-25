@@ -223,6 +223,10 @@ h3.titulo {
 
 /********** Tabs **********/
 
+.tab-content {
+	padding: 25px 0;
+}
+
 .tab-content .tab-pane {
 	margin: 20px 0 30px;
 }

@@ -11,10 +11,10 @@
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="evento">
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Tipo de evento:</label>
 					<select id="tipoEvento" name="tipoEvento" class="form-control">
-						<option value="">Selecciona el tipo de evento</option>
+						<option value="">Selecciona</option>
 						<?php
 						foreach ( $tipos_evento as $val ) {
 						?>
@@ -24,17 +24,17 @@
 						?>
 					</select>
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Nombre del evento:</label>
 					<input type="text" id="evento" name="evento" class="form-control" placeholder="Ingresa el nombre del evento" />
 				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Sede:</label>
 					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" />
 				</div>
-				<div class="form-group col-sm-6">
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-12">
 					<label class="obligatorio">Institución que organiza:</label>
 					<input type="text" id="institucion" name="institucion" class="form-control" placeholder="Ingresa la institución que organiza" />
 				</div>
@@ -68,7 +68,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-8">
 					<label class="obligatorio">Itinerario de viaje:</label>
 					<input type="text" id="itinerario" name="itinerario" class="form-control" placeholder="Ingresa tu itinerario de viaje (origen - destino)" />
 				</div>
@@ -93,14 +93,14 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
 										<label>Fecha de salida:</label>
 										<input type="text" id="fechaSalida" name="fechaSalida" class="datepicker form-control" data-mask="99/99/9999" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" placeholder="Fecha de salida" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
 										<label>Fecha de regreso:</label>
 										<input type="text" id="fechaRegreso" name="fechaRegreso" class="datepicker form-control" data-mask="99/99/9999" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" placeholder="Fecha de regreso" />
@@ -159,7 +159,7 @@
 				<div class="form-group col-sm-4">
 					<label>Tipo de moneda</label>
 					<select id="moneda" name="moneda" class="form-control">
-						<option value="">Selecciona el tipo de moneda</option>
+						<option value="">Selecciona</option>
 						<?php
 						foreach ( $monedas as $val ) {
 						?>
@@ -210,7 +210,7 @@
 								<div class="form-group col-sm-4">
 									<label>Tipo de moneda</label>
 									<select id="monedaAp" name="monedaAp" class="form-control">
-										<option value="">Selecciona el tipo de moneda</option>
+										<option value="">Selecciona</option>
 										<?php
 										foreach ( $monedas as $val ) {
 										?>

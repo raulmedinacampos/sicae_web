@@ -13,10 +13,10 @@
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="evento">
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Tipo de evento</label>
 					<select id="tipoEvento" name="tipoEvento" class="form-control">
-						<option value="">Selecciona el tipo de evento</option>
+						<option value="">Selecciona</option>
 						<?php
 						foreach ( $tipos_evento as $val ) {
 						?>
@@ -26,30 +26,30 @@
 						?>
 					</select>
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-8">
 					<label class="obligatorio">Nombre del evento</label>
 					<input type="text" id="evento" name="evento" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Idioma del evento (Inglés, español, otro)</label>
 					<input type="text" id="idioma" name="idioma" class="form-control" placeholder="" />
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Sede</label>
 					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
 						<label class="obligatorio">Fecha de inicio</label>
 						<input type="text" id="fechaInicio" name="fechaInicio" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
 						<label class="obligatorio">Fecha de término</label>
 						<input type="text" id="fechaFin" name="fechaFin" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" />
@@ -107,7 +107,7 @@
 							Expositor 1
 						</a>
 						</h4>
-						<button type="button" class="collpase-button collapsed" data-parent="#accordion1" data-toggle="collapse" href="#panel-1"></button>
+						<button type="button" class="collpase-button" data-parent="#accordion1" data-toggle="collapse" href="#panel-1"></button>
 					</div>
 					<div class="panel-collapse collapse in" id="panel-1">
 						<div class="panel-body">
@@ -126,47 +126,45 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-8">
 									<label>Procedencia</label>
 									<input type="text" id="" name="" class="form-control" />
 								</div>
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<label>Trabajo actual</label>
 									<input type="text" id="" name="" class="form-control" />
 								</div>
 							</div>
 							<div class="row">
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<label>Licenciatura</label>
 									<input type="text" id="" name="" class="form-control" />
 								</div>
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<label>Maestría</label>
 									<input type="text" id="" name="" class="form-control" />
 								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<label>Doctorado</label>
 									<input type="text" id="" name="" class="form-control" />
 								</div>
-								<div class="form-group col-sm-6">
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-4">
 									<label>Especialidad</label>
 									<input type="text" id="" name="" class="form-control" />
 								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-8">
 									<label>Actividad del expositor</label>
 									<input type="text" id="" name="" class="form-control" />
 								</div>
-								<div class="form-group col-sm-6">
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-8">
 									<label>Tema a exponer</label>
 									<input type="text" id="" name="" class="form-control" />
 								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<label>Horario</label>
 									<input type="text" id="" name="" class="form-control" />
 								</div>
@@ -178,57 +176,64 @@
 		</div>
 		<div role="tabpanel" class="tab-pane" id="monto">
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Pago de honorarios a expositores</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
 					</div>
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Viáticos a expositores</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Transporte aéreo</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
 					</div>
 				</div>
-				<div class="form-group col-sm-6">
-					<label class="obligatorio">+ Especifique</label>
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-12">
+					<label class="obligatorio">+ Especifica</label>
 					<input type="text" id="" name="" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Transporte terrestre</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
 					</div>
 				</div>
-				<div class="form-group col-sm-6">
-					<label class="obligatorio">+ Especifique</label>
+				<div class="form-group col-sm-8">
+					<label class="obligatorio">+ Especifica</label>
 					<input type="text" id="" name="" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Material didáctico</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
 					</div>
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Servicio de cafetería</label>
+					<div class="input-group">
+						<div class="input-group-addon">$</div>
+						<input type="text" id="" name="" class="form-control" placeholder="" />
+					</div>
+				</div>
+				<div class="form-group col-sm-4">
+					<label class="obligatorio">Otros gastos</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
@@ -236,15 +241,8 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
-					<label class="obligatorio">Otros gastos</label>
-					<div class="input-group">
-						<div class="input-group-addon">$</div>
-						<input type="text" id="" name="" class="form-control" placeholder="" />
-					</div>
-				</div>
-				<div class="form-group col-sm-6">
-					<label class="obligatorio">Especifique sus otros gastos</label>
+				<div class="form-group col-sm-12">
+					<label class="obligatorio">Especifica tus otros gastos</label>
 					<input type="text" id="" name="" class="form-control" placeholder="" />
 				</div>
 			</div>
@@ -263,7 +261,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label class="obligatorio">¿Cuenta con otros apoyos?</label>
+									<label class="obligatorio">¿Cuentas con otros apoyos?</label>
 									<div>
 										<label class="radio-inline">
 											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($persona) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
@@ -315,21 +313,21 @@
 			<h5 class="text-justify">Los datos bancarios que se ingresen deben 
 				corresponder a la cuenta de la escuela o centro solicitante.</h5>
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Banco</label>
 					<input type="text" id="banco" name="banco" class="form-control" placeholder="Ingrese el nombre del banco" />
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Número de sucursal</label>
 					<input type="text" id="sucursal" name="sucursal" class="form-control" placeholder="Ingrese su número de sucursal" />
 				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Número de cuenta</label>
 					<input type="text" id="cuentaBanco" name="cuentaBanco" maxlength="12" class="form-control" placeholder="Ingrese su número de cuenta" />
 				</div>
-				<div class="form-group col-sm-6">
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">CLABE Interbancaria</label>
 					<input type="text" id="clabe" name="clabe" maxlength="18" class="form-control" data-mask="999 999 99999999999 9" placeholder="Ingrese la CLABE interbancaria (18 dígitos)" />
 				</div>

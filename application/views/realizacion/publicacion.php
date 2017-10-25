@@ -18,18 +18,17 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-12">
 					<label class="obligatorio">Revista de publicación:</label>
-					<input type="text" id="revista" name="revista" class="form-control" placeholder="Ingresa el idioma en que se presentará el evento (Inglés, español, otro)" />
+					<input type="text" id="revista" name="revista" class="form-control" placeholder="Ingresa el nombre de la revista que se publicará" />
 				</div>
-				<div class="form-group col-sm-6">
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">ISSN de la revista:</label>
 					<input type="text" id="issn" name="issn" class="form-control" placeholder="Ingresa la institución que organiza" />
 				</div>
-			</div>
-			
-			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Sede:</label>
 					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" />
 				</div>
@@ -88,7 +87,7 @@
 				<div class="form-group col-sm-4">
 					<label>Tipo de moneda</label>
 					<select id="moneda" name="moneda" class="form-control">
-						<option value="">Selecciona el tipo de moneda</option>
+						<option value="">Selecciona</option>
 						<?php
 						foreach ( $monedas as $val ) {
 						?>

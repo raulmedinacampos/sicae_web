@@ -17,11 +17,11 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Sede:</label>
 					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" />
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-8">
 					<label class="obligatorio">Lugar donde se llevará a cabo el evento:</label>
 					<div>
 						<label class="radio-inline">
@@ -90,14 +90,14 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
 										<label>Fecha de salida:</label>
 										<input type="text" id="fechaSalida" name="fechaSalida" class="datepicker form-control" data-mask="99/99/9999" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" placeholder="Fecha de salida" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
 										<label>Fecha de regreso:</label>
 										<input type="text" id="fechaRegreso" name="fechaRegreso" class="datepicker form-control" data-mask="99/99/9999" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" placeholder="Fecha de regreso" />
@@ -153,7 +153,7 @@
 				<div class="form-group col-sm-4">
 					<label>Tipo de moneda</label>
 					<select id="moneda" name="moneda" class="form-control">
-						<option value="">Selecciona el tipo de moneda</option>
+						<option value="">Selecciona</option>
 						<?php
 						foreach ( $monedas as $val ) {
 						?>
@@ -204,7 +204,7 @@
 								<div class="form-group col-sm-4">
 									<label>Tipo de moneda</label>
 									<select id="monedaAp" name="monedaAp" class="form-control">
-										<option value="">Selecciona el tipo de moneda</option>
+										<option value="">Selecciona</option>
 										<?php
 										foreach ( $monedas as $val ) {
 										?>

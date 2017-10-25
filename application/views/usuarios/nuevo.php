@@ -106,7 +106,7 @@
 				<div class="form-group col-sm-12">
 					<label class="obligatorio">Escuela:</label>
 					<select id="escuela" name="escuela" class="form-control">
-						<option value="">Selecciona tu centro de adscripción</option>
+						<option value="">Selecciona</option>
 						<?php
 						foreach ( $escuelas as $val ) {
 						?>
@@ -133,7 +133,7 @@
 				<div class="form-group col-sm-4">
 					<label>Tipo de nombramiento</label>
 					<select id="tipoNombramiento" name="tipoNombramiento" class="form-control">
-						<option value="">Selecciona tu tipo de nombramiento</option>
+						<option value="">Selecciona</option>
 						<?php
 						foreach ( $nombramientos as $val ) {
 						?>
@@ -201,7 +201,7 @@
 								<div class="form-group col-sm-4">
 									<label>Horas de plaza</label>
 									<select id="horas" name="horas" class="form-control">
-										<option value="">Selecciona el número de horas</option>
+										<option value="">Selecciona</option>
 										<option value="20">20</option>
 										<option value="30">30</option>
 										<option value="40">40</option>
@@ -274,7 +274,7 @@
 								<div class="form-group col-sm-4">
 									<label>Tipo de sabático</label>
 									<select id="tipoSabatico" name="tipoSabatico" class="form-control">
-										<option value="">Seleccione una opción</option>
+										<option value="">Selecciona</option>
 									</select>
 								</div>
 								<div class="form-group col-sm-4">
@@ -381,10 +381,10 @@
 					<div class="panel-collapse collapse in" id="panel-5">
 						<div class="panel-body">
 							<div class="row">
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<label>¿Es becario EDD?</label>
 									<select id="edd" name="edd" class="form-control">
-										<option value="">Selecciona tu situación</option>
+										<option value="">Selecciona</option>
 										<option value="0">No soy becario EDD</option>
 										<?php
 										for ( $i=1; $i<10; $i++ ) {
@@ -395,10 +395,10 @@
 										?>
 									</select>
 								</div>
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<label>¿Es becario por exclusividad?</label>
 									<select id="exclusividad" name="exclusividad" class="form-control">
-										<option value="">Selecciona tu situación</option>
+										<option value="">Selecciona</option>
 										<option value="0">No soy becario por exclusividad</option>
 										<?php
 										for ( $i=1; $i<4; $i++ ) {
@@ -409,12 +409,10 @@
 										?>
 									</select>
 								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<label>¿Es becario EDI?</label>
 									<select id="edi" name="edi" class="form-control">
-										<option value="">Selecciona tu situación</option>
+										<option value="">Selecciona</option>
 										<option value="0">No soy becario EDI</option>
 										<?php
 										for ( $i=1; $i<10; $i++ ) {
@@ -425,10 +423,12 @@
 										?>
 									</select>
 								</div>
-								<div class="form-group col-sm-6">
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-4">
 									<label>¿Es becario SNI?</label>
 									<select id="sni" name="sni" class="form-control">
-										<option value="">Selecciona tu situación</option>
+										<option value="">Selecciona</option>
 										<option value="0">No soy becario SNI</option>
 										<option value="1">Investigador 1er nivel</option>
 										<option value="2">Investigador 2do nivel</option>
@@ -444,24 +444,24 @@
 		</div>
 		<div role="tabpanel" class="tab-pane" id="alumno">
 			<div class="row">
-				<div class="form-group col-sm-3">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Boleta:</label>
 					<input type="text" id="boleta" name="boleta" class="form-control" placeholder="Ingresa tu número de boleta" />
 				</div>
-				<div class="form-group col-sm-3">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Semestre:</label>
 					<input type="text" id="semestre" name="semestre" class="form-control" placeholder="Ingresa el semestre que cursas actualmente" />
 				</div>
-				<div class="form-group col-sm-3">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Promedio:</label>
 					<input type="text" id="promedio" name="promedio" class="form-control" placeholder="Ingresa tu promedio con dos decimales" />
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Las materias que cursas actualmente son de:</label>
 					<select id="materiasCursa" name="materiasCursa" class="form-control">
-						<option value="">Selecciona el nivel que cursas</option>
+						<option value="">Selecciona</option>
 						<?php
 						foreach ( $niveles_academicos as $val ) {
 						?>
@@ -471,9 +471,7 @@
 						?>
 					</select>
 				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-sm-3">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">¿Eres becario BEIFI?</label>
 					<div>
 						<label class="radio-inline">
@@ -484,7 +482,7 @@
 						</label>
 					</div>
 				</div>
-				<div class="form-group col-sm-3">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">¿Eres becario CONACYT?</label>
 					<div>
 						<label class="radio-inline">
@@ -512,10 +510,10 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="form-group col-sm-6">
+						<div class="form-group col-sm-4">
 							<label class="obligatorio">Escuela:</label>
 							<select id="escuelaSIP" name="escuelaSIP" class="form-control">
-								<option value="">Selecciona la escuela en donde está inscrito el proyecto SIP</option>
+								<option value="">Selecciona</option>
 								<?php
 								foreach ( $escuelas as $val ) {
 								?>
@@ -525,7 +523,7 @@
 								?>
 							</select>
 						</div>
-						<div class="form-group col-sm-6">
+						<div class="form-group col-sm-8">
 							<label class="obligatorio">Director del proyecto:</label>
 							<input type="text" id="directorSIP" name="directorSIP" class="form-control" placeholder="Ingresa el nombre del director del proyecto SIP" />
 						</div>
@@ -639,10 +637,10 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label>Las materias que impartes corresponden a:</label>
 					<select class="form-control">
-						<option value="">Selecciona el nivel que impartes</option>
+						<option value="">Selecciona</option>
 						<?php
 						foreach ( $niveles_academicos as $val ) {
 						?>
@@ -652,10 +650,23 @@
 						?>
 					</select>
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label>Publicaciones nacionales realizadas:</label>
 					<select class="form-control">
-						<option value="">Selecciona el número de publicaciones nacionales</option>
+						<option value="">Selecciona</option>
+						<?php
+						for ( $i=0; $i<=50; $i++) {
+						?>
+						<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+						<?php
+						}
+						?>
+					</select>
+				</div>
+				<div class="form-group col-sm-4">
+					<label>Publicaciones internacionales realizadas:</label>
+					<select class="form-control">
+						<option value="">Selecciona</option>
 						<?php
 						for ( $i=0; $i<=50; $i++) {
 						?>
@@ -667,20 +678,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
-					<label>Publicaciones internacionales realizadas:</label>
-					<select class="form-control">
-						<option value="">Selecciona el número de publicaciones internacionales</option>
-						<?php
-						for ( $i=0; $i<=50; $i++) {
-						?>
-						<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-						<?php
-						}
-						?>
-					</select>
-				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label>Unidades de aprendizaje impartidas en el instituto:</label>
 					<input type="text" id="" name="" class="form-control" placeholder='Ingresa materias separadas por comas, Ej. "Economía, Bases de datos, Cálculo"' />
 				</div>
@@ -707,29 +705,29 @@
 				<div class="panel-collapse collapse in" id="panel-6">
 					<div class="panel-body">
 						<div class="row">
-							<div class="form-group col-sm-6">
+							<div class="form-group col-sm-4">
 								<label>Tipo de proyecto</label>
 								<select id="tipoProyecto6" name="tipoProyecto[]" class="form-control tipoProy">
-									<option value="">Selecciona el tipo de proyecto</option>
+									<option value="">Selecciona</option>
 									<option value="SIP">SIP</option>
 									<option value="CONACYT">CONACYT</option>
 									<option value="Otros">Otros</option>
 								</select>
 							</div>
-							<div class="form-group col-sm-6">
+							<div class="form-group col-sm-4">
 								<label>Especifica el tipo de proyecto</label>
 								<input type="text" id="espTP6" name="espTP[]" class="form-control otro" disabled="disabled" placeholder='Especifica si el tipo de proyecto es "Otros"' />
 							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-sm-6">
+							<div class="form-group col-sm-4">
 								<label>Número de registro</label>
 								<input type="text" id="registro6" name="registro[]" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
 							</div>
-							<div class="form-group col-sm-6">
+						</div>
+						<div class="row">
+							<div class="form-group col-sm-4">
 								<label>Tipo de participacion</label>
 								<select id="tParticipacion6" name="tParticipacion[]" class="form-control">
-									<option value="">Selecciona la actividad que desempeñaste dentro del proyecto</option>
+									<option value="">Selecciona</option>
 									<?php
 									foreach ( $tipos_participacion as $val ) {
 									?>
@@ -739,9 +737,7 @@
 									?>
 								</select>
 							</div>
-						</div>
-						<div class="row">
-							<div class="form-group col-sm-12">
+							<div class="form-group col-sm-8">
 								<label>Nombre del proyecto</label>
 								<input type="text" id="proyecto6" name="proyecto[]" class="form-control" placeholder="Ingresa el nombre del proyecto" />
 							</div>
@@ -762,29 +758,29 @@
 					<div class="panel-collapse collapse" id="panel-7">
 						<div class="panel-body">
 							<div class="row">
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<label>Tipo de proyecto</label>
 									<select id="tipoProyecto7" name="tipoProyecto[]" class="form-control tipoProy">
-										<option value="">Selecciona el tipo de proyecto</option>
+										<option value="">Selecciona</option>
 										<option value="SIP">SIP</option>
 										<option value="CONACYT">CONACYT</option>
 										<option value="Otros">Otros</option>
 									</select>
 								</div>
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<label>Especifica el tipo de proyecto</label>
 									<input type="text" id="espTP7" name="espTP[]" class="form-control otro" disabled="disabled" placeholder='Especifica si el tipo de proyecto es "Otros"' />
 								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<label>Número de registro</label>
 									<input type="text" id="registro7" name="registro[]" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
 								</div>
-								<div class="form-group col-sm-6">
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-4">
 									<label>Tipo de participacion</label>
 									<select id="tParticipacion7" name="tParticipacion[]" class="form-control">
-										<option value="">Selecciona la actividad que desempeñaste dentro del proyecto</option>
+										<option value="">Selecciona</option>
 										<?php
 										foreach ( $tipos_participacion as $val ) {
 										?>
@@ -794,9 +790,7 @@
 										?>
 									</select>
 								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-sm-12">
+								<div class="form-group col-sm-8">
 									<label>Nombre del proyecto</label>
 									<input type="text" id="proyecto7" name="proyecto[]" class="form-control" placeholder="Ingresa el nombre del proyecto" />
 								</div>
@@ -818,29 +812,29 @@
 					<div class="panel-collapse collapse" id="panel-8">
 						<div class="panel-body">
 							<div class="row">
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<label>Tipo de proyecto</label>
 									<select id="tipoProyecto8" name="tipoProyecto[]" class="form-control tipoProy">
-										<option value="">Selecciona el tipo de proyecto</option>
+										<option value="">Selecciona</option>
 										<option value="SIP">SIP</option>
 										<option value="CONACYT">CONACYT</option>
 										<option value="Otros">Otros</option>
 									</select>
 								</div>
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<label>Especifica el tipo de proyecto</label>
 									<input type="text" id="espTP8" name="espTP[]" class="form-control otro" disabled="disabled" placeholder='Especifica si el tipo de proyecto es "Otros"' />
 								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-sm-6">
+								<div class="form-group col-sm-4">
 									<label>Número de registro</label>
 									<input type="text" id="registro8" name="registro[]" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
 								</div>
-								<div class="form-group col-sm-6">
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-4">
 									<label>Tipo de participacion</label>
 									<select id="tParticipacion8" name="tParticipacion[]" class="form-control">
-										<option value="">Selecciona la actividad que desempeñaste dentro del proyecto</option>
+										<option value="">Selecciona</option>
 										<?php
 										foreach ( $tipos_participacion as $val ) {
 										?>
@@ -850,9 +844,7 @@
 										?>
 									</select>
 								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-sm-12">
+								<div class="form-group col-sm-8">
 									<label>Nombre del proyecto</label>
 									<input type="text" id="proyecto8" name="proyecto[]" class="form-control" placeholder="Ingresa el nombre del proyecto" />
 								</div>
@@ -865,21 +857,21 @@
 		
 		<div role="tabpanel" class="tab-pane" id="bancarios">
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Banco:</label>
 					<input type="text" id="banco" name="banco" class="form-control" placeholder="Ingresa el nombre del banco" />
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Número de sucursal:</label>
 					<input type="text" id="sucursal" name="sucursal" class="form-control" placeholder="Ingresa el número de sucursal" />
 				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Número de cuenta:</label>
 					<input type="text" id="cuentaBanco" name="cuentaBanco" maxlength="12" class="form-control" placeholder="Ingresa tu número de cuenta" />
 				</div>
-				<div class="form-group col-sm-6">
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">CLABE Interbancaria:</label>
 					<input type="text" id="clabe" name="clabe" maxlength="18" class="form-control" data-mask="999 999 99999999999 9" placeholder="Ingresa la CLABE interbancaria (18 dígitos)" />
 				</div>

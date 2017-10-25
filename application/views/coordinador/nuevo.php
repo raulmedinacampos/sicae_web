@@ -65,7 +65,7 @@
 		<div class="form-group col-sm-12">
 			<label class="obligatorio">Escuela:</label>
 			<select id="escuela" name="escuela" class="form-control">
-				<option value="">Selecciona tu centro de adscripción</option>
+				<option value="">Selecciona</option>
 				<?php
 				foreach ( $escuelas as $val ) {
 				?>

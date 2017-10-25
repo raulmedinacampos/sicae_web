@@ -11,21 +11,21 @@
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="grado">
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-12">
 					<label class="obligatorio">Nombre de la universidad:</label>
 					<input type="text" id="universidad" name="universidad" class="form-control" placeholder="Ingresa el nombre de la universidad" />
 				</div>
-				<div class="form-group col-sm-6">
+			</div>
+			<div class="row">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Grado a obtener:</label>
 					<select id="grado" name="grado" class="form-control">
-						<option value="">Selecciona el grado a obtener</option>
+						<option value="">Selecciona</option>
 						<option value="Maestría">Maestría</option>
 						<option value="Doctorado">Doctorado</option>
 					</select>
 				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Sede:</label>
 					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" />
 				</div>
@@ -54,7 +54,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-4">
 					<label class="obligatorio">Itinerario de viaje:</label>
 					<input type="text" id="itinerario" name="itinerario" class="form-control" placeholder="Ingresa tu itinerario de viaje (origen - destino)" />
 				</div>
@@ -90,7 +90,7 @@
 				<div class="form-group col-sm-4">
 					<label>Tipo de moneda</label>
 					<select id="moneda" name="moneda" class="form-control">
-						<option value="">Selecciona el tipo de moneda</option>
+						<option value="">Selecciona</option>
 						<?php
 						foreach ( $monedas as $val ) {
 						?>
@@ -141,7 +141,7 @@
 								<div class="form-group col-sm-4">
 									<label>Tipo de moneda</label>
 									<select id="monedaAp" name="monedaAp" class="form-control">
-										<option value="">Selecciona el tipo de moneda</option>
+										<option value="">Selecciona</option>
 										<?php
 										foreach ( $monedas as $val ) {
 										?>
