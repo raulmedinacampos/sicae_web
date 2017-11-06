@@ -232,15 +232,17 @@ class Usuario extends CI_Controller {
 		$reg=$this->input->post("registro");
 		$tpart=$this->input->post("tParticipacion");
 		
-		foreach($reg as $ky=>$proy){
-			$data=array();
-			array_push($data, $usr);
-			array_push($data, $tpart[$ky]);
-			array_push($data, $esp[$ky]);
-			array_push($data, $reg[$ky]);
-			array_push($data, $tipo[$ky]);
-			
-			$id = $this->proyecto_md->InsertRecord($data);
+		foreach($reg as $ky=>$proy) {
+			if ( $reg[$ky] ) {
+				$data=array();
+				array_push($data, $usr);
+				array_push($data, $tpart[$ky]);
+				array_push($data, $esp[$ky]);
+				array_push($data, $reg[$ky]);
+				array_push($data, $tipo[$ky]);
+				
+				$id = $this->proyecto_md->InsertRecord($data);
+			}
 		}
 		echo $id;
 	}

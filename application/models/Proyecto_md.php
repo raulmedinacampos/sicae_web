@@ -40,7 +40,12 @@ class Proyecto_md extends CI_Model {
     }
 	
     function InsertRecord($data) {
-    	
+    	$this->db->select_max('ID');
+    	$query = $this->db->get(self::tabla);
+    	$id = $query->row();
+    	$id = $id->ID + 1;
+    	 
+    	$this->db->set('ID', $id);
     	$this->db->set('PERSONA_ID', $data[0]);
     	$this->db->set('PARTICIPACION_ID', $data[1]);
     	//$this->db->set('NOMBRE', $data[2]);
@@ -55,7 +60,7 @@ class Proyecto_md extends CI_Model {
         $this->db->insert(self::tabla,$this);
 		
 		$this->db->select("ID");
-        $this->db->where(array("PERSONA_ID"=>$data[0],"NOMBRE"=>$data[2],"PARTICIPACION_ID"=>$data[1]));
+        $this->db->where(array("PERSONA_ID"=>$data[0],"PARTICIPACION_ID"=>$data[1]));
         $query = $this->db->get(self::tabla);
         
         $usr = $query->row();
