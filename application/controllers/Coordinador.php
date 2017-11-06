@@ -39,14 +39,14 @@ class Coordinador extends CI_Controller {
 		
 		array_push($data,$this->input->post('escuela'));
 		array_push($data,2);
-		array_push($data,$this->input->post('curp'));//username
-		array_push($data,$this->input->post('password'));
+		array_push($data, NULL);
+		array_push($data, NULL);
 		array_push($data,$this->input->post('nombre'));
 		array_push($data,$this->input->post('apPatermo'));
 		array_push($data,$this->input->post('apMaterno'));
 		array_push($data,$this->input->post('fechaNac'));
 		array_push($data,$this->input->post('email'));
-		array_push($data,$this->input->post('rfc'));
+		array_push($data, NULL);
 		array_push($data,$this->input->post('curp'));
 		array_push($data,$this->input->post('sexo'));
 		array_push($data,$this->input->post('telefono'));
@@ -56,7 +56,15 @@ class Coordinador extends CI_Controller {
 		array_push($data,NULL);
 		array_push($data,NULL);
 		
-		//$this->persona_md->InsertRecord($data);
+		$id = $this->persona_md->InsertRecord($data);
+		$usr = $this->persona_md->GetById($id);
+		
+		$nom = trim($usr["NOMBRE"]." ".$usr["APELLIDO_P"]." ".$usr["APELLIDO_M"]);
+		$id = $usr["ID"];
+		$rol = $usr["TIPO_PERSONA_ID"];
+		$name = $usr["USERNAME"];
+		$curp = $usr["CURP"];
+		$this->session->set_userdata(array("nom"=>$nom,"rol"=>$rol,"username"=>$name,"id"=>$id,"curp"=>$curp));
 		
 		redirect(base_url("coordinador"));
 	}
@@ -67,14 +75,14 @@ class Coordinador extends CI_Controller {
 		
 		array_push($data,$this->input->post('escuela'));
 		array_push($data,2);
-		array_push($data,$this->input->post('curp'));//username
-		array_push($data,$this->input->post('password'));
+		array_push($data, NULL);
+		array_push($data, NULL);
 		array_push($data,$this->input->post('nombre'));
 		array_push($data,$this->input->post('apPatermo'));
 		array_push($data,$this->input->post('apMaterno'));
 		array_push($data,$this->input->post('fechaNac'));
 		array_push($data,$this->input->post('email'));
-		array_push($data,$this->input->post('rfc'));
+		array_push($data, NULL);
 		array_push($data,$this->input->post('curp'));
 		array_push($data,$this->input->post('sexo'));
 		array_push($data,$this->input->post('telefono'));
@@ -86,7 +94,7 @@ class Coordinador extends CI_Controller {
 		
 		$this->persona_md->UpdateRecord($data,$id);
 		
-		redirect(base_url("usuario"));
+		redirect(base_url("coordinador"));
 	}
 }
 ?>

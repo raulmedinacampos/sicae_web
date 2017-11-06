@@ -1,3 +1,9 @@
+function Init() {
+	$('[data-toggle="tooltip"]').tooltip();
+	
+	$('textarea[placeholder]').placeholder();
+}
+
 function AddCoauthor() {
 	var i = 2;
 	$("#btnAgregarCoautor").click(function(e) {
@@ -100,7 +106,8 @@ function Validate() {
 	});
 }
 
-$(function() {
+$gmx(document).ready(function() {
+	Init();
 	AddCoauthor();
 	Validate();
 })

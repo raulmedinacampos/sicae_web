@@ -1,6 +1,8 @@
 function Init() {
 	$(".datepicker").datepicker();
 	
+	$('[data-toggle="tooltip"]').tooltip();
+	
 	$("#emailConf, #passwordConf").on("cut copy paste", function(e) {
 		e.preventDefault();
 	});
@@ -14,6 +16,18 @@ function Init() {
 	$("#panel-base, #panel-interinato, #panel-sabatico, #panel-sueldo").css("display", "none");
 	
 	$('textarea[placeholder]').placeholder();
+}
+
+function TooglePasswordFields() {
+	$("#chkPass").click(function() {
+		if ( $(this).is(":checked") ) {
+			$("div.oculto").css("display", "block");
+		} else {
+			$("div.oculto").css("display", "none");
+			$("#password").val("");
+			$("#passwordConf").val("");
+		}
+	});
 }
 
 function ToggleProfData() {
@@ -52,6 +66,36 @@ function ToggleProfData() {
 	});
 }
 
+function CalculateTesis() {
+	var ctl = $("#cTLicenciatura");
+	var itl = $("#iTLicenciatura");
+	var ctm = $("#cTMaestria");
+	var itm = $("#iTMaestria");
+	var ctd = $("#cTDoctorado");
+	var itd = $("#iTDoctorado");
+	
+	$("#cTLicenciatura, #iTLicenciatura").keyup(function() {
+		if ( $("#cTLicenciatura").val() && $("#iTLicenciatura").val() ) {
+			var suma = parseInt($("#cTLicenciatura").val()) + parseInt($("#iTLicenciatura").val());
+			$("#tTLicenciatura").val(suma);
+		}
+	});
+	
+	$("#cTMaestria, #iTMaestria").keyup(function() {
+		if ( $("#cTMaestria").val() && $("#iTMaestria").val() ) {
+			var suma = parseInt($("#cTMaestria").val()) + parseInt($("#iTMaestria").val());
+			$("#tTMaestria").val(suma);
+		}
+	});
+	
+	$("#cTDoctorado, #iTDoctorado").keyup(function() {
+		if( $("#cTDoctorado").val() && $("#iTDoctorado").val() ) {
+			var suma = parseInt($("#cTDoctorado").val()) + parseInt($("#iTDoctorado").val());
+			$("#tTDoctorado").val(suma);
+		}
+	});
+}
+
 function EnableProjectDesc() {
 	$(".tipoProy").change(function() {
 		var p = $(this).parents(".panel-body");
@@ -65,10 +109,64 @@ function EnableProjectDesc() {
 	});
 }
 
+function SaveData() {
+	$("#btnGuardar").click(function(e) {
+		e.preventDefault();
+		
+		var perfil = $("#hdnTipo").val();
+		
+		if ( $("#formUsuario").valid() ) {
+			$.post(
+				'/usuario/editar', 
+				$("#formUsuario").serialize(), 
+				function (data) {}
+			);
+			
+			if ( perfil == 1 ) {  // Profesor
+				$.post(
+					'/usuario/datos-profesor', 
+					$("#formUsuario").serialize(), 
+					function (data) {}
+				);
+				
+				$.post(
+					'/usuario/direcciones', 
+					$("#formUsuario").serialize(), 
+					function (data) {}
+				);
+				
+				$.post(
+					'/usuario/proyectos', 
+					$("#formUsuario").serialize(), 
+					function (data) {}
+				);
+			}
+			
+			if ( perfil == 3 ) {  // Alumno
+				$.post(
+					'/usuario/datos-alumno', 
+					$("#formUsuario").serialize(), 
+					function (data) {}
+				);
+			}
+			
+			$.post(
+				'/usuario/grados-academicos', 
+				$("#formUsuario").serialize(), 
+				function (data) {}
+			);
+		}
+	});
+}
+
 function Validate() {
 	$.validator.methods.email = function( value, element ) {
 		return this.optional( element ) || /[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-z]+/.test( value );
 	}
+	
+	$.validator.addMethod("promedio", function(value, element) {
+	    return this.optional(element) || /^\d{0,3}(\.\d{0,2})?$/i.test(value);
+	}, "Ingresa un número válido");
 	
 	$.extend($.validator.messages, {
 		  required: "Este campo es obligatorio.",
@@ -144,8 +242,112 @@ function Validate() {
 			escuela: {
 				required: true
 			},
+			password: {
+				required: "#chkPass:checked",
+				minlength: 8
+			},
 			passwordConf: {
 				equalTo: "#password"
+			},
+			tipoNombramiento: {
+				required: true
+			},
+			fechaBase: {
+				required: function(element) {
+					return $("#tipoNombramiento").val() == "1" || $("#tipoNombramiento").val() == "3";
+				}
+			},
+			categoria: {
+				required: function(element) {
+					return $("#tipoNombramiento").val() == "1" || $("#tipoNombramiento").val() == "3";
+				}
+			},
+			plaza: {
+				required: function(element) {
+					return $("#tipoNombramiento").val() == "1" || $("#tipoNombramiento").val() == "3";
+				}
+			},
+			horas: {
+				required: function(element) {
+					return $("#tipoNombramiento").val() == "1" || $("#tipoNombramiento").val() == "3";
+				}
+			},
+			fechaInicioInt: {
+				required: function(element) {
+					return $("#tipoNombramiento").val() == "2";
+				}
+			},
+			fechaFinInt: {
+				required: function(element) {
+					return $("#tipoNombramiento").val() == "2";
+				}
+			},
+			numEmpleado: {
+				required: true
+			},
+			fechaIngreso: {
+				required: true
+			},
+			excelencia: {
+				required: true
+			},
+			sabatico: {
+				required: true
+			},
+			tipoSabatico: {
+				required: function(element) {
+					return $('input[name="sabatico"]:checked').val() == "1";
+				}
+			},
+			fechaInicioSab: {
+				required: function(element) {
+					return $('input[name="sabatico"]:checked').val() == "1";
+				}
+			},
+			fechaFinSab: {
+				required: function(element) {
+					return $('input[name="sabatico"]:checked').val() == "1";
+				}
+			},
+			sueldo: {
+				required: true
+			},
+			fechaInicioGoce: {
+				required: function(element) {
+					return $('input[name="sueldo"]:checked').val() == "1";
+				}
+			},
+			fechaFinGoce: {
+				required: function(element) {
+					return $('input[name="sueldo"]:checked').val() == "1";
+				}
+			},
+			prorroga: {
+				required: function(element) {
+					return $('input[name="sueldo"]:checked').val() == "1";
+				}
+			},
+			fechaInicioProrroga: {
+				required: function(element) {
+					return $('input[name="prorroga"]:checked').val() == "1";
+				}
+			},
+			fechaFinProrroga: {
+				required: function(element) {
+					return $('input[name="prorroga"]:checked').val() == "1";
+				}
+			},
+			edd: {
+				required: true
+			},
+			exclusividad: {
+				required: true
+			},
+			edi: {
+				required: true
+			},
+			sni: {
+				required: true
 			},
 			boleta: {
 				required: true
@@ -157,7 +359,7 @@ function Validate() {
 			},
 			promedio: {
 				required: true,
-				number: true
+				promedio: true
 			},
 			materiasCursa: {
 				required: true
@@ -171,13 +373,22 @@ function Validate() {
 			numSIP: {
 				required: true
 			},
-			nombreSIP: {
-				required: true
-			},
 			escuelaSIP: {
 				required: true
 			},
 			directorSIP: {
+				required: true
+			},
+			materiasImp: {
+				required: true
+			},
+			publNacionales: {
+				required: true
+			},
+			publInt: {
+				required: true
+			},
+			unidAprendizaje: {
 				required: true
 			},
 			banco: {
@@ -185,15 +396,16 @@ function Validate() {
 			},
 			sucursal: {
 				required: true,
-				digits: true
+				digits: true,
+				maxlength: 6
 			},
 			cuentaBanco: {
 				required: true,
-				digits: true
+				digits: true,
+				maxlength: 15
 			},
 			clabe: {
-				required: true,
-				digits: true
+				required: true
 			}
 		},
 		messages: {
@@ -214,23 +426,33 @@ function Validate() {
 			extension: {
 				minlength: "La extensión debe ser de 5 dígitos"
 			},
+			password: {
+				minlength: "La contraseña debe tener por lo menos 8 caracteres"
+			},
 			passwordConf: "La contraseña no coincide",
 			semestre: {
 				maxlength: "El semestre no puede ser de más de dos dígitos"
 			},
-			promedio: {
-				number: "El promedio debe ser entero o con dos decimales"
+			sucursal: {
+				maxlength: "El número de sucursal no puede de más de seis dígitos"
 			},
 			clabe: {
-				maxlength: "La clave interbancaria debe ser de 18 dígitos"
+				maxlength: "Deben ser 18 dígitos"
 			}
 		}
 	});
 }
 
-$(function() {
+$gmx(document).ready(function() {
 	Init();
+	TooglePasswordFields();
 	ToggleProfData();
+	CalculateTesis();
 	EnableProjectDesc();
+	SaveData();
 	Validate();
+	
+	$("#tipoNombramiento").trigger("change");
+	$('input[name="sabatico"]:checked').trigger("change");
+	$('input[name="sueldo"]:checked').trigger("change");
 });

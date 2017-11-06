@@ -29,31 +29,33 @@
 		<div role="tabpanel" class="tab-pane active" id="personal">
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">CURP:</label>
+					<label>CURP<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Clave Única de Registro de Población"></span></label>
 					<input type="text" id="curp" name="curp" maxlength="18" class="form-control" placeholder="Ingresa tu CURP" value="<?php if(isset($persona)) {echo $persona["CURP"];} ?>" />
+					<input type="hidden" id="hdnID" name="hdnID" value="<?php if(isset($persona)) {echo $persona["ID"];} ?>" />
+					<input type="hidden" id="hdnTipo" name="hdnTipo" value="<?php echo $perfil; ?>" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">RFC:</label>
+					<label>RFC<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Registro Federal de Contribuyentes"></span></label>
 					<input type="text" id="rfc" name="rfc" maxlength="13" class="form-control" placeholder="Ingresa tu RFC" value="<?php if(isset($persona)) {echo $persona["RFC"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Nombre(s):</label>
+					<label>Nombre(s)<span class="form-text">*</span>:</label>
 					<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingresa tu nombre" value="<?php if(isset($persona)) {echo $persona["NOMBRE"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Primer apellido:</label>
+					<label>Primer apellido<span class="form-text">*</span>:</label>
 					<input type="text" id="apPaterno" name="apPaterno" class="form-control" placeholder="Ingresa tu primer apellido" value="<?php if(isset($persona)) {echo $persona["APELLIDO_P"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Segundo apellido:</label>
+					<label>Segundo apellido:</label>
 					<input type="text" id="apMaterno" name="apMaterno" class="form-control" placeholder="Ingresa tu segundo apellido" value="<?php if(isset($persona)) {echo $persona["APELLIDO_M"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Sexo:</label>
+					<label>Sexo<span class="form-text">*</span>:</label>
 					<div>
 						<label class="radio-inline">
 							<input type="radio" id="rdbH" name="sexo" <?php if ( isset($persona) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="M" /> Hombre
@@ -64,7 +66,7 @@
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Nacionalidad:</label>
+					<label>Nacionalidad<span class="form-text">*</span>:</label>
 					<div>
 						<label class="radio-inline">
 							<input type="radio" id="rdbMex" name="nacionalidad" <?php if ( isset($persona) && preg_match("/(mex).*/i", $persona["NACIONALIDAD"]) == 1 ) {echo 'checked="checked"'; } ?> value="Mexicano" /> Mexicano
@@ -76,7 +78,7 @@
 				</div>
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
-						<label class="obligatorio">Fecha de nacimiento:</label>
+						<label>Fecha de nacimiento<span class="form-text">*</span>:</label>
 						<input type="text" id="fechaNac" name="fechaNac" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de nacimiento" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
@@ -84,27 +86,27 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Teléfono fijo:</label>
+					<label>Teléfono fijo<span class="form-text">*</span>:</label>
 					<input type="text" id="telefono" name="telefono" maxlength="15" class="form-control" data-mask="9999999999" value="<?php if(isset($persona)) {echo $persona["TELEFONO"];} ?>" placeholder="Teléfono fijo" />
 				</div>
 				<div class="form-group col-sm-2">
-					<label class="obligatorio">Extensión:</label>
+					<label>Extensión<span class="form-text">*</span>:</label>
 					<input type="text" id="extension" name="extension" maxlength="5" class="form-control" data-mask="99999" value="<?php if(isset($persona)) {echo $persona["EXTENSION"];} ?>" placeholder="Extensión" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Correo electrónico:</label>
-					<input type="text" id="email" name="email" class="form-control" placeholder="Email para recibir notificación de dictamen" value="<?php if(isset($persona)) {echo $persona["EMAIL"];} ?>" />
+					<label>Correo electrónico<span class="form-text">*</span>:</label>
+					<input type="text" id="email" name="email" class="form-control" placeholder="ejemplo@dominio.com" value="<?php if(isset($persona)) {echo $persona["EMAIL"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Confirmar correo electrónico:</label>
-					<input type="text" id="emailConf" name="emailConf" class="form-control" placeholder="Confirma el correo electrónico" value="<?php if(isset($persona)) {echo $persona["EMAIL"];} ?>" />
+					<label>Confirmar correo electrónico<span class="form-text">*</span>:</label>
+					<input type="text" id="emailConf" name="emailConf" class="form-control" placeholder="ejemplo@dominio.com" value="<?php if(isset($persona)) {echo $persona["EMAIL"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label class="obligatorio">Escuela:</label>
+					<label>Escuela<span class="form-text">*</span>:</label>
 					<select id="escuela" name="escuela" class="form-control">
 						<option value="">Selecciona</option>
 						<?php
@@ -119,15 +121,27 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label>Contraseña:</label>
-					<input type="password" id="password" name="password" class="form-control" placeholder="<?php if(isset($persona)) {echo 'Nueva contraseña';} else {echo 'Ingresa una contraseña';} ?>" />
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" id="chkPass" value="1" /> ¿Deseas modificar la contraseña?
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="row oculto">
+				<div class="form-group col-sm-4">
+					<label>Contraseña<span class="form-text">*</span>:</label>
+					<input type="password" id="password" name="password" maxlength="8" class="form-control" placeholder="Nueva contraseña" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Confirmar contraseña:</label>
-					<input type="password" id="passwordConf" name="passwordConf" class="form-control" placeholder="<?php if(isset($persona)) {echo 'Confirma la nueva contraseña';} else {echo 'Confirma la contraseña';} ?>" />
+					<label>Confirmar contraseña<span class="form-text">*</span>:</label>
+					<input type="password" id="passwordConf" name="passwordConf" maxlength="8" class="form-control" placeholder="Confirma la nueva contraseña" />
 				</div>
 			</div>
 		</div>
+		<?php
+			if ( $perfil == "1") {  // Profesor
+		?>
 		<div role="tabpanel" class="tab-pane" id="profesor">
 			<div class="row">
 				<div class="form-group col-sm-4">
@@ -137,7 +151,7 @@
 						<?php
 						foreach ( $nombramientos as $val ) {
 						?>
-						<option <?php if ( isset($profesor) ) {echo 'selected="selected"'; } ?> value="<?php echo $val->ID; ?>"><?php echo $val->DESCRIPCION; ?></option>
+						<option <?php if ( isset($profesor) && $profesor["NOMBRAMIENTO"] == $val->ID ) {echo 'selected="selected"'; } ?> value="<?php echo $val->ID; ?>"><?php echo $val->DESCRIPCION; ?></option>
 						<?php
 						}
 						?>
@@ -145,12 +159,12 @@
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Número de empleado</label>
-					<input type="text" id="numEmpleado" name="numEmpleado" class="form-control" placeholder="Ingresa tu número de empleado" />
+					<input type="text" id="numEmpleado" name="numEmpleado" class="form-control" placeholder="Ingresa tu número de empleado" value="<?php if(isset($profesor)) {echo $profesor["NO_EMPLEADO"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
 						<label>Fecha de ingreso</label>
-						<input type="text" id="fechaIngreso" name="fechaIngreso" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de ingreso" />
+						<input type="text" id="fechaIngreso" name="fechaIngreso" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de ingreso" value="<?php if(isset($profesor)) {echo $profesor["FECHA_INGRESO"];} ?>" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
@@ -160,10 +174,10 @@
 					<label>¿Fuiste contratado dentro del Personal Académico Extraordinario?</label>
 					<div>
 						<label class="radio-inline">
-							<input type="radio" id="rdbES" name="excelencia" <?php if ( isset($profesor) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
+							<input type="radio" id="rdbES" name="excelencia" <?php if ( isset($profesor) && $profesor["EXCELENCIA"] == "1" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
 						</label>
 						<label class="radio-inline">
-							<input type="radio" id="rdbEN" name="excelencia" <?php if ( isset($profesor) && $persona["GENERO"] == "F" ) {echo 'checked="checked"'; } ?> value="0" /> No
+							<input type="radio" id="rdbEN" name="excelencia" <?php if ( isset($profesor) && $profesor["EXCELENCIA"] == "0" ) {echo 'checked="checked"'; } ?> value="0" /> No
 						</label>
 					</div>
 				</div>
@@ -184,27 +198,27 @@
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
 										<label>Fecha en que obtuviste la base</label>
-										<input type="text" id="fechaBase" name="fechaBase" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha en que obtuvo la base" />
+										<input type="text" id="fechaBase" name="fechaBase" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha en que obtuvo la base" value="<?php if(isset($profesor)) {echo $profesor["FECHA_BASE"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Categoría</label>
-									<input type="text" id="categoria" name="categoria" class="form-control" placeholder="Ingresa tu categoría" />
+									<input type="text" id="categoria" name="categoria" class="form-control" placeholder="Ingresa tu categoría" value="<?php if(isset($profesor)) {echo $profesor["CATEGORIA"];} ?>" />
+								</div>
+								<div class="form-group col-sm-4">
+									<label>Plaza</label>
+									<input type="text" id="plaza" name="plaza" class="form-control" placeholder="Ingresa tu plaza" value="<?php if(isset($profesor)) {echo $profesor["PLAZA"];} ?>" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>Plaza</label>
-									<input type="text" id="plaza" name="plaza" class="form-control" placeholder="Ingresa tu plaza" />
-								</div>
-								<div class="form-group col-sm-4">
 									<label>Horas de plaza</label>
 									<select id="horas" name="horas" class="form-control">
 										<option value="">Selecciona</option>
-										<option value="20">20</option>
-										<option value="30">30</option>
-										<option value="40">40</option>
+										<option <?php if ( isset($profesor) && $profesor["HORAS"] == "20" ) {echo 'selected="selected"'; } ?> value="20">20</option>
+										<option <?php if ( isset($profesor) && $profesor["HORAS"] == "30" ) {echo 'selected="selected"'; } ?> value="30">30</option>
+										<option <?php if ( isset($profesor) && $profesor["HORAS"] == "40" ) {echo 'selected="selected"'; } ?> value="40">40</option>
 									</select>
 								</div>
 							</div>
@@ -228,14 +242,14 @@
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
 										<label>Fecha de inicio de interinato</label>
-										<input type="text" id="FechaInicioInt" name="FechaInicioInt" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de inicio" />
+										<input type="text" id="fechaInicioInt" name="fechaInicioInt" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de inicio" value="<?php if(isset($profesor)) {echo $profesor["INICIO_INTERINATO"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
 										<label>Fecha de término de interinato</label>
-										<input type="text" id="FechaFinInt" name="FechaFinInt" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de término" />
+										<input type="text" id="fechaFinInt" name="fechaFinInt" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de término" value="<?php if(isset($profesor)) {echo $profesor["FIN_INTERINATO"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
@@ -250,10 +264,10 @@
 					<label>¿Cuentas con sabático?</label>
 					<div>
 						<label class="radio-inline">
-							<input type="radio" id="rdbES" name="sabatico" <?php if ( isset($profesor) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
+							<input type="radio" id="rdbES" name="sabatico" <?php if ( isset($profesor) && $profesor["SABATICO"] == "1" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
 						</label>
 						<label class="radio-inline">
-							<input type="radio" id="rdbEN" name="sabatico" <?php if ( isset($profesor) && $persona["GENERO"] == "F" ) {echo 'checked="checked"'; } ?> value="0" /> No
+							<input type="radio" id="rdbEN" name="sabatico" <?php if ( isset($profesor) && $profesor["SABATICO"] == "0" ) {echo 'checked="checked"'; } ?> value="0" /> No
 						</label>
 					</div>
 				</div>
@@ -275,19 +289,21 @@
 									<label>Tipo de sabático</label>
 									<select id="tipoSabatico" name="tipoSabatico" class="form-control">
 										<option value="">Selecciona</option>
+										<option <?php if ( isset($profesor) && $profesor["SABATICO_ANUAL"] == "0" ) {echo 'selected="selected"'; } ?> value="0">Semestre sabático</option>
+										<option <?php if ( isset($profesor) && $profesor["SABATICO_ANUAL"] == "1" ) {echo 'selected="selected"'; } ?> value="1">Año sabático</option>
 									</select>
 								</div>
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
 										<label>Fecha de inicio de sabático</label>
-										<input type="text" id="fechaInicioSab" name="fechaInicioSab" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+										<input type="text" id="fechaInicioSab" name="fechaInicioSab" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de inicio" value="<?php if(isset($profesor)) {echo $profesor["SABATICO_INICIO"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
 										<label>Fecha de término de sabático</label>
-										<input type="text" id="fechaFinSab" name="fechaFinSab" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+										<input type="text" id="fechaFinSab" name="fechaFinSab" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de término" value="<?php if(isset($profesor)) {echo $profesor["SABATICO_FIN"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
@@ -301,10 +317,10 @@
 					<label>¿Cuenta con licencia con goce de sueldo?</label>
 					<div>
 						<label class="radio-inline">
-							<input type="radio" id="rdbSS" name="sueldo" <?php if ( isset($profesor) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
+							<input type="radio" id="rdbSS" name="sueldo" <?php if ( isset($profesor) && $profesor["LIC_SUELDO"] == "1" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
 						</label>
 						<label class="radio-inline">
-							<input type="radio" id="rdbSN" name="sueldo" <?php if ( isset($profesor) && $persona["GENERO"] == "F" ) {echo 'checked="checked"'; } ?> value="0" /> No
+							<input type="radio" id="rdbSN" name="sueldo" <?php if ( isset($profesor) && $profesor["LIC_SUELDO"] == "0" ) {echo 'checked="checked"'; } ?> value="0" /> No
 						</label>
 					</div>
 				</div>
@@ -325,14 +341,14 @@
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
 										<label>Fecha de inicio del periodo</label>
-										<input type="text" id="fechaInicioGoce" name="fechaInicioGoce" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+										<input type="text" id="fechaInicioGoce" name="fechaInicioGoce" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de inicio" value="<?php if(isset($profesor)) {echo $profesor["LIC_SUELDO_INICIO"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
 										<label>Fecha de término del periodo</label>
-										<input type="text" id="fechaFinGoce" name="fechaFinGoce" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+										<input type="text" id="fechaFinGoce" name="fechaFinGoce" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de término" value="<?php if(isset($profesor)) {echo $profesor["LIC_SUELDO_FIN"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
@@ -342,24 +358,24 @@
 									<label>¿Cuenta usted con prórroga?</label>
 									<div>
 										<label class="radio-inline">
-											<input type="radio" id="rdbSS" name="prorroga" <?php if ( isset($profesor) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
+											<input type="radio" id="rdbSS" name="prorroga" <?php if ( isset($profesor) && $profesor["PRORROGA"] == "1" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
 										</label>
 										<label class="radio-inline">
-											<input type="radio" id="rdbSN" name="prorroga" <?php if ( isset($profesor) && $persona["GENERO"] == "F" ) {echo 'checked="checked"'; } ?> value="0" /> No
+											<input type="radio" id="rdbSN" name="prorroga" <?php if ( isset($profesor) && $profesor["PRORROGA"] == "0" ) {echo 'checked="checked"'; } ?> value="0" /> No
 										</label>
 									</div>
 								</div>
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
 										<label>Fecha de inicio de prórroga</label>
-										<input type="text" id="fechaInicioProrroga" name="fechaInicioProrroga" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+										<input type="text" id="fechaInicioProrroga" name="fechaInicioProrroga" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de inicio" value="<?php if(isset($profesor)) {echo $profesor["PRORROGA_INICIO"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
 										<label>Fecha de término de prórroga</label>
-										<input type="text" id="fechaFinProrroga" name="fechaFinProrroga" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" />
+										<input type="text" id="fechaFinProrroga" name="fechaFinProrroga" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de término" value="<?php if(isset($profesor)) {echo $profesor["PRORROGA_FIN"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
@@ -389,7 +405,7 @@
 										<?php
 										for ( $i=1; $i<10; $i++ ) {
 										?>
-										<option value="<?php echo $i; ?>"><?php echo "Nivel ".$i; ?></option>
+										<option <?php if ( isset($profesor) && $profesor["EDD"] == $i ) {echo 'selected="selected"'; } ?> value="<?php echo $i; ?>"><?php echo "Nivel ".$i; ?></option>
 										<?php
 										}
 										?>
@@ -403,7 +419,7 @@
 										<?php
 										for ( $i=1; $i<4; $i++ ) {
 										?>
-										<option value="<?php echo $i; ?>"><?php echo "Nivel ".$i; ?></option>
+										<option <?php if ( isset($profesor) && $profesor["EXCLUSIVIDAD"] == $i ) {echo 'selected="selected"'; } ?> value="<?php echo $i; ?>"><?php echo "Nivel ".$i; ?></option>
 										<?php
 										}
 										?>
@@ -417,7 +433,7 @@
 										<?php
 										for ( $i=1; $i<10; $i++ ) {
 										?>
-										<option value="<?php echo $i; ?>"><?php echo "Nivel ".$i; ?></option>
+										<option <?php if ( isset($profesor) && $profesor["EDI"] == $i ) {echo 'selected="selected"'; } ?> value="<?php echo $i; ?>"><?php echo "Nivel ".$i; ?></option>
 										<?php
 										}
 										?>
@@ -429,11 +445,11 @@
 									<label>¿Es becario SNI?</label>
 									<select id="sni" name="sni" class="form-control">
 										<option value="">Selecciona</option>
-										<option value="0">No soy becario SNI</option>
-										<option value="1">Investigador 1er nivel</option>
-										<option value="2">Investigador 2do nivel</option>
-										<option value="3">Investigador 3er nivel</option>
-										<option value="4">Candidato</option>
+										<option <?php if ( isset($profesor) && $profesor["SNI"] == "0" ) {echo 'selected="selected"'; } ?> value="0">No soy becario SNI</option>
+										<option <?php if ( isset($profesor) && $profesor["SNI"] == "1" ) {echo 'selected="selected"'; } ?> value="1">Investigador 1er nivel</option>
+										<option <?php if ( isset($profesor) && $profesor["SNI"] == "2" ) {echo 'selected="selected"'; } ?> value="2">Investigador 2do nivel</option>
+										<option <?php if ( isset($profesor) && $profesor["SNI"] == "3" ) {echo 'selected="selected"'; } ?> value="3">Investigador 3er nivel</option>
+										<option <?php if ( isset($profesor) && $profesor["SNI"] == "4" ) {echo 'selected="selected"'; } ?> value="4">Candidato</option>
 									</select>
 								</div>
 							</div>
@@ -442,37 +458,43 @@
 				</div>
 			</div>
 		</div>
+		<?php
+			}
+		?>
+		<?php
+			if ( $perfil == "3") {  // Alumno
+		?>
 		<div role="tabpanel" class="tab-pane" id="alumno">
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Boleta:</label>
-					<input type="text" id="boleta" name="boleta" class="form-control" placeholder="Ingresa tu número de boleta" />
+					<label>Boleta<span class="form-text">*</span>:</label>
+					<input type="text" id="boleta" name="boleta" class="form-control" placeholder="Ingresa tu número de boleta" value="<?php if(isset($alumno)) {echo $alumno["BOLETA"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Semestre:</label>
-					<input type="text" id="semestre" name="semestre" class="form-control" placeholder="Ingresa el semestre que cursas actualmente" />
+					<label>Semestre<span class="form-text">*</span>:</label>
+					<input type="text" id="semestre" name="semestre" class="form-control" maxlength="2" placeholder="Ingresa el semestre que cursas actualmente" value="<?php if(isset($alumno)) {echo $alumno["SEMESTRE"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Promedio:</label>
-					<input type="text" id="promedio" name="promedio" class="form-control" placeholder="Ingresa tu promedio con dos decimales" />
+					<label>Promedio<span class="form-text">*</span>:</label>
+					<input type="text" id="promedio" name="promedio" class="form-control" placeholder="Ingresa tu promedio con dos decimales" value="<?php if(isset($alumno)) {echo $alumno["PROMEDIO"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Las materias que cursas actualmente son de:</label>
+					<label>Las materias que cursas actualmente son de<span class="form-text">*</span>:</label>
 					<select id="materiasCursa" name="materiasCursa" class="form-control">
 						<option value="">Selecciona</option>
 						<?php
 						foreach ( $niveles_academicos as $val ) {
 						?>
-						<option value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE; ?></option>
+						<option <?php if ( isset($alumno) && $alumno["NIVEL_ACADEMICO"] == $val->ID ) {echo 'selected="selected"'; } ?> value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE; ?></option>
 						<?php
 						}
 						?>
 					</select>
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">¿Eres becario BEIFI?</label>
+					<label>¿Eres becario BEIFI?<span class="form-text">*</span>:</label>
 					<div>
 						<label class="radio-inline">
 							<input type="radio" id="pifiS" name="pifi" <?php if ( isset($alumno) && $alumno["PIFI"] == "1" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
@@ -483,7 +505,7 @@
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">¿Eres becario CONACYT?</label>
+					<label>¿Eres becario CONACYT?<span class="form-text">*</span>:</label>
 					<div>
 						<label class="radio-inline">
 							<input type="radio" id="conacytS" name="conacyt" <?php if ( isset($alumno) && $alumno["CONACYT"] == "1" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
@@ -501,77 +523,76 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="form-group col-sm-4">
-							<label class="obligatorio">Número de registro:</label>
-							<input type="text" id="numSIP" name="numSIP" class="form-control" placeholder="Ingresa el número de registro del proyecto SIP" />
+							<label>Número de registro<span class="form-text">*</span>:</label>
+							<input type="text" id="numSIP" name="numSIP" class="form-control" data-mask="SIP-99999999" placeholder="Número de registro del proyecto SIP" value="<?php if(isset($alumno)) {echo $alumno["SIP_REGISTRO"];} ?>" />
 						</div>
 						<div class="form-group col-sm-8">
-							<label class="obligatorio">Nombre del proyecto:</label>
-							<input type="text" id="nombreSIP" name="nombreSIP" class="form-control" placeholder="Ingresa el nombre del proyecto SIP" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group col-sm-4">
-							<label class="obligatorio">Escuela:</label>
+							<label>Escuela<span class="form-text">*</span>:</label>
 							<select id="escuelaSIP" name="escuelaSIP" class="form-control">
 								<option value="">Selecciona</option>
 								<?php
 								foreach ( $escuelas as $val ) {
 								?>
-								<option value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE_CORTO; ?></option>
+								<option <?php if ( isset($alumno) && $alumno["SIP_ESCUELA"] == $val->ID ) {echo 'selected="selected"'; } ?> value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE_CORTO; ?></option>
 								<?php
 								}
 								?>
 							</select>
 						</div>
-						<div class="form-group col-sm-8">
-							<label class="obligatorio">Director del proyecto:</label>
-							<input type="text" id="directorSIP" name="directorSIP" class="form-control" placeholder="Ingresa el nombre del director del proyecto SIP" />
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-12">
+							<label>Director del proyecto<span class="form-text">*</span>:</label>
+							<input type="text" id="directorSIP" name="directorSIP" class="form-control" placeholder="Ingresa el nombre del director del proyecto SIP" value="<?php if(isset($alumno)) {echo $alumno["SIP_DIRECTOR"];} ?>" />
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<?php
+			}
+		?>
+		
+		
 		<div role="tabpanel" class="tab-pane" id="grados">
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Nivel licenciatura:</label>
-					<input type="text" id="nLicenciatura" name="nLicenciatura" class="form-control" placeholder='Ingresa las carreras separadas por comas, Ej: "en Economía, Ing. Industrial"' />
+					<input type="text" id="nLicenciatura" name="nLicenciatura" class="form-control" placeholder='Ingresa las carreras separadas por comas, Ej: "en Economía, Ing. Industrial"' value="<?php if(isset($nivel_lic)) {echo $nivel_lic["NOMBRE"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Nivel maestría:</label>
-					<input type="text" id="nMaestria" name="nMaestria" class="form-control" placeholder='Ingresa las carreras separadas por comas, Ej: "en Computación"' />
+					<input type="text" id="nMaestria" name="nMaestria" class="form-control" placeholder='Ingresa las carreras separadas por comas, Ej: "en Computación"' value="<?php if(isset($nivel_maes)) {echo $nivel_maes["NOMBRE"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Nivel doctorado:</label>
-					<input type="text" id="nDoctorado" name="nDoctorado" class="form-control" placeholder='Ingresa las carreras separadas por comas, Ej: "en Ciencias Marinas"' />
+					<input type="text" id="nDoctorado" name="nDoctorado" class="form-control" placeholder='Ingresa las carreras separadas por comas, Ej: "en Ciencias Marinas"' value="<?php if(isset($nivel_dr)) {echo $nivel_dr["NOMBRE"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Otros estudios:</label>
-					<input type="text" id="nOtros" name="nOtros" class="form-control" placeholder="Si no cuentas con algún nivel, deja en blanco" />
+					<input type="text" id="nOtros" name="nOtros" class="form-control" placeholder="Si no cuentas con algún nivel, deja en blanco" value="<?php if(isset($nivel_otro)) {echo $nivel_otro;} ?>" />
 				</div>
 			</div>
 		</div>
+		
+		<?php
+			if ( $perfil == "1") {  // Profesor
+		?>
 		<div role="tabpanel" class="tab-pane" id="productividad">
 			<p>A continuación, ingresa el total de direcciones de tesis concluidas 
-				en <?php echo date('Y')-2; ?> y <?php echo date('Y')-1; ?> por nivel, 
+				en <?php echo date('Y')-1; ?> y <?php echo date('Y'); ?> por nivel, 
 				seguido de cuantas de estas están concluidas y cuantas son institucionales</p>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h5 class="panel-title">Direcciones de tesis de licenciatura:</h5>
 				</div>
 				<div class="panel-body form-horizontal">
-					<div class="form-group col-sm-4">
-						<label class="col-sm-8 control-label">Total:</label>
-						<div class="col-sm-4">
-							<input type="text" id="tTLicenciatura" name="tTLicenciatura" maxlength="3" class="form-control text-center" placeholder="0" />
-						</div>
-					</div>
 					<div class="form-group col-sm-4">
 						<label class="col-sm-8 control-label">Concluidas:</label>
 						<div class="col-sm-4">
@@ -584,6 +605,12 @@
 							<input type="text" id="iTLicenciatura" name="iTLicenciatura" maxlength="3" class="form-control text-center" placeholder="0" />
 						</div>
 					</div>
+					<div class="form-group col-sm-4">
+						<label class="col-sm-8 control-label">Total:</label>
+						<div class="col-sm-4">
+							<input type="text" id="tTLicenciatura" name="tTLicenciatura" readonly="readonly" class="form-control text-center" placeholder="0" />
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="panel panel-default">
@@ -591,12 +618,6 @@
 					<h5 class="panel-title">Direcciones de tesis de maestría:</h5>
 				</div>
 				<div class="panel-body form-horizontal">
-					<div class="form-group col-sm-4">
-						<label class="col-sm-8 control-label">Total:</label>
-						<div class="col-sm-4">
-							<input type="text" id="tTMaestria" name="tTMaestria" maxlength="3" class="form-control text-center" placeholder="0" />
-						</div>
-					</div>
 					<div class="form-group col-sm-4">
 						<label class="col-sm-8 control-label">Concluidas:</label>
 						<div class="col-sm-4">
@@ -609,6 +630,12 @@
 							<input type="text" id="iTMaestria" name="iTMaestria" maxlength="3" class="form-control text-center" placeholder="0" />
 						</div>
 					</div>
+					<div class="form-group col-sm-4">
+						<label class="col-sm-8 control-label">Total:</label>
+						<div class="col-sm-4">
+							<input type="text" id="tTMaestria" name="tTMaestria" readonly="readonly" class="form-control text-center" placeholder="0" />
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="panel panel-default">
@@ -616,12 +643,6 @@
 					<h5 class="panel-title">Direcciones de tesis de doctorado:</h5>
 				</div>
 				<div class="panel-body form-horizontal">
-					<div class="form-group col-sm-4">
-						<label class="col-sm-8 control-label">Total:</label>
-						<div class="col-sm-4">
-							<input type="text" id="tTDoctorado" name="tTDoctorado" maxlength="3" class="form-control text-center" placeholder="0" />
-						</div>
-					</div>
 					<div class="form-group col-sm-4">
 						<label class="col-sm-8 control-label">Concluidas:</label>
 						<div class="col-sm-4">
@@ -634,12 +655,18 @@
 							<input type="text" id="iTDoctorado" name="iTDoctorado" maxlength="3" class="form-control text-center" placeholder="0" />
 						</div>
 					</div>
+					<div class="form-group col-sm-4">
+						<label class="col-sm-8 control-label">Total:</label>
+						<div class="col-sm-4">
+							<input type="text" id="tTDoctorado" name="tTDoctorado" readonly="readonly" class="form-control text-center" placeholder="0" />
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
 					<label>Las materias que impartes corresponden a:</label>
-					<select class="form-control">
+					<select id="materiasImp" name="materiasImp" class="form-control">
 						<option value="">Selecciona</option>
 						<?php
 						foreach ( $niveles_academicos as $val ) {
@@ -652,7 +679,7 @@
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Publicaciones nacionales realizadas:</label>
-					<select class="form-control">
+					<select id="publNacionales" name="publNacionales" class="form-control">
 						<option value="">Selecciona</option>
 						<?php
 						for ( $i=0; $i<=50; $i++) {
@@ -665,7 +692,7 @@
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Publicaciones internacionales realizadas:</label>
-					<select class="form-control">
+					<select id="publInt" name="publInt" class="form-control">
 						<option value="">Selecciona</option>
 						<?php
 						for ( $i=0; $i<=50; $i++) {
@@ -678,25 +705,32 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-4">
+				<div class="form-group col-sm-8">
 					<label>Unidades de aprendizaje impartidas en el instituto:</label>
-					<input type="text" id="" name="" class="form-control" placeholder='Ingresa materias separadas por comas, Ej. "Economía, Bases de datos, Cálculo"' />
+					<input type="text" id="unidAprendizaje" name="unidAprendizaje" maxlength="100" class="form-control" placeholder='Ingresa materias separadas por comas, Ej. "Economía, Bases de datos, Cálculo"' />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>Patentes y/o publicaciones de libros:</label>
-					<textarea id="" name="" rows="5" class="form-control" placeholder="Ingresa, si consideras tener más productividad, la descripción y año del producto, sepáralos por coma (,) y por cada diferente producto inicia en una nueva línea; ejemplo:\nProducto uno, YYYY (representa el año)\nProducto dos, YYYY"></textarea>
+					<label>Patentes y/o publicaciones de libros: <span class="icon-infocircle" data-toggle="tooltip" title="Ingresa, si consideras tener más productividad, la descripción y año del producto, sepáralos por coma (,) y por cada diferente producto inicia en una nueva línea; ejemplo:&#010;Producto uno, YYYY (representa el año)&#010;Producto dos, YYYY"></span></label>
+					<textarea id="patentes" name="patentes" rows="5" class="form-control" placeholder="Ingresa, si consideras tener más productividad, la descripción y año del producto, sepáralos por coma (,) y por cada diferente producto inicia en una nueva línea; ejemplo:\nProducto uno, YYYY (representa el año)\nProducto dos, YYYY"></textarea>
 				</div>
 			</div>
 		</div>
+		<?php
+			}
+		?>
+		
+		<?php
+			if ( $perfil == "1") {  // Profesor
+		?>
 		<div role="tabpanel" class="tab-pane" id="proyectos">
 			<div class="panel-group ficha-collapse" id="accordion6">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h4 class="panel-title">
 						<a data-parent="#accordion6" data-toggle="collapse" href="#panel-6" aria-expanded="true" aria-controls="panel-6">
-							Proyecto <?php echo date('Y'); ?>
+							Proyecto <?php if(date('m')>=10) {echo date('Y')+1;} else {echo date('Y');} ?>
 						</a>
 						</h4>
 						<button type="button" class="collpase-button" data-parent="#accordion6" data-toggle="collapse" href="#panel-6"></button>
@@ -725,7 +759,7 @@
 						</div>
 						<div class="row">
 							<div class="form-group col-sm-4">
-								<label>Tipo de participacion</label>
+								<label>Tipo de participación</label>
 								<select id="tParticipacion6" name="tParticipacion[]" class="form-control">
 									<option value="">Selecciona</option>
 									<?php
@@ -737,10 +771,6 @@
 									?>
 								</select>
 							</div>
-							<div class="form-group col-sm-8">
-								<label>Nombre del proyecto</label>
-								<input type="text" id="proyecto6" name="proyecto[]" class="form-control" placeholder="Ingresa el nombre del proyecto" />
-							</div>
 						</div>
 					</div>
 				</div>
@@ -750,7 +780,7 @@
 					<div class="panel-heading">
 						<h4 class="panel-title">
 						<a data-parent="#accordion7" data-toggle="collapse" href="#panel-7" aria-expanded="true" aria-controls="panel-7">
-							Proyecto <?php echo (date('Y')-1); ?>
+							Proyecto <?php if(date('m')>=10) {echo date('Y');} else {echo (date('Y')-1);} ?>
 						</a>
 						</h4>
 						<button type="button" class="collpase-button collapsed" data-parent="#accordion7" data-toggle="collapse" href="#panel-7"></button>
@@ -778,7 +808,7 @@
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>Tipo de participacion</label>
+									<label>Tipo de participación</label>
 									<select id="tParticipacion7" name="tParticipacion[]" class="form-control">
 										<option value="">Selecciona</option>
 										<?php
@@ -790,10 +820,6 @@
 										?>
 									</select>
 								</div>
-								<div class="form-group col-sm-8">
-									<label>Nombre del proyecto</label>
-									<input type="text" id="proyecto7" name="proyecto[]" class="form-control" placeholder="Ingresa el nombre del proyecto" />
-								</div>
 							</div>
 						</div>
 					</div>
@@ -804,7 +830,7 @@
 					<div class="panel-heading">
 						<h4 class="panel-title">
 						<a data-parent="#accordion8" data-toggle="collapse" href="#panel-8" aria-expanded="true" aria-controls="panel-8">
-							Proyecto <?php echo (date('Y')-2); ?>
+							Proyecto <?php if(date('m')>=10) {echo (date('Y')-1);} else {echo (date('Y')-2);} ?>
 						</a>
 						</h4>
 						<button type="button" class="collpase-button collapsed" data-parent="#accordion8" data-toggle="collapse" href="#panel-8"></button>
@@ -832,7 +858,7 @@
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>Tipo de participacion</label>
+									<label>Tipo de participación</label>
 									<select id="tParticipacion8" name="tParticipacion[]" class="form-control">
 										<option value="">Selecciona</option>
 										<?php
@@ -844,42 +870,41 @@
 										?>
 									</select>
 								</div>
-								<div class="form-group col-sm-8">
-									<label>Nombre del proyecto</label>
-									<input type="text" id="proyecto8" name="proyecto[]" class="form-control" placeholder="Ingresa el nombre del proyecto" />
-								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<?php
+			}
+		?>
 		
 		<div role="tabpanel" class="tab-pane" id="bancarios">
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Banco:</label>
-					<input type="text" id="banco" name="banco" class="form-control" placeholder="Ingresa el nombre del banco" />
+					<label>Banco<span class="form-text">*</span>:</label>
+					<input type="text" id="banco" name="banco" class="form-control" placeholder="Ingresa el nombre del banco" value="<?php if(isset($persona)) {echo $persona["BANCO_NOMBRE"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Número de sucursal:</label>
-					<input type="text" id="sucursal" name="sucursal" class="form-control" placeholder="Ingresa el número de sucursal" />
+					<label>Número de sucursal<span class="form-text">*</span>:</label>
+					<input type="text" id="sucursal" name="sucursal" class="form-control" placeholder="Ingresa el número de sucursal" value="<?php if(isset($persona)) {echo $persona["BANCO_SUCURSAL"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Número de cuenta:</label>
-					<input type="text" id="cuentaBanco" name="cuentaBanco" maxlength="12" class="form-control" placeholder="Ingresa tu número de cuenta" />
+					<label>Número de cuenta<span class="form-text">*</span>:</label>
+					<input type="text" id="cuentaBanco" name="cuentaBanco" maxlength="15" class="form-control" placeholder="Ingresa tu número de cuenta" value="<?php if(isset($persona)) {echo $persona["BANCO_CUENTA"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">CLABE Interbancaria:</label>
-					<input type="text" id="clabe" name="clabe" maxlength="18" class="form-control" data-mask="999 999 99999999999 9" placeholder="Ingresa la CLABE interbancaria (18 dígitos)" />
+					<label>Cuenta CLABE<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Ingresa la Clave Bancaria Estandarizada"></span></label>
+					<input type="text" id="clabe" name="clabe" class="form-control" data-mask="999 999 99999999999 9" placeholder="Ingresa la CLABE interbancaria" value="<?php if(isset($persona)) {echo $persona["BANCO_CLABE"];} ?>" />
 				</div>
 			</div>
 		</div>
 		<div class="row">
-				<div class="form-group col-sm-2 col-sm-offset-5">
-					<button type="submit" class="btn btn-block btn-primary">Guardar</button>
+				<div class="form-group col-sm-2 pull-right">
+					<button id="btnGuardar" type="submit" class="btn btn-block btn-primary">Guardar</button>
 				</div>
 			</div>
 	</div>

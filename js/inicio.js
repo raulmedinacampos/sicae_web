@@ -1,13 +1,7 @@
 function Init() {
 	$("#fechaNac, #fechaNacC").datepicker();
 	
-	$(window).load(function() {
-        $('#slider').nivoSlider({
-        	effect: 'boxRainGrowReverse',
-        	directionNav: false,
-        	controlNav: false
-        });
-    });
+	$('[data-toggle="tooltip"]').tooltip();
 	
 	$("#emailConf, #passwordConf").on("cut copy paste", function(e) {
 		e.preventDefault();
@@ -277,7 +271,8 @@ function Validate() {
 				required: true
 			},
 			password: {
-				required: true
+				required: true,
+				minlength: 8
 			},
 			passwordConf: {
 				equalTo: "#password"
@@ -300,6 +295,9 @@ function Validate() {
 			},
 			extension: {
 				minlength: "La extensión debe ser de 5 dígitos"
+			},
+			password: {
+				minlength: "La contraseña debe tener por lo menos 8 caracteres"
 			},
 			passwordConf: "La contraseña no coincide"
 		}
@@ -329,9 +327,6 @@ function Validate() {
 				required: true
 			},
 			apPaternoC: {
-				required: true
-			},
-			apMaternoC: {
 				required: true
 			},
 			fechaNacC: {

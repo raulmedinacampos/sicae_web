@@ -12,17 +12,20 @@
 		<div role="tabpanel" class="tab-pane active" id="estancia">
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>Institución donde se realizará la estancia:</label>
+					<label>Institución donde se realizará la estancia<span class="form-text">*</span>:</label>
 					<input type="text" id="universidad" name="universidad" class="form-control" placeholder="Ingresa el nombre de la universidad donde realizarás la estadía" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Sede:</label>
+					<label>Sede<span class="form-text">*</span>:</label>
 					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" />
 				</div>
+				<?php
+				if ( $this->session->rol != "1" ) {  // No se muestra para profesor
+				?>
 				<div class="form-group col-sm-8">
-					<label class="obligatorio">Lugar donde se llevará a cabo el evento:</label>
+					<label>Tipo de sede<span class="form-text">*</span>:</label>
 					<div>
 						<label class="radio-inline">
 							<input type="radio" id="rdbLN" name="lugar" <?php if ( isset($persona) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="N" /> Nacional
@@ -32,43 +35,46 @@
 						</label>
 					</div>
 				</div>
+				<?php
+				}
+				?>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>Objetivo:</label>
-					<textarea id="objetivo" name="objetivo" rows="3" class="form-control" placeholder="Ingresa el beneficio al instituto del evento (700 caracteres max.)"></textarea>
+					<label>Objetivo<span class="form-text">*</span>:</label>
+					<textarea id="objetivo" name="objetivo" rows="3" maxlength="700" class="form-control" placeholder="Ingresa el objetivo al instituto del evento (700 caracteres max.)"></textarea>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>Beneficio institucional:</label>
-					<textarea id="beneficio" name="beneficio" rows="3" class="form-control" placeholder="Ingresa el objetivo del evento (700 caracteres max.)"></textarea>
+					<label>Beneficio institucional<span class="form-text">*</span>:</label>
+					<textarea id="beneficio" name="beneficio" rows="3" maxlength="700" class="form-control" placeholder="Ingresa el beneficio del evento (700 caracteres max.)"></textarea>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>Programa de trabajo:</label>
-					<textarea id="programa" name="programa" rows="3" class="form-control" placeholder="Ingresa el programa de trabajo detallado y calendarizado (700 caracteres max.)"></textarea>
+					<label>Programa de trabajo<span class="form-text">*</span>:</label>
+					<textarea id="programa" name="programa" rows="3" maxlength="700" class="form-control" placeholder="Ingresa el programa de trabajo detallado y calendarizado (700 caracteres max.)"></textarea>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
-						<label class="obligatorio">Fecha de inicio del evento:</label>
+						<label>Fecha de inicio del evento<span class="form-text">*</span>:</label>
 						<input type="text" id="fechaInicio" name="fechaInicio" class="datepicker form-control" data-mask="99/99/9999" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" placeholder="Fecha de inicio" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
-						<label class="obligatorio">Fecha de término del evento:</label>
+						<label>Fecha de término del evento<span class="form-text">*</span>:</label>
 						<input type="text" id="fechaFin" name="fechaFin" class="datepicker form-control" data-mask="99/99/9999" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" placeholder="Fecha de término" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Itinerario de viaje:</label>
-					<input type="text" id="itinerario" name="itinerario" class="form-control" placeholder="Ingresa tu itinerario de viaje (origen - destino)" />
+					<label>Itinerario de viaje<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Ingresa tu itinerario de viaje (origen - destino)"></span></label>
+					<input type="text" id="itinerario" name="itinerario" class="form-control" placeholder="Ingresa tu itinerario de viaje" />
 				</div>
 			</div>
 			<div class="panel-group ficha-collapse" id="accordion1">
@@ -85,7 +91,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="form-group col-sm-12">
-									<label>Justificación</label>
+									<label>Justificación:</label>
 									<input type="text" id="justificacion" name="justificacion" class="form-control" placeholder="Llenar solo en caso de requerir dos o más días adicionales anteriores y/o posteriores al evento" />
 								</div>
 							</div>
@@ -117,21 +123,21 @@
 					<label>Transporte aéreo</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="aereo" name="aereo" class="form-control" placeholder="Especifica el monto del viaje redondo" />
+						<input type="text" id="aereo" name="aereo" class="form-control" placeholder="Monto del viaje redondo" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Especifique</label>
-					<input type="text" id="espTAereo" name="espTAereo" class="form-control" placeholder="Indica el itinerario de viaje, en clase turista" />
+					<label>Especifica <span class="icon-infocircle" data-toggle="tooltip" title="Indica el itinerario de vuelo, en clase turista"></span></label>
+					<input type="text" id="espTAereo" name="espTAereo" class="form-control" placeholder="Indica el itinerario de vuelo" />
 				</div>
 				<?php
 				if ( $this->session->rol != "1" ) {  // No se muestra para profesor
 				?>
-				<div class="form-group col-sm-4">
+				<div class="form-group col-sm-4 oculto">
 					<label>Seguro de viaje internacional</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="seguroViaje" name="seguroViaje" class="form-control" placeholder="Solo aplica a alumnos en viajes internacionales" />
+						<input type="text" id="seguroViaje" name="seguroViaje" class="form-control" placeholder="Solo aplica en viajes internacionales" />
 					</div>
 				</div>
 				<?php
@@ -143,12 +149,12 @@
 					<label>Transporte terrestre</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="terrestre" name="terrestre" class="form-control" placeholder="Especifica el monto del viaje redondo" />
+						<input type="text" id="terrestre" name="terrestre" class="form-control" placeholder="Monto del viaje redondo" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Especifique</label>
-					<input type="text" id="espTTerrestre" name="espTTerrestre" class="form-control" placeholder="Indica el itinerario de viaje" />
+					<label>Especifica</label>
+					<input type="text" id="espTTerrestre" name="espTTerrestre" class="form-control" placeholder="Indica el itinerario del traslado" />
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Tipo de moneda</label>
@@ -178,7 +184,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>¿Cuentas con otros apoyos?</label>
+									<label>¿Cuentas con otros apoyos?<span class="form-text">*</span></label>
 									<div>
 										<label class="radio-inline">
 											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($persona) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
@@ -226,7 +232,7 @@
 		</div>
 		
 		<div class="row">
-				<div class="form-group col-sm-2 col-sm-offset-5">
+				<div class="form-group col-sm-2 pull-right">
 					<button type="submit" class="btn btn-block btn-primary">Guardar</button>
 				</div>
 			</div>

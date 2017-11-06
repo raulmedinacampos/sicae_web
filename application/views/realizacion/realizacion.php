@@ -1,6 +1,6 @@
 <h3>Realización del evento</h3>
 <hr class="red" />
-<form id="formCoordinador" name="formCoordinador" method="post" action="">
+<form id="formRealizacion" name="formRealizacion" method="post" action="">
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" role="tablist">
 		<li role="presentation" class="active"><a href="#evento" aria-controls="evento" role="tab" data-toggle="tab">Datos del evento</a></li>
@@ -14,7 +14,7 @@
 		<div role="tabpanel" class="tab-pane active" id="evento">
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Tipo de evento</label>
+					<label>Tipo de evento<span class="form-text">*</span>:</label>
 					<select id="tipoEvento" name="tipoEvento" class="form-control">
 						<option value="">Selecciona</option>
 						<?php
@@ -27,66 +27,66 @@
 					</select>
 				</div>
 				<div class="form-group col-sm-8">
-					<label class="obligatorio">Nombre del evento</label>
-					<input type="text" id="evento" name="evento" class="form-control" placeholder="" />
+					<label>Nombre del evento<span class="form-text">*</span>:</label>
+					<input type="text" id="evento" name="evento" class="form-control" placeholder="Ingresa el nombre del evento" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Idioma del evento (Inglés, español, otro)</label>
-					<input type="text" id="idioma" name="idioma" class="form-control" placeholder="" />
+					<label>Idioma del evento<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Ingresa el idioma del evento (inglés, español, otro)"></span></label>
+					<input type="text" id="idioma" name="idioma" class="form-control" placeholder="Ingresa el idioma del evento" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Sede</label>
+					<label>Sede<span class="form-text">*</span>:</label>
 					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
-						<label class="obligatorio">Fecha de inicio</label>
-						<input type="text" id="fechaInicio" name="fechaInicio" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" />
+						<label>Fecha de inicio<span class="form-text">*</span>:</label>
+						<input type="text" id="fechaInicio" name="fechaInicio" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de inicio" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
-						<label class="obligatorio">Fecha de término</label>
-						<input type="text" id="fechaFin" name="fechaFin" class="datepicker form-control" data-mask="99/99/9999" placeholder="dd/mm/aaaa" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" />
+						<label>Fecha de término<span class="form-text">*</span>:</label>
+						<input type="text" id="fechaFin" name="fechaFin" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de término" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Total de participantes</label>
-					<input type="text" id="tParticipantes" name="tParticipantes" class="form-control" placeholder="" />
+					<label>Total de participantes<span class="form-text">*</span>:</label>
+					<input type="text" id="tParticipantes" name="tParticipantes" class="form-control" placeholder="Ingresa el total de participantes" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Total de expositores</label>
-					<input type="text" id="tExpositores" name="tExpositores" class="form-control" placeholder="" />
+					<label>Total de expositores<span class="form-text">*</span>:</label>
+					<input type="text" id="tExpositores" name="tExpositores" class="form-control" placeholder="Ingresa el total de expositores" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Horas de duración del evento</label>
-					<input type="text" id="duracion" name="duracion" class="form-control" placeholder="" />
+					<label>Horas de duración del evento<span class="form-text">*</span>:</label>
+					<input type="text" id="duracion" name="duracion" class="form-control" placeholder="Ingresa la duración del evento" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label class="obligatorio">A quién va dirigido el evento</label>
-					<input type="text" id="dirigido" name="dirigido" class="form-control" placeholder="" />
+					<label>A quién va dirigido el evento<span class="form-text">*</span>:</label>
+					<input type="text" id="dirigido" name="dirigido" class="form-control" placeholder="Ingresa a quién va dirigido el evento" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label class="obligatorio">Objetivo</label>
-					<textarea id="objetivo" name="objetivo" cols="3" class="form-control" placeholder=""></textarea>
+					<label>Objetivo<span class="form-text">*</span>:</label>
+					<textarea id="objetivo" name="objetivo" maxlength="700" cols="3" class="form-control" placeholder="Ingrese el objetivo del evento (700 caracteres max.)"></textarea>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label class="obligatorio">Beneficio institucional</label>
-					<textarea id="beneficio" name="beneficio" cols="3" class="form-control" placeholder=""></textarea>
+					<label>Beneficio institucional<span class="form-text">*</span>:</label>
+					<textarea id="beneficio" name="beneficio" maxlength="700" cols="3" class="form-control" placeholder="Ingrese el beneficio del evento (700 caracteres max.)"></textarea>
 				</div>
 			</div>
 		</div>
@@ -113,26 +113,26 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>Nombre(s):</label>
-									<input type="text" id="" name="" class="form-control" />
+									<label>Nombre(s)<span class="form-text">*</span>:</label>
+									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el nombre del expositor" />
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Primer apellido</label>
-									<input type="text" id="" name="" class="form-control" />
+									<label>Primer apellido<span class="form-text">*</span>:</label>
+									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el primer apellido" />
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Segundo apellido</label>
-									<input type="text" id="" name="" class="form-control" />
+									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el segundo apellido" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-8">
 									<label>Procedencia</label>
-									<input type="text" id="" name="" class="form-control" />
+									<input type="text" id="" name="" class="form-control" placeholder="Ingresa la procedencia del expositor" />
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Trabajo actual</label>
-									<input type="text" id="" name="" class="form-control" />
+									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el trabajo actual del expositor" />
 								</div>
 							</div>
 							<div class="row">
@@ -177,21 +177,21 @@
 		<div role="tabpanel" class="tab-pane" id="monto">
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Pago de honorarios a expositores</label>
+					<label>Pago de honorarios a expositores<span class="form-text">*</span>:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Viáticos a expositores</label>
+					<label>Viáticos a expositores<span class="form-text">*</span>:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Transporte aéreo</label>
+					<label>Transporte aéreo<span class="form-text">*</span>:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
@@ -200,40 +200,40 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label class="obligatorio">+ Especifica</label>
+					<label>+ Especifica<span class="form-text">*</span>:</label>
 					<input type="text" id="" name="" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Transporte terrestre</label>
+					<label>Transporte terrestre<span class="form-text">*</span>:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
 					</div>
 				</div>
 				<div class="form-group col-sm-8">
-					<label class="obligatorio">+ Especifica</label>
+					<label>+ Especifica<span class="form-text">*</span>:</label>
 					<input type="text" id="" name="" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Material didáctico</label>
+					<label>Material didáctico<span class="form-text">*</span>:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Servicio de cafetería</label>
+					<label>Servicio de cafetería<span class="form-text">*</span>:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Otros gastos</label>
+					<label>Otros gastos<span class="form-text">*</span>:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
@@ -242,7 +242,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label class="obligatorio">Especifica tus otros gastos</label>
+					<label>Especifica tus otros gastos<span class="form-text">*</span>:</label>
 					<input type="text" id="" name="" class="form-control" placeholder="" />
 				</div>
 			</div>
@@ -261,7 +261,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label class="obligatorio">¿Cuentas con otros apoyos?</label>
+									<label>¿Cuentas con otros apoyos?<span class="form-text">*</span>:</label>
 									<div>
 										<label class="radio-inline">
 											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($persona) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
@@ -274,18 +274,18 @@
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label class="obligatorio">Institución que apoya</label>
+									<label>Institución que apoya<span class="form-text">*</span>:</label>
 									<input type="text" id="" name="" class="form-control" placeholder="" />
 								</div>
 								<div class="form-group col-sm-4">
-									<label class="obligatorio">Monto con el que apoya</label>
+									<label>Monto con el que apoya<span class="form-text">*</span>:</label>
 									<div class="input-group">
 										<div class="input-group-addon">$</div>
 										<input type="text" id="" name="" class="form-control" placeholder="" />
 									</div>
 								</div>
 								<div class="form-group col-sm-4">
-									<label class="obligatorio">Tipo de moneda</label>
+									<label>Tipo de moneda<span class="form-text">*</span>:</label>
 									<select class="form-control">
 										<option value="">Selecciona</option>
 										<?php
@@ -300,7 +300,7 @@
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-12">
-									<label class="obligatorio">Especificación del apoyo</label>
+									<label>Especificación del apoyo<span class="form-text">*</span>:</label>
 									<textarea rows="3" class="form-control"></textarea>
 								</div>
 							</div>
@@ -314,28 +314,28 @@
 				corresponder a la cuenta de la escuela o centro solicitante.</h5>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Banco</label>
-					<input type="text" id="banco" name="banco" class="form-control" placeholder="Ingrese el nombre del banco" />
+					<label>Banco<span class="form-text">*</span>:</label>
+					<input type="text" id="banco" name="banco" class="form-control" placeholder="Ingresa el nombre del banco" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Número de sucursal</label>
-					<input type="text" id="sucursal" name="sucursal" class="form-control" placeholder="Ingrese su número de sucursal" />
+					<label>Número de sucursal<span class="form-text">*</span>:</label>
+					<input type="text" id="sucursal" name="sucursal" class="form-control" placeholder="Ingresa el número de sucursal" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Número de cuenta</label>
-					<input type="text" id="cuentaBanco" name="cuentaBanco" maxlength="12" class="form-control" placeholder="Ingrese su número de cuenta" />
+					<label>Número de cuenta<span class="form-text">*</span>:</label>
+					<input type="text" id="cuentaBanco" name="cuentaBanco" maxlength="12" class="form-control" placeholder="Ingresa tu número de cuenta" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">CLABE Interbancaria</label>
-					<input type="text" id="clabe" name="clabe" maxlength="18" class="form-control" data-mask="999 999 99999999999 9" placeholder="Ingrese la CLABE interbancaria (18 dígitos)" />
+					<label>Cuenta CLABE<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Ingresa la Clave Bancaria Estandarizada"></span></label>
+					<input type="text" id="clabe" name="clabe" maxlength="18" class="form-control" data-mask="999 999 99999999999 9" placeholder="Ingresa la CLABE interbancaria" />
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="form-group col-sm-2 col-sm-offset-5">
+		<div class="form-group col-sm-2 pull-right">
 			<button type="submit" class="btn btn-block btn-primary">Guardar</button>
 		</div>
 	</div>

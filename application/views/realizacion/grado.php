@@ -12,13 +12,13 @@
 		<div role="tabpanel" class="tab-pane active" id="grado">
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label class="obligatorio">Nombre de la universidad:</label>
+					<label>Nombre de la universidad<span class="form-text">*</span>:</label>
 					<input type="text" id="universidad" name="universidad" class="form-control" placeholder="Ingresa el nombre de la universidad" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Grado a obtener:</label>
+					<label>Grado a obtener<span class="form-text">*</span>:</label>
 					<select id="grado" name="grado" class="form-control">
 						<option value="">Selecciona</option>
 						<option value="Maestría">Maestría</option>
@@ -26,28 +26,28 @@
 					</select>
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Sede:</label>
+					<label>Sede<span class="form-text">*</span>:</label>
 					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
-						<label class="obligatorio">Fecha del examen:</label>
+						<label>Fecha del examen<span class="form-text">*</span>:</label>
 						<input type="text" id="fechaExamen" name="fechaExamen" class="datepicker form-control" data-mask="99/99/9999" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" placeholder="Fecha del examen" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
-						<label class="obligatorio">Fecha de inicio del evento:</label>
+						<label>Fecha de inicio del evento<span class="form-text">*</span>:</label>
 						<input type="text" id="fechaInicio" name="fechaInicio" class="datepicker form-control" data-mask="99/99/9999" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" placeholder="Fecha de inicio" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
-						<label class="obligatorio">Fecha de término del evento:</label>
+						<label>Fecha de término del evento<span class="form-text">*</span>:</label>
 						<input type="text" id="fechaFin" name="fechaFin" class="datepicker form-control" data-mask="99/99/9999" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" placeholder="Fecha de término" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
@@ -55,7 +55,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Itinerario de viaje:</label>
+					<label>Itinerario de viaje<span class="form-text">*</span>:</label>
 					<input type="text" id="itinerario" name="itinerario" class="form-control" placeholder="Ingresa tu itinerario de viaje (origen - destino)" />
 				</div>
 			</div>
@@ -67,12 +67,12 @@
 					<label>Transporte aéreo</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="aereo" name="aereo" class="form-control" placeholder="Especifica el monto del viaje redondo" />
+						<input type="text" id="aereo" name="aereo" class="form-control" placeholder="Monto del viaje redondo" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Especifique</label>
-					<input type="text" id="espTAereo" name="espTAereo" class="form-control" placeholder="Indica el itinerario de viaje, en clase turista" />
+					<label>Especifique <span class="icon-infocircle" data-toggle="tooltip" title="Indica el itinerario de vuelo, en clase turista"></span></label>
+					<input type="text" id="espTAereo" name="espTAereo" class="form-control" placeholder="Indica el itinerario de viaje" />
 				</div>
 			</div>
 			<div class="row">
@@ -80,12 +80,12 @@
 					<label>Transporte terrestre</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="terrestre" name="terrestre" class="form-control" placeholder="Especifica el monto del viaje redondo" />
+						<input type="text" id="terrestre" name="terrestre" class="form-control" placeholder="Monto del viaje redondo" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Especifique</label>
-					<input type="text" id="espTTerrestre" name="espTTerrestre" class="form-control" placeholder="Indica el itinerario de viaje" />
+					<input type="text" id="espTTerrestre" name="espTTerrestre" class="form-control" placeholder="Indica el itinerario del traslado" />
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Tipo de moneda</label>
@@ -163,7 +163,7 @@
 		</div>
 		
 		<div class="row">
-				<div class="form-group col-sm-2 col-sm-offset-5">
+				<div class="form-group col-sm-2 pull-right">
 					<button type="submit" class="btn btn-block btn-primary">Guardar</button>
 				</div>
 			</div>

@@ -1,32 +1,3 @@
-<!-- 
-<div class="row" style="margin-bottom: 50px;">
-	<div class="col-sm-12">
-		<div class="slider-wrapper theme-default">
-			<div id="slider" class="nivoSlider">
-				<a href="http://dev7studios.com">
-					<img src="<?php echo base_url('images/nuevoReglamento.jpg'); ?>" alt="" title="#html1" />
-				</a>
-				<img src="<?php echo base_url('images/pasitos.jpg'); ?>" alt="" title="#html2" />
-				<img src="<?php echo base_url('images/asistencia.jpg'); ?>" alt="" title="#html3" />
-			</div>
-			
-			<div id="html1" class="nivo-html-caption">
-				<strong>Nuevo reglamento</strong>
-				<p>Para el otorgamiento de Becas de Estudio, Apoyos Económicos y 
-					Licencias con Goce de sueldo en el Instituto Politécnico Nacional</p>
-			</div>
-			<div id="html2" class="nivo-html-caption">
-				<strong>Tres pasos sencillos</strong>
-				<p>1) Realiza tu registro único 2) Inicia sesión para entrar a tu cuenta 
-					y 3) Realiza la solicitud para apoyo económico</p>
-			</div>
-			<div id="html3" class="nivo-html-caption">
-				<strong>Instructivo de asistencia</strong>
-				<p>Sigue este pequeño manual</p>
-			</div>
-		</div>
-	</div>
-</div> -->
 <h5 class="text-justify" style="font-weight:normal;">El apoyo económico es una 
 aportación de recurso que asigna la Comisión para que el docente, alumno o Unidad 
 Académica del IPN cubra una parte significativa del costo total que se origina 
@@ -88,13 +59,14 @@ apoyar la modalidad de publicación de artículos.</p>
 				<div class="modal-body">
 					<div class="row">
 						<div class="form-group col-sm-10 col-sm-offset-1">
-							<label>CURP</label>
+							<label>CURP<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Clave Única de Registro de Población"></span></label>
+							<a href="https://renapo.gob.mx/swb/swb/RENAPO/consultacurp" target="_blank"><small>Consulta tu CURP</small></a>
 							<input type="text" id="curpA" name="curpA" maxlength="18" class="form-control" placeholder="Ingresa el CURP que registraste" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-10 col-sm-offset-1">
-							<label>Contraseña</label>
+							<label>Contraseña<span class="form-text">*</span>:</label>
 							<input type="password" id="passA" name="passA" class="form-control" placeholder="Contraseña" />
 						</div>
 					</div>
@@ -127,13 +99,14 @@ apoyar la modalidad de publicación de artículos.</p>
 				<div class="modal-body">
 					<div class="row">
 						<div class="form-group col-sm-10 col-sm-offset-1">
-							<label>CURP</label>
+							<label>CURP<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Clave Única de Registro de Población"></span></label>
+							<a href="https://renapo.gob.mx/swb/swb/RENAPO/consultacurp" target="_blank"><small>Consulta tu CURP</small></a>
 							<input type="text" id="curpC" name="curpC" maxlength="18" class="form-control" placeholder="Ingresa tu CURP con el que registraste el evento" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-10 col-sm-offset-1">
-							<label>Escuela</label>
+							<label>Escuela<span class="form-text">*</span>:</label>
 							<select id="escuelaC" name="escuelaC" class="form-control">
 								<option value="">Selecciona el centro de adscripción</option>
 								<?php

@@ -1,8 +1,8 @@
 <?php
 
-class Coautor_md extends CI_Model {
+class Estudio_otro_md extends CI_Model {
 	
-	const tabla="COAUTOR";
+	const tabla="ESTUDIO_OTRO";
 	
 	function __construct() {
         // Call the Model constructor
@@ -33,59 +33,60 @@ class Coautor_md extends CI_Model {
         return $query->row_array();
     }
 	
-	function GetBySolicitud($id) {
-		$this->db->where(array('SOLICITUD_ID'=>$id));
-        $query = $this->db->get(self::tabla);
-        return $query->result_array();
-    }
-	
-    function GetByPonencia($id) {
-		$this->db->where(array('PONENCIA_ID'=>$id));
-        $query = $this->db->get(self::tabla);
-        return $query->result_array();
-    }
 	
     function GetByPersona($id) {
-		$this->db->where(array('PERSONA_ID'=>$id));
+    	$this->db->where(array('PERSONA_ID'=>$id));
         $query = $this->db->get(self::tabla);
+        return $query->result_array();
     }
 	
+	
     function InsertRecord($data) {
-    	
-    	$this->db->set('PONENCIA_ID', $data[0]);
-    	$this->db->set('SOLICITUD_ID', $data[1]);
-    	$this->db->set('TIPO_SOLICITUD', $data[2]);
-    	$this->db->set('PERSONA_ID', $data[3]);
-    	$this->db->set('NOMBRE', $data[4]);
-    	$this->db->set('APELLIDO_P', $data[5]);
-    	$this->db->set('APELLIDO_M', $data[6]);
+    	$this->db->select_max('ID');
+    	$query = $this->db->get(self::tabla);
+    	$id = $query->row();
+    	$id = $id->ID + 1;
+    	 
+    	$this->db->set('ID', $id);
+    	$this->db->set('PERSONA_ID', $data[0]);
+    	$this->db->set('NOMBRE', $data[1]);
 		
         $this->db->insert(self::tabla,$this);
         
 		$this->db->select("ID");
-        $this->db->where(array("PONENCIA_ID"=>$data[0],"PERSONA_ID"=>$data[3]));
+        
+		$this->db->where(array('NOMBRE'=>$data[1],'PERSONA_ID'=>$data[0]));
         $query = $this->db->get(self::tabla);
         
-        $usr = $query->row();
+		$usr = $query->row();
         
 		return $usr->ID;
     }
 	
     function UpdateRecord($data,$id) {
     	
-    	$this->db->set('PONENCIA_ID', $data[0]);
-    	$this->db->set('SOLICITUD_ID', $data[1]);
-    	$this->db->set('TIPO_SOLICITUD', $data[2]);
-    	$this->db->set('PERSONA_ID', $data[3]);
-    	$this->db->set('NOMBRE', $data[4]);
-    	$this->db->set('APELLIDO_P', $data[5]);
-    	$this->db->set('APELLIDO_M', $data[6]);
+    	$this->db->set('PERSONA_ID', $data[0]);
+    	$this->db->set('NOMBRE', $data[1]);
 		
-		$this->db->update(self::tabla, $this, array('ID' => $id));
+		$this->db->update(self::tabla, $this, array('ID'=>$id));
 		
 		return $id;
     }
-
+	
+	function SetDatos($data){
+		$al=$this->GetByNvPr($data[1],$data[0]);
+		if(count($al)<1)
+			$this->InsertRecord($data);
+		else
+			$this->UpdateRecord($data,$al['ID']);
+		
+	}
+	
+	function CleanPr($pr) {
+    	$this->db->where(array('PERSONA_ID'=>$pr));
+        $query = $this->db->delete(self::tabla);
+    }
+	
     /*function Disable($id) {
     	$this->ACTIVO = 'N';
 

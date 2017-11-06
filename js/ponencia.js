@@ -3,7 +3,21 @@ var i = 2
 function Init() {
 	$(".datepicker").datepicker();
 	
+	$('[data-toggle="tooltip"]').tooltip();
+	
 	$('textarea[placeholder]').placeholder();
+}
+
+function ToogleInsurance() {
+	$('input[name="lugar"]').click(function() {
+		var elem = $(this);
+		
+		if ( elem.is(":checked") && elem.val() == "I" ) {
+			$(".oculto").css("display", "block");
+		} else {
+			$(".oculto").css("display", "none");
+		}
+	});
 }
 
 function AddSpeechTitle() {
@@ -111,6 +125,10 @@ function DrawCoauthor() {
 }
 
 function Validate() {
+	$.validator.addMethod("moneda", function(value, element) {
+	    return this.optional(element) || /^\d{0,8}(\.\d{0,2})?$/i.test(value);
+	}, "Ingresa una cantidad válida");
+	
 	$.extend($.validator.messages, {
 		  required: "Este campo es obligatorio.",
 		  digits: "Deben ser solo números"
@@ -145,6 +163,9 @@ function Validate() {
 			sede: {
 				required: true
 			},
+			lugar: {
+				required: true
+			},
 			institucion: {
 				required: true
 			},
@@ -156,6 +177,43 @@ function Validate() {
 			},
 			itinerario: {
 				required: true
+			},
+			"tituloPonencia[]": {
+				required: true
+			},
+			aereo: {
+				moneda: true
+			},
+			terrestre: {
+				moneda: true
+			},
+			seguroViaje: {
+				required: function(element) {
+					return $('input[name="lugar"]:checked').val() == "I";
+				},
+				moneda: true
+			},
+			estancia: {
+				moneda: true
+			},
+			inscripcion: {
+				moneda: true
+			},
+			otrosGastos: {
+				moneda: true
+			},
+			apoyo: {
+				required: true
+			},
+			institucionAp: {
+				required: "#rdbApS:checked"
+			},
+			montoAp: {
+				required: "#rdbApS:checked",
+				moneda: true
+			},
+			monedaAp: {
+				required: "#rdbApS:checked"
 			}
 		},
 		messages: {
@@ -164,8 +222,9 @@ function Validate() {
 	});
 }
 
-$(function() {
+$gmx(document).ready(function() {
 	Init();
+	ToogleInsurance();
 	AddSpeechTitle();
 	DrawCoauthor();
 	Validate();

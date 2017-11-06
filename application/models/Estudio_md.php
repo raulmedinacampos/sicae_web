@@ -1,8 +1,8 @@
 <?php
 
-class Direccion_md extends CI_Model {
+class Estudio_md extends CI_Model {
 	
-	const tabla="DIRECCION";
+	const tabla="ESTUDIO";
 	
 	function __construct() {
         // Call the Model constructor
@@ -27,16 +27,17 @@ class Direccion_md extends CI_Model {
     	return $query->result();
     }
     */
-    
-    function GetByNivel($id) {
-		$this->db->where(array('NIVEL_ID'=>$id));
+    function GetById($id) {
+    	$this->db->where(array('ID'=>$id));
         $query = $this->db->get(self::tabla);
-        return $query->result_array();
+        return $query->row_array();
     }
 	
+	
     function GetByPersona($id) {
-		$this->db->where(array('PERSONA_ID'=>$id));
+    	$this->db->where(array('PERSONA_ID'=>$id));
         $query = $this->db->get(self::tabla);
+        return $query->result_array();
     }
 	
     function GetByNvPr($nv,$pr) {
@@ -46,34 +47,35 @@ class Direccion_md extends CI_Model {
     }
 	
     function InsertRecord($data) {
+    	$this->db->select_max('ID');
+    	$query = $this->db->get(self::tabla);
+    	$id = $query->row();
+    	$id = $id->ID + 1;
     	
+    	$this->db->set('ID', $id);
     	$this->db->set('PERSONA_ID', $data[0]);
     	$this->db->set('NIVEL_ID', $data[1]);
-    	$this->db->set('TOTAL', $data[2]);
-    	$this->db->set('CONCLUIDAS', $data[3]);
-    	$this->db->set('INTERNAS', $data[4]);
+    	$this->db->set('NOMBRE', $data[2]);
 		
         $this->db->insert(self::tabla,$this);
         
-		/*$this->db->select("ID");
-        $this->db->where(array("PONENCIA_ID"=>$data[0],"PERSONA_ID"=>$data[3]));
+		$this->db->select("ID");
+        
+		$this->db->where(array('NIVEL_ID'=>$data[1],'PERSONA_ID'=>$data[0],'NOMBRE'=>$data[2]));
         $query = $this->db->get(self::tabla);
         
-        $usr = $query->row();
+		$usr = $query->row();
         
-		return $usr->ID;*/
-		return true;
+		return $usr->ID;
     }
 	
-	 function UpdateRecord($data,$id) {
+    function UpdateRecord($data,$id) {
     	
-    	//$this->db->set('PERSONA_ID', $data[0]);
-    	//$this->db->set('NIVEL_ID', $data[1]);
-    	$this->db->set('TOTAL', $data[2]);
-    	$this->db->set('CONCLUIDAS', $data[3]);
-    	$this->db->set('INTERNAS', $data[4]);
+    	$this->db->set('PERSONA_ID', $data[0]);
+    	$this->db->set('NIVEL_ID', $data[1]);
+    	$this->db->set('NOMBRE', $data[2]);
 		
-		//$this->db->update(self::tabla, $this, array('PERSONA_ID'=>$id, 'NIVEL_ID'=>$data[1]));
+		$this->db->update(self::tabla, $this, array('ID'=>$id));
 		
 		return $id;
     }
@@ -83,25 +85,15 @@ class Direccion_md extends CI_Model {
 		if(count($al)<1)
 			$this->InsertRecord($data);
 		else
-			$this->UpdateRecord($data,$data[0]);
+			$this->UpdateRecord($data,$al['ID']);
 		
 	}
 	
-    /*function UpdateRecord($data,$id) {
-    	
-    	$this->db->set('PONENCIA_ID', $data[0]);
-    	$this->db->set('SOLICITUD_ID', $data[1]);
-    	$this->db->set('TIPO_SOLICITUD', $data[2]);
-    	$this->db->set('PERSONA_ID', $data[3]);
-    	$this->db->set('NOMBRE', $data[4]);
-    	$this->db->set('APELLIDO_P', $data[5]);
-    	$this->db->set('APELLIDO_M', $data[6]);
-		
-		$this->db->update(self::tabla, $this, array('ID' => $id));
-		
-		return $id;
+	function CleanPr($nv,$pr) {
+    	$this->db->where(array('NIVEL_ID'=>$nv,'PERSONA_ID'=>$pr));
+        $query = $this->db->delete(self::tabla);
     }
-
+	
     /*function Disable($id) {
     	$this->ACTIVO = 'N';
 

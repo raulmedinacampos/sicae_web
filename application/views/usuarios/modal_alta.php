@@ -27,7 +27,7 @@
 							</ol>
 							<div class="row">
 								<div class="form-group col-sm-12 text-center">
-									<h4 class="tipo-perfil obligatorio">Selecciona tu tipo de usuario</h4>
+									<h4 class="tipo-perfil">Selecciona tu tipo de usuario*</h4>
 									<label class="radio-perfil">
 										<input type="radio" name="rPerfil" id="rProfesor" value="1" />
 										<div class="profesor"></div>
@@ -44,17 +44,17 @@
 						<div role="tabpanel" class="tab-pane" id="registro">
 							<div class="row">
 								<div class="form-group col-sm-6">
-									<label class="obligatorio">CURP:</label>
+									<label>CURP<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Clave Única de Registro de Población"></span></label>
 									<input type="text" id="curp" name="curp" maxlength="18" class="form-control" placeholder="Ingresa tu CURP" />
 								</div>
 								<div class="form-group col-sm-6">
-									<label class="obligatorio">Nombre(s):</label>
+									<label>Nombre(s)<span class="form-text">*</span>:</label>
 									<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingresa tu nombre" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-6">
-									<label class="obligatorio">Primer apellido:</label>
+									<label>Primer apellido<span class="form-text">*</span>:</label>
 									<input type="text" id="apPaterno" name="apPaterno" class="form-control" placeholder="Ingresa tu primer apellido" />
 								</div>
 								<div class="form-group col-sm-6">
@@ -65,19 +65,19 @@
 							<div class="row">
 								<div class="form-group col-sm-6">
 									<div class="datepicker-group">
-										<label class="obligatorio">Fecha de nacimiento:</label>
+										<label>Fecha de nacimiento</label>
 										<input type="text" id="fechaNac" name="fechaNac" class="form-control" data-mask="99/99/9999" placeholder="Fecha de nacimiento" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
 								<div class="form-group col-sm-6">
-									<label class="obligatorio">RFC:</label>
+									<label>RFC<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Registro Federal de Contribuyentes"></span></label>
 									<input type="text" id="rfc" name="rfc" maxlength="13" class="form-control" placeholder="Ingresa tu RFC" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-6">
-									<label class="obligatorio">Sexo:</label>
+									<label>Sexo<span class="form-text">*</span>:</label>
 									<div>
 										<label class="radio-inline">
 											<input id="rdbH" name="sexo" value="M" type="radio" /> Hombre
@@ -88,7 +88,7 @@
 									</div>
 								</div>
 								<div class="form-group col-sm-6">
-									<label class="obligatorio">Nacionalidad:</label>
+									<label>Nacionalidad<span class="form-text">*</span>:</label>
 									<div>
 										<label class="radio-inline">
 											<input id="rdbMex" name="nacionalidad" value="Mexicano" type="radio" /> Mexicano
@@ -101,29 +101,29 @@
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-6">
-									<label class="obligatorio">Correo electrónico:</label>
-									<input type="text" id="email" name="email" class="form-control" placeholder="Email para recibir notificación de dictamen" />
+									<label>Correo electrónico<span class="form-text">*</span>:</label>
+									<input type="text" id="email" name="email" class="form-control" placeholder="ejemplo@dominio.com" />
 								</div>
 								<div class="form-group col-sm-6">
-									<label class="obligatorio">Confirmar correo electrónico:</label>
-									<input type="text" id="emailConf" name="emailConf" class="form-control" placeholder="Confirma el correo electrónico" />
+									<label>Confirmar correo electrónico<span class="form-text">*</span>:</label>
+									<input type="text" id="emailConf" name="emailConf" class="form-control" placeholder="ejemplo@dominio.com" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-6">
-									<label class="obligatorio">Teléfono fijo:</label>
+									<label>Teléfono fijo<span class="form-text">*</span>:</label>
 									<input type="text" id="telefono" name="telefono" maxlength="15" class="form-control" data-mask="9999999999" placeholder="Teléfono fijo" />
 								</div>
 								<div class="form-group col-sm-3">
-									<label class="obligatorio">Extensión:</label>
+									<label>Extensión<span class="form-text">*</span>:</label>
 									<input type="text" id="extension" name="extension" maxlength="5" class="form-control" data-mask="99999" placeholder="Extensión" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-12">
-									<label class="obligatorio">Escuela:</label>
+									<label>Escuela<span class="form-text">*</span>:</label>
 									<select id="escuela" name="escuela" class="form-control">
-										<option value="">Selecciona tu centro de adscripción</option>
+										<option value="">Selecciona</option>
 										<?php
 										foreach ( $escuelas as $val ) {
 										?>
@@ -136,12 +136,12 @@
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-6">
-									<label class="obligatorio">Contraseña:</label>
-									<input type="password" id="password" name="password" class="form-control" placeholder="Ingresa una contraseña" />
+									<label>Contraseña<span class="form-text">*</span>:</label>
+									<input type="password" id="password" name="password" maxlength="8" class="form-control" placeholder="Ingresa una contraseña" />
 								</div>
 								<div class="form-group col-sm-6">
-									<label class="obligatorio">Confirmar contraseña:</label>
-									<input type="password" id="passwordConf" name="passwordConf" class="form-control" placeholder="Confirma la contraseña" />
+									<label>Confirmar contraseña<span class="form-text">*</span>:</label>
+									<input type="password" id="passwordConf" name="passwordConf" maxlength="8" class="form-control" placeholder="Confirma la contraseña" />
 								</div>
 							</div>
 						</div>

@@ -54,21 +54,29 @@ class Alumno_md extends CI_Model {
 	
     function UpdateRecord($data,$id) {
     	
-    	$this->db->set('PIFI', $data[0]);
-    	$this->db->set('CONACYT', $data[1]);
-    	$this->db->set('BOLETA', $data[2]);
-    	$this->db->set('SEMESTRE', $data[3]);
-    	$this->db->set('PROMEDIO', $data[4]);
-    	$this->db->set('SIP_REGISTRO', $data[5]);
-    	$this->db->set('SIP_NOMBRE', $data[6]);
-    	$this->db->set('SIP_ESCUELA', $data[7]);
-    	$this->db->set('SIP_DIRECTOR', $data[8]);
-    	$this->db->set('NIVEL_ACADEMICO', $data[9]);
+    	$this->db->set('PIFI', $data[1]);
+    	$this->db->set('CONACYT', $data[2]);
+    	$this->db->set('BOLETA', $data[3]);
+    	$this->db->set('SEMESTRE', $data[4]);
+    	$this->db->set('PROMEDIO', $data[5]);
+    	$this->db->set('SIP_REGISTRO', $data[6]);
+    	$this->db->set('SIP_NOMBRE', $data[7]);
+    	$this->db->set('SIP_ESCUELA', $data[8]);
+    	$this->db->set('SIP_DIRECTOR', $data[9]);
+    	$this->db->set('NIVEL_ACADEMICO', $data[10]);
 		
 		$this->db->update(self::tabla, $this, array('PERSONA_ID' => $id));
 		
 		return $id;
     }
+	
+	function SetDatos($data){
+		$al=$this->GetById($data[0]);
+		if(count($al)<1)
+			$this->InsertRecord($data);
+		else
+			$this->UpdateRecord($data,$data[0]);
+	}
 
     /*function Disable($id) {
     	$this->ACTIVO = 'N';

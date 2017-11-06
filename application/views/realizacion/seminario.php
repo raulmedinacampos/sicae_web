@@ -12,7 +12,7 @@
 		<div role="tabpanel" class="tab-pane active" id="evento">
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Tipo de evento:</label>
+					<label>Tipo de evento<span class="form-text">*</span>:</label>
 					<select id="tipoEvento" name="tipoEvento" class="form-control">
 						<option value="">Selecciona</option>
 						<?php
@@ -25,31 +25,31 @@
 					</select>
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Nombre del evento:</label>
+					<label>Nombre del evento<span class="form-text">*</span>:</label>
 					<input type="text" id="evento" name="evento" class="form-control" placeholder="Ingresa el nombre del evento" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Sede:</label>
+					<label>Sede<span class="form-text">*</span>:</label>
 					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label class="obligatorio">Institución que organiza:</label>
+					<label>Institución que organiza<span class="form-text">*</span>:</label>
 					<input type="text" id="institucion" name="institucion" class="form-control" placeholder="Ingresa la institución que organiza" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
-						<label class="obligatorio">Fecha de inicio del evento:</label>
+						<label>Fecha de inicio del evento<span class="form-text">*</span>:</label>
 						<input type="text" id="fechaInicio" name="fechaInicio" class="datepicker form-control" data-mask="99/99/9999" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" placeholder="Fecha de inicio" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
-						<label class="obligatorio">Fecha de término del evento:</label>
+						<label>Fecha de término del evento<span class="form-text">*</span>:</label>
 						<input type="text" id="fechaFin" name="fechaFin" class="datepicker form-control" data-mask="99/99/9999" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" placeholder="Fecha de término" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
@@ -58,18 +58,18 @@
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Objetivo:</label>
-					<textarea id="objetivo" name="objetivo" rows="3" class="form-control" placeholder="Ingresa el beneficio al instituto del evento (700 caracteres max.)"></textarea>
+					<textarea id="objetivo" name="objetivo" rows="3" maxlength="700" class="form-control" placeholder="Ingresa el objetivo del evento (700 caracteres max.)"></textarea>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Beneficio institucional:</label>
-					<textarea id="beneficio" name="beneficio" rows="3" class="form-control" placeholder="Ingresa el objetivo del evento (700 caracteres max.)"></textarea>
+					<textarea id="beneficio" name="beneficio" rows="3" maxlength="700" class="form-control" placeholder="Ingresa el beneficio al instituto del evento (700 caracteres max.)"></textarea>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-8">
-					<label class="obligatorio">Itinerario de viaje:</label>
+					<label>Itinerario de viaje<span class="form-text">*</span>:</label>
 					<input type="text" id="itinerario" name="itinerario" class="form-control" placeholder="Ingresa tu itinerario de viaje (origen - destino)" />
 				</div>
 			</div>
@@ -88,7 +88,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="form-group col-sm-12">
-									<label>Justificación</label>
+									<label>Justificación:</label>
 									<input type="text" id="justificacion" name="justificacion" class="form-control" placeholder="Llenar solo en caso de requerir dos o más días adicionales anteriores y/o posteriores al evento" />
 								</div>
 							</div>
@@ -120,12 +120,12 @@
 					<label>Transporte aéreo</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="aereo" name="aereo" class="form-control" placeholder="Especifica el monto del viaje redondo" />
+						<input type="text" id="aereo" name="aereo" class="form-control" placeholder="Monto del viaje redondo" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Especifica</label>
-					<input type="text" id="espTAereo" name="espTAereo" class="form-control" placeholder="Indica el itinerario de viaje, en clase turista" />
+					<label>Especifica  <span class="icon-infocircle" data-toggle="tooltip" title="Indica el itinerario de vuelo, en clase turista"></span></label>
+					<input type="text" id="espTAereo" name="espTAereo" class="form-control" placeholder="Indica el itinerario de vuelo" />
 				</div>
 			</div>
 			<div class="row">
@@ -133,12 +133,12 @@
 					<label>Transporte terrestre</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="terrestre" name="terrestre" class="form-control" placeholder="Especifica el monto del viaje redondo" />
+						<input type="text" id="terrestre" name="terrestre" class="form-control" placeholder="Monto del viaje redondo" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Especifica</label>
-					<input type="text" id="espTTerrestre" name="espTTerrestre" class="form-control" placeholder="Indica el itinerario de viaje" />
+					<input type="text" id="espTTerrestre" name="espTTerrestre" class="form-control" placeholder="Indica el itinerario del traslado" />
 				</div>
 			</div>
 			<div class="row">
@@ -232,7 +232,7 @@
 		</div>
 		
 		<div class="row">
-				<div class="form-group col-sm-2 col-sm-offset-5">
+				<div class="form-group col-sm-2 pull-right">
 					<button type="submit" class="btn btn-block btn-primary">Guardar</button>
 				</div>
 			</div>

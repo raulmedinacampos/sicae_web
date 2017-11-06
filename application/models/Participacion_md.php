@@ -10,6 +10,7 @@ class Participacion_md extends CI_Model {
     }
 	
 	function GetAll() {
+		$this->db->where_in("ID", array("1", "2"));
 		$this->db->order_by("ID");
 		$query = $this->db->get(self::tabla);
 		return $query->result();

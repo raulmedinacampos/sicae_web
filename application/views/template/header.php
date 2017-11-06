@@ -106,7 +106,7 @@
           </ul>
         </li>
         <li<?php if(uri_string() == "historial") {echo ' class="active"';}?>><a href="<?php echo base_url('historial'); ?>">Formato</a></li>
-        <li><a href="<?php echo base_url('uploads/encuesta_2016.pdf'); ?>" target="_blank">Encuesta de calidad</a></li>
+        <li><a href="<?php echo base_url('uploads/encuesta_2018.pdf'); ?>" target="_blank">Encuesta de calidad</a></li>
 		<?php
 			}
 		?>
@@ -116,7 +116,7 @@
         <li<?php if(uri_string() == "coordinador") {echo ' class="active"';}?>><a href="<?php echo base_url('coordinador'); ?>">Actualizar datos</a></li>
         <li<?php if(uri_string() == "realizacion") {echo ' class="active"';}?>><a href="<?php echo base_url('realizacion'); ?>">Realización</a></li>
         <li<?php if(uri_string() == "historial") {echo ' class="active"';}?>><a href="<?php echo base_url('historial'); ?>">Formato</a></li>
-        <li><a href="<?php echo base_url('uploads/encuesta_2016.pdf'); ?>" target="_blank">Encuesta de calidad</a></li>
+        <li><a href="<?php echo base_url('uploads/encuesta_2018.pdf'); ?>" target="_blank">Encuesta de calidad</a></li>
         <?php
 			}
 		?>
@@ -132,39 +132,14 @@
           </ul>
         </li>
         <li<?php if(uri_string() == "historial") {echo ' class="active"';}?>><a href="<?php echo base_url('historial'); ?>">Formato</a></li>
-        <li><a href="<?php echo base_url('uploads/encuesta_2016.pdf'); ?>" target="_blank">Encuesta de calidad</a></li>
+        <li><a href="<?php echo base_url('uploads/encuesta_2018.pdf'); ?>" target="_blank">Encuesta de calidad</a></li>
 		<?php
 			}
 		?>
       </ul>
       
       
-      <!-- <ul class="wizard-steps" role="tablist">
-		<li role="presentation" class="completed">
-			<a href="#personal" aria-controls="personal" role="tab" data-toggle="tab">
-				<h5>Datos del</h5>
-				<span>coordinador</span>
-			</a>
-		</li>
-		<li role="presentation">
-			<a href="#evento" aria-controls="evento" role="tab" data-toggle="tab">
-				<h5>Selección de</h5>
-				<span>eventos</span>
-			</a>
-		</li>
-		<li role="presentation">
-			<a href="#expositores" aria-controls="expositores" role="tab" data-toggle="tab">
-				<h5>Formato</h5>
-				<span>&nbsp;</span>
-			</a>
-		</li>
-        <li role="presentation">
-        	<a href="#monto" aria-controls="monto" role="tab" data-toggle="tab">
-            	<h5>Encuesta de</h5>
-            	<span>calidad</span>
-            </a>
-        </li>
-    </ul> -->
+
       <ul class="nav navbar-nav navbar-right">
         <li><a href="<?php echo base_url('login/cerrar'); ?>">Cerrar sesión</a></li>
       </ul>

@@ -13,23 +13,23 @@
 		<div role="tabpanel" class="tab-pane active" id="presentacion">
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label class="obligatorio">Título del artículo en inglés y  en español:</label>
-					<textarea id="titulo" name="titulo" rows="3" class="form-control" placeholder="Anota el nombre de tu ponencia en inglés y en español separados por un salto de línea.\nNOTA: El nombre de la ponencia deberá coincidir con los demás documentos (oficio, carta de aceptación, resumen y ponencia completa)"></textarea>
+					<label>Título del artículo en inglés y en español<span class="form-text">*</span>:</label>
+					<textarea id="titulo" name="titulo" rows="3" class="form-control" placeholder="Anota el nombre del artículo a publicar en inglés y en español separado por un salto de línea.\nEl nombre de la ponencia deberá coincidir con los demás documentos (oficio, carta de aceptación y el extenso del artículo)."></textarea>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label class="obligatorio">Revista de publicación:</label>
-					<input type="text" id="revista" name="revista" class="form-control" placeholder="Ingresa el nombre de la revista que se publicará" />
+					<label>Nombre de la revista<span class="form-text">*</span>:</label>
+					<input type="text" id="revista" name="revista" class="form-control" placeholder="Ingresa el nombre de la revista donde se publicará el artículo" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">ISSN de la revista:</label>
-					<input type="text" id="issn" name="issn" class="form-control" placeholder="Ingresa la institución que organiza" />
+					<label>ISSN de la revista<span class="form-text">*</span>:  <span class="icon-infocircle" data-toggle="tooltip" title="Ingresa el Número de Serie Estándar Internacional para publicaciones"></span></label>
+					<input type="text" id="issn" name="issn" class="form-control" data-mask="9999-9999" placeholder="Ingresa el ISSN" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label class="obligatorio">Sede:</label>
+					<label>Sede<span class="form-text">*</span>:</label>
 					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" />
 				</div>
 			</div>
@@ -101,7 +101,7 @@
 		</div>
 		
 		<div class="row">
-				<div class="form-group col-sm-2 col-sm-offset-5">
+				<div class="form-group col-sm-2 pull-right">
 					<button type="submit" class="btn btn-block btn-primary">Guardar</button>
 				</div>
 			</div>

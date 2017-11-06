@@ -2,12 +2,6 @@ function Init() {
 	$(".datepicker").datepicker();
 	
 	$('[data-toggle="tooltip"]').tooltip();
-	
-	$("#emailConf").on("cut copy paste", function(e) {
-		e.preventDefault();
-	});
-	
-	$("#curp").displayAsUppercase();
 }
 
 function AddOrganizer() {
@@ -110,22 +104,18 @@ function AddOrganizer() {
 }
 
 function Validate() {
-	$.validator.methods.email = function( value, element ) {
-		return this.optional( element ) || /[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-z]+/.test( value );
-	}
-	
 	$.extend($.validator.messages, {
 		  required: "Este campo es obligatorio.",
 		  digits: "Deben ser solo números"
 	});
 	
-	$("#formCoordinador").validate({
+	$("#formRealizacion").validate({
 		ignore: [],
-		errorElement: "span",
+		errorElement: "small",
 		errorClass: "help-block",
 		errorPlacement: function(error, element) {
-			if ( element.attr("name") == "rPerfil" ) {
-		        error.insertAfter(".tipo-perfil");
+			if ( element.attr("type") == "radio" ) {
+				error.insertAfter(element.parent().parent());
 			} else if ( element.parent(".input-group").length ) {
 				error.insertAfter(element.parent());
 			} else {
@@ -139,45 +129,59 @@ function Validate() {
 			$(element).closest(".form-group").removeClass("has-error");
 		},
 		rules: {
-			nombre: {
+			tipoEvento: {
 				required: true
 			},
-			apPaterno: {
+			evento: {
 				required: true
 			},
-			apMaterno: {
+			idioma: {
 				required: true
 			},
-			fechaNac: {
+			sede: {
 				required: true
 			},
-			curp: {
+			fechaInicio: {
+				required: true
+			},
+			fechaFin: {
+				required: true
+			},
+			tParticipantes: {
 				required: true,
-				minlength: 18
+				digits: true
 			},
-			sexo: {
+			tExpositores: {
+				required: true,
+				digits: true
+			},
+			duracion: {
+				required: true,
+				digits: true
+			},
+			dirigido: {
 				required: true
 			},
-			email: {
-				required: true,
-				email: true
-			},
-			emailConf: {
-				equalTo: "#email"
-			},
-			telefono: {
-				required: true,
-				digits: true,
-				minlength: 10
-			},
-			extension: {
-				required: true,
-				digits: true,
-				minlength: 3,
-				maxlength: 6
-			},
-			escuela: {
+			objetivo: {
 				required: true
+			},
+			beneficio: {
+				required: true
+			},
+			banco: {
+				required: true
+			},
+			sucursal: {
+				required: true,
+				digits: true
+			},
+			cuentaBanco: {
+				required: true,
+				digits: true
+			},
+			clabe: {
+				required: true,
+				digits: true
 			}
 		},
 		messages: {

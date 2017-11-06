@@ -10,34 +10,34 @@
 				<div class="modal-body">
 					<div class="row">
 						<div class="form-group col-sm-6">
-							<label class="obligatorio">CURP:</label>
+							<label>CURP<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Clave Única de Registro de Población"></span></label>
 							<input type="text" id="curpC" name="curpC" maxlength="18" class="form-control" placeholder="Ingresa tu CURP" />
 						</div>
 						<div class="form-group col-sm-6">
-							<label class="obligatorio">Nombre(s):</label>
+							<label>Nombre(s)<span class="form-text">*</span>:</label>
 							<input type="text" id="nombreC" name="nombreC" class="form-control" placeholder="Ingresa tu nombre" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-6">
-							<label class="obligatorio">Primer apellido:</label>
+							<label>Primer apellido<span class="form-text">*</span>:</label>
 							<input type="text" id="apPaternoC" name="apPaternoC" class="form-control" placeholder="Ingresa tu primer apellido" />
 						</div>
 						<div class="form-group col-sm-6">
-							<label class="obligatorio">Segundo apellido:</label>
+							<label>Segundo apellido</label>
 							<input type="text" id="apMaternoC" name="apMaternoC" class="form-control" placeholder="Ingresa tu segundo apellido" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-6">
 							<div class="datepicker-group">
-								<label class="obligatorio">Fecha de nacimiento:</label>
+								<label>Fecha de nacimiento<span class="form-text">*</span>:</label>
 								<input type="text" id="fechaNacC" name="fechaNacC" class="form-control" data-mask="99/99/9999" placeholder="Fecha de nacimiento" />
 								<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 							</div>
 						</div>
 						<div class="form-group col-sm-6">
-							<label class="obligatorio">Sexo:</label>
+							<label>Sexo<span class="form-text">*</span>:</label>
 							<div>
 								<label class="radio-inline">
 									<input id="rdbHC" name="sexoC" value="M" type="radio" /> Hombre
@@ -50,29 +50,29 @@
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-6">
-							<label class="obligatorio">Teléfono fijo:</label>
+							<label>Teléfono fijo<span class="form-text">*</span>:</label>
 							<input type="text" id="telefonoC" name="telefonoC" maxlength="7" class="form-control" data-mask="9999999999" placeholder="Teléfono fijo" />
 						</div>
 						<div class="form-group col-sm-3">
-							<label class="obligatorio">Extensión:</label>
+							<label>Extensión<span class="form-text">*</span>:</label>
 							<input type="text" id="extensionC" name="extensionC" maxlength="5" class="form-control" data-mask="99999" placeholder="Extensión" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-6">
-							<label class="obligatorio">Correo electrónico:</label>
-							<input type="text" id="emailC" name="emailC" class="form-control" placeholder="Email para recibir notificación de dictamen" />
+							<label>Correo electrónico<span class="form-text">*</span>:</label>
+							<input type="text" id="emailC" name="emailC" class="form-control" placeholder="ejemplo@dominio.com" />
 						</div>
 						<div class="form-group col-sm-6">
-							<label class="obligatorio">Confirmar correo electrónico:</label>
-							<input type="text" id="emailConfC" name="emailConfC" class="form-control" placeholder="Confirma el correo electrónico" />
+							<label>Confirmar correo electrónico<span class="form-text">*</span>:</label>
+							<input type="text" id="emailConfC" name="emailConfC" class="form-control" placeholder="ejemplo@dominio.com" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="form-group col-sm-12">
-							<label class="obligatorio">Escuela:</label>
+							<label>Escuela<span class="form-text">*</span>:</label>
 							<select id="escuelaC" name="escuelaC" class="form-control">
-								<option value="">Selecciona tu centro de adscripción</option>
+								<option value="">Selecciona</option>
 								<?php
 								foreach ( $escuelas as $val ) {
 								?>

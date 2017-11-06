@@ -10,7 +10,7 @@ function Validate() {
 	
 	$("#formRecuperar").validate({
 		ignore: [],
-		errorElement: "span",
+		errorElement: "small",
 		errorClass: "help-block",
 		errorPlacement: function(error, element) {
 			if ( element.parent(".input-group").length ) {

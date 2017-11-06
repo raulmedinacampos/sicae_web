@@ -1,5 +1,7 @@
 function Init() {
 	$(".datepicker").datepicker();
+	
+	$('[data-toggle="tooltip"]').tooltip();
 }
 
 function Validate() {
@@ -56,7 +58,7 @@ function Validate() {
 	});
 }
 
-$(function() {
+$gmx(document).ready(function() {
 	Init();
 	Validate();
 });

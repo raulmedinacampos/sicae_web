@@ -1,8 +1,8 @@
 <?php
 
-class Coautor_md extends CI_Model {
+class Monto_md extends CI_Model {
 	
-	const tabla="COAUTOR";
+	const tabla="MONTO";
 	
 	function __construct() {
         // Call the Model constructor
@@ -33,59 +33,26 @@ class Coautor_md extends CI_Model {
         return $query->row_array();
     }
 	
-	function GetBySolicitud($id) {
-		$this->db->where(array('SOLICITUD_ID'=>$id));
+    function GetBySolicitud($id) {
+    	$this->db->where(array('SOLICITUD_ID'=>$id));
         $query = $this->db->get(self::tabla);
         return $query->result_array();
-    }
-	
-    function GetByPonencia($id) {
-		$this->db->where(array('PONENCIA_ID'=>$id));
-        $query = $this->db->get(self::tabla);
-        return $query->result_array();
-    }
-	
-    function GetByPersona($id) {
-		$this->db->where(array('PERSONA_ID'=>$id));
-        $query = $this->db->get(self::tabla);
     }
 	
     function InsertRecord($data) {
     	
-    	$this->db->set('PONENCIA_ID', $data[0]);
+    	$this->db->set('TIPO_MONTO_ID', $data[0]);
     	$this->db->set('SOLICITUD_ID', $data[1]);
     	$this->db->set('TIPO_SOLICITUD', $data[2]);
-    	$this->db->set('PERSONA_ID', $data[3]);
-    	$this->db->set('NOMBRE', $data[4]);
-    	$this->db->set('APELLIDO_P', $data[5]);
-    	$this->db->set('APELLIDO_M', $data[6]);
+    	$this->db->set('SOLICITADO', $data[3]);
+    	$this->db->set('CALCULADO', $data[4]);
+    	$this->db->set('JUSTIFICACION', $data[5]);
+    	$this->db->set('S_MONEDA_ID', $data[6]);
+    	$this->db->set('C_MONEDA_ID', $data[7]);
 		
         $this->db->insert(self::tabla,$this);
-        
-		$this->db->select("ID");
-        $this->db->where(array("PONENCIA_ID"=>$data[0],"PERSONA_ID"=>$data[3]));
-        $query = $this->db->get(self::tabla);
-        
-        $usr = $query->row();
-        
-		return $usr->ID;
     }
 	
-    function UpdateRecord($data,$id) {
-    	
-    	$this->db->set('PONENCIA_ID', $data[0]);
-    	$this->db->set('SOLICITUD_ID', $data[1]);
-    	$this->db->set('TIPO_SOLICITUD', $data[2]);
-    	$this->db->set('PERSONA_ID', $data[3]);
-    	$this->db->set('NOMBRE', $data[4]);
-    	$this->db->set('APELLIDO_P', $data[5]);
-    	$this->db->set('APELLIDO_M', $data[6]);
-		
-		$this->db->update(self::tabla, $this, array('ID' => $id));
-		
-		return $id;
-    }
-
     /*function Disable($id) {
     	$this->ACTIVO = 'N';
 

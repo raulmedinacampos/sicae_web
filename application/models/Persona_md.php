@@ -31,6 +31,7 @@ class Persona_md extends CI_Model {
     	$this->db->select("ID, CENTRO_ADSCRIPCION, TIPO_PERSONA_ID, USERNAME, NOMBRE, APELLIDO_P, APELLIDO_M");
     	$this->db->select("TO_CHAR(FECHA_NACIMIENTO, 'DD/MM/RRRR') AS FECHA_NACIMIENTO", FALSE);
     	$this->db->select("EMAIL, RFC, CURP, GENERO, TELEFONO, EXTENSION, NACIONALIDAD");
+    	$this->db->select("BANCO_NOMBRE, BANCO_SUCURSAL, BANCO_CUENTA, BANCO_CLABE");
 		$this->db->where(array('ID'=>$id));
         $query = $this->db->get(self::tabla);
         return $query->row_array();
@@ -75,11 +76,15 @@ class Persona_md extends CI_Model {
     	$this->db->set('CENTRO_ADSCRIPCION', $data[0]);
     	$this->db->set('TIPO_PERSONA_ID', $data[1]);
     	$this->db->set('USERNAME', $data[2]);
-    	$this->db->set('PASSWORD', $data[3]);
+    	
+    	if ( $data[3] ) {
+    		$this->db->set('PASSWORD', $data[3]);
+    	}
+    	
     	$this->db->set('NOMBRE', $data[4]);
     	$this->db->set('APELLIDO_P', $data[5]);
     	$this->db->set('APELLIDO_M', $data[6]);
-    	$this->db->set('FECHA_NACIMIENTO', "to_date('$data[10]', 'RRRR-MM-DD')",FALSE);
+    	$this->db->set('FECHA_NACIMIENTO', "to_date('$data[7]', 'DD/MM/RRRR')",FALSE);
     	$this->db->set('EMAIL', $data[8]);
     	$this->db->set('RFC', $data[9]);
     	$this->db->set('CURP', $data[10]);
@@ -90,7 +95,19 @@ class Persona_md extends CI_Model {
     	$this->db->set('BANCO_SUCURSAL', $data[15]);
     	$this->db->set('BANCO_CUENTA', $data[16]);
     	$this->db->set('BANCO_CLABE', $data[17]);
-    	//$this->db->set('NACIONALIDAD', $data[18]);
+    	$this->db->set('NACIONALIDAD', $data[18]);
+		
+		$this->db->update(self::tabla, $this, array('ID' => $id));
+		
+		return $id;
+    }
+	
+    function SetCuentaBancaria($data,$id) {
+    	
+    	$this->db->set('BANCO_NOMBRE', $data[0]);
+    	$this->db->set('BANCO_SUCURSAL', $data[1]);
+    	$this->db->set('BANCO_CUENTA', $data[2]);
+    	$this->db->set('BANCO_CLABE', $data[3]);
 		
 		$this->db->update(self::tabla, $this, array('IDUSUARIO' => $id));
 		

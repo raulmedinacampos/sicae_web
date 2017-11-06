@@ -10,7 +10,7 @@ class Nivel_academico_md extends CI_Model {
     }
 	
 	function GetAll() {
-		$this->db->order_by("ID");
+		$this->db->order_by("ORDEN");
 		$query = $this->db->get(self::tabla);
 		return $query->result();
     }
