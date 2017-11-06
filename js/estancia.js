@@ -16,6 +16,18 @@ function ToogleInsurance() {
 	});
 }
 
+function SaveData() {
+	$("#btnGuardar").click(function(e) {
+		e.preventDefault();
+		
+		$.post(
+			'/estancia-de-investigacion/guardar', 
+			$("#formEstancia").serialize(), 
+			function(data) {}
+		);
+	});
+}
+
 function Validate() {
 	$.validator.addMethod("moneda", function(value, element) {
 	    return this.optional(element) || /^\d{0,8}(\.\d{0,2})?$/i.test(value);
@@ -108,5 +120,6 @@ function Validate() {
 $gmx(document).ready(function() {
 	Init();
 	ToogleInsurance();
+	SaveData();
 	Validate();
 });

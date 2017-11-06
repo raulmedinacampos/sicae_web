@@ -34,7 +34,12 @@ class Solicitud_md extends CI_Model {
     }
 	
     function InsertRecord($data) {
-    	
+    	$this->db->select_max('ID');
+    	$query = $this->db->get(self::tabla);
+    	$id = $query->row();
+    	$id = $id->ID + 1;
+    	 
+    	$this->db->set('ID', $id);
     	$this->db->set('TIPO', $data[0]);
     	$this->db->set('PERSONA_ID', $data[1]);
     	$this->db->set('TIPO_EVENTO_ID', $data[2]);
