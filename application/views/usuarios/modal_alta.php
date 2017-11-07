@@ -45,6 +45,7 @@
 							<div class="row">
 								<div class="form-group col-sm-6">
 									<label>CURP<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Clave Única de Registro de Población"></span></label>
+									<a href="https://renapo.gob.mx/swb/swb/RENAPO/consultacurp" target="_blank"><small>Consulta tu CURP</small></a>
 									<input type="text" id="curp" name="curp" maxlength="18" class="form-control" placeholder="Ingresa tu CURP" />
 								</div>
 								<div class="form-group col-sm-6">
@@ -66,7 +67,7 @@
 								<div class="form-group col-sm-6">
 									<div class="datepicker-group">
 										<label>Fecha de nacimiento</label>
-										<input type="text" id="fechaNac" name="fechaNac" class="form-control" data-mask="99/99/9999" placeholder="Fecha de nacimiento" />
+										<input type="text" id="fechaNac" name="fechaNac" class="form-control" data-mask="99/99/9999" placeholder="Fecha de nacimiento (dd/mm/aaaa)" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
@@ -112,7 +113,7 @@
 							<div class="row">
 								<div class="form-group col-sm-6">
 									<label>Teléfono fijo<span class="form-text">*</span>:</label>
-									<input type="text" id="telefono" name="telefono" maxlength="15" class="form-control" data-mask="9999999999" placeholder="Teléfono fijo" />
+									<input type="text" id="telefono" name="telefono" maxlength="15" class="form-control" placeholder="Teléfono fijo (lada + teléfono)" />
 								</div>
 								<div class="form-group col-sm-3">
 									<label>Extensión<span class="form-text">*</span>:</label>

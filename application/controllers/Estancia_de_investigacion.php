@@ -5,9 +5,11 @@ class Estancia_de_investigacion extends CI_Controller {
 		
 		$header["titulo"] = "Estancia de investigación";
 		
+		$this->load->model("solicitud_md");
 		$this->load->model("moneda_md");
 		
 		$params["monedas"] = $this->moneda_md->GetAll();
+		$params["estancia"] = $this->solicitud_md->GetByPerson($this->session->id);
 		
 		$this->load->view('template/header', $header);
 		$this->load->view('realizacion/estancia', $params);
@@ -41,7 +43,10 @@ class Estancia_de_investigacion extends CI_Controller {
 		array_push($data, NULL);
 		array_push($data, NULL);
 		
-		$id = $this->solicitud_md->InsertRecord($data);
+		if($this->input->post("id_solicitud")==0)
+			$id = $this->solicitud_md->InsertRecord($data);
+		else
+			$id=$this->solictud_md->UpdateRecord($data,$this->input->post("id_solicitud"));
 		
 		echo $id;
 	}

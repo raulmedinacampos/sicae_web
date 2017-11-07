@@ -401,7 +401,7 @@
 									<label>¿Es becario EDD?</label>
 									<select id="edd" name="edd" class="form-control">
 										<option value="">Selecciona</option>
-										<option value="0">No soy becario EDD</option>
+										<option <?php if ( isset($profesor) && $profesor["EDD"] == "0" ) {echo 'selected="selected"'; } ?> value="0">No soy becario EDD</option>
 										<?php
 										for ( $i=1; $i<10; $i++ ) {
 										?>
@@ -415,7 +415,7 @@
 									<label>¿Es becario por exclusividad?</label>
 									<select id="exclusividad" name="exclusividad" class="form-control">
 										<option value="">Selecciona</option>
-										<option value="0">No soy becario por exclusividad</option>
+										<option <?php if ( isset($profesor) && $profesor["EXCLUSIVIDAD"] == "0" ) {echo 'selected="selected"'; } ?> value="0">No soy becario por exclusividad</option>
 										<?php
 										for ( $i=1; $i<4; $i++ ) {
 										?>
@@ -429,7 +429,7 @@
 									<label>¿Es becario EDI?</label>
 									<select id="edi" name="edi" class="form-control">
 										<option value="">Selecciona</option>
-										<option value="0">No soy becario EDI</option>
+										<option <?php if ( isset($profesor) && $profesor["EDI"] == "0" ) {echo 'selected="selected"'; } ?> value="0">No soy becario EDI</option>
 										<?php
 										for ( $i=1; $i<10; $i++ ) {
 										?>
@@ -524,7 +524,7 @@
 					<div class="row">
 						<div class="form-group col-sm-4">
 							<label>Número de registro<span class="form-text">*</span>:</label>
-							<input type="text" id="numSIP" name="numSIP" class="form-control" data-mask="SIP-99999999" placeholder="Número de registro del proyecto SIP" value="<?php if(isset($alumno)) {echo $alumno["SIP_REGISTRO"];} ?>" />
+							<input type="text" id="numSIP" name="numSIP" class="form-control" data-mask="SIP-9999?9999" placeholder="Número de registro del proyecto SIP" value="<?php if(isset($alumno)) {echo $alumno["SIP_REGISTRO"];} ?>" />
 						</div>
 						<div class="form-group col-sm-8">
 							<label>Escuela<span class="form-text">*</span>:</label>

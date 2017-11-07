@@ -62,6 +62,34 @@ class Usuario extends CI_Controller {
 		echo json_encode($persona);
 	}
 	
+	public function validar_curp() {
+		$curp = $this->input->post("curp");
+		
+		$curp = strtoupper($curp);
+		
+		$valid = $this->persona_md->CheckCURP($curp);
+		
+		if ( $valid ) {
+			echo "false";
+		} else {
+			echo "true";
+		}
+	}
+	
+	public function validar_curpC() {
+		$curp = $this->input->post("curpC");
+		
+		$curp = strtoupper($curp);
+		
+		$valid = $this->persona_md->CheckCURP($curp);
+		
+		if ( $valid ) {
+			echo "false";
+		} else {
+			echo "true";
+		}
+	}
+	
 	public function agregar() {
 		$data=array();
 		
@@ -204,6 +232,46 @@ class Usuario extends CI_Controller {
 		$id = $this->direccion_md->setDatos($data);
 		
 		$total=$this->input->post('tTLicenciatura')+$this->input->post('tTMaestria')+$this->input->post('tTDoctorado');
+		
+		$id=$this->profesor_md->SetDirecciones($total,$usr);
+		
+		echo $id;
+	}
+	
+	
+	public function direccionespr() {
+		$this->load->model("direccion_md");
+		$this->load->model("profesor_md");
+		$usr=$this->session->userdata('id');
+		
+		$data=array();
+		array_push($data,$usr);
+		array_push($data,3);
+		array_push($data, $_REQUEST['tTLicenciatura']);
+		array_push($data, $_REQUEST['cTLicenciatura']);
+		array_push($data, $_REQUEST['iTLicenciatura']);
+		
+		$id = $this->direccion_md->SetDatos($data);
+		
+		$data=array();
+		array_push($data,$usr);
+		array_push($data,4);
+		array_push($data, $_REQUEST['tTMaestria']);
+		array_push($data, $_REQUEST['cTMaestria']);
+		array_push($data, $_REQUEST['iTMaestria']);
+		
+		$id = $this->direccion_md->SetDatos($data);
+		
+		$data=array();
+		array_push($data,$usr);
+		array_push($data,5);
+		array_push($data, $_REQUEST['tTDoctorado']);
+		array_push($data, $_REQUEST['cTDoctorado']);
+		array_push($data, $_REQUEST['iTDoctorado']);
+		
+		$id = $this->direccion_md->setDatos($data);
+		
+		$total=$_REQUEST['tTLicenciatura']+$_REQUEST['tTMaestria']+$_REQUEST['tTDoctorado'];
 		
 		$id=$this->profesor_md->SetDirecciones($total,$usr);
 		

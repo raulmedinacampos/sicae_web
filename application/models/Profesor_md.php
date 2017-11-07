@@ -28,6 +28,20 @@ class Profesor_md extends CI_Model {
     }
     */
     function GetById($id) {
+    	$this->db->select("PERSONA_ID, NOMBRAMIENTO, EDD, EXCLUSIVIDAD, EDI, SNI");
+    	$this->db->select("TO_CHAR(FECHA_INGRESO, 'DD/MM/RRRR') AS FECHA_INGRESO", FALSE);
+    	$this->db->select("TO_CHAR(FECHA_BASE, 'DD/MM/RRRR') AS FECHA_BASE", FALSE);
+    	$this->db->select("EXCELENCIA, SABATICO, LIC_SUELDO, CATEGORIA, PLAZA, INTERINATO");
+    	$this->db->select("TO_CHAR(INICIO_INTERINATO, 'DD/MM/RRRR') AS INICIO_INTERINATO", FALSE);
+    	$this->db->select("TO_CHAR(FIN_INTERINATO, 'DD/MM/RRRR') AS FIN_INTERINATO", FALSE);
+    	$this->db->select("HORAS, NO_EMPLEADO, SABATICO_ANUAL, PRORROGA");
+    	$this->db->select("TO_CHAR(SABATICO_INICIO, 'DD/MM/RRRR') AS SABATICO_INICIO", FALSE);
+    	$this->db->select("TO_CHAR(SABATICO_FIN, 'DD/MM/RRRR') AS SABATICO_FIN", FALSE);
+    	$this->db->select("TO_CHAR(LIC_SUELDO_INICIO, 'DD/MM/RRRR') AS LIC_SUELDO_INICIO", FALSE);
+    	$this->db->select("TO_CHAR(LIC_SUELDO_FIN, 'DD/MM/RRRR') AS LIC_SUELDO_FIN", FALSE);
+    	$this->db->select("TO_CHAR(PRORROGA_INICIO, 'DD/MM/RRRR') AS PRORROGA_INICIO", FALSE);
+    	$this->db->select("TO_CHAR(PRORROGA_FIN, 'DD/MM/RRRR') AS PRORROGA_FIN", FALSE);
+    	$this->db->select("CARGA_ACADEMICA, DIRECCIONES_TESIS, NIVEL_ACADEMICO");
     	$this->db->where(array('PERSONA_ID'=>$id));
         $query = $this->db->get(self::tabla);
         return $query->row_array();

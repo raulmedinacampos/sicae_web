@@ -12,6 +12,16 @@ function Init() {
 	$("#password, #passwordConf, #passA").password({
 		message: "Haga click aquí para ver u ocultar la contraseña"
 	});
+	
+	$('#telefono').inputmask({
+		mask: '9999999999',
+		placeholder: ''
+	});
+	
+	$('#telefonoC').inputmask({
+		mask: '9999999999',
+		placeholder: ''
+	});
 }
 
 function OpenNewUserModal() {
@@ -238,7 +248,11 @@ function Validate() {
 			},
 			curp: {
 				required: true,
-				minlength: 18
+				minlength: 18,
+				remote: {
+					url: "usuario/validar-curp",
+					type: "post"
+				}
 			},
 			rfc: {
 				required: true,
@@ -281,7 +295,8 @@ function Validate() {
 		messages: {
 			rPerfil: "Seleccione un tipo de usuario",
 			curp: {
-				minlength: "El CURP es incorrecto"
+				minlength: "El CURP es incorrecto",
+				remote: "Este CURP ya está registrado"
 			},
 			rfc: {
 				minlength: "El RFC es incorrecto"
@@ -334,7 +349,11 @@ function Validate() {
 			},
 			curpC: {
 				required: true,
-				minlength: 18
+				minlength: 18,
+				remote: {
+					url: "usuario/validar-curpC",
+					type: "post"
+				}
 			},
 			sexoC: {
 				required: true
@@ -362,7 +381,8 @@ function Validate() {
 		},
 		messages: {
 			curpC: {
-				minlength: "El CURP es incorrecto"
+				minlength: "El CURP es incorrecto",
+				remote: "Este CURP ya está registrado"
 			},
 			emailC: {
 				email: "El correo es incorrecto"
@@ -379,7 +399,6 @@ function Validate() {
 }
 
 $gmx(document).ready(function() {
-	/*$.noConflict();*/
 	Init();
 	OpenNewUserModal();
 	OpenNewOrganizerModal();

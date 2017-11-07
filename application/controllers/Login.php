@@ -94,6 +94,7 @@ class Login extends CI_Controller {
 			$curp = $usr->CURP;
 			$this->session->set_userdata(array("nom"=>$nom,"rol"=>$rol,"esc"=>$school,"id"=>$id,"curp"=>$curp));
 		} else {
+			$redirect = base_url();
 			$this->session->set_flashdata("error", 1);
 		}
 		

@@ -73,7 +73,7 @@ class Direccion_md extends CI_Model {
     	$this->db->set('CONCLUIDAS', $data[3]);
     	$this->db->set('INTERNAS', $data[4]);
 		
-		//$this->db->update(self::tabla, $this, array('PERSONA_ID'=>$id, 'NIVEL_ID'=>$data[1]));
+		$this->db->update(self::tabla, $this, array('PERSONA_ID'=>$id, 'NIVEL_ID'=>$data[1]));
 		
 		return $id;
     }

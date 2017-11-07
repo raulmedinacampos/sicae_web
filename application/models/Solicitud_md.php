@@ -32,6 +32,12 @@ class Solicitud_md extends CI_Model {
         $query = $this->db->get(self::tabla);
         return $query->row_array();
     }
+    
+    function GetByPerson($id) {
+    	$this->db->where(array('PERSONA_ID'=>$id));
+    	$query = $this->db->get(self::tabla);
+    	return $query->row_array();
+    }
 	
     function InsertRecord($data) {
     	$this->db->select_max('ID');
@@ -80,6 +86,7 @@ class Solicitud_md extends CI_Model {
 	
     function UpdateRecord($data,$id) {
     	
+    	
     	$this->db->set('TIPO', $data[0]);
     	$this->db->set('PERSONA_ID', $data[1]);
     	$this->db->set('TIPO_EVENTO_ID', $data[2]);
@@ -88,10 +95,15 @@ class Solicitud_md extends CI_Model {
     	$this->db->set('SEDE', $data[5]);
     	$this->db->set('FECHA_INICIAL', "to_date('$data[6]', 'DD/MM/RRRR')",FALSE);
     	$this->db->set('FECHA_FINAL', "to_date('$data[7]', 'DD/MM/RRRR')",FALSE);
-    	$this->db->set('DIAS_ADICIONALES', $data[8]);
-    	$this->db->set('DA_JUSTIFICACION', $data[9]);
-    	$this->db->set('DA_FECHA_SALIDA', "to_date('$data[10]', 'DD/MM/RRRR')",FALSE);
-    	$this->db->set('DA_FECHA_REGRESO', "to_date('$data[11]', 'DD/MM/RRRR')",FALSE);
+		if($data[9]!=""&&$data[10]!=""&&$data[11]!=""){
+			$this->db->set('DIAS_ADICIONALES', $data[8]);
+			$this->db->set('DA_JUSTIFICACION', $data[9]);
+			$this->db->set('DA_FECHA_SALIDA', "to_date('$data[10]', 'DD/MM/RRRR')",FALSE);
+			$this->db->set('DA_FECHA_REGRESO', "to_date('$data[11]', 'DD/MM/RRRR')",FALSE);
+		}
+		else{
+			$this->db->set('DIAS_ADICIONALES',0);
+		}
     	$this->db->set('ITINERARIO', $data[12]);
     	$this->db->set('OTRO', $data[13]);
     	$this->db->set('OBJETIVO', $data[14]);

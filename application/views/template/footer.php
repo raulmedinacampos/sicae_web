@@ -2,6 +2,20 @@
 				</div> <!-- .container -->		
 			</div> <!-- #mainWrapper -->
 			
+			<div id="modalAviso" class="modal fade">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title"></h4>
+						</div>
+						<div class="modal-body"></div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			
 			<!-- Footer -->
 			<footer>
 				<div class="container">

@@ -155,6 +155,14 @@ function SaveData() {
 				$("#formUsuario").serialize(), 
 				function (data) {}
 			);
+			
+			$("#modalAviso .modal-title").html('Información actualizada');
+			$("#modalAviso .modal-body").html('<div class="alert alert-success">La información ha sido actualizada</div>');
+			$("#modalAviso").modal('show');
+		} else {
+			$("#modalAviso .modal-title").html('Error');
+			$("#modalAviso .modal-body").html('<div class="alert alert-danger">Verifica cada una de las pestañas, aún hay campos pendientes de llenar.</div>');
+			$("#modalAviso").modal('show');
 		}
 	});
 }
