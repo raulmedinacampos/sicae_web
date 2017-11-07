@@ -37,20 +37,20 @@ class Coordinador extends CI_Controller {
 	public function agregar() {
 		$data=array();
 		
-		array_push($data,$this->input->post('escuela'));
+		array_push($data,$this->input->post('escuelaC'));
 		array_push($data,2);
 		array_push($data, NULL);
 		array_push($data, NULL);
-		array_push($data,$this->input->post('nombre'));
-		array_push($data,$this->input->post('apPatermo'));
-		array_push($data,$this->input->post('apMaterno'));
-		array_push($data,$this->input->post('fechaNac'));
-		array_push($data,$this->input->post('email'));
+		array_push($data,$this->input->post('nombreC'));
+		array_push($data,$this->input->post('apPaternoC'));
+		array_push($data,$this->input->post('apMaternoC'));
+		array_push($data,$this->input->post('fechaNacC'));
+		array_push($data,$this->input->post('emailC'));
 		array_push($data, NULL);
-		array_push($data,$this->input->post('curp'));
-		array_push($data,$this->input->post('sexo'));
-		array_push($data,$this->input->post('telefono'));
-		array_push($data,$this->input->post('extension'));
+		array_push($data,strtoupper($this->input->post('curpC')));
+		array_push($data,$this->input->post('sexoC'));
+		array_push($data,$this->input->post('telefonoC'));
+		array_push($data,$this->input->post('extensionC'));
 		array_push($data,NULL);
 		array_push($data,NULL);
 		array_push($data,NULL);
@@ -78,7 +78,7 @@ class Coordinador extends CI_Controller {
 		array_push($data, NULL);
 		array_push($data, NULL);
 		array_push($data,$this->input->post('nombre'));
-		array_push($data,$this->input->post('apPatermo'));
+		array_push($data,$this->input->post('apPaterno'));
 		array_push($data,$this->input->post('apMaterno'));
 		array_push($data,$this->input->post('fechaNac'));
 		array_push($data,$this->input->post('email'));
@@ -91,10 +91,11 @@ class Coordinador extends CI_Controller {
 		array_push($data,NULL);
 		array_push($data,NULL);
 		array_push($data,NULL);
+		array_push($data,NULL);
 		
 		$this->persona_md->UpdateRecord($data,$id);
 		
-		redirect(base_url("coordinador"));
+		//redirect(base_url("coordinador"));
 	}
 }
 ?>

@@ -24,7 +24,15 @@ function SaveData() {
 			$.post(
 				'/estancia-de-investigacion/guardar', 
 				$("#formEstancia").serialize(), 
-				function(data) {}
+				function(data) {
+					$("#idSolicitud").val(data);
+					
+					$.post(
+						'/estancia-de-investigacion/montos', 
+						$("#formEstancia").serialize(), 
+						function(data) {}
+					);
+				}
 			);
 			
 			$("#modalAviso .modal-title").html('Información actualizada');

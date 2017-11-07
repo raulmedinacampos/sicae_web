@@ -38,6 +38,12 @@ class Monto_md extends CI_Model {
         $query = $this->db->get(self::tabla);
         return $query->result_array();
     }
+    
+    function GetByTypeReq($tipo, $id) {
+    	$this->db->where(array('TIPO_MONTO_ID'=>$tipo, 'SOLICITUD_ID'=>$id));
+    	$query = $this->db->get(self::tabla);
+    	return $query->row_array();
+    }
 	
     function InsertRecord($data) {
     	
@@ -51,6 +57,11 @@ class Monto_md extends CI_Model {
     	$this->db->set('C_MONEDA_ID', $data[7]);
 		
         $this->db->insert(self::tabla,$this);
+    }
+    
+    function CleanAmount($id) {
+    	$this->db->where(array('SOLICITUD_ID'=>$id));
+    	$query = $this->db->delete(self::tabla);
     }
 	
     /*function Disable($id) {

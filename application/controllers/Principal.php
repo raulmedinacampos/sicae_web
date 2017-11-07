@@ -11,6 +11,10 @@ class Principal extends CI_Controller {
 	public function inicio() {
 		$header['js'][] = "bootstrap-show-password.min";
 		$header['js'][] = "inicio";
+		
+		if ( $this->session->flashdata('error') ) {
+			$header["js"][] = "login_error";
+		}
 	
 		$header['titulo'] = "Inicio";
 	

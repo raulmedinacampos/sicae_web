@@ -32,6 +32,12 @@ class Apoyo_md extends CI_Model {
         $query = $this->db->get(self::tabla);
         return $query->row_array();
     }
+    
+    function GetBySolicitud($id) {
+    	$this->db->where(array('SOLICITUD_ID'=>$id));
+    	$query = $this->db->get(self::tabla);
+    	return $query->row_array();
+    }
 	
     function InsertRecord($data) {
     	
@@ -58,6 +64,11 @@ class Apoyo_md extends CI_Model {
 		$this->db->update(self::tabla, $this, array('SOLICITUD_ID' => $id));
 		
 		return $id;
+    }
+    
+    function CleanSupport($id) {
+    	$this->db->where(array('SOLICITUD_ID'=>$id));
+    	$query = $this->db->delete(self::tabla);
     }
 
     /*function Disable($id) {

@@ -277,7 +277,7 @@
 		
 		<div class="row">
 				<div class="form-group col-sm-2 pull-right">
-					<button type="submit" class="btn btn-block btn-primary">Guardar</button>
+					<button type="submit" id="btnGuardar" class="btn btn-block btn-primary">Guardar</button>
 				</div>
 			</div>
 	</div>
