@@ -8,9 +8,17 @@ class Obtencion_de_grado extends CI_Controller {
 		$perfil = $this->session->rol;
 		$params["perfil"] = $perfil;
 		
+		$this->load->model("solicitud_md");
 		$this->load->model("moneda_md");
+		$this->load->model("monto_md");
+		$this->load->model("apoyo_md");
 		
 		$params["monedas"] = $this->moneda_md->GetAll();
+		$params["grado"] = $this->solicitud_md->GetByTypePerson(4, $this->session->id);
+		$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["grado"]["ID"]);
+		$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["grado"]["ID"]);
+		$params["seguro_int"] = $this->monto_md->GetByTypeReq("11", $params["grado"]["ID"]);
+		$params["apoyo"] = $this->apoyo_md->GetBySolicitud($params["grado"]["ID"]);
 		
 		$this->load->view('template/header', $header);
 		$this->load->view('realizacion/grado', $params);
@@ -35,7 +43,7 @@ class Obtencion_de_grado extends CI_Controller {
 		array_push($data, NULL);
 		array_push($data, NULL);
 		array_push($data, $this->input->post('itinerario'));
-		array_push($data, NULL);
+		array_push($data, $this->input->post('fechaExamen'));
 		array_push($data, NULL);
 		array_push($data, NULL);
 		array_push($data, NULL);
@@ -57,13 +65,13 @@ class Obtencion_de_grado extends CI_Controller {
 		$this->load->model("apoyo_md");
 		$aereo=$this->input->post('aereo');
 		$terrestre=$this->input->post('terrestre');
-		$sol=$this->input->post("solicitud_id");
+		$sol=$this->input->post("idSolicitud");
 		if($aereo!=""&&$aereo>0){
-			$this->monto_md->InsertRecord(array(5,$sol,"a",$aereo,0,$this->input->post("espTAereo"),$this->input->post("moneda"),$this->input->post("moneda")));
+			$this->monto_md->InsertRecord(array(5,$sol,"A",$aereo,0,$this->input->post("espTAereo"),$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
 		if($terrestre!=""&&$terrestre>0){
-			$this->monto_md->InsertRecord(array(4,$sol,"a",$terrestre,0,$this->input->post("espTTerrestre"),$this->input->post("moneda"),$this->input->post("moneda")));
+			$this->monto_md->InsertRecord(array(4,$sol,"A",$terrestre,0,$this->input->post("espTTerrestre"),$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
 		if($this->input->post("apoyo")==1){

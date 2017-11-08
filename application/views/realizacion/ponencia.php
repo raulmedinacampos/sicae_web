@@ -122,15 +122,70 @@
 					</button>
 				</div>
 			</div>
+			<?php
+			if ( empty($titulos) && !isset($ponencia) ) {
+			?>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Ponencia 1. Título de ponencia en inglés y español</label>
 					<textarea id="tituloPonencia1" name="tituloPonencia[]" rows="3" class="form-control" placeholder="Anota el nombre de tu ponencia en inglés y en español separados por un salto de línea.\nNOTA: El nombre de la ponencia deberá coincidir con los demás documentos (oficio, carta de aceptación, resumen y ponencia completa)"></textarea>
 				</div>
 			</div>
+			<?php
+			} else {
+				foreach ( $titulos as $val ) {
+			?>
+			<div class="row">
+				<div class="form-group col-sm-12">
+					<label>Ponencia 1. Título de ponencia en inglés y español</label>
+					<textarea id="tituloPonencia1" name="tituloPonencia[]" rows="3" class="form-control" placeholder="Anota el nombre de tu ponencia en inglés y en español separados por un salto de línea.\nNOTA: El nombre de la ponencia deberá coincidir con los demás documentos (oficio, carta de aceptación, resumen y ponencia completa)"><?php echo $val["NOMBRE"]; ?></textarea>
+				</div>
+			</div>
+			<?php
+				}
+			}
+			?>
 		</div>
 		
 		<div role="tabpanel" class="tab-pane" id="coautores">
+			<?php
+			if ( !empty($coautores) && isset($publicacion) ) {
+			?>
+			<div class="panel-group ficha-collapse" id="accordion-c'+x+'">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+							<a data-parent="#accordion-c'+x+'" data-toggle="collapse" href="#panel-c'+x+'" aria-expanded="'+aria+'" aria-controls="panel-c'+x+'">Ponencia x</a>
+						</h4>
+						<button type="button" class="collpase-button '+collapsed+'" data-parent="#accordion-c'+x+'" data-toggle="collapse" href="#panel-c'+x+'"></button>
+					</div>
+					<div class="panel-collapse collapse '+collapse+'" id="panel-c'+x+'">
+						<div class="panel-body">
+							<button id="btnAgregarCoautor'+x+'" data-c="'+x+'" class="btn btn-sm btn-primary btnAgregarCoautor">
+								<span class="glyphicon glyphicon-plus"></span> Agregar coautor
+							</button>
+							<h5>Coautor 1</h5>
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<label>Nombre(s):</label>
+									<input type="text" id="coNombre'+x+'_1" name="coNombre_1[]" class="form-control" placeholder="Nombre del coautor" />
+								</div>
+								<div class="form-group col-sm-4">
+									<label>Primer apellido:</label>
+									<input type="text" id="coApP'+x+'_1" name="coApP_1[]" class="form-control" placeholder="Primer apellido del coautor" />
+								</div>
+								<div class="form-group col-sm-4">
+									<label>Segundo apellido:</label>
+									<input type="text" id="coApM'+x+'_1" name="coApM_1[]" class="form-control" placeholder="Segundo apellido del coautor" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php
+			}
+			?>
 		</div>
 		
 		<div role="tabpanel" class="tab-pane" id="monto">

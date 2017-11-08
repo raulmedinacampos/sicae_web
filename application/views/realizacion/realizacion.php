@@ -28,7 +28,8 @@
 				</div>
 				<div class="form-group col-sm-8">
 					<label>Nombre del evento<span class="form-text">*</span>:</label>
-					<input type="text" id="evento" name="evento" class="form-control" placeholder="Ingresa el nombre del evento" />
+					<input type="text" id="evento" name="evento" class="form-control" placeholder="Ingresa el nombre del evento" value="<?php if(isset($realizacion)) {echo $realizacion["NOMBRE_EVENTO"];} ?>" />
+					<input type="hidden" id="idSolicitud" name="idSolicitud" value="<?php if(isset($realizacion)) {echo $realizacion["ID"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
@@ -177,21 +178,21 @@
 		<div role="tabpanel" class="tab-pane" id="monto">
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label>Pago de honorarios a expositores<span class="form-text">*</span>:</label>
+					<label>Pago de honorarios a expositores</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Viáticos a expositores<span class="form-text">*</span>:</label>
+					<label>Viáticos a expositores</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Transporte aéreo<span class="form-text">*</span>:</label>
+					<label>Transporte aéreo</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
@@ -200,40 +201,40 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>+ Especifica<span class="form-text">*</span>:</label>
+					<label>+ Especifica</label>
 					<input type="text" id="" name="" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label>Transporte terrestre<span class="form-text">*</span>:</label>
+					<label>Transporte terrestre</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
 					</div>
 				</div>
 				<div class="form-group col-sm-8">
-					<label>+ Especifica<span class="form-text">*</span>:</label>
+					<label>+ Especifica</label>
 					<input type="text" id="" name="" class="form-control" placeholder="" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label>Material didáctico<span class="form-text">*</span>:</label>
+					<label>Material didáctico</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Servicio de cafetería<span class="form-text">*</span>:</label>
+					<label>Servicio de cafetería</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Otros gastos<span class="form-text">*</span>:</label>
+					<label>Otros gastos</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="" name="" class="form-control" placeholder="" />
@@ -242,7 +243,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>Especifica tus otros gastos<span class="form-text">*</span>:</label>
+					<label>Especifica tus otros gastos</label>
 					<input type="text" id="" name="" class="form-control" placeholder="" />
 				</div>
 			</div>
@@ -274,18 +275,18 @@
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>Institución que apoya<span class="form-text">*</span>:</label>
+									<label>Institución que apoya</label>
 									<input type="text" id="" name="" class="form-control" placeholder="" />
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Monto con el que apoya<span class="form-text">*</span>:</label>
+									<label>Monto con el que apoya</label>
 									<div class="input-group">
 										<div class="input-group-addon">$</div>
 										<input type="text" id="" name="" class="form-control" placeholder="" />
 									</div>
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Tipo de moneda<span class="form-text">*</span>:</label>
+									<label>Tipo de moneda</label>
 									<select class="form-control">
 										<option value="">Selecciona</option>
 										<?php
@@ -300,7 +301,7 @@
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-12">
-									<label>Especificación del apoyo<span class="form-text">*</span>:</label>
+									<label>Especificación del apoyo</label>
 									<textarea rows="3" class="form-control"></textarea>
 								</div>
 							</div>

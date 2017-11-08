@@ -28,28 +28,28 @@
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Sede<span class="form-text">*</span>:</label>
-					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" value="<?php if(isset($grado)) {echo $grado["ORGANIZA"];} ?>" />
+					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" value="<?php if(isset($grado)) {echo $grado["SEDE"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
 						<label>Fecha del examen<span class="form-text">*</span>:</label>
-						<input type="text" id="fechaExamen" name="fechaExamen" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha del examen" value="<?php if(isset($grado)) {echo $grado["ORGANIZA"];} ?>" />
+						<input type="text" id="fechaExamen" name="fechaExamen" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha del examen" value="<?php if(isset($grado)) {echo $grado["OTRO"];} ?>" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
 						<label>Fecha de inicio del evento<span class="form-text">*</span>:</label>
-						<input type="text" id="fechaInicio" name="fechaInicio" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de inicio" value="<?php if(isset($grado)) {echo $grado["ORGANIZA"];} ?>" />
+						<input type="text" id="fechaInicio" name="fechaInicio" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de inicio" value="<?php if(isset($grado)) {echo $grado["FECHA_INICIAL"];} ?>" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
 						<label>Fecha de término del evento<span class="form-text">*</span>:</label>
-						<input type="text" id="fechaFin" name="fechaFin" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de término" value="<?php if(isset($grado)) {echo $grado["ORGANIZA"];} ?>" />
+						<input type="text" id="fechaFin" name="fechaFin" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de término" value="<?php if(isset($grado)) {echo $grado["FECHA_FINAL"];} ?>" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
@@ -57,7 +57,7 @@
 			<div class="row">
 				<div class="form-group col-sm-8">
 					<label>Itinerario de viaje<span class="form-text">*</span>:</label>
-					<input type="text" id="itinerario" name="itinerario" class="form-control" placeholder="Ingresa tu itinerario de viaje (origen - destino)" value="<?php if(isset($grado)) {echo $grado["ORGANIZA"];} ?>" />
+					<input type="text" id="itinerario" name="itinerario" class="form-control" placeholder="Ingresa tu itinerario de viaje (origen - destino)" value="<?php if(isset($grado)) {echo $grado["ITINERARIO"];} ?>" />
 				</div>
 			</div>
 		</div>

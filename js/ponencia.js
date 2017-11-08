@@ -76,15 +76,15 @@ function DrawCoauthor() {
 			panel += '<div class="row">';
 			panel += '<div class="form-group col-sm-4">';
 			panel += '<label>Nombre(s):</label>';
-			panel += '<input type="text" id="coNombre'+x+'_1" name="coNombre_1[]" class="form-control" placeholder="Nombre del autor" />';
+			panel += '<input type="text" id="coNombre'+x+'_1" name="coNombre_1[]" class="form-control" placeholder="Nombre del coautor" />';
 			panel += '</div>';
 			panel += '<div class="form-group col-sm-4">';
 			panel += '<label>Primer apellido:</label>';
-			panel += '<input type="text" id="coApP'+x+'_1" name="coApP_1[]" class="form-control" placeholder="Primer apellido del autor" />';
+			panel += '<input type="text" id="coApP'+x+'_1" name="coApP_1[]" class="form-control" placeholder="Primer apellido del coautor" />';
 			panel += '</div>';
 			panel += '<div class="form-group col-sm-4">';
 			panel += '<label>Segundo apellido:</label>';
-			panel += '<input type="text" id="coApM'+x+'_1" name="coApM_1[]" class="form-control" placeholder="Segundo apellido del autor" />';
+			panel += '<input type="text" id="coApM'+x+'_1" name="coApM_1[]" class="form-control" placeholder="Segundo apellido del coautor" />';
 			panel += '</div></div>';  //.row
 			panel += '</div></div>';  // .panel-body y .collapse
 			panel += '</div>';  // .panel

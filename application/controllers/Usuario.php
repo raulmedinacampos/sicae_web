@@ -16,6 +16,8 @@ class Usuario extends CI_Controller {
 		$this->load->model("participacion_md");
 		$this->load->model('estudio_md');
 		$this->load->model('estudio_otro_md');
+		$this->load->model("direccion_md");
+		
 		
 		$perfil = $this->session->rol;
 		$params["perfil"] = $perfil;
@@ -31,7 +33,16 @@ class Usuario extends CI_Controller {
 			case 1:
 				$params["perfilC"] = "profesor";
 				$this->load->model('profesor_md');
+				$this->load->model("materia_md");
+				
 				$params["profesor"] = $this->profesor_md->GetById($params["persona"]["ID"]);
+				$materias = $this->materia_md->GetByPerson($params["persona"]["ID"]);
+				
+				$mat = "";
+				foreach ( $materias as $val ) {
+					$mat .= $val["NOMBRE"].", ";
+				}
+				$params["materias"] = trim($mat, ", ");
 				break;
 			case 3:
 				$params["perfilC"] = "alumno";
@@ -50,6 +61,9 @@ class Usuario extends CI_Controller {
 		$params["nivel_maes"] = $this->estudio_md->GetByNvPr(4, $params["persona"]["ID"]);
 		$params["nivel_dr"] = $this->estudio_md->GetByNvPr(5, $params["persona"]["ID"]);
 		$params["nivel_otro"] = implode(", ", array_column($nivel_otro, "NOMBRE"));
+		$params["dirLic"] = $this->direccion_md->GetByNvPr(3, $params["persona"]["ID"]);
+		$params["dirMaes"] = $this->direccion_md->GetByNvPr(4, $params["persona"]["ID"]);
+		$params["dirDoc"] = $this->direccion_md->GetByNvPr(5, $params["persona"]["ID"]);
 		
 		$this->load->view('template/header', $header);
 		$this->load->view('usuarios/nuevo', $params);
@@ -202,6 +216,9 @@ class Usuario extends CI_Controller {
 	public function direcciones() {
 		$this->load->model("direccion_md");
 		$this->load->model("profesor_md");
+		$this->load->model("materia_md");
+		$this->load->model("producto_otro_md");
+		$this->load->model("publicacion_md");
 		$usr=$this->session->userdata('id');
 		
 		$data=array();
@@ -234,6 +251,20 @@ class Usuario extends CI_Controller {
 		$total=$this->input->post('tTLicenciatura')+$this->input->post('tTMaestria')+$this->input->post('tTDoctorado');
 		
 		$id=$this->profesor_md->SetDirecciones($total,$usr);
+		
+		$unidades=$this->input->post("unidAprendizaje");
+		$unidades=explode(",",$unidades);
+		foreach($unidades as $mat){
+			$this->materia_md->InsertRecord(array($usr,$mat));
+		}
+		
+		$patentes=$this->input->post("patentes");
+		$patentes=explode("\n", $patentes);
+		foreach($patentes as $pat){
+			$pat=explode(",",$pat);
+			$this->producto_otro_md->InsertRecord(array($usr,$pat[0],$pat[1]));
+			
+		}
 		
 		echo $id;
 	}

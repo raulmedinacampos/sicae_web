@@ -596,19 +596,19 @@
 					<div class="form-group col-sm-4">
 						<label class="col-sm-8 control-label">Concluidas:</label>
 						<div class="col-sm-4">
-							<input type="text" id="cTLicenciatura" name="cTLicenciatura" maxlength="3" class="form-control text-center" placeholder="0" />
+							<input type="text" id="cTLicenciatura" name="cTLicenciatura" maxlength="3" class="form-control text-center" placeholder="0" value="<?php if(isset($dirLic)) {echo $dirLic["CONCLUIDAS"];} ?>" />
 						</div>
 					</div>
 					<div class="form-group col-sm-4">
 						<label class="col-sm-8 control-label">Institucionales:</label>
 						<div class="col-sm-4">
-							<input type="text" id="iTLicenciatura" name="iTLicenciatura" maxlength="3" class="form-control text-center" placeholder="0" />
+							<input type="text" id="iTLicenciatura" name="iTLicenciatura" maxlength="3" class="form-control text-center" placeholder="0" value="<?php if(isset($dirLic)) {echo $dirLic["INTERNAS"];} ?>" />
 						</div>
 					</div>
 					<div class="form-group col-sm-4">
 						<label class="col-sm-8 control-label">Total:</label>
 						<div class="col-sm-4">
-							<input type="text" id="tTLicenciatura" name="tTLicenciatura" readonly="readonly" class="form-control text-center" placeholder="0" />
+							<input type="text" id="tTLicenciatura" name="tTLicenciatura" readonly="readonly" class="form-control text-center" placeholder="0" value="<?php if(isset($dirLic)) {echo $dirLic["TOTAL"];} ?>" />
 						</div>
 					</div>
 				</div>
@@ -621,19 +621,19 @@
 					<div class="form-group col-sm-4">
 						<label class="col-sm-8 control-label">Concluidas:</label>
 						<div class="col-sm-4">
-							<input type="text" id="cTMaestria" name="cTMaestria" maxlength="3" class="form-control text-center" placeholder="0" />
+							<input type="text" id="cTMaestria" name="cTMaestria" maxlength="3" class="form-control text-center" placeholder="0" value="<?php if(isset($dirMaes)) {echo $dirMaes["CONCLUIDAS"];} ?>" />
 						</div>
 					</div>
 					<div class="form-group col-sm-4">
 						<label class="col-sm-8 control-label">Institucionales:</label>
 						<div class="col-sm-4">
-							<input type="text" id="iTMaestria" name="iTMaestria" maxlength="3" class="form-control text-center" placeholder="0" />
+							<input type="text" id="iTMaestria" name="iTMaestria" maxlength="3" class="form-control text-center" placeholder="0" value="<?php if(isset($dirMaes)) {echo $dirMaes["INTERNAS"];} ?>" />
 						</div>
 					</div>
 					<div class="form-group col-sm-4">
 						<label class="col-sm-8 control-label">Total:</label>
 						<div class="col-sm-4">
-							<input type="text" id="tTMaestria" name="tTMaestria" readonly="readonly" class="form-control text-center" placeholder="0" />
+							<input type="text" id="tTMaestria" name="tTMaestria" readonly="readonly" class="form-control text-center" placeholder="0" value="<?php if(isset($dirMaes)) {echo $dirMaes["TOTAL"];} ?>" />
 						</div>
 					</div>
 				</div>
@@ -646,19 +646,19 @@
 					<div class="form-group col-sm-4">
 						<label class="col-sm-8 control-label">Concluidas:</label>
 						<div class="col-sm-4">
-							<input type="text" id="cTDoctorado" name="cTDoctorado" maxlength="3" class="form-control text-center" placeholder="0" />
+							<input type="text" id="cTDoctorado" name="cTDoctorado" maxlength="3" class="form-control text-center" placeholder="0" value="<?php if(isset($dirDoc)) {echo $dirDoc["CONCLUIDAS"];} ?>" />
 						</div>
 					</div>
 					<div class="form-group col-sm-4">
 						<label class="col-sm-8 control-label">Institucionales:</label>
 						<div class="col-sm-4">
-							<input type="text" id="iTDoctorado" name="iTDoctorado" maxlength="3" class="form-control text-center" placeholder="0" />
+							<input type="text" id="iTDoctorado" name="iTDoctorado" maxlength="3" class="form-control text-center" placeholder="0" value="<?php if(isset($dirDoc)) {echo $dirDoc["INTERNAS"];} ?>" />
 						</div>
 					</div>
 					<div class="form-group col-sm-4">
 						<label class="col-sm-8 control-label">Total:</label>
 						<div class="col-sm-4">
-							<input type="text" id="tTDoctorado" name="tTDoctorado" readonly="readonly" class="form-control text-center" placeholder="0" />
+							<input type="text" id="tTDoctorado" name="tTDoctorado" readonly="readonly" class="form-control text-center" placeholder="0" value="<?php if(isset($dirDoc)) {echo $dirDoc["TOTAL"];} ?>" />
 						</div>
 					</div>
 				</div>
@@ -671,7 +671,7 @@
 						<?php
 						foreach ( $niveles_academicos as $val ) {
 						?>
-						<option value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE; ?></option>
+						<option <?php if(isset($profesor) && $profesor["NIVEL_ACADEMICO"] == $val->ID) {echo 'selected="selected"';} ?>" value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE; ?></option>
 						<?php
 						}
 						?>
@@ -705,9 +705,9 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-8">
+				<div class="form-group col-sm-12">
 					<label>Unidades de aprendizaje impartidas en el instituto:</label>
-					<input type="text" id="unidAprendizaje" name="unidAprendizaje" maxlength="100" class="form-control" placeholder='Ingresa materias separadas por comas, Ej. "Economía, Bases de datos, Cálculo"' />
+					<input type="text" id="unidAprendizaje" name="unidAprendizaje" maxlength="100" class="form-control" placeholder='Ingresa materias separadas por comas, Ej. "Economía, Bases de datos, Cálculo"' value="<?php if(isset($materias)) {echo $materias;} ?>" />
 				</div>
 			</div>
 			<div class="row">

@@ -17,7 +17,7 @@ function SaveData() {
 					
 					$.post(
 						'/obtencion-de-grado/montos', 
-						$("#formEstancia").serialize(), 
+						$("#formGrado").serialize(), 
 						function(data) {}
 					);
 				}
@@ -35,6 +35,10 @@ function SaveData() {
 }
 
 function Validate() {
+	$.validator.addMethod("moneda", function(value, element) {
+	    return this.optional(element) || /^\d{0,8}(\.\d{0,2})?$/i.test(value);
+	}, "Ingresa una cantidad válida");
+	
 	$.extend($.validator.messages, {
 		  required: "Este campo es obligatorio.",
 		  digits: "Deben ser solo números"
@@ -80,6 +84,19 @@ function Validate() {
 			},
 			itinerario: {
 				required: true
+			},
+			apoyo: {
+				required: true
+			},
+			institucionAp: {
+				required: "#rdbApS:checked"
+			},
+			montoAp: {
+				required: "#rdbApS:checked",
+				moneda: true
+			},
+			monedaAp: {
+				required: "#rdbApS:checked"
 			}
 		},
 		messages: {
@@ -90,5 +107,6 @@ function Validate() {
 
 $gmx(document).ready(function() {
 	Init();
+	SaveData();
 	Validate();
 });

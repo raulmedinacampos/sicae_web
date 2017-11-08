@@ -20,7 +20,20 @@ function Init() {
 	});
 }
 
+function SendForm() {
+	$("table tr td:last-of-type a").click(function(e) {
+		e.preventDefault();
+		
+		var id = $(this).data("id");
+		
+		$("#hdnID").val(id);
+		
+		$("#formFormato").submit();
+	});
+}
+
 
 $(function() {
 	Init();
+	SendForm();
 });

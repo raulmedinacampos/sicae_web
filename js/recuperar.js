@@ -8,7 +8,7 @@ function SendMail() {
 		
 		if ( $("#formRecuperar").valid() ) {
 			$.post(
-				'', 
+				'/correo/recuperar-pass', 
 				$("#formRecuperar").serialize(), 
 				function(data){
 					if ( data == "1" ) {

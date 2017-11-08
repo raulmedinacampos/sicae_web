@@ -52,7 +52,31 @@ class Solicitud_md extends CI_Model {
     	$this->db->select("JUSTIFICACION, HORAS_TOTALES, MONTO");
     	$this->db->where(array('PERSONA_ID'=>$id));
     	$query = $this->db->get(self::tabla);
-    	return $query->row_array();
+    	
+    	if ( $query->num_rows() == 1 ) {
+    		return $query->row_array();
+    	} else {
+    		return $query->result_array();
+    	}
+    }
+    
+    function GetByTypePerson($tipo, $id) {
+    	$this->db->select("ID, TIPO, PERSONA_ID, TIPO_EVENTO_ID, NOMBRE_EVENTO, ORGANIZA, SEDE");
+    	$this->db->select("TO_CHAR(FECHA_INICIAL, 'DD/MM/RRRR') AS FECHA_INICIAL", FALSE);
+    	$this->db->select("TO_CHAR(FECHA_FINAL, 'DD/MM/RRRR') AS FECHA_FINAL", FALSE);
+    	$this->db->select("FECHA_REGISTRO, DIAS_ADICIONALES, DA_JUSTIFICACION");
+    	$this->db->select("TO_CHAR(DA_FECHA_SALIDA, 'DD/MM/RRRR') AS DA_FECHA_SALIDA", FALSE);
+    	$this->db->select("TO_CHAR(DA_FECHA_REGRESO, 'DD/MM/RRRR') AS DA_FECHA_REGRESO", FALSE);
+    	$this->db->select("ITINERARIO, OTRO, OBJETIVO, BENEFICIO, PARTICIPANTES, EXPOSITORES");
+    	$this->db->select("JUSTIFICACION, HORAS_TOTALES, MONTO");
+    	$this->db->where(array('TIPO_EVENTO_ID'=>$tipo, 'PERSONA_ID'=>$id));
+    	$query = $this->db->get(self::tabla);
+    	 
+    	if ( $query->num_rows() == 1 ) {
+    		return $query->row_array();
+    	} else {
+    		return $query->result_array();
+    	}
     }
 	
     function InsertRecord($data) {

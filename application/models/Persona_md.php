@@ -37,6 +37,12 @@ class Persona_md extends CI_Model {
         return $query->row_array();
     }
     
+    function GetByCURP($curp) {
+    	$this->db->where(array('CURP'=>$curp));
+    	$query = $this->db->get(self::tabla);
+    	return $query->row();
+    }
+    
     function CheckCURP($curp) {
     	$this->db->where('CURP', $curp);
     	$query = $this->db->get(self::tabla);

@@ -11,7 +11,7 @@ class Estancia_de_investigacion extends CI_Controller {
 		$this->load->model("apoyo_md");
 		
 		$params["monedas"] = $this->moneda_md->GetAll();
-		$params["estancia"] = $this->solicitud_md->GetByPerson($this->session->id);
+		$params["estancia"] = $this->solicitud_md->GetByTypePerson(3, $this->session->id);
 		$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["estancia"]["ID"]);
 		$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["estancia"]["ID"]);
 		$params["seguro_int"] = $this->monto_md->GetByTypeReq("11", $params["estancia"]["ID"]);

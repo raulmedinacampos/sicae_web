@@ -2,7 +2,13 @@
 class Principal extends CI_Controller {
 	public function index() {
 		if( $this->session->rol ) {
-			redirect(base_url("usuario"));
+			if ( $this->session->rol == 1 || $this->session->rol == 3 ) {
+				redirect(base_url("usuario"));
+			}
+			
+			if ( $this->session->rol == 2 ) {
+				redirect(base_url("coordinador"));
+			}
 		} else {
 			$this->inicio();
 		}

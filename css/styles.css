@@ -73,7 +73,7 @@ h3.titulo {
 	width: 160px;
 	height: 160px;
 	border-width: 8px;
-	border-color: #EEE;
+	border-color: #EEEEEE;
 	border-style: solid;
 	border-radius: 50%;
 	transition: border-color 1s ease;

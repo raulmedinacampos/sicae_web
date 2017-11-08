@@ -55,9 +55,9 @@
 				<div id="logosWraper">
 					<div class="container">
 						<div class="row">
-							<div class="hidden-xs col-xs-3"><img id="logoSEP" alt="SEP" src="<?php echo base_url("images/sep.png"); ?>" class="img-responsive" /></div>
-							<div class="hidden-xs col-xs-1"><img id="logoIPN" alt="IPN" src="<?php echo base_url("images/ipn.png"); ?>" class="img-responsive" /></div>
-							<div class="col-xs-4"><img id="logoCOFAA" alt="COFAA" src="<?php echo base_url("images/cofaa.png"); ?>" class="img-responsive" /></div>
+							<div class="hidden-xs col-xs-3"><img id="logoSEP" alt="SEP" src="<?php echo base_url('images/sep.png'); ?>" class="img-responsive" /></div>
+							<div class="hidden-xs col-xs-1"><img id="logoIPN" alt="IPN" src="<?php echo base_url('images/ipn.png'); ?>" class="img-responsive" /></div>
+							<div class="col-xs-4"><img id="logoCOFAA" alt="COFAA" src="<?php echo base_url('images/cofaa.png'); ?>" class="img-responsive" /></div>
 							<div class="col-xs-4 text-right">
 								<h6 class="hidden-xs hidden-md hidden-sm">Dirección de Especialización Docente e Investigación Científica y Tecnológica</h6>
 								<h7 class="hidden-xs hidden-md hidden-sm">Departamento de Apoyos Económicos</h7>

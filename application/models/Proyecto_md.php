@@ -10,7 +10,7 @@ class Proyecto_md extends CI_Model {
     }
 	
 	function GetAll() {
-        $query = $this->db->get(self::tabla);
+		$query = $this->db->get(self::tabla);
         return $query->result();
     }
     /*
@@ -34,8 +34,11 @@ class Proyecto_md extends CI_Model {
     }
 	
     function GetByPersona($id) {
+    	$this->db->select("p.*, tp.DESCRIPCION");
+    	$this->db->from(self::tabla." p");
+    	$this->db->join("TIPO_PARTICIPACION tp", "tp.ID = p.PARTICIPACION_ID", "left");
     	$this->db->where(array('PERSONA_ID'=>$id));
-        $query = $this->db->get(self::tabla);
+        $query = $this->db->get();
         return $query->result_array();
     }
 	

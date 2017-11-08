@@ -6,8 +6,11 @@ class Historial extends CI_Controller {
 		
 		$header["titulo"] = "Historial de asistencia";
 		
+		$this->load->model("solicitud_md");
+		$params["solicitudes"] = $this->solicitud_md->GetByPerson($this->session->id);
+		
 		$this->load->view('template/header', $header);
-		$this->load->view('historial/listado');
+		$this->load->view('historial/listado', $params);
 		$this->load->view('template/footer');
 	}
 }

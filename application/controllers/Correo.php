@@ -45,6 +45,8 @@ class Correo extends CI_Controller {
 			} else {
 				echo "0";
 			}
+		} else {
+			echo "0";
 		}
 	}
 }

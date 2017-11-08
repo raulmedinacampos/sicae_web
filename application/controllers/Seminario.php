@@ -6,10 +6,18 @@ class Seminario extends CI_Controller {
 		$header["titulo"] = "Seminarios y otros";
 		
 		$this->load->model("tipo_evento_md");
+		$this->load->model("solicitud_md");
 		$this->load->model("moneda_md");
+		$this->load->model("monto_md");
+		$this->load->model("apoyo_md");
 		
 		$params["tipos_evento"] = $this->tipo_evento_md->GetAll();
 		$params["monedas"] = $this->moneda_md->GetAll();
+		$params["seminario"] = $this->solicitud_md->GetByTypePerson(7, $this->session->id);
+		$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["seminario"]["ID"]);
+		$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["seminario"]["ID"]);
+		$params["seguro_int"] = $this->monto_md->GetByTypeReq("11", $params["seminario"]["ID"]);
+		$params["apoyo"] = $this->apoyo_md->GetBySolicitud($params["seminario"]["ID"]);
 		
 		$this->load->view('template/header', $header);
 		$this->load->view('realizacion/seminario', $params);
@@ -44,12 +52,11 @@ class Seminario extends CI_Controller {
 		array_push($data, NULL);
 		array_push($data, NULL);
 		
-		if($this->input->post("id_solicitud")==0)
+		if ( $this->input->post("idSolicitud") == 0 )
 			$id = $this->solicitud_md->InsertRecord($data);
 		else
-			$id=$this->solictud_md->UpdateRecord($data,$this->input->post("id_solicitud"));
-		
-		
+			$id = $this->solicitud_md->UpdateRecord($data,$this->input->post("idSolicitud"));
+	
 		echo $id;
 	}
 		
@@ -60,7 +67,7 @@ class Seminario extends CI_Controller {
 		$terrestre=$this->input->post('terrestre');
 		$inscripcion=$this->input->post('inscripcion');
 		$estancia=$this->input->post('estancia');
-		$sol=$this->input->post("solicitud_id");
+		$sol=$this->input->post("idSolicitud");
 		if($aereo!=""&&$aereo>0){
 			$this->monto_md->InsertRecord(array(5,$sol,"a",$aereo,0,$this->input->post("espTAereo"),$this->input->post("moneda"),$this->input->post("moneda")));
 			
