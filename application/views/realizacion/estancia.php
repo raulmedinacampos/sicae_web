@@ -29,7 +29,7 @@
 					<label>Tipo de sede<span class="form-text">*</span>:</label>
 					<div>
 						<label class="radio-inline">
-							<input type="radio" id="rdbLN" name="lugar" <?php if ( !isset($seguro_int) ) {echo 'checked="checked"'; } ?> value="N" /> Nacional
+							<input type="radio" id="rdbLN" name="lugar" <?php if ( !isset($seguro_int) && isset($estancia) ) {echo 'checked="checked"'; } ?> value="N" /> Nacional
 						</label>
 						<label class="radio-inline">
 							<input type="radio" id="rdbLI" name="lugar" <?php if ( isset($seguro_int) ) {echo 'checked="checked"'; } ?> value="I" /> Internacional
@@ -188,10 +188,10 @@
 									<label>¿Cuentas con otros apoyos?<span class="form-text">*</span></label>
 									<div>
 										<label class="radio-inline">
-											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($apoyo) ) {echo 'checked="checked"'; } ?> value="1" /> Sí
+											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($apoyo) ) {echo 'checked="checked"';} ?> value="1" /> Sí
 										</label>
 										<label class="radio-inline">
-											<input type="radio" id="rdbApN" name="apoyo" <?php if ( !isset($apoyo) ) {echo 'checked="checked"'; } ?>value="0" /> No
+											<input type="radio" id="rdbApN" name="apoyo" <?php if ( !isset($apoyo) && isset($estancia) ) {echo 'checked="checked"';} ?> value="0" /> No
 										</label>
 									</div>
 								</div>
@@ -215,7 +215,7 @@
 										<?php
 										foreach ( $monedas as $val ) {
 										?>
-										<option <?php if ( isset($apoyo) && $apoyo["MONEDA_ID"] == $val->ID ) {echo 'selected="selected"'; } ?> value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE; ?></option>
+										<option <?php if ( isset($apoyo) && $apoyo["MONEDA_ID"] == $val->ID ) {echo 'selected="selected"';} ?> value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE; ?></option>
 										<?php
 										}
 										?>

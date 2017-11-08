@@ -92,7 +92,7 @@ class Solicitud_md extends CI_Model {
         $this->db->insert(self::tabla,$this);
         
         $this->db->select("ID");
-        $this->db->where(array("TIPO"=>$data[0],"PERSONA_ID"=>$data[1],"NOMBRE_EVENTO"=>$data[3]));
+        $this->db->where(array("TIPO"=>$data[0],"PERSONA_ID"=>$data[1]));
         $query = $this->db->get(self::tabla);
         
         $usr = $query->row();

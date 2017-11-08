@@ -9,12 +9,12 @@
 			<h4 class="form-group">Ingresa el CURP que registraste y la contraseña te será enviada a tu correo electrónico.</h4>
 			<div class="row">
 				<div class="form-group col-sm-5">
-					<input type="text" id="curp" name="curp" maxlength="18" class="form-control" placeholder="Ingresa el CURP que registraste" />
+					<input type="text" id="curp" name="curp" maxlength="18" class="form-control" autocomplete="off" placeholder="Ingresa el CURP que registraste" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-3">
-					<button type="submit" class="btn btn-block btn-primary">Recuperar</button>
+					<button type="submit" id="btnEnviar" class="btn btn-block btn-primary">Recuperar</button>
 				</div>
 			</div>
 			<div class="panel panel-default panel-sm">
