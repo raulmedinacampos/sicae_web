@@ -59,13 +59,13 @@
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Objetivo:</label>
-					<textarea id="objetivo" name="objetivo" rows="3" maxlength="700" class="form-control" placeholder="Ingresa el objetivo del evento (700 caracteres max.)"><?php if(isset($estancia)) {echo $estancia["OBJETIVO"];} ?></textarea>
+					<textarea id="objetivo" name="objetivo" rows="3" maxlength="700" class="form-control" placeholder="Ingresa el objetivo del evento (700 caracteres max.)"><?php if(isset($seminario) && ($seminario)) {echo $seminario["OBJETIVO"];} ?></textarea>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Beneficio institucional:</label>
-					<textarea id="beneficio" name="beneficio" rows="3" maxlength="700" class="form-control" placeholder="Ingresa el beneficio al instituto del evento (700 caracteres max.)"><?php if(isset($estancia)) {echo $estancia["BENEFICIO"];} ?></textarea>
+					<textarea id="beneficio" name="beneficio" rows="3" maxlength="700" class="form-control" placeholder="Ingresa el beneficio al instituto del evento (700 caracteres max.)"><?php if(isset($seminario) && ($seminario)) {echo $seminario["BENEFICIO"];} ?></textarea>
 				</div>
 			</div>
 			<div class="row">

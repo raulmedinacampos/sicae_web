@@ -14,20 +14,25 @@ class Seminario extends CI_Controller {
 		$params["tipos_evento"] = $this->tipo_evento_md->GetAll();
 		$params["monedas"] = $this->moneda_md->GetAll();
 		$params["seminario"] = $this->solicitud_md->GetByTypePerson(1, $this->session->id);
+		
 		if ( !$params["seminario"] ) {
 			$params["seminario"] = $this->solicitud_md->GetByTypePerson(2, $this->session->id);
 		}
+		
 		if ( !$params["seminario"] ) {
 			$params["seminario"] = $this->solicitud_md->GetByTypePerson(7, $this->session->id);
 		}
+		
 		if ( !$params["seminario"] ) {
 			$params["seminario"] = $this->solicitud_md->GetByTypePerson(8, $this->session->id);
 		}
 		
 		if ( $params["seminario"] ) {
+			$params["seminario"] = $params["seminario"][0];
 			$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["seminario"]["ID"]);
 			$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["seminario"]["ID"]);
-			$params["seguro_int"] = $this->monto_md->GetByTypeReq("11", $params["seminario"]["ID"]);
+			$params["estancia"] = $this->monto_md->GetByTypeReq("2", $params["seminario"]["ID"]);
+			$params["inscripcion"] = $this->monto_md->GetByTypeReq("3", $params["seminario"]["ID"]);
 			$params["apoyo"] = $this->apoyo_md->GetBySolicitud($params["seminario"]["ID"]);
 		}
 		
@@ -89,7 +94,7 @@ class Seminario extends CI_Controller {
 			
 		}
 		if($inscripcion!=""&&$inscripcion>0){
-			$this->monto_md->InsertRecord(array(2,$sol,"a",$inscripcion,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
+			$this->monto_md->InsertRecord(array(3,$sol,"a",$inscripcion,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
 		if($estancia!=""&&$estancia>0){
