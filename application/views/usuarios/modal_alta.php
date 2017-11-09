@@ -66,7 +66,7 @@
 							<div class="row">
 								<div class="form-group col-sm-6">
 									<div class="datepicker-group">
-										<label>Fecha de nacimiento</label>
+										<label>Fecha de nacimiento<span class="form-text">*</span>:</label>
 										<input type="text" id="fechaNac" name="fechaNac" class="form-control" data-mask="99/99/9999" placeholder="Fecha de nacimiento (dd/mm/aaaa)" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
@@ -117,7 +117,7 @@
 								</div>
 								<div class="form-group col-sm-3">
 									<label>Extensión<span class="form-text">*</span>:</label>
-									<input type="text" id="extension" name="extension" maxlength="5" class="form-control" data-mask="99999" placeholder="Extensión" />
+									<input type="text" id="extension" name="extension" maxlength="5" class="form-control" placeholder="Extensión" />
 								</div>
 							</div>
 							<div class="row">

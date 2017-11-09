@@ -266,6 +266,18 @@ class Usuario extends CI_Controller {
 			
 		}
 		
+		$nacionales=$this->input->post("publNacionales");
+		
+		for($ct=0;$ct<$nacionales;$ct++){
+			$this->publicacion_md->InsertRecord(array($usr,"NP",1,"NP",0));
+		}
+		
+		$internacionales=$this->input->post("publInt");
+		
+		for($ct=0;$ct<$internacionales;$ct++){
+			$this->publicacion_md->InsertRecord(array($usr,"NP",0,"NP",0));
+		}
+		
 		echo $id;
 	}
 	

@@ -145,7 +145,7 @@
 		<div role="tabpanel" class="tab-pane" id="profesor">
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label>Tipo de nombramiento</label>
+					<label>Tipo de nombramiento<span class="form-text">*</span>:</label>
 					<select id="tipoNombramiento" name="tipoNombramiento" class="form-control">
 						<option value="">Selecciona</option>
 						<?php
@@ -158,12 +158,12 @@
 					</select>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Número de empleado</label>
+					<label>Número de empleado<span class="form-text">*</span>:</label>
 					<input type="text" id="numEmpleado" name="numEmpleado" class="form-control" placeholder="Ingresa tu número de empleado" value="<?php if(isset($profesor)) {echo $profesor["NO_EMPLEADO"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
-						<label>Fecha de ingreso</label>
+						<label>Fecha de ingreso<span class="form-text">*</span>:</label>
 						<input type="text" id="fechaIngreso" name="fechaIngreso" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de ingreso" value="<?php if(isset($profesor)) {echo $profesor["FECHA_INGRESO"];} ?>" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
@@ -171,7 +171,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>¿Fuiste contratado dentro del Personal Académico Extraordinario?</label>
+					<label>¿Fuiste contratado dentro del Personal Académico Extraordinario?<span class="form-text">*</span>:</label>
 					<div>
 						<label class="radio-inline">
 							<input type="radio" id="rdbES" name="excelencia" <?php if ( isset($profesor) && $profesor["EXCELENCIA"] == "1" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
@@ -197,23 +197,23 @@
 							<div class="row">
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
-										<label>Fecha en que obtuviste la base</label>
+										<label>Fecha en que obtuviste la base<span class="form-text">*</span>:</label>
 										<input type="text" id="fechaBase" name="fechaBase" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha en que obtuvo la base" value="<?php if(isset($profesor)) {echo $profesor["FECHA_BASE"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Categoría</label>
+									<label>Categoría<span class="form-text">*</span>:</label>
 									<input type="text" id="categoria" name="categoria" class="form-control" placeholder="Ingresa tu categoría" value="<?php if(isset($profesor)) {echo $profesor["CATEGORIA"];} ?>" />
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Plaza</label>
+									<label>Plaza<span class="form-text">*</span>:</label>
 									<input type="text" id="plaza" name="plaza" class="form-control" placeholder="Ingresa tu plaza" value="<?php if(isset($profesor)) {echo $profesor["PLAZA"];} ?>" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>Horas de plaza</label>
+									<label>Horas de plaza<span class="form-text">*</span>:</label>
 									<select id="horas" name="horas" class="form-control">
 										<option value="">Selecciona</option>
 										<option <?php if ( isset($profesor) && $profesor["HORAS"] == "20" ) {echo 'selected="selected"'; } ?> value="20">20</option>
@@ -241,14 +241,14 @@
 							<div class="row">
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
-										<label>Fecha de inicio de interinato</label>
+										<label>Fecha de inicio de interinato<span class="form-text">*</span>:</label>
 										<input type="text" id="fechaInicioInt" name="fechaInicioInt" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de inicio" value="<?php if(isset($profesor)) {echo $profesor["INICIO_INTERINATO"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
-										<label>Fecha de término de interinato</label>
+										<label>Fecha de término de interinato<span class="form-text">*</span>:</label>
 										<input type="text" id="fechaFinInt" name="fechaFinInt" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de término" value="<?php if(isset($profesor)) {echo $profesor["FIN_INTERINATO"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
@@ -261,7 +261,7 @@
 			
 			<div class="row">
 				<div class="form-group col-sm-6">
-					<label>¿Cuentas con sabático?</label>
+					<label>¿Cuentas con sabático?<span class="form-text">*</span>:</label>
 					<div>
 						<label class="radio-inline">
 							<input type="radio" id="rdbES" name="sabatico" <?php if ( isset($profesor) && $profesor["SABATICO"] == "1" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
@@ -286,7 +286,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>Tipo de sabático</label>
+									<label>Tipo de sabático<span class="form-text">*</span>:</label>
 									<select id="tipoSabatico" name="tipoSabatico" class="form-control">
 										<option value="">Selecciona</option>
 										<option <?php if ( isset($profesor) && $profesor["SABATICO_ANUAL"] == "0" ) {echo 'selected="selected"'; } ?> value="0">Semestre sabático</option>
@@ -295,14 +295,14 @@
 								</div>
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
-										<label>Fecha de inicio de sabático</label>
+										<label>Fecha de inicio de sabático<span class="form-text">*</span>:</label>
 										<input type="text" id="fechaInicioSab" name="fechaInicioSab" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de inicio" value="<?php if(isset($profesor)) {echo $profesor["SABATICO_INICIO"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
-										<label>Fecha de término de sabático</label>
+										<label>Fecha de término de sabático<span class="form-text">*</span>:</label>
 										<input type="text" id="fechaFinSab" name="fechaFinSab" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de término" value="<?php if(isset($profesor)) {echo $profesor["SABATICO_FIN"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
@@ -314,7 +314,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-6">
-					<label>¿Cuenta con licencia con goce de sueldo?</label>
+					<label>¿Cuenta con licencia con goce de sueldo?<span class="form-text">*</span>:</label>
 					<div>
 						<label class="radio-inline">
 							<input type="radio" id="rdbSS" name="sueldo" <?php if ( isset($profesor) && $profesor["LIC_SUELDO"] == "1" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
@@ -340,14 +340,14 @@
 							<div class="row">
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
-										<label>Fecha de inicio del periodo</label>
+										<label>Fecha de inicio del periodo<span class="form-text">*</span>:</label>
 										<input type="text" id="fechaInicioGoce" name="fechaInicioGoce" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de inicio" value="<?php if(isset($profesor)) {echo $profesor["LIC_SUELDO_INICIO"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
-										<label>Fecha de término del periodo</label>
+										<label>Fecha de término del periodo<span class="form-text">*</span>:</label>
 										<input type="text" id="fechaFinGoce" name="fechaFinGoce" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de término" value="<?php if(isset($profesor)) {echo $profesor["LIC_SUELDO_FIN"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
@@ -355,7 +355,7 @@
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>¿Cuenta usted con prórroga?</label>
+									<label>¿Cuenta usted con prórroga?<span class="form-text">*</span>:</label>
 									<div>
 										<label class="radio-inline">
 											<input type="radio" id="rdbSS" name="prorroga" <?php if ( isset($profesor) && $profesor["PRORROGA"] == "1" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
@@ -398,7 +398,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>¿Es becario EDD?</label>
+									<label>¿Es becario EDD?<span class="form-text">*</span>:</label>
 									<select id="edd" name="edd" class="form-control">
 										<option value="">Selecciona</option>
 										<option <?php if ( isset($profesor) && $profesor["EDD"] == "0" ) {echo 'selected="selected"'; } ?> value="0">No soy becario EDD</option>
@@ -412,7 +412,7 @@
 									</select>
 								</div>
 								<div class="form-group col-sm-4">
-									<label>¿Es becario por exclusividad?</label>
+									<label>¿Es becario por exclusividad?<span class="form-text">*</span>:</label>
 									<select id="exclusividad" name="exclusividad" class="form-control">
 										<option value="">Selecciona</option>
 										<option <?php if ( isset($profesor) && $profesor["EXCLUSIVIDAD"] == "0" ) {echo 'selected="selected"'; } ?> value="0">No soy becario por exclusividad</option>
@@ -426,7 +426,7 @@
 									</select>
 								</div>
 								<div class="form-group col-sm-4">
-									<label>¿Es becario EDI?</label>
+									<label>¿Es becario EDI?<span class="form-text">*</span>:</label>
 									<select id="edi" name="edi" class="form-control">
 										<option value="">Selecciona</option>
 										<option <?php if ( isset($profesor) && $profesor["EDI"] == "0" ) {echo 'selected="selected"'; } ?> value="0">No soy becario EDI</option>
@@ -442,7 +442,7 @@
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>¿Es becario SNI?</label>
+									<label>¿Es becario SNI?<span class="form-text">*</span>:</label>
 									<select id="sni" name="sni" class="form-control">
 										<option value="">Selecciona</option>
 										<option <?php if ( isset($profesor) && $profesor["SNI"] == "0" ) {echo 'selected="selected"'; } ?> value="0">No soy becario SNI</option>
@@ -665,7 +665,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label>Las materias que impartes corresponden a:</label>
+					<label>Nivel de materias impartidas<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Selecciona el nivel académicos correspondiente a las materias que impartes"></span></label>
 					<select id="materiasImp" name="materiasImp" class="form-control">
 						<option value="">Selecciona</option>
 						<?php
@@ -678,7 +678,7 @@
 					</select>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Publicaciones nacionales realizadas:</label>
+					<label>Publicaciones nacionales<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Selecciona el número de publicaciones nacionales realizadas"></span></label>
 					<select id="publNacionales" name="publNacionales" class="form-control">
 						<option value="">Selecciona</option>
 						<?php
@@ -691,7 +691,7 @@
 					</select>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Publicaciones internacionales realizadas:</label>
+					<label>Publicaciones internacionales<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Selecciona el número de publicaciones internacionales realizadas"></span></label>
 					<select id="publInt" name="publInt" class="form-control">
 						<option value="">Selecciona</option>
 						<?php
@@ -706,7 +706,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>Unidades de aprendizaje impartidas en el instituto:</label>
+					<label>Unidades de aprendizaje impartidas en el instituto<span class="form-text">*</span>:</label>
 					<input type="text" id="unidAprendizaje" name="unidAprendizaje" maxlength="100" class="form-control" placeholder='Ingresa materias separadas por comas, Ej. "Economía, Bases de datos, Cálculo"' value="<?php if(isset($materias)) {echo $materias;} ?>" />
 				</div>
 			</div>
@@ -740,7 +740,7 @@
 					<div class="panel-body">
 						<div class="row">
 							<div class="form-group col-sm-4">
-								<label>Tipo de proyecto</label>
+								<label>Tipo de proyecto:</label>
 								<select id="tipoProyecto6" name="tipoProyecto[]" class="form-control tipoProy">
 									<option value="">Selecciona</option>
 									<option value="SIP">SIP</option>
@@ -749,17 +749,17 @@
 								</select>
 							</div>
 							<div class="form-group col-sm-4">
-								<label>Especifica el tipo de proyecto</label>
+								<label>Especifica el tipo de proyecto:</label>
 								<input type="text" id="espTP6" name="espTP[]" class="form-control otro" disabled="disabled" placeholder='Especifica si el tipo de proyecto es "Otros"' />
 							</div>
 							<div class="form-group col-sm-4">
-								<label>Número de registro</label>
+								<label>Número de registro:</label>
 								<input type="text" id="registro6" name="registro[]" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
 							</div>
 						</div>
 						<div class="row">
 							<div class="form-group col-sm-4">
-								<label>Tipo de participación</label>
+								<label>Tipo de participación:</label>
 								<select id="tParticipacion6" name="tParticipacion[]" class="form-control">
 									<option value="">Selecciona</option>
 									<?php
@@ -789,7 +789,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>Tipo de proyecto</label>
+									<label>Tipo de proyecto:</label>
 									<select id="tipoProyecto7" name="tipoProyecto[]" class="form-control tipoProy">
 										<option value="">Selecciona</option>
 										<option value="SIP">SIP</option>
@@ -798,17 +798,17 @@
 									</select>
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Especifica el tipo de proyecto</label>
+									<label>Especifica el tipo de proyecto:</label>
 									<input type="text" id="espTP7" name="espTP[]" class="form-control otro" disabled="disabled" placeholder='Especifica si el tipo de proyecto es "Otros"' />
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Número de registro</label>
+									<label>Número de registro:</label>
 									<input type="text" id="registro7" name="registro[]" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>Tipo de participación</label>
+									<label>Tipo de participación:</label>
 									<select id="tParticipacion7" name="tParticipacion[]" class="form-control">
 										<option value="">Selecciona</option>
 										<?php
@@ -839,7 +839,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>Tipo de proyecto</label>
+									<label>Tipo de proyecto:</label>
 									<select id="tipoProyecto8" name="tipoProyecto[]" class="form-control tipoProy">
 										<option value="">Selecciona</option>
 										<option value="SIP">SIP</option>
@@ -848,17 +848,17 @@
 									</select>
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Especifica el tipo de proyecto</label>
+									<label>Especifica el tipo de proyecto:</label>
 									<input type="text" id="espTP8" name="espTP[]" class="form-control otro" disabled="disabled" placeholder='Especifica si el tipo de proyecto es "Otros"' />
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Número de registro</label>
+									<label>Número de registro:</label>
 									<input type="text" id="registro8" name="registro[]" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>Tipo de participación</label>
+									<label>Tipo de participación:</label>
 									<select id="tParticipacion8" name="tParticipacion[]" class="form-control">
 										<option value="">Selecciona</option>
 										<?php

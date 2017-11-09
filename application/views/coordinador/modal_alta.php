@@ -56,7 +56,7 @@
 						</div>
 						<div class="form-group col-sm-3">
 							<label>Extensión<span class="form-text">*</span>:</label>
-							<input type="text" id="extensionC" name="extensionC" maxlength="5" class="form-control" data-mask="99999" placeholder="Extensión" />
+							<input type="text" id="extensionC" name="extensionC" maxlength="5" class="form-control" placeholder="Extensión" />
 						</div>
 					</div>
 					<div class="row">

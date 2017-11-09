@@ -13,11 +13,23 @@ class Seminario extends CI_Controller {
 		
 		$params["tipos_evento"] = $this->tipo_evento_md->GetAll();
 		$params["monedas"] = $this->moneda_md->GetAll();
-		$params["seminario"] = $this->solicitud_md->GetByTypePerson(7, $this->session->id);
-		$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["seminario"]["ID"]);
-		$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["seminario"]["ID"]);
-		$params["seguro_int"] = $this->monto_md->GetByTypeReq("11", $params["seminario"]["ID"]);
-		$params["apoyo"] = $this->apoyo_md->GetBySolicitud($params["seminario"]["ID"]);
+		$params["seminario"] = $this->solicitud_md->GetByTypePerson(1, $this->session->id);
+		if ( !$params["seminario"] ) {
+			$params["seminario"] = $this->solicitud_md->GetByTypePerson(2, $this->session->id);
+		}
+		if ( !$params["seminario"] ) {
+			$params["seminario"] = $this->solicitud_md->GetByTypePerson(7, $this->session->id);
+		}
+		if ( !$params["seminario"] ) {
+			$params["seminario"] = $this->solicitud_md->GetByTypePerson(8, $this->session->id);
+		}
+		
+		if ( $params["seminario"] ) {
+			$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["seminario"]["ID"]);
+			$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["seminario"]["ID"]);
+			$params["seguro_int"] = $this->monto_md->GetByTypeReq("11", $params["seminario"]["ID"]);
+			$params["apoyo"] = $this->apoyo_md->GetBySolicitud($params["seminario"]["ID"]);
+		}
 		
 		$this->load->view('template/header', $header);
 		$this->load->view('realizacion/seminario', $params);
@@ -33,7 +45,7 @@ class Seminario extends CI_Controller {
 		array_push($data,'A');
 		array_push($data, $usr);
 		array_push($data,$this->input->post('tipoEvento'));
-		array_push($data,$this->input->post('evento'));//FALTA CAMPO DE NOMBRE DEL EVENTO EN FORMULARIO DE SOLICITUD
+		array_push($data,$this->input->post('evento'));
 		array_push($data, $this->input->post('institucion'));
 		array_push($data, $this->input->post('sede'));
 		array_push($data, $this->input->post('fechaInicio'));

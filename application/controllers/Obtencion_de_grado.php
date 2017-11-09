@@ -15,10 +15,14 @@ class Obtencion_de_grado extends CI_Controller {
 		
 		$params["monedas"] = $this->moneda_md->GetAll();
 		$params["grado"] = $this->solicitud_md->GetByTypePerson(4, $this->session->id);
-		$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["grado"]["ID"]);
-		$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["grado"]["ID"]);
-		$params["seguro_int"] = $this->monto_md->GetByTypeReq("11", $params["grado"]["ID"]);
-		$params["apoyo"] = $this->apoyo_md->GetBySolicitud($params["grado"]["ID"]);
+		
+		if ( $params["grado"] ) {
+			$params["grado"] = $params["grado"][0];
+			$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["grado"]["ID"]);
+			$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["grado"]["ID"]);
+			$params["seguro_int"] = $this->monto_md->GetByTypeReq("11", $params["grado"]["ID"]);
+			$params["apoyo"] = $this->apoyo_md->GetBySolicitud($params["grado"]["ID"]);
+		}
 		
 		$this->load->view('template/header', $header);
 		$this->load->view('realizacion/grado', $params);

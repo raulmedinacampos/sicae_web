@@ -13,14 +13,14 @@
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Institución donde se realizará la estancia<span class="form-text">*</span>:</label>
-					<input type="text" id="universidad" name="universidad" class="form-control" placeholder="Ingresa el nombre de la universidad donde realizarás la estadía" value="<?php if(isset($estancia)) {echo $estancia["ORGANIZA"];} ?>" />
-					<input type="hidden" id="idSolicitud" name="idSolicitud" value="<?php if(isset($estancia)) {echo $estancia["ID"];} ?>" />
+					<input type="text" id="universidad" name="universidad" class="form-control" placeholder="Ingresa el nombre de la universidad donde realizarás la estadía" value="<?php if(isset($estancia) && ($estancia)) {echo $estancia["ORGANIZA"];} ?>" />
+					<input type="hidden" id="idSolicitud" name="idSolicitud" value="<?php if(isset($estancia) && ($estancia)) {echo $estancia["ID"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
 					<label>Sede<span class="form-text">*</span>:</label>
-					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" value="<?php if(isset($estancia)) {echo $estancia["SEDE"];} ?>" />
+					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" value="<?php if(isset($estancia) && ($estancia)) {echo $estancia["SEDE"];} ?>" />
 				</div>
 				<?php
 				if ( $this->session->rol != "1" ) {  // No se muestra para profesor
@@ -43,39 +43,39 @@
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Objetivo<span class="form-text">*</span>:</label>
-					<textarea id="objetivo" name="objetivo" rows="3" maxlength="700" class="form-control" placeholder="Ingresa el objetivo al instituto del evento (700 caracteres max.)"><?php if(isset($estancia)) {echo $estancia["OBJETIVO"];} ?></textarea>
+					<textarea id="objetivo" name="objetivo" rows="3" maxlength="700" class="form-control" placeholder="Ingresa el objetivo al instituto del evento (700 caracteres max.)"><?php if(isset($estancia) && ($estancia)) {echo $estancia["OBJETIVO"];} ?></textarea>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Beneficio institucional<span class="form-text">*</span>:</label>
-					<textarea id="beneficio" name="beneficio" rows="3" maxlength="700" class="form-control" placeholder="Ingresa el beneficio del evento (700 caracteres max.)"><?php if(isset($estancia)) {echo $estancia["BENEFICIO"];} ?></textarea>
+					<textarea id="beneficio" name="beneficio" rows="3" maxlength="700" class="form-control" placeholder="Ingresa el beneficio del evento (700 caracteres max.)"><?php if(isset($estancia) && ($estancia)) {echo $estancia["BENEFICIO"];} ?></textarea>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Programa de trabajo<span class="form-text">*</span>:</label>
-					<textarea id="programa" name="programa" rows="3" maxlength="700" class="form-control" placeholder="Ingresa el programa de trabajo detallado y calendarizado (700 caracteres max.)"><?php if(isset($estancia)) {echo $estancia["OTRO"];} ?></textarea>
+					<textarea id="programa" name="programa" rows="3" maxlength="700" class="form-control" placeholder="Ingresa el programa de trabajo detallado y calendarizado (700 caracteres max.)"><?php if(isset($estancia) && ($estancia)) {echo $estancia["OTRO"];} ?></textarea>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
 						<label>Fecha de inicio del evento<span class="form-text">*</span>:</label>
-						<input type="text" id="fechaInicio" name="fechaInicio" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de inicio" value="<?php if(isset($estancia)) {echo $estancia["FECHA_INICIAL"];} ?>" />
+						<input type="text" id="fechaInicio" name="fechaInicio" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de inicio" value="<?php if(isset($estancia) && ($estancia)) {echo $estancia["FECHA_INICIAL"];} ?>" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
 						<label>Fecha de término del evento<span class="form-text">*</span>:</label>
-						<input type="text" id="fechaFin" name="fechaFin" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de término" value="<?php if(isset($estancia)) {echo $estancia["FECHA_FINAL"];} ?>" />
+						<input type="text" id="fechaFin" name="fechaFin" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de término" value="<?php if(isset($estancia) && ($estancia)) {echo $estancia["FECHA_FINAL"];} ?>" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Itinerario de viaje<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Ingresa tu itinerario de viaje (origen - destino)"></span></label>
-					<input type="text" id="itinerario" name="itinerario" class="form-control" placeholder="Ingresa tu itinerario de viaje" value="<?php if(isset($estancia)) {echo $estancia["ITINERARIO"];} ?>" />
+					<input type="text" id="itinerario" name="itinerario" class="form-control" placeholder="Ingresa tu itinerario de viaje" value="<?php if(isset($estancia) && ($estancia)) {echo $estancia["ITINERARIO"];} ?>" />
 				</div>
 			</div>
 			<div class="panel-group ficha-collapse" id="accordion1">
@@ -93,21 +93,21 @@
 							<div class="row">
 								<div class="form-group col-sm-12">
 									<label>Justificación:</label>
-									<input type="text" id="justificacion" name="justificacion" class="form-control" placeholder="Llenar solo en caso de requerir dos o más días adicionales anteriores y/o posteriores al evento" value="<?php if(isset($estancia)) {echo $estancia["DA_JUSTIFICACION"];} ?>" />
+									<input type="text" id="justificacion" name="justificacion" class="form-control" placeholder="Llenar solo en caso de requerir dos o más días adicionales anteriores y/o posteriores al evento" value="<?php if(isset($estancia) && ($estancia)) {echo $estancia["DA_JUSTIFICACION"];} ?>" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
 										<label>Fecha de salida:</label>
-										<input type="text" id="fechaSalida" name="fechaSalida" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de salida" value="<?php if(isset($estancia)) {echo $estancia["DA_FECHA_SALIDA"];} ?>" />
+										<input type="text" id="fechaSalida" name="fechaSalida" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de salida" value="<?php if(isset($estancia) && ($estancia)) {echo $estancia["DA_FECHA_SALIDA"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
 								<div class="form-group col-sm-4">
 									<div class="datepicker-group">
 										<label>Fecha de regreso:</label>
-										<input type="text" id="fechaRegreso" name="fechaRegreso" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de regreso" value="<?php if(isset($estancia)) {echo $estancia["DA_FECHA_REGRESO"];} ?>" />
+										<input type="text" id="fechaRegreso" name="fechaRegreso" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de regreso" value="<?php if(isset($estancia) && ($estancia)) {echo $estancia["DA_FECHA_REGRESO"];} ?>" />
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 									</div>
 								</div>
@@ -121,21 +121,21 @@
 		<div role="tabpanel" class="tab-pane" id="monto">
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label>Transporte aéreo</label>
+					<label>Transporte aéreo:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="aereo" name="aereo" class="form-control" placeholder="Monto del viaje redondo" value="<?php if(isset($tAereo)) {echo $tAereo["SOLICITADO"];} ?>" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Especifica <span class="icon-infocircle" data-toggle="tooltip" title="Indica el itinerario de vuelo, en clase turista"></span></label>
+					<label>Especifica: <span class="icon-infocircle" data-toggle="tooltip" title="Indica el itinerario de vuelo, en clase turista"></span></label>
 					<input type="text" id="espTAereo" name="espTAereo" class="form-control" placeholder="Indica el itinerario de vuelo" value="<?php if(isset($tAereo)) {echo $tAereo["JUSTIFICACION"];} ?>" />
 				</div>
 				<?php
 				if ( $this->session->rol != "1" ) {  // No se muestra para profesor
 				?>
 				<div class="form-group col-sm-4 oculto">
-					<label>Seguro de viaje internacional</label>
+					<label>Seguro de viaje internacional<span class="form-text">*</span>:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="seguroViaje" name="seguroViaje" class="form-control" placeholder="Solo aplica en viajes internacionales" value="<?php if(isset($seguro_int)) {echo $seguro_int["SOLICITADO"];} ?>" />
@@ -147,18 +147,18 @@
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label>Transporte terrestre</label>
+					<label>Transporte terrestre:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="terrestre" name="terrestre" class="form-control" placeholder="Monto del viaje redondo" value="<?php if(isset($tTerrestre)) {echo $tTerrestre["SOLICITADO"];} ?>" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Especifica</label>
+					<label>Especifica:</label>
 					<input type="text" id="espTTerrestre" name="espTTerrestre" class="form-control" placeholder="Indica el itinerario del traslado" value="<?php if(isset($tTerrestre)) {echo $tTerrestre["JUSTIFICACION"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Tipo de moneda</label>
+					<label>Tipo de moneda:</label>
 					<select id="moneda" name="moneda" class="form-control">
 						<option value="">Selecciona</option>
 						<?php
@@ -191,16 +191,16 @@
 											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($apoyo) ) {echo 'checked="checked"';} ?> value="1" /> Sí
 										</label>
 										<label class="radio-inline">
-											<input type="radio" id="rdbApN" name="apoyo" <?php if ( !isset($apoyo) && isset($estancia) ) {echo 'checked="checked"';} ?> value="0" /> No
+											<input type="radio" id="rdbApN" name="apoyo" <?php if ( !isset($apoyo) && isset($estancia) && ($estancia) ) {echo 'checked="checked"';} ?> value="0" /> No
 										</label>
 									</div>
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Institución que apoya</label>
+									<label>Institución que apoya:</label>
 									<input type="text" id="institucionAp" name="institucionAp" class="form-control" placeholder="Ingresa el nombre de la institución" value="<?php if(isset($apoyo)) {echo $apoyo["INSTITUCION"];} ?>" />
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Monto con el que apoya</label>
+									<label>Monto con el que apoya:</label>
 									<div class="input-group">
 										<div class="input-group-addon">$</div>
 										<input type="text" id="montoAp" name="montoAp" class="form-control" placeholder="Monto del apoyo adicional" value="<?php if(isset($apoyo)) {echo $apoyo["MONTO"];} ?>" />
@@ -209,7 +209,7 @@
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>Tipo de moneda</label>
+									<label>Tipo de moneda:</label>
 									<select id="monedaAp" name="monedaAp" class="form-control">
 										<option value="">Selecciona</option>
 										<?php
@@ -222,7 +222,7 @@
 									</select>
 								</div>
 								<div class="form-group col-sm-8">
-									<label>Especificación del apoyo</label>
+									<label>Especificación del apoyo:</label>
 									<input type="text" id="especificacionAp" name="especificacionAp" class="form-control" placeholder="Ingresa la especificación del apoyo" value="<?php if(isset($apoyo)) {echo $apoyo["ESPECIFICACION"];} ?>" />
 								</div>
 							</div>

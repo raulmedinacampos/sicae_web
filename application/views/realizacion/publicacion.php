@@ -120,14 +120,14 @@
 		<div role="tabpanel" class="tab-pane" id="monto">
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label>Costo de publicación</label>
+					<label>Costo de publicación:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
 						<input type="text" id="costo" name="costo" class="form-control" placeholder="Costo de publicación" value="<?php if(isset($costo)) {echo $costo["SOLICITADO"];} ?>" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Tipo de moneda</label>
+					<label>Tipo de moneda:</label>
 					<select id="moneda" name="moneda" class="form-control">
 						<option value="">Selecciona</option>
 						<?php

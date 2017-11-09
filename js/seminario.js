@@ -10,13 +10,13 @@ function SaveData() {
 		
 		if ( $("#formSeminario").valid() ) {
 			$.post(
-				'/obtencion-de-grado/guardar', 
+				'/seminario/guardar', 
 				$("#formSeminario").serialize(), 
 				function(data) {
 					$("#idSolicitud").val(data);
 					
 					$.post(
-						'/obtencion-de-grado/montos', 
+						'/seminario/montos', 
 						$("#formSeminario").serialize(), 
 						function(data) {}
 					);

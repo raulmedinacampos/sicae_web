@@ -22,6 +22,16 @@ function Init() {
 		mask: '9999999999',
 		placeholder: ''
 	});
+	
+	$('#extension').inputmask({
+		mask: '99999',
+		placeholder: ''
+	});
+	
+	$('#extensionC').inputmask({
+		mask: '99999',
+		placeholder: ''
+	});
 }
 
 function OpenNewUserModal() {
@@ -240,9 +250,6 @@ function Validate() {
 			apPaterno: {
 				required: true
 			},
-			apMaterno: {
-				required: true
-			},
 			fechaNac: {
 				required: true
 			},
@@ -269,6 +276,7 @@ function Validate() {
 				email: true
 			},
 			emailConf: {
+				required: true,
 				equalTo: "#email"
 			},
 			telefono: {
@@ -289,6 +297,7 @@ function Validate() {
 				minlength: 8
 			},
 			passwordConf: {
+				required: true,
 				equalTo: "#password"
 			}
 		},
@@ -363,6 +372,7 @@ function Validate() {
 				email: true
 			},
 			emailConfC: {
+				required: true,
 				equalTo: "#emailC"
 			},
 			telefonoC: {

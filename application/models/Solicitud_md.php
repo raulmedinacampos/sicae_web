@@ -53,11 +53,7 @@ class Solicitud_md extends CI_Model {
     	$this->db->where(array('PERSONA_ID'=>$id));
     	$query = $this->db->get(self::tabla);
     	
-    	if ( $query->num_rows() == 1 ) {
-    		return $query->row_array();
-    	} else {
-    		return $query->result_array();
-    	}
+    	return $query->result_array();
     }
     
     function GetByTypePerson($tipo, $id) {
@@ -72,11 +68,7 @@ class Solicitud_md extends CI_Model {
     	$this->db->where(array('TIPO_EVENTO_ID'=>$tipo, 'PERSONA_ID'=>$id));
     	$query = $this->db->get(self::tabla);
     	 
-    	if ( $query->num_rows() == 1 ) {
-    		return $query->row_array();
-    	} else {
-    		return $query->result_array();
-    	}
+    	return $query->result_array();
     }
 	
     function InsertRecord($data) {
@@ -116,7 +108,7 @@ class Solicitud_md extends CI_Model {
         $this->db->insert(self::tabla,$this);
         
         $this->db->select("ID");
-        $this->db->where(array("TIPO"=>$data[0],"PERSONA_ID"=>$data[1]));
+        $this->db->where(array("TIPO"=>$data[0],"PERSONA_ID"=>$data[1],"TIPO_EVENTO_ID"=>$data[2]));
         $query = $this->db->get(self::tabla);
         
         $usr = $query->row();
