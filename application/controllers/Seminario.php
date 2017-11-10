@@ -28,7 +28,7 @@ class Seminario extends CI_Controller {
 		}
 		
 		if ( $params["seminario"] ) {
-			$params["seminario"] = $params["seminario"][0];
+			$params["seminario"] = end($params["seminario"]);
 			$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["seminario"]["ID"]);
 			$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["seminario"]["ID"]);
 			$params["estancia"] = $this->monto_md->GetByTypeReq("2", $params["seminario"]["ID"]);

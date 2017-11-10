@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="form-group col-sm-8">
 			<label>CURP<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Clave Única de Registro de Población"></span></label>
-			<input type="text" id="curp" name="curp" maxlength="18" class="form-control" value="<?php if(isset($persona)) {echo $persona["CURP"];} ?>" placeholder="Ingresa tu CURP" />
+			<input type="text" id="curp" name="curp" maxlength="18" readonly="readonly" class="form-control" value="<?php if(isset($persona)) {echo $persona["CURP"];} ?>" placeholder="Ingresa tu CURP" />
 			<input type="hidden" id="hdnID" name="hdnID" value="<?php if(isset($persona)) {echo $persona["ID"];} ?>" />
 		</div>
 	</div>

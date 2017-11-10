@@ -28,6 +28,12 @@ class Materia_md extends CI_Model {
     }
 	
     function InsertRecord($data) {
+    	$this->db->select_max('ID');
+    	$query = $this->db->get(self::tabla);
+    	$id = $query->row();
+    	$id = $id->ID + 1;
+    	 
+    	$this->db->set('ID', $id);
     	
     	$this->db->set('PERSONA_ID', $data[0]);
     	$this->db->set('NOMBRE', $data[1]);
@@ -35,7 +41,7 @@ class Materia_md extends CI_Model {
         $this->db->insert(self::tabla,$this);
         
 		$this->db->select("ID");
-        $this->db->where(array("nombre"=>$data[1],"PERSONA_ID"=>$data[0]));
+        $this->db->where(array("NOMBRE"=>$data[1],"PERSONA_ID"=>$data[0]));
         $query = $this->db->get(self::tabla);
         
         $usr = $query->row();
@@ -51,6 +57,11 @@ class Materia_md extends CI_Model {
 		$this->db->update(self::tabla, $this, array('ID' => $id));
 		
 		return $id;
+    }
+    
+    function CleanPr($pr) {
+    	$this->db->where(array('PERSONA_ID'=>$pr));
+    	$query = $this->db->delete(self::tabla);
     }
 
     /*function Disable($id) {

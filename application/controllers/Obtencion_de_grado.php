@@ -17,7 +17,7 @@ class Obtencion_de_grado extends CI_Controller {
 		$params["grado"] = $this->solicitud_md->GetByTypePerson(4, $this->session->id);
 		
 		if ( $params["grado"] ) {
-			$params["grado"] = $params["grado"][0];
+			$params["grado"] = end($params["grado"]);
 			$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["grado"]["ID"]);
 			$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["grado"]["ID"]);
 			$params["seguro_int"] = $this->monto_md->GetByTypeReq("11", $params["grado"]["ID"]);

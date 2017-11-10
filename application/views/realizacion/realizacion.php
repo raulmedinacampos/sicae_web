@@ -122,52 +122,52 @@
 									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el primer apellido" />
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Segundo apellido</label>
+									<label>Segundo apellido:</label>
 									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el segundo apellido" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-8">
-									<label>Procedencia</label>
+									<label>Procedencia:</label>
 									<input type="text" id="" name="" class="form-control" placeholder="Ingresa la procedencia del expositor" />
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Trabajo actual</label>
+									<label>Trabajo actual:</label>
 									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el trabajo actual del expositor" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>Licenciatura</label>
-									<input type="text" id="" name="" class="form-control" />
+									<label>Licenciatura:</label>
+									<input type="text" id="" name="" class="form-control" placeholder="Estudios de licenciatura" />
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Maestría</label>
-									<input type="text" id="" name="" class="form-control" />
+									<label>Maestría:</label>
+									<input type="text" id="" name="" class="form-control" placeholder="Estudios de maestría" />
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Doctorado</label>
-									<input type="text" id="" name="" class="form-control" />
+									<label>Doctorado:</label>
+									<input type="text" id="" name="" class="form-control" placeholder="Estudios de doctorado" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>Especialidad</label>
-									<input type="text" id="" name="" class="form-control" />
+									<label>Especialidad:</label>
+									<input type="text" id="" name="" class="form-control" placeholder="Estudios de especialidad" />
 								</div>
 								<div class="form-group col-sm-8">
-									<label>Actividad del expositor</label>
-									<input type="text" id="" name="" class="form-control" />
+									<label>Actividad del expositor:</label>
+									<input type="text" id="" name="" class="form-control" placeholder="Actividad del expositor" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-8">
-									<label>Tema a exponer</label>
-									<input type="text" id="" name="" class="form-control" />
+									<label>Tema a exponer:</label>
+									<input type="text" id="" name="" class="form-control" placeholder="Tema a exponer" />
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Horario</label>
-									<input type="text" id="" name="" class="form-control" />
+									<label>Horario:</label>
+									<input type="text" id="" name="" class="form-control" placeholder="Horario de la exposición" />
 								</div>
 							</div>
 						</div>
@@ -178,73 +178,73 @@
 		<div role="tabpanel" class="tab-pane" id="monto">
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label>Pago de honorarios a expositores</label>
+					<label>Pago de honorarios a expositores:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="" name="" class="form-control" placeholder="" />
+						<input type="text" id="" name="" class="form-control" placeholder="Honorarios de expositores" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Viáticos a expositores</label>
+					<label>Viáticos a expositores:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="" name="" class="form-control" placeholder="" />
+						<input type="text" id="" name="" class="form-control" placeholder="Viáticos de expositores" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Transporte aéreo</label>
+					<label>Transporte aéreo:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="" name="" class="form-control" placeholder="" />
+						<input type="text" id="" name="" class="form-control" placeholder="Monto del viaje redondo" />
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>+ Especifica</label>
-					<input type="text" id="" name="" class="form-control" placeholder="" />
+					<label>+ Especifica:</label>
+					<input type="text" id="" name="" class="form-control" placeholder="Indica el itinerario de vuelo, en clase turista" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label>Transporte terrestre</label>
+					<label>Transporte terrestre:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="" name="" class="form-control" placeholder="" />
+						<input type="text" id="" name="" class="form-control" placeholder="Monto del viaje redondo" />
 					</div>
 				</div>
 				<div class="form-group col-sm-8">
-					<label>+ Especifica</label>
-					<input type="text" id="" name="" class="form-control" placeholder="" />
+					<label>+ Especifica:</label>
+					<input type="text" id="" name="" class="form-control" placeholder="Indica el itinerario del traslado" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
-					<label>Material didáctico</label>
+					<label>Material didáctico:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="" name="" class="form-control" placeholder="" />
+						<input type="text" id="" name="" class="form-control" placeholder="Costo de material didáctico" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Servicio de cafetería</label>
+					<label>Servicio de cafetería:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="" name="" class="form-control" placeholder="" />
+						<input type="text" id="" name="" class="form-control" placeholder="Costo de servicio de cafetería" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Otros gastos</label>
+					<label>Otros gastos:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="" name="" class="form-control" placeholder="" />
+						<input type="text" id="" name="" class="form-control" placeholder="Otros gastos" />
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>Especifica tus otros gastos</label>
-					<input type="text" id="" name="" class="form-control" placeholder="" />
+					<label>Especifica tus otros gastos:</label>
+					<input type="text" id="" name="" class="form-control" placeholder="Describe los otros gastos" />
 				</div>
 			</div>
 			
@@ -265,29 +265,29 @@
 									<label>¿Cuentas con otros apoyos?<span class="form-text">*</span>:</label>
 									<div>
 										<label class="radio-inline">
-											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($persona) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
+											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($realizacion) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
 										</label>
 										<label class="radio-inline">
-											<input type="radio" id="rdbApN" name="apoyo" <?php if ( isset($persona) && $persona["GENERO"] == "F" ) {echo 'checked="checked"'; } ?> value="0" /> No
+											<input type="radio" id="rdbApN" name="apoyo" <?php if ( isset($realizacion) && $persona["GENERO"] == "F" ) {echo 'checked="checked"'; } ?> value="0" /> No
 										</label>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
-									<label>Institución que apoya</label>
-									<input type="text" id="" name="" class="form-control" placeholder="" />
+									<label>Institución que apoya:</label>
+									<input type="text" id="institucionAp" name="institucionAp" class="form-control" placeholder="Ingresa el nombre de la institución" />
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Monto con el que apoya</label>
+									<label>Monto con el que apoya:</label>
 									<div class="input-group">
 										<div class="input-group-addon">$</div>
-										<input type="text" id="" name="" class="form-control" placeholder="" />
+										<input type="text" id="montoAp" name="montoAp" class="form-control" placeholder="Monto del apoyo adicional" />
 									</div>
 								</div>
 								<div class="form-group col-sm-4">
-									<label>Tipo de moneda</label>
-									<select class="form-control">
+									<label>Tipo de moneda:</label>
+									<select id="monedaAp" name="monedaAp" class="form-control">
 										<option value="">Selecciona</option>
 										<?php
 										foreach ( $monedas as $val ) {
@@ -301,8 +301,8 @@
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-12">
-									<label>Especificación del apoyo</label>
-									<textarea rows="3" class="form-control"></textarea>
+									<label>Especificación del apoyo:</label>
+									<textarea id="especificacionAp" name="especificacionAp" rows="3" class="form-control" placeholder="Ingresa la especificación del apoyo"></textarea>
 								</div>
 							</div>
 						</div>
@@ -330,14 +330,14 @@
 			<div class="row">
 				<div class="form-group col-sm-4">
 					<label>Cuenta CLABE<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Ingresa la Clave Bancaria Estandarizada"></span></label>
-					<input type="text" id="clabe" name="clabe" maxlength="18" class="form-control" data-mask="999 999 99999999999 9" placeholder="Ingresa la CLABE interbancaria" />
+					<input type="text" id="clabe" name="clabe" class="form-control" data-mask="999 999 99999999999 9" placeholder="Ingresa la CLABE interbancaria" />
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="row">
 		<div class="form-group col-sm-2 pull-right">
-			<button type="submit" class="btn btn-block btn-primary">Guardar</button>
+			<button type="submit" id="btnGuardar" class="btn btn-block btn-primary">Guardar</button>
 		</div>
 	</div>
 </form>

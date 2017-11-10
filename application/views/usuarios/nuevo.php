@@ -518,7 +518,7 @@
 			</div>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Proyecto SIP <?php echo date('Y'); ?></h3>
+					<h3 class="panel-title">Proyecto SIP <?php if(date('m')>=11) {echo (date('Y')+1);} else {echo date('Y');} ?></h3>
 				</div>
 				<div class="panel-body">
 					<div class="row">
@@ -684,7 +684,7 @@
 						<?php
 						for ( $i=0; $i<=50; $i++) {
 						?>
-						<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+						<option <?php if($publicaciones_nacionales == $i) {echo 'selected="selected"';}?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
 						<?php
 						}
 						?>
@@ -697,7 +697,7 @@
 						<?php
 						for ( $i=0; $i<=50; $i++) {
 						?>
-						<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+						<option <?php if($publicaciones_internacionales == $i) {echo 'selected="selected"';}?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
 						<?php
 						}
 						?>
@@ -708,12 +708,6 @@
 				<div class="form-group col-sm-12">
 					<label>Unidades de aprendizaje impartidas en el instituto<span class="form-text">*</span>:</label>
 					<input type="text" id="unidAprendizaje" name="unidAprendizaje" maxlength="100" class="form-control" placeholder='Ingresa materias separadas por comas, Ej. "Economía, Bases de datos, Cálculo"' value="<?php if(isset($materias)) {echo $materias;} ?>" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-sm-12">
-					<label>Patentes y/o publicaciones de libros: <span class="icon-infocircle" data-toggle="tooltip" title="Ingresa, si consideras tener más productividad, la descripción y año del producto, sepáralos por coma (,) y por cada diferente producto inicia en una nueva línea; ejemplo:&#010;Producto uno, YYYY (representa el año)&#010;Producto dos, YYYY"></span></label>
-					<textarea id="patentes" name="patentes" rows="5" class="form-control" placeholder="Ingresa, si consideras tener más productividad, la descripción y año del producto, sepáralos por coma (,) y por cada diferente producto inicia en una nueva línea; ejemplo:\nProducto uno, YYYY (representa el año)\nProducto dos, YYYY"></textarea>
 				</div>
 			</div>
 		</div>
@@ -730,7 +724,7 @@
 					<div class="panel-heading">
 						<h4 class="panel-title">
 						<a data-parent="#accordion6" data-toggle="collapse" href="#panel-6" aria-expanded="true" aria-controls="panel-6">
-							Proyecto <?php if(date('m')>=10) {echo date('Y')+1;} else {echo date('Y');} ?>
+							Proyecto <?php if(date('m')>=11) {echo date('Y')+1;} else {echo date('Y');} ?>
 						</a>
 						</h4>
 						<button type="button" class="collpase-button" data-parent="#accordion6" data-toggle="collapse" href="#panel-6"></button>
@@ -780,7 +774,7 @@
 					<div class="panel-heading">
 						<h4 class="panel-title">
 						<a data-parent="#accordion7" data-toggle="collapse" href="#panel-7" aria-expanded="true" aria-controls="panel-7">
-							Proyecto <?php if(date('m')>=10) {echo date('Y');} else {echo (date('Y')-1);} ?>
+							Proyecto <?php if(date('m')>=11) {echo date('Y');} else {echo (date('Y')-1);} ?>
 						</a>
 						</h4>
 						<button type="button" class="collpase-button collapsed" data-parent="#accordion7" data-toggle="collapse" href="#panel-7"></button>
@@ -830,7 +824,7 @@
 					<div class="panel-heading">
 						<h4 class="panel-title">
 						<a data-parent="#accordion8" data-toggle="collapse" href="#panel-8" aria-expanded="true" aria-controls="panel-8">
-							Proyecto <?php if(date('m')>=10) {echo (date('Y')-1);} else {echo (date('Y')-2);} ?>
+							Proyecto <?php if(date('m')>=11) {echo (date('Y')-1);} else {echo (date('Y')-2);} ?>
 						</a>
 						</h4>
 						<button type="button" class="collpase-button collapsed" data-parent="#accordion8" data-toggle="collapse" href="#panel-8"></button>

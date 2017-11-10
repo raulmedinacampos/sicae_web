@@ -160,9 +160,21 @@ function SaveData() {
 			$("#modalAviso .modal-body").html('<div class="alert alert-success">La información ha sido actualizada</div>');
 			$("#modalAviso").modal('show');
 		} else {
+			var ctrlError = $("div.tab-content").find(".has-error").first();
+			var tab = ctrlError.parents(".tab-pane");
+			var tabID = tab.attr("id");
+			
 			$("#modalAviso .modal-title").html('Error');
 			$("#modalAviso .modal-body").html('<div class="alert alert-danger">Verifica cada una de las pestañas, aún hay campos pendientes de llenar.</div>');
 			$("#modalAviso").modal('show');
+			
+			$('#modalAviso').on('hidden.bs.modal', function(e) {
+				$('[href="#'+tabID+'"]').tab('show');
+				
+				$('html, body').animate({
+			        scrollTop: ctrlError.offset().top - 150
+			    }, 500);
+			});
 		}
 	});
 }
@@ -210,15 +222,12 @@ function Validate() {
 			apPaterno: {
 				required: true
 			},
-			apMaterno: {
-				required: true
-			},
 			fechaNac: {
 				required: true
 			},
 			curp: {
 				required: true,
-				minlength: 18
+				minlength: 18,
 			},
 			rfc: {
 				required: true,
@@ -235,6 +244,7 @@ function Validate() {
 				email: true
 			},
 			emailConf: {
+				required: true,
 				equalTo: "#email"
 			},
 			telefono: {
@@ -255,6 +265,7 @@ function Validate() {
 				minlength: 8
 			},
 			passwordConf: {
+				required: "#chkPass:checked",
 				equalTo: "#password"
 			},
 			tipoNombramiento: {
@@ -390,12 +401,6 @@ function Validate() {
 			materiasImp: {
 				required: true
 			},
-			publNacionales: {
-				required: true
-			},
-			publInt: {
-				required: true
-			},
 			unidAprendizaje: {
 				required: true
 			},
@@ -440,6 +445,9 @@ function Validate() {
 			passwordConf: "La contraseña no coincide",
 			semestre: {
 				maxlength: "El semestre no puede ser de más de dos dígitos"
+			},
+			unidAprendizaje: {
+				maxlength: "El texto no debe exceder los 100 caracteres"
 			},
 			sucursal: {
 				maxlength: "El número de sucursal no puede de más de seis dígitos"

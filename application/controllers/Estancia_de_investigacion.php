@@ -14,7 +14,7 @@ class Estancia_de_investigacion extends CI_Controller {
 		$params["estancia"] = $this->solicitud_md->GetByTypePerson(3, $this->session->id);
 		
 		if ( $params["estancia"] ) {
-			$params["estancia"] = $params["estancia"][0];
+			$params["estancia"] = end($params["estancia"]);
 			$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["estancia"]["ID"]);
 			$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["estancia"]["ID"]);
 			$params["seguro_int"] = $this->monto_md->GetByTypeReq("11", $params["estancia"]["ID"]);

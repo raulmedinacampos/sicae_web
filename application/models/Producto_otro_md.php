@@ -24,9 +24,16 @@ class Producto_otro_md extends CI_Model {
     function GetByPersona($id) {
 		$this->db->where(array('PERSONA_ID'=>$id));
         $query = $this->db->get(self::tabla);
+		return $query->result_array();
     }
 	
     function InsertRecord($data) {
+    	$this->db->select_max('ID');
+    	$query = $this->db->get(self::tabla);
+    	$id = $query->row();
+    	$id = $id->ID + 1;
+    	 
+    	$this->db->set('ID', $id);
     	
     	$this->db->set('PERSONA_ID', $data[0]);
     	$this->db->set('DESCRIPCION', $data[1]);

@@ -6,9 +6,26 @@ class Ponencia extends CI_Controller {
 		
 		$header["titulo"] = "Ponencia";
 		
+		$this->load->model("solicitud_md");
+		$this->load->model("ponencia_md");
 		$this->load->model("moneda_md");
+		$this->load->model("monto_md");
+		$this->load->model("apoyo_md");
 		
 		$params["monedas"] = $this->moneda_md->GetAll();
+		$params["ponencia"] = $this->solicitud_md->GetByTypePerson(5, $this->session->id);
+		
+		if ( $params["ponencia"] ) {
+			$params["ponencia"] = end($params["ponencia"]);
+			$params["titulos"] = $this->ponencia_md->GetBySolicitud($params["ponencia"]["ID"]);
+			$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["ponencia"]["ID"]);
+			$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["ponencia"]["ID"]);
+			$params["seguro_int"] = $this->monto_md->GetByTypeReq("11", $params["ponencia"]["ID"]);
+			$params["estancia"] = $this->monto_md->GetByTypeReq("2", $params["ponencia"]["ID"]);
+			$params["inscripcion"] = $this->monto_md->GetByTypeReq("3", $params["ponencia"]["ID"]);
+			$params["otros_gastos"] = $this->monto_md->GetByTypeReq("9", $params["ponencia"]["ID"]);
+			$params["apoyo"] = $this->apoyo_md->GetBySolicitud($params["ponencia"]["ID"]);
+		}
 		
 		$this->load->view('template/header', $header);
 		$this->load->view('realizacion/ponencia', $params);
@@ -33,7 +50,7 @@ class Ponencia extends CI_Controller {
 		array_push($data, $this->input->post('fechaSalida'));
 		array_push($data, $this->input->post('fechaRegreso'));
 		array_push($data, $this->input->post('itinerario'));
-		array_push($data, NULL);
+		array_push($data, $this->input->post('idioma'));
 		array_push($data, NULL);
 		array_push($data, NULL);
 		array_push($data, NULL);
@@ -42,19 +59,18 @@ class Ponencia extends CI_Controller {
 		array_push($data, NULL);
 		array_push($data, NULL);
 		
-		if($this->input->post("id_solicitud")==0)
+		if ( $this->input->post("idSolicitud") == 0 )
 			$id = $this->solicitud_md->InsertRecord($data);
 		else
-			$id=$this->solictud_md->UpdateRecord($data,$this->input->post("id_solicitud"));
-		
-		
+			$id = $this->solicitud_md->UpdateRecord($data,$this->input->post("idSolicitud"));
+			
 		echo $id;
 	}
 	
 	public function datos_ponencia() {
 		$this->load->model("ponencia_md");
 		$usr=$this->session->userdata('id');
-		$sol=$this->input->post("solicitud_id");
+		$sol=$this->input->post("idSolicitud");
 		$ponencias=$this->input->post("tituloPonencia");
 		$res=array();
 		foreach($ponencias as $pn){
@@ -67,7 +83,7 @@ class Ponencia extends CI_Controller {
 	
 	public function coautores() {
 		$this->load->model("coautor_md");
-		$sol=$this->input->post("solicitud_id");
+		$sol=$this->input->post("idSolicitud");
 		$ponencias=$this->input->post("id_ponencias");//recibir id de las ponencias como json para insertar coautores en sus respectivas ponencias
 		$ctpn=1;
 		$res=array();
@@ -102,25 +118,25 @@ class Ponencia extends CI_Controller {
 		$inscripcion=$this->input->post('inscripcion');
 		$estancia=$this->input->post('estancia');
 		$otros=$this->input->post('otrosGastos');
-		$sol=$this->input->post("solicitud_id");
+		$sol=$this->input->post("idSolicitud");
 		if($aereo!=""&&$aereo>0){
-			$this->monto_md->InsertRecord(array(5,$sol,"a",$aereo,0,$this->input->post("espTAereo"),$this->input->post("moneda"),$this->input->post("moneda")));
+			$this->monto_md->InsertRecord(array(5,$sol,"A",$aereo,0,$this->input->post("espTAereo"),$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
 		if($terrestre!=""&&$terrestre>0){
-			$this->monto_md->InsertRecord(array(4,$sol,"a",$terrestre,0,$this->input->post("espTTerrestre"),$this->input->post("moneda"),$this->input->post("moneda")));
+			$this->monto_md->InsertRecord(array(4,$sol,"A",$terrestre,0,$this->input->post("espTTerrestre"),$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
 		if($inscripcion!=""&&$inscripcion>0){
-			$this->monto_md->InsertRecord(array(2,$sol,"a",$inscripcion,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
+			$this->monto_md->InsertRecord(array(3,$sol,"A",$inscripcion,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
 		if($estancia!=""&&$estancia>0){
-			$this->monto_md->InsertRecord(array(2,$sol,"a",$estancia,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
+			$this->monto_md->InsertRecord(array(2,$sol,"A",$estancia,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
 		if($otros!=""&&$otros>0){
-			$this->monto_md->InsertRecord(array(9,$sol,"a",$otros,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
+			$this->monto_md->InsertRecord(array(9,$sol,"A",$otros,0,$this->input->post("espOtros"),$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
 		if($this->input->post("apoyo")==1){

@@ -40,7 +40,12 @@ class Ponencia_md extends CI_Model {
     }
 	
     function InsertRecord($data) {
+    	$this->db->select_max('ID');
+    	$query = $this->db->get(self::tabla);
+    	$id = $query->row();
+    	$id = $id->ID + 1;
     	
+    	$this->db->set('ID', $id);
     	$this->db->set('SOLICITUD_ID', $data[0]);
     	$this->db->set('TIPO_SOLICITUD', $data[1]);
     	$this->db->set('NOMBRE', $data[2]);

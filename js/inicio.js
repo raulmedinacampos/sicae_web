@@ -257,7 +257,7 @@ function Validate() {
 				required: true,
 				minlength: 18,
 				remote: {
-					url: "usuario/validar-curp",
+					url: "/usuario/validar-curp",
 					type: "post"
 				}
 			},
@@ -360,7 +360,7 @@ function Validate() {
 				required: true,
 				minlength: 18,
 				remote: {
-					url: "usuario/validar-curpC",
+					url: "/usuario/validar-curpC",
 					type: "post"
 				}
 			},

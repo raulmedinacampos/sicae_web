@@ -167,15 +167,12 @@ function Validate() {
 			apPaterno: {
 				required: true
 			},
-			apMaterno: {
-				required: true
-			},
 			fechaNac: {
 				required: true
 			},
 			curp: {
 				required: true,
-				minlength: 18
+				minlength: 18,
 			},
 			sexo: {
 				required: true
@@ -185,6 +182,7 @@ function Validate() {
 				email: true
 			},
 			emailConf: {
+				required: true,
 				equalTo: "#email"
 			},
 			telefono: {

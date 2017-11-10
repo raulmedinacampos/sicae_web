@@ -57,17 +57,17 @@ class Realizacion extends CI_Controller {
 		array_push($data, NULL);
 		array_push($data, NULL);
 		
-		if($this->input->post("id_solicitud")==0)
+		if ( $this->input->post("idSolicitud") == 0 )
 			$id = $this->solicitud_md->InsertRecord($data);
 		else
-			$id=$this->solictud_md->UpdateRecord($data,$this->input->post("id_solicitud"));
-		
+			$id = $this->solicitud_md->UpdateRecord($data,$this->input->post("idSolicitud"));
+			
 		echo $id;
 	}
 	
 	public function expositores() {
 		$this->load->model("expositor_md");
-		$sol=$this->input->post("solicitud_id");
+		$sol=$this->input->post("idSolicitud");
 		$res=array();
 		$nombres=$this->input->post("exNombre");
 		$apps=$this->input->post("exApP");//Revisar name del campo en la vista de las ponencias que se agregan

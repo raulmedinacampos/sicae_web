@@ -132,6 +132,20 @@ function SaveData() {
 			$.post(
 				'/ponencia/guardar', 
 				$("#formPonencia").serialize(), 
+				function(data) {
+					$("#idSolicitud").val(data);
+					
+					$.post(
+						'/ponencia/montos', 
+						$("#formPonencia").serialize(), 
+						function(data) {}
+					);
+				}
+			);
+			
+			$.post(
+				'/ponencia/datos-ponencia', 
+				$("#formPonencia").serialize(), 
 				function(data) {}
 			);
 			
@@ -139,9 +153,21 @@ function SaveData() {
 			$("#modalAviso .modal-body").html('<div class="alert alert-success">La información ha sido actualizada</div>');
 			$("#modalAviso").modal('show');
 		} else {
+			var ctrlError = $("div.tab-content").find(".has-error").first();
+			var tab = ctrlError.parents(".tab-pane");
+			var tabID = tab.attr("id");
+			
 			$("#modalAviso .modal-title").html('Error');
 			$("#modalAviso .modal-body").html('<div class="alert alert-danger">Verifica cada una de las pestañas, aún hay campos pendientes de llenar.</div>');
 			$("#modalAviso").modal('show');
+			
+			$('#modalAviso').on('hidden.bs.modal', function(e) {
+				$('[href="#'+tabID+'"]').tab('show');
+				
+				$('html, body').animate({
+			        scrollTop: ctrlError.offset().top - 150
+			    }, 500);
+			});
 		}
 	});
 }

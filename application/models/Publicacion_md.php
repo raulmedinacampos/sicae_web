@@ -39,8 +39,19 @@ class Publicacion_md extends CI_Model {
         return $query->result_array();
     }
 	
+	function GetCtByPersonaNc($id,$tipo) {//tipo es 0 internacional, 1 nacional
+    	$this->db->where(array('PERSONA_ID'=>$id,"NACIONAL"=>$tipo));
+        $query = $this->db->get(self::tabla);
+        return count($query->result_array());
+    }
+	
     function InsertRecord($data) {
+    	$this->db->select_max('ID');
+    	$query = $this->db->get(self::tabla);
+    	$id = $query->row();
+    	$id = $id->ID + 1;
     	
+		$this->db->set('ID',$id);
     	$this->db->set('PERSONA_ID', $data[0]);
     	$this->db->set('NOMBRE', $data[1]);
     	$this->db->set('NACIONAL', $data[2]);

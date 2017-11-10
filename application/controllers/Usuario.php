@@ -17,6 +17,8 @@ class Usuario extends CI_Controller {
 		$this->load->model('estudio_md');
 		$this->load->model('estudio_otro_md');
 		$this->load->model("direccion_md");
+		$this->load->model("publicacion_md");
+		$this->load->model("producto_otro_md");
 		
 		
 		$perfil = $this->session->rol;
@@ -43,6 +45,16 @@ class Usuario extends CI_Controller {
 					$mat .= $val["NOMBRE"].", ";
 				}
 				$params["materias"] = trim($mat, ", ");
+				
+				/*$otros = $this->producto_otro_md->GetByPersona($params["persona"]["ID"]);
+				
+				$otr = "";
+				foreach ( $otros as $val ) {
+					$otr .= $val["DESCRIPCION"].", ".$val["ANIO"]."\n";
+				}
+				$params["patentes_otros"]=$otr;*/
+				$params["publicaciones_nacionales"]=$this->publicacion_md->GetCtByPersonaNc($params["persona"]["ID"],1);
+				$params["publicaciones_internacionales"]=$this->publicacion_md->GetCtByPersonaNc($params["persona"]["ID"],0);
 				break;
 			case 3:
 				$params["perfilC"] = "alumno";
@@ -194,7 +206,7 @@ class Usuario extends CI_Controller {
 				"fechaFinProrroga",
 				"cargaAcademica",
 				"direccionesTesis",
-				"nivelAcademico"
+				"materiasImp"
 			);
 		
 		array_push($data, $usr);
@@ -254,17 +266,18 @@ class Usuario extends CI_Controller {
 		
 		$unidades=$this->input->post("unidAprendizaje");
 		$unidades=explode(",",$unidades);
+		$this->materia_md->CleanPr($usr);
 		foreach($unidades as $mat){
 			$this->materia_md->InsertRecord(array($usr,$mat));
 		}
 		
-		$patentes=$this->input->post("patentes");
+		/*$patentes=$this->input->post("patentes");
 		$patentes=explode("\n", $patentes);
 		foreach($patentes as $pat){
 			$pat=explode(",",$pat);
 			$this->producto_otro_md->InsertRecord(array($usr,$pat[0],$pat[1]));
 			
-		}
+		}*/
 		
 		$nacionales=$this->input->post("publNacionales");
 		

@@ -8,8 +8,11 @@ class Correo extends CI_Controller {
 	
 	public function recuperar_pass() {
 		$curp = $this->input->post("curp");
+		$curp = strtoupper($curp);
 		
 		$usr = $this->persona_md->GetByCURP($curp);
+		
+		print_r($curp);
 		
 		if ( $usr ) {
 			$correo = $usr->EMAIL;
@@ -32,6 +35,11 @@ class Correo extends CI_Controller {
 			
 			$body += '<p>En caso de seguir teniendo problemas para acceder al sistema te puedes comunicar al 5729 6000, extensiones 65033, 65095, 65145.</p>';
 			
+			$config["protocol"] = "smtp";
+			$config["smtp_host"] = "correo.cofaa.ipn.mx";
+			$config["smtp_port"] = "25";
+			$config["smtp_user"] = "";
+			$config["smtp_pass"] = "";
 			$config["mailtype"] = "html";
 			
 			$this->email->initialize($config);
@@ -43,7 +51,7 @@ class Correo extends CI_Controller {
 			if ( $this->email->send() ) {
 				echo "1";
 			} else {
-				echo "0";
+				echo "0x ".$this->email->print_debugger();
 			}
 		} else {
 			echo "0";
