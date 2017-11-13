@@ -67,7 +67,11 @@ class Publicacion_md extends CI_Model {
         $usr = $query->row();
         
 		return $usr->ID;
+    }
     
+    function CleanPr($pr) {
+    	$this->db->where(array('PERSONA_ID'=>$pr));
+    	$query = $this->db->delete(self::tabla);
     }
 	
     /*function Disable($id) {

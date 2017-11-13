@@ -102,9 +102,9 @@ function EnableProjectDesc() {
 		var input = p.find(".otro");
 		
 		if ( $(this).val() == "Otros" ) {
-			input.prop("disabled", false);
+			input.prop("readonly", false);
 		} else {
-			input.prop("disabled", true);
+			input.prop("readonly", true);
 		}
 	});
 }
@@ -457,6 +457,60 @@ function Validate() {
 			}
 		}
 	});
+	
+	/*$("#espTP6").rules("add", {
+		required: function(element) {
+			return $("#tipoProyecto6").val() == "Otros";
+		}
+	});
+	
+	$("#registro6").rules("add", {
+		required: function(element) {
+			return $("#tipoProyecto6").val() != "";
+		}
+	});
+	
+	$("#tParticipacion6").rules("add", {
+		required: function(element) {
+			return $("#tipoProyecto6").val() != "";
+		}
+	});
+	
+	$("#espTP7").rules("add", {
+		required: function(element) {
+			return $("#tipoProyecto7").val() == "Otros";
+		}
+	});
+	
+	$("#registro7").rules("add", {
+		required: function(element) {
+			return $("#tipoProyecto7").val() != "";
+		}
+	});
+	
+	$("#tParticipacion7").rules("add", {
+		required: function(element) {
+			return $("#tipoProyecto7").val() != "";
+		}
+	});
+	
+	$("#espTP8").rules("add", {
+		required: function(element) {
+			return $("#tipoProyecto8").val() == "Otros";
+		}
+	});
+	
+	$("#registro8").rules("add", {
+		required: function(element) {
+			return $("#tipoProyecto8").val() != "";
+		}
+	});
+	
+	$("#tParticipacion8").rules("add", {
+		required: function(element) {
+			return $("#tipoProyecto8").val() != "";
+		}
+	});*/
 }
 
 $gmx(document).ready(function() {
@@ -471,4 +525,18 @@ $gmx(document).ready(function() {
 	$("#tipoNombramiento").trigger("change");
 	$('input[name="sabatico"]:checked').trigger("change");
 	$('input[name="sueldo"]:checked').trigger("change");
+	
+	$("#tipoProyecto6").trigger("change");
+	$("#tipoProyecto7").trigger("change");
+	$("#tipoProyecto8").trigger("change");
+	
+	if ( $("#tipoProyecto7").val() != "" ) {
+		var h = $("#proyectos").find('a[href="#panel-7"]');
+		h.trigger("click");
+	}
+	
+	if ( $("#tipoProyecto8").val() != "" ) {
+		var h = $("#proyectos").find('a[href="#panel-8"]');
+		h.trigger("click");
+	}
 });

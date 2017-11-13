@@ -14,24 +14,24 @@
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Título del artículo en inglés y en español<span class="form-text">*</span>:</label>
-					<textarea id="titulo" name="titulo" rows="3" class="form-control" placeholder="Anota el nombre del artículo a publicar en inglés y en español separado por un salto de línea.\nEl nombre de la ponencia deberá coincidir con los demás documentos (oficio, carta de aceptación y el extenso del artículo)."><?php if(isset($publicacion)) {echo $publicacion["NOMBRE_EVENTO"];} ?></textarea>
-					<input type="hidden" id="idSolicitud" name="idSolicitud" value="<?php if(isset($publicacion)) {echo $publicacion["ID"];} ?>" />
+					<textarea id="titulo" name="titulo" rows="3" class="form-control" placeholder="Anota el nombre del artículo a publicar en inglés y en español separado por un salto de línea.\nEl nombre de la ponencia deberá coincidir con los demás documentos (oficio, carta de aceptación y el extenso del artículo)."><?php if(isset($publicacion)&& ($publicacion)) {echo $publicacion["NOMBRE_EVENTO"];} ?></textarea>
+					<input type="hidden" id="idSolicitud" name="idSolicitud" value="<?php if(isset($publicacion)&& ($publicacion)) {echo $publicacion["ID"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Nombre de la revista<span class="form-text">*</span>:</label>
-					<input type="text" id="revista" name="revista" class="form-control" placeholder="Ingresa el nombre de la revista donde se publicará el artículo" value="<?php if(isset($publicacion)) {echo $publicacion["ID"];} ?>" />
+					<input type="text" id="revista" name="revista" class="form-control" placeholder="Ingresa el nombre de la revista donde se publicará el artículo" value="<?php if(isset($publicacion)&& ($publicacion)) {echo $publicacion["ORGANIZA"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
 					<label>ISSN de la revista<span class="form-text">*</span>:  <span class="icon-infocircle" data-toggle="tooltip" title="Ingresa el Número de Serie Estándar Internacional para publicaciones"></span></label>
-					<input type="text" id="issn" name="issn" class="form-control" data-mask="9999-9999" placeholder="Ingresa el ISSN" value="<?php if(isset($publicacion)) {echo $publicacion["ID"];} ?>" />
+					<input type="text" id="issn" name="issn" class="form-control" data-mask="9999-9999" placeholder="Ingresa el ISSN" value="<?php if(isset($publicacion)&& ($publicacion)) {echo $publicacion["OTRO"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Sede<span class="form-text">*</span>:</label>
-					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" value="<?php if(isset($publicacion)) {echo $publicacion["SEDE"];} ?>" />
+					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" value="<?php if(isset($publicacion)&& ($publicacion)) {echo $publicacion["SEDE"];} ?>" />
 				</div>
 			</div>
 		</div>
@@ -45,7 +45,8 @@
 				</div>
 			</div>
 			<?php
-			if ( empty($coautores) && !isset($publicacion) ) {
+			$i = "";
+			if ( (empty($coautores) && isset($publicacion)) || (!isset($publicacion)) ) {
 			?>
 			<div class="panel-group ficha-collapse" id="accordion1">
 				<div class="panel panel-default">
@@ -79,19 +80,20 @@
 			</div>
 			<?php
 			} else {
+				$i = 1;
 				foreach ( $coautores as $val ) {
 			?>
-			<div class="panel-group ficha-collapse" id="accordion1">
+			<div class="panel-group ficha-collapse" id="accordion<?php echo $i; ?>">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h4 class="panel-title">
-							<a data-parent="#accordion1" data-toggle="collapse" href="#panel-1" aria-expanded="true" aria-controls="panel-1">
-								Coautor 1
+							<a data-parent="#accordion<?php echo $i; ?>" data-toggle="collapse" href="#panel-<?php echo $i; ?>" aria-expanded="true" aria-controls="panel-<?php echo $i; ?>">
+								Coautor <?php echo $i; ?>
 							</a>
 						</h4>
-						<button type="button" class="collpase-button" data-parent="#accordion1" data-toggle="collapse" href="#panel-1"></button>
+						<button type="button" class="collpase-button" data-parent="#accordion<?php echo $i; ?>" data-toggle="collapse" href="#panel-<?php echo $i; ?>"></button>
 					</div>
-					<div class="panel-collapse collapse in" id="panel-1">
+					<div class="panel-collapse collapse in" id="panel-<?php echo $i; ?>">
 						<div class="panel-body">
 							<div class="row">
 								<div class="form-group col-sm-4">
@@ -112,9 +114,11 @@
 				</div>
 			</div>
 			<?php
+				$i++;
 				}
 			}
 			?>
+			<input type="hidden" id="hdnTotalCoautores" value="<?php echo $i; ?>" />
 		</div>
 		
 		<div role="tabpanel" class="tab-pane" id="monto">

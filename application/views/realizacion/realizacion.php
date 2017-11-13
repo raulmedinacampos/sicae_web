@@ -20,7 +20,7 @@
 						<?php
 						foreach ( $tipos_evento as $val ) {
 						?>
-						<option value="<?php echo $val->ID; ?>"><?php echo $val->DESCRIPCION; ?></option>
+						<option <?php if(isset($realizacion) && ($realizacion) && $realizacion["TIPO_EVENTO_ID"] == $val->ID ) {echo 'selected="selected"'; } ?> value="<?php echo $val->ID; ?>"><?php echo $val->DESCRIPCION; ?></option>
 						<?php
 						}
 						?>
@@ -28,32 +28,32 @@
 				</div>
 				<div class="form-group col-sm-8">
 					<label>Nombre del evento<span class="form-text">*</span>:</label>
-					<input type="text" id="evento" name="evento" class="form-control" placeholder="Ingresa el nombre del evento" value="<?php if(isset($realizacion)) {echo $realizacion["NOMBRE_EVENTO"];} ?>" />
-					<input type="hidden" id="idSolicitud" name="idSolicitud" value="<?php if(isset($realizacion)) {echo $realizacion["ID"];} ?>" />
+					<input type="text" id="evento" name="evento" class="form-control" placeholder="Ingresa el nombre del evento" value="<?php if(isset($realizacion) && ($realizacion)) {echo $realizacion["NOMBRE_EVENTO"];} ?>" />
+					<input type="hidden" id="idSolicitud" name="idSolicitud" value="<?php if(isset($realizacion) && ($realizacion)) {echo $realizacion["ID"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
 					<label>Idioma del evento<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Ingresa el idioma del evento (inglés, español, otro)"></span></label>
-					<input type="text" id="idioma" name="idioma" class="form-control" placeholder="Ingresa el idioma del evento" />
+					<input type="text" id="idioma" name="idioma" class="form-control" placeholder="Ingresa el idioma del evento" value="<?php if(isset($realizacion) && ($realizacion)) {echo $realizacion["OTRO"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Sede<span class="form-text">*</span>:</label>
-					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" />
+					<input type="text" id="sede" name="sede" class="form-control" placeholder="Ciudad, país" value="<?php if(isset($realizacion) && ($realizacion)) {echo $realizacion["SEDE"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
 						<label>Fecha de inicio<span class="form-text">*</span>:</label>
-						<input type="text" id="fechaInicio" name="fechaInicio" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de inicio" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" />
+						<input type="text" id="fechaInicio" name="fechaInicio" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de inicio" value="<?php if(isset($realizacion) && ($realizacion)) {echo $realizacion["FECHA_INICIAL"];} ?>" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
 					<div class="datepicker-group">
 						<label>Fecha de término<span class="form-text">*</span>:</label>
-						<input type="text" id="fechaFin" name="fechaFin" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de término" value="<?php if(isset($persona)) {echo $persona["FECHA_NACIMIENTO"];} ?>" />
+						<input type="text" id="fechaFin" name="fechaFin" class="datepicker form-control" data-mask="99/99/9999" placeholder="Fecha de término" value="<?php if(isset($realizacion) && ($realizacion)) {echo $realizacion["FECHA_FINAL"];} ?>" />
 						<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 					</div>
 				</div>
@@ -61,33 +61,33 @@
 			<div class="row">
 				<div class="form-group col-sm-4">
 					<label>Total de participantes<span class="form-text">*</span>:</label>
-					<input type="text" id="tParticipantes" name="tParticipantes" class="form-control" placeholder="Ingresa el total de participantes" />
+					<input type="text" id="tParticipantes" name="tParticipantes" class="form-control" placeholder="Ingresa el total de participantes" value="<?php if(isset($realizacion) && ($realizacion)) {echo $realizacion["PARTICIPANTES"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Total de expositores<span class="form-text">*</span>:</label>
-					<input type="text" id="tExpositores" name="tExpositores" class="form-control" placeholder="Ingresa el total de expositores" />
+					<input type="text" id="tExpositores" name="tExpositores" class="form-control" placeholder="Ingresa el total de expositores" value="<?php if(isset($realizacion) && ($realizacion)) {echo $realizacion["EXPOSITORES"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Horas de duración del evento<span class="form-text">*</span>:</label>
-					<input type="text" id="duracion" name="duracion" class="form-control" placeholder="Ingresa la duración del evento" />
+					<input type="text" id="duracion" name="duracion" class="form-control" placeholder="Ingresa la duración del evento" value="<?php if(isset($realizacion) && ($realizacion)) {echo $realizacion["HORAS_TOTALES"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>A quién va dirigido el evento<span class="form-text">*</span>:</label>
-					<input type="text" id="dirigido" name="dirigido" class="form-control" placeholder="Ingresa a quién va dirigido el evento" />
+					<input type="text" id="dirigido" name="dirigido" class="form-control" placeholder="Ingresa a quién va dirigido el evento" value="<?php if(isset($realizacion) && ($realizacion)) {echo $realizacion["ID"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Objetivo<span class="form-text">*</span>:</label>
-					<textarea id="objetivo" name="objetivo" maxlength="700" cols="3" class="form-control" placeholder="Ingrese el objetivo del evento (700 caracteres max.)"></textarea>
+					<textarea id="objetivo" name="objetivo" maxlength="700" cols="3" class="form-control" placeholder="Ingrese el objetivo del evento (700 caracteres max.)"><?php if(isset($realizacion) && ($realizacion)) {echo $realizacion["OBJETIVO"];} ?></textarea>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Beneficio institucional<span class="form-text">*</span>:</label>
-					<textarea id="beneficio" name="beneficio" maxlength="700" cols="3" class="form-control" placeholder="Ingrese el beneficio del evento (700 caracteres max.)"></textarea>
+					<textarea id="beneficio" name="beneficio" maxlength="700" cols="3" class="form-control" placeholder="Ingrese el beneficio del evento (700 caracteres max.)"><?php if(isset($realizacion) && ($realizacion)) {echo $realizacion["BENEFICIO"];} ?></textarea>
 				</div>
 			</div>
 		</div>
@@ -265,10 +265,10 @@
 									<label>¿Cuentas con otros apoyos?<span class="form-text">*</span>:</label>
 									<div>
 										<label class="radio-inline">
-											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($realizacion) && $persona["GENERO"] == "M" ) {echo 'checked="checked"'; } ?> value="1" /> Sí
+											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($apoyo) ) {echo 'checked="checked"';} ?> value="1" /> Sí
 										</label>
 										<label class="radio-inline">
-											<input type="radio" id="rdbApN" name="apoyo" <?php if ( isset($realizacion) && $persona["GENERO"] == "F" ) {echo 'checked="checked"'; } ?> value="0" /> No
+											<input type="radio" id="rdbApN" name="apoyo" <?php if ( !isset($apoyo) && isset($estancia) ) {echo 'checked="checked"';} ?> value="0" /> No
 										</label>
 									</div>
 								</div>
@@ -316,21 +316,21 @@
 			<div class="row">
 				<div class="form-group col-sm-4">
 					<label>Banco<span class="form-text">*</span>:</label>
-					<input type="text" id="banco" name="banco" class="form-control" placeholder="Ingresa el nombre del banco" />
+					<input type="text" id="banco" name="banco" class="form-control" placeholder="Ingresa el nombre del banco" value="<?php if(isset($persona) && ($persona)) {echo $persona["BANCO_NOMBRE"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Número de sucursal<span class="form-text">*</span>:</label>
-					<input type="text" id="sucursal" name="sucursal" class="form-control" placeholder="Ingresa el número de sucursal" />
+					<input type="text" id="sucursal" name="sucursal" class="form-control" placeholder="Ingresa el número de sucursal" value="<?php if(isset($persona) && ($persona)) {echo $persona["BANCO_SUCURSAL"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Número de cuenta<span class="form-text">*</span>:</label>
-					<input type="text" id="cuentaBanco" name="cuentaBanco" maxlength="12" class="form-control" placeholder="Ingresa tu número de cuenta" />
+					<input type="text" id="cuentaBanco" name="cuentaBanco" maxlength="12" class="form-control" placeholder="Ingresa tu número de cuenta" value="<?php if(isset($persona) && ($persona)) {echo $persona["BANCO_CUENTA"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-4">
 					<label>Cuenta CLABE<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Ingresa la Clave Bancaria Estandarizada"></span></label>
-					<input type="text" id="clabe" name="clabe" class="form-control" data-mask="999 999 99999999999 9" placeholder="Ingresa la CLABE interbancaria" />
+					<input type="text" id="clabe" name="clabe" class="form-control" data-mask="999 999 99999999999 9" placeholder="Ingresa la CLABE interbancaria" value="<?php if(isset($persona) && ($persona)) {echo $persona["BANCO_CLABE"];} ?>" />
 				</div>
 			</div>
 		</div>

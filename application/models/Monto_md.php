@@ -59,7 +59,7 @@ class Monto_md extends CI_Model {
         $this->db->insert(self::tabla,$this);
     }
     
-    function CleanAmount($id) {
+    function CleanSol($id) {
     	$this->db->where(array('SOLICITUD_ID'=>$id));
     	$query = $this->db->delete(self::tabla);
     }

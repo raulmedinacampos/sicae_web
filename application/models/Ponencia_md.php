@@ -59,7 +59,11 @@ class Ponencia_md extends CI_Model {
         $usr = $query->row();
         
 		return $usr->ID;
+    }
     
+    function CleanSol($id) {
+    	$this->db->where(array('SOLICITUD_ID'=>$id));
+    	$query = $this->db->delete(self::tabla);
     }
 	
     /*function Disable($id) {

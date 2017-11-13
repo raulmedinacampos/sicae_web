@@ -18,7 +18,7 @@ class Usuario extends CI_Controller {
 		$this->load->model('estudio_otro_md');
 		$this->load->model("direccion_md");
 		$this->load->model("publicacion_md");
-		$this->load->model("producto_otro_md");
+		$this->load->model("proyecto_md");
 		
 		
 		$perfil = $this->session->rol;
@@ -44,17 +44,11 @@ class Usuario extends CI_Controller {
 				foreach ( $materias as $val ) {
 					$mat .= $val["NOMBRE"].", ";
 				}
+				
 				$params["materias"] = trim($mat, ", ");
-				
-				/*$otros = $this->producto_otro_md->GetByPersona($params["persona"]["ID"]);
-				
-				$otr = "";
-				foreach ( $otros as $val ) {
-					$otr .= $val["DESCRIPCION"].", ".$val["ANIO"]."\n";
-				}
-				$params["patentes_otros"]=$otr;*/
 				$params["publicaciones_nacionales"]=$this->publicacion_md->GetCtByPersonaNc($params["persona"]["ID"],1);
 				$params["publicaciones_internacionales"]=$this->publicacion_md->GetCtByPersonaNc($params["persona"]["ID"],0);
+				$params["proyectos"] = $this->proyecto_md->GetByPerson($params["persona"]["ID"]);
 				break;
 			case 3:
 				$params["perfilC"] = "alumno";
@@ -280,7 +274,7 @@ class Usuario extends CI_Controller {
 		}*/
 		
 		$nacionales=$this->input->post("publNacionales");
-		
+		$this->publicacion_md->CleanPr($usr);
 		for($ct=0;$ct<$nacionales;$ct++){
 			$this->publicacion_md->InsertRecord(array($usr,"NP",1,"NP",0));
 		}
@@ -352,16 +346,24 @@ class Usuario extends CI_Controller {
 		$this->load->model("proyecto_md");
 		$usr=$this->session->userdata('id');
 		$tipo=$this->input->post("tipoProyecto");
+		$anio=$this->input->post("anio");
 		$esp=$this->input->post("espTP");
 		$reg=$this->input->post("registro");
 		$tpart=$this->input->post("tParticipacion");
 		
+		$this->proyecto_md->CleanPr($usr);
+		
 		foreach($reg as $ky=>$proy) {
 			if ( $reg[$ky] ) {
 				$data=array();
+				
+				if ( $tipo[$ky] == "Otros" ) {
+					$tipo[$ky] = $esp[$ky];
+				}
+				
 				array_push($data, $usr);
 				array_push($data, $tpart[$ky]);
-				array_push($data, $esp[$ky]);
+				array_push($data, $anio[$ky]);
 				array_push($data, $reg[$ky]);
 				array_push($data, $tipo[$ky]);
 				
@@ -385,6 +387,7 @@ class Usuario extends CI_Controller {
 			$noms=explode(",",$niv);
 			$id_niv=$ky+3;
 			$this->estudio_md->CleanPr($id_niv,$usr);
+			
 			foreach($noms as $nm){
 				$nm=trim($nm);
 				if($nm!="")

@@ -5,7 +5,13 @@ function Init() {
 }
 
 function AddCoauthor() {
+	var total = $("#hdnTotalCoautores").val();
 	var i = 2;
+	
+	if ( total > 2 ) {
+		i = total;
+	}
+	
 	$("#btnAgregarCoautor").click(function(e) {
 		e.preventDefault();
 		
@@ -61,7 +67,59 @@ function AddCoauthor() {
 	});
 }
 
+function SaveData() {
+	$("#btnGuardar").click(function(e) {
+		e.preventDefault();
+		
+		if ( $("#formPublicacion").valid() ) {
+			$.post(
+				'/publicacion/guardar', 
+				$("#formPublicacion").serialize(), 
+				function(data) {
+					$("#idSolicitud").val(data);
+					
+					$.post(
+						'/publicacion/coautores', 
+						$("#formPublicacion").serialize(), 
+						function(data) {}
+					);
+					
+					$.post(
+						'/publicacion/montos', 
+						$("#formPublicacion").serialize(), 
+						function(data) {}
+					);
+				}
+			);
+			
+			$("#modalAviso .modal-title").html('Información actualizada');
+			$("#modalAviso .modal-body").html('<div class="alert alert-success">La información ha sido actualizada</div>');
+			$("#modalAviso").modal('show');
+		} else {
+			var ctrlError = $("div.tab-content").find(".has-error").first();
+			var tab = ctrlError.parents(".tab-pane");
+			var tabID = tab.attr("id");
+			
+			$("#modalAviso .modal-title").html('Error');
+			$("#modalAviso .modal-body").html('<div class="alert alert-danger">Verifica cada una de las pestañas, aún hay campos pendientes de llenar.</div>');
+			$("#modalAviso").modal('show');
+			
+			$('#modalAviso').on('hidden.bs.modal', function(e) {
+				$('[href="#'+tabID+'"]').tab('show');
+				
+				$('html, body').animate({
+			        scrollTop: ctrlError.offset().top - 150
+			    }, 500);
+			});
+		}
+	});
+}
+
 function Validate() {
+	$.validator.addMethod("moneda", function(value, element) {
+	    return this.optional(element) || /^\d{0,8}(\.\d{0,2})?$/i.test(value);
+	}, "Ingresa una cantidad válida");
+	
 	$.extend($.validator.messages, {
 		  required: "Este campo es obligatorio.",
 		  digits: "Deben ser solo números"
@@ -109,5 +167,6 @@ function Validate() {
 $gmx(document).ready(function() {
 	Init();
 	AddCoauthor();
+	SaveData();
 	Validate();
 })

@@ -123,6 +123,7 @@
 				</div>
 			</div>
 			<?php
+			$i = "";
 			if ( (empty($titulos) && isset($ponencia)) || (!isset($ponencia)) ) {
 			?>
 			<div class="row">
@@ -133,59 +134,77 @@
 			</div>
 			<?php
 			} else {
+				$i = 1;
 				foreach ( $titulos as $val ) {
 			?>
 			<div class="row">
 				<div class="form-group col-sm-12">
-					<label>Ponencia 1. Título de ponencia en inglés y español</label>
-					<textarea id="tituloPonencia1" name="tituloPonencia[]" rows="3" class="form-control" placeholder="Anota el nombre de tu ponencia en inglés y en español separados por un salto de línea.\nNOTA: El nombre de la ponencia deberá coincidir con los demás documentos (oficio, carta de aceptación, resumen y ponencia completa)"><?php echo $val["NOMBRE"]; ?></textarea>
+					<label>Ponencia <?php echo $i; ?>. Título de ponencia en inglés y español</label>
+					<textarea id="tituloPonencia<?php echo $i; ?>" name="tituloPonencia[]" rows="3" class="form-control" placeholder="Anota el nombre de tu ponencia en inglés y en español separados por un salto de línea.\nNOTA: El nombre de la ponencia deberá coincidir con los demás documentos (oficio, carta de aceptación, resumen y ponencia completa)"><?php echo $val["NOMBRE"]; ?></textarea>
 				</div>
 			</div>
 			<?php
+				$i++;
 				}
 			}
 			?>
+			<input type="hidden" id="hdnTotalTitulos" value="<?php echo $i; ?>" />
 		</div>
 		
 		<div role="tabpanel" class="tab-pane" id="coautores">
 			<?php
-			if ( !empty($coautores) && isset($publicacion) ) {
+			$i = 1;
+			if ( !empty($titulos) && !empty($coautores) && isset($ponencia) ) {
+				foreach ( $titulos as $t ) {
 			?>
-			<div class="panel-group ficha-collapse" id="accordion-c'+x+'">
+			<div class="panel-group ficha-collapse" id="accordion-c<?php echo $i; ?>">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						<h4 class="panel-title">
-							<a data-parent="#accordion-c'+x+'" data-toggle="collapse" href="#panel-c'+x+'" aria-expanded="'+aria+'" aria-controls="panel-c'+x+'">Ponencia x</a>
+							<a data-parent="#accordion-c<?php echo $i; ?>" data-toggle="collapse" href="#panel-c<?php echo $i; ?>" aria-expanded="true" aria-controls="panel-c<?php echo $i; ?>">Ponencia <?php echo $i; ?></a>
 						</h4>
-						<button type="button" class="collpase-button '+collapsed+'" data-parent="#accordion-c'+x+'" data-toggle="collapse" href="#panel-c'+x+'"></button>
+						<button type="button" class="collpase-button" data-parent="#accordion-c<?php echo $i; ?>" data-toggle="collapse" href="#panel-c<?php echo $i; ?>"></button>
 					</div>
-					<div class="panel-collapse collapse '+collapse+'" id="panel-c'+x+'">
+					<div class="panel-collapse collapse in" id="panel-c<?php echo $i; ?>">
 						<div class="panel-body">
-							<button id="btnAgregarCoautor'+x+'" data-c="'+x+'" class="btn btn-sm btn-primary btnAgregarCoautor">
+							<button id="btnAgregarCoautor<?php echo $i; ?>" data-c="<?php echo $i; ?>" class="btn btn-sm btn-primary btnAgregarCoautor">
 								<span class="glyphicon glyphicon-plus"></span> Agregar coautor
 							</button>
-							<h5>Coautor 1</h5>
+							<?php
+							$j = 1;
+							foreach ( $coautores as $co ) {
+								if ( $t["ID"] == $co["PONENCIA_ID"] ) {
+							?>
+							<h5>Coautor <?php echo $j; ?></h5>
 							<div class="row">
 								<div class="form-group col-sm-4">
 									<label>Nombre(s):</label>
-									<input type="text" id="coNombre'+x+'_1" name="coNombre_1[]" class="form-control" placeholder="Nombre del coautor" />
+									<input type="text" id="coNombre<?php echo $i."_".$j; ?>" name="coNombre_<?php echo $j; ?>[]" class="form-control" placeholder="Nombre del coautor" value="<?php if(isset($coautores) && ($coautores)) {echo $co["NOMBRE"];} ?>" />
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Primer apellido:</label>
-									<input type="text" id="coApP'+x+'_1" name="coApP_1[]" class="form-control" placeholder="Primer apellido del coautor" />
+									<input type="text" id="coApP<?php echo $i."_".$j; ?>" name="coApP_<?php echo $j; ?>[]" class="form-control" placeholder="Primer apellido del coautor" value="<?php if(isset($coautores) && ($coautores)) {echo $co["APELLIDO_P"];}?>" />
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Segundo apellido:</label>
-									<input type="text" id="coApM'+x+'_1" name="coApM_1[]" class="form-control" placeholder="Segundo apellido del coautor" />
+									<input type="text" id="coApM<?php echo $i."_".$j; ?>" name="coApM_<?php echo $j; ?>[]" class="form-control" placeholder="Segundo apellido del coautor" value="<?php if(isset($coautores) && ($coautores)) {echo $co["APELLIDO_M"];}?>" />
 								</div>
 							</div>
+							<?php
+								$j++;
+								}
+							}
+							?>
 						</div>
 					</div>
 				</div>
 			</div>
 			<?php
+				$i++;
+				}
 			}
 			?>
+			<input type="hidden" id="hdnTotalCoautores" value="<?php echo sizeof($coautores); ?>" />
 		</div>
 		
 		<div role="tabpanel" class="tab-pane" id="monto">

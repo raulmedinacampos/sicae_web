@@ -124,7 +124,7 @@ class Persona_md extends CI_Model {
     	$this->db->set('BANCO_CUENTA', $data[2]);
     	$this->db->set('BANCO_CLABE', $data[3]);
 		
-		$this->db->update(self::tabla, $this, array('IDUSUARIO' => $id));
+		$this->db->update(self::tabla, $this, array('ID' => $id));
 		
 		return $id;
     }

@@ -33,7 +33,7 @@ class Proyecto_md extends CI_Model {
         return $query->row_array();
     }
 	
-    function GetByPersona($id) {
+    function GetByPerson($id) {
     	$this->db->select("p.*, tp.DESCRIPCION");
     	$this->db->from(self::tabla." p");
     	$this->db->join("TIPO_PARTICIPACION tp", "tp.ID = p.PARTICIPACION_ID", "left");
@@ -51,14 +51,13 @@ class Proyecto_md extends CI_Model {
     	$this->db->set('ID', $id);
     	$this->db->set('PERSONA_ID', $data[0]);
     	$this->db->set('PARTICIPACION_ID', $data[1]);
-    	//$this->db->set('NOMBRE', $data[2]);
-    	$this->db->set('NOMBRE', ".");
+    	$this->db->set('NOMBRE', $data[2]);
     	$this->db->set('REGISTRO', $data[3]);
 		$this->db->set('TIPO', $data[4]);
 		
-		if ( $data[4] == "Otros" ) {
+		/*if ( $data[4] == "Otros" ) {
 			$this->db->set('TIPO', substr($data[2], 0, 20));
-		}
+		}*/
 		
         $this->db->insert(self::tabla,$this);
 		
@@ -69,7 +68,11 @@ class Proyecto_md extends CI_Model {
         $usr = $query->row();
         
 		return $usr->ID;
+    }
     
+    function CleanPr($pr) {
+    	$this->db->where(array('PERSONA_ID'=>$pr));
+    	$query = $this->db->delete(self::tabla);
     }
 	
     /*function Disable($id) {

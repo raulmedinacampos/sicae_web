@@ -671,7 +671,7 @@
 						<?php
 						foreach ( $niveles_academicos as $val ) {
 						?>
-						<option <?php if(isset($profesor) && $profesor["NIVEL_ACADEMICO"] == $val->ID) {echo 'selected="selected"';} ?>" value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE; ?></option>
+						<option <?php if(isset($profesor) && $profesor["NIVEL_ACADEMICO"] == $val->ID) {echo 'selected="selected"';} ?> value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE; ?></option>
 						<?php
 						}
 						?>
@@ -707,7 +707,7 @@
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Unidades de aprendizaje impartidas en el instituto<span class="form-text">*</span>:</label>
-					<input type="text" id="unidAprendizaje" name="unidAprendizaje" maxlength="100" class="form-control" placeholder='Ingresa materias separadas por comas, Ej. "Economía, Bases de datos, Cálculo"' value="<?php if(isset($materias)) {echo $materias;} ?>" />
+					<input type="text" id="unidAprendizaje" name="unidAprendizaje" maxlength="100" class="form-control" placeholder='Ingresa materias separadas por comas, Ej. "Economía, Bases de datos, Cálculo. (Máximo 100 caracteres)"' value="<?php if(isset($materias)) {echo $materias;} ?>" />
 				</div>
 			</div>
 		</div>
@@ -717,6 +717,17 @@
 		
 		<?php
 			if ( $perfil == "1") {  // Profesor
+				$p = array();
+				
+				foreach ( $proyectos as $val ) {
+					if ( date('m') >= 11 && $val["NOMBRE"] == (date('Y')+1) ) {
+						$p = $val;
+					}
+					
+					if ( date('m') < 11 && $val["NOMBRE"] == date('Y') ) {
+						$p = $val;
+					}
+				}
 		?>
 		<div role="tabpanel" class="tab-pane" id="proyectos">
 			<div class="panel-group ficha-collapse" id="accordion6">
@@ -737,18 +748,19 @@
 								<label>Tipo de proyecto:</label>
 								<select id="tipoProyecto6" name="tipoProyecto[]" class="form-control tipoProy">
 									<option value="">Selecciona</option>
-									<option value="SIP">SIP</option>
-									<option value="CONACYT">CONACYT</option>
-									<option value="Otros">Otros</option>
+									<option <?php if(!empty($p) && $p["TIPO"] == "SIP") {echo 'selected="selected"';} ?> value="SIP">SIP</option>
+									<option <?php if(!empty($p) && $p["TIPO"] == "CONACYT") {echo 'selected="selected"';} ?> value="CONACYT">CONACYT</option>
+									<option <?php if(!empty($p) && $p["TIPO"] != "SIP" && $p["TIPO"] != "CONACYT") {echo 'selected="selected"';} ?> value="Otros">Otros</option>
 								</select>
 							</div>
 							<div class="form-group col-sm-4">
 								<label>Especifica el tipo de proyecto:</label>
-								<input type="text" id="espTP6" name="espTP[]" class="form-control otro" disabled="disabled" placeholder='Especifica si el tipo de proyecto es "Otros"' />
+								<input type="text" id="espTP6" name="espTP[]" readonly="readonly" class="form-control otro" placeholder='Especifica si el tipo de proyecto es "Otros"' value="<?php if(!empty($p) && $p["TIPO"] != "SIP" && $p["TIPO"] != "CONACYT") {echo $p["TIPO"];} ?>" />
+								<input type="hidden" id="anio6" name="anio[]" value="<?php if(date('m')>=11) {echo date('Y')+1;} else {echo date('Y');} ?>" />
 							</div>
 							<div class="form-group col-sm-4">
 								<label>Número de registro:</label>
-								<input type="text" id="registro6" name="registro[]" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
+								<input type="text" id="registro6" name="registro[]" class="form-control" placeholder="Ingresa el número de registro del proyecto" value="<?php if(!empty($p)) {echo $p["REGISTRO"];} ?>" />
 							</div>
 						</div>
 						<div class="row">
@@ -759,7 +771,7 @@
 									<?php
 									foreach ( $tipos_participacion as $val ) {
 									?>
-									<option value="<?php echo $val->ID; ?>"><?php echo $val->DESCRIPCION; ?></option>
+									<option <?php if(!empty($p) && $p["PARTICIPACION_ID"] == $val->ID) {echo 'selected="selected"';}?> value="<?php echo $val->ID; ?>"><?php echo $val->DESCRIPCION; ?></option>
 									<?php
 									}
 									?>
@@ -769,6 +781,19 @@
 					</div>
 				</div>
 			</div>
+			<?php
+			$p = array();
+			
+			foreach ( $proyectos as $val ) {
+				if ( date('m') >= 11 && $val["NOMBRE"] == date('Y') ) {
+					$p = $val;
+				}
+					
+				if ( date('m') < 11 && $val["NOMBRE"] == (date('Y')-1) ) {
+					$p = $val;
+				}
+			}
+			?>
 			<div class="panel-group ficha-collapse" id="accordion7">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -786,18 +811,19 @@
 									<label>Tipo de proyecto:</label>
 									<select id="tipoProyecto7" name="tipoProyecto[]" class="form-control tipoProy">
 										<option value="">Selecciona</option>
-										<option value="SIP">SIP</option>
-										<option value="CONACYT">CONACYT</option>
-										<option value="Otros">Otros</option>
+										<option <?php if(!empty($p) && $p["TIPO"] == "SIP") {echo 'selected="selected"';} ?> value="SIP">SIP</option>
+										<option <?php if(!empty($p) && $p["TIPO"] == "CONACYT") {echo 'selected="selected"';} ?> value="CONACYT">CONACYT</option>
+										<option <?php if(!empty($p) && $p["TIPO"] != "SIP" && $p["TIPO"] != "CONACYT") {echo 'selected="selected"';} ?> value="Otros">Otros</option>
 									</select>
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Especifica el tipo de proyecto:</label>
-									<input type="text" id="espTP7" name="espTP[]" class="form-control otro" disabled="disabled" placeholder='Especifica si el tipo de proyecto es "Otros"' />
+									<input type="text" id="espTP7" name="espTP[]" readonly="readonly" class="form-control otro" placeholder='Especifica si el tipo de proyecto es "Otros"' value="<?php if(!empty($p) && $p["TIPO"] != "SIP" && $p["TIPO"] != "CONACYT") {echo $p["TIPO"];} ?>" />
+									<input type="hidden" id="anio7" name="anio[]" value="<?php if(date('m')>=11) {echo date('Y');} else {echo (date('Y')-1);} ?>" />
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Número de registro:</label>
-									<input type="text" id="registro7" name="registro[]" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
+									<input type="text" id="registro7" name="registro[]" class="form-control" placeholder="Ingresa el número de registro del proyecto" value="<?php if(!empty($p)){echo $p["REGISTRO"];} ?>" />
 								</div>
 							</div>
 							<div class="row">
@@ -808,7 +834,7 @@
 										<?php
 										foreach ( $tipos_participacion as $val ) {
 										?>
-										<option value="<?php echo $val->ID; ?>"><?php echo $val->DESCRIPCION; ?></option>
+										<option <?php if(!empty($p) && $p["PARTICIPACION_ID"] == $val->ID) {echo 'selected="selected"';}?> value="<?php echo $val->ID; ?>"><?php echo $val->DESCRIPCION; ?></option>
 										<?php
 										}
 										?>
@@ -819,6 +845,19 @@
 					</div>
 				</div>
 			</div>
+			<?php
+			$p = array();
+			
+			foreach ( $proyectos as $val ) {
+				if ( date('m') >= 11 && $val["NOMBRE"] == (date('Y')-1) ) {
+					$p = $val;
+				}
+					
+				if ( date('m') < 11 && $val["NOMBRE"] == (date('Y')-2) ) {
+					$p = $val;
+				}
+			}
+			?>
 			<div class="panel-group ficha-collapse" id="accordion8">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -836,18 +875,19 @@
 									<label>Tipo de proyecto:</label>
 									<select id="tipoProyecto8" name="tipoProyecto[]" class="form-control tipoProy">
 										<option value="">Selecciona</option>
-										<option value="SIP">SIP</option>
-										<option value="CONACYT">CONACYT</option>
-										<option value="Otros">Otros</option>
+										<option <?php if(!empty($p) && $p["TIPO"] == "SIP") {echo 'selected="selected"';} ?> value="SIP">SIP</option>
+										<option <?php if(!empty($p) && $p["TIPO"] == "CONACYT") {echo 'selected="selected"';} ?> value="CONACYT">CONACYT</option>
+										<option <?php if(!empty($p) && $p["TIPO"] != "SIP" && $p["TIPO"] != "CONACYT") {echo 'selected="selected"';} ?> value="Otros">Otros</option>
 									</select>
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Especifica el tipo de proyecto:</label>
-									<input type="text" id="espTP8" name="espTP[]" class="form-control otro" disabled="disabled" placeholder='Especifica si el tipo de proyecto es "Otros"' />
+									<input type="text" id="espTP8" name="espTP[]" readonly="readonly" class="form-control otro" placeholder='Especifica si el tipo de proyecto es "Otros"' value="<?php if(!empty($p) && $p["TIPO"] != "SIP" && $p["TIPO"] != "CONACYT") {echo $p["TIPO"];} ?>" />
+									<input type="hidden" id="anio7" name="anio[]" value="<?php if(date('m')>=11) {echo (date('Y')-1);} else {echo (date('Y')-2);} ?>" />
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Número de registro:</label>
-									<input type="text" id="registro8" name="registro[]" class="form-control" placeholder="Ingresa el número de registro del proyecto" />
+									<input type="text" id="registro8" name="registro[]" class="form-control" placeholder="Ingresa el número de registro del proyecto" value="<?php if(!empty($p)){echo $p["REGISTRO"];} ?>" />
 								</div>
 							</div>
 							<div class="row">
@@ -858,7 +898,7 @@
 										<?php
 										foreach ( $tipos_participacion as $val ) {
 										?>
-										<option value="<?php echo $val->ID; ?>"><?php echo $val->DESCRIPCION; ?></option>
+										<option <?php if(!empty($p) && $p["PARTICIPACION_ID"] == $val->ID) {echo 'selected="selected"';}?> value="<?php echo $val->ID; ?>"><?php echo $val->DESCRIPCION; ?></option>
 										<?php
 										}
 										?>

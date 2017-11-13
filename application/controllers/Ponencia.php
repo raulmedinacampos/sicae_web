@@ -8,6 +8,7 @@ class Ponencia extends CI_Controller {
 		
 		$this->load->model("solicitud_md");
 		$this->load->model("ponencia_md");
+		$this->load->model("coautor_md");
 		$this->load->model("moneda_md");
 		$this->load->model("monto_md");
 		$this->load->model("apoyo_md");
@@ -18,6 +19,7 @@ class Ponencia extends CI_Controller {
 		if ( $params["ponencia"] ) {
 			$params["ponencia"] = end($params["ponencia"]);
 			$params["titulos"] = $this->ponencia_md->GetBySolicitud($params["ponencia"]["ID"]);
+			$params["coautores"] = $this->coautor_md->GetBySolicitud($params["ponencia"]["ID"]);
 			$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["ponencia"]["ID"]);
 			$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["ponencia"]["ID"]);
 			$params["seguro_int"] = $this->monto_md->GetByTypeReq("11", $params["ponencia"]["ID"]);
@@ -73,6 +75,7 @@ class Ponencia extends CI_Controller {
 		$sol=$this->input->post("idSolicitud");
 		$ponencias=$this->input->post("tituloPonencia");
 		$res=array();
+		$this->ponencia_md->CleanSol($sol);
 		foreach($ponencias as $pn){
 			$id_pon=$this->ponencia_md->insertRecord(array($sol,"A",$pn));
 			array_push($res,$id_pon);
@@ -84,9 +87,12 @@ class Ponencia extends CI_Controller {
 	public function coautores() {
 		$this->load->model("coautor_md");
 		$sol=$this->input->post("idSolicitud");
-		$ponencias=$this->input->post("id_ponencias");//recibir id de las ponencias como json para insertar coautores en sus respectivas ponencias
+		$ponencias=$this->input->post("idPonencias");
+		$ponencias=explode(",", $ponencias);
 		$ctpn=1;
 		$res=array();
+		
+		$rs=$this->coautor_md->CleanSol($sol);
 		foreach($ponencias as $pn){
 			$nombres=$this->input->post("coNombre_".$ctpn);
 			$apps=$this->input->post("coApP_".$ctpn);//Revisar name del campo en la vista de las ponencias que se agregan
@@ -101,10 +107,12 @@ class Ponencia extends CI_Controller {
 				array_push($data,$apps[$ky]);
 				array_push($data,$apms[$ky]);
 				
+				
 				$rs=$this->coautor_md->insertRecord($data);
 				
 				array_push($res,$rs);
 			}
+			$ctpn++;
 		}
 		
 		echo json_encode($res);//Son los id de los coautores agregados
@@ -119,6 +127,9 @@ class Ponencia extends CI_Controller {
 		$estancia=$this->input->post('estancia');
 		$otros=$this->input->post('otrosGastos');
 		$sol=$this->input->post("idSolicitud");
+		
+		$this->monto_md->CleanSol($sol);
+		
 		if($aereo!=""&&$aereo>0){
 			$this->monto_md->InsertRecord(array(5,$sol,"A",$aereo,0,$this->input->post("espTAereo"),$this->input->post("moneda"),$this->input->post("moneda")));
 			
@@ -149,6 +160,7 @@ class Ponencia extends CI_Controller {
 			array_push($data,$this->input->post("montoAp"));
 			array_push($data,$this->input->post("especificacionAp"));
 			
+			$this->apoyo_md->CleanSupport($sol);
 			$this->apoyo_md->InsertRecord($data);
 		}
 		

@@ -46,8 +46,11 @@ function DrawCoauthor() {
 		var collapse = "in";
 		var collapsed = "";
 		var z = new Array();
+		var ca = $("#hdnTotalCoautores").val();
 		
-		$("#coautores").html("");
+		if ( ca == "" ) {
+			$("#coautores").html("");
+		}
 		
 		for ( x=1; x<i; x++ ) {
 			z[x] = 2;
@@ -76,20 +79,23 @@ function DrawCoauthor() {
 			panel += '<div class="row">';
 			panel += '<div class="form-group col-sm-4">';
 			panel += '<label>Nombre(s):</label>';
-			panel += '<input type="text" id="coNombre'+x+'_1" name="coNombre_1[]" class="form-control" placeholder="Nombre del coautor" />';
+			panel += '<input type="text" id="coNombre'+x+'_1" name="coNombre_'+x+'[]" class="form-control" placeholder="Nombre del coautor" />';
 			panel += '</div>';
 			panel += '<div class="form-group col-sm-4">';
 			panel += '<label>Primer apellido:</label>';
-			panel += '<input type="text" id="coApP'+x+'_1" name="coApP_1[]" class="form-control" placeholder="Primer apellido del coautor" />';
+			panel += '<input type="text" id="coApP'+x+'_1" name="coApP_'+x+'[]" class="form-control" placeholder="Primer apellido del coautor" />';
 			panel += '</div>';
 			panel += '<div class="form-group col-sm-4">';
 			panel += '<label>Segundo apellido:</label>';
-			panel += '<input type="text" id="coApM'+x+'_1" name="coApM_1[]" class="form-control" placeholder="Segundo apellido del coautor" />';
+			panel += '<input type="text" id="coApM'+x+'_1" name="coApM_'+x+'[]" class="form-control" placeholder="Segundo apellido del coautor" />';
 			panel += '</div></div>';  //.row
 			panel += '</div></div>';  // .panel-body y .collapse
 			panel += '</div>';  // .panel
 			panel += '</div>';  // .ficha-collapse
-			$("#coautores").append(panel);
+			
+			if ( ca == "" ) {
+				$("#coautores").append(panel);
+			}
 			
 			
 		}
@@ -136,17 +142,25 @@ function SaveData() {
 					$("#idSolicitud").val(data);
 					
 					$.post(
+						'/ponencia/datos-ponencia', 
+						$("#formPonencia").serialize(), 
+						function(dp) {
+							var p = $.parseJSON(dp);
+							
+							$.post(
+								'/ponencia/coautores', 
+								$("#formPonencia").serialize() + '&idPonencias=' + p, 
+								function(data) {}
+							);
+						}
+					);
+					
+					$.post(
 						'/ponencia/montos', 
 						$("#formPonencia").serialize(), 
 						function(data) {}
 					);
 				}
-			);
-			
-			$.post(
-				'/ponencia/datos-ponencia', 
-				$("#formPonencia").serialize(), 
-				function(data) {}
 			);
 			
 			$("#modalAviso .modal-title").html('Información actualizada');
@@ -277,4 +291,10 @@ $gmx(document).ready(function() {
 	DrawCoauthor();
 	SaveData();
 	Validate();
+	
+	var total = $("#hdnTotalTitulos").val();
+	
+	if ( total > 2 ) {
+		i = total;
+	}
 });

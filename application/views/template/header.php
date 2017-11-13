@@ -101,7 +101,7 @@
             <li><a href="<?php echo base_url('estancia-de-investigacion'); ?>">Estancia de investigación</a></li>
             <li><a href="<?php echo base_url('obtencion-de-grado'); ?>">Obtención de grado</a></li>
             <li><a href="<?php echo base_url('ponencia'); ?>">Ponencia</a></li>
-            <li><a href="<?php echo base_url('publicaciones'); ?>">Publicaciones</a></li>
+            <li><a href="<?php echo base_url('publicacion'); ?>">Publicaciones</a></li>
             <li><a href="<?php echo base_url('seminario'); ?>">Seminarios y otros</a></li>
           </ul>
         </li>

@@ -13,9 +13,13 @@ class Realizacion extends CI_Controller {
 		$perfil = $this->session->rol;
 		$params["perfil"] = $perfil;
 		
+		$this->load->model("persona_md");
+		$this->load->model("solicitud_md");
 		$this->load->model("tipo_evento_md");
 		$this->load->model("escuela_md");
 		$this->load->model("moneda_md");
+		$this->load->model("monto_md");
+		$this->load->model("apoyo_md");
 		
 		$params["escuelas"] = $this->escuela_md->GetAll();
 		$params["tipos_evento"] = $this->tipo_evento_md->GetAllOrganizer();
@@ -23,6 +27,12 @@ class Realizacion extends CI_Controller {
 		
 		if ( $this->session->rol ) {
 			$params["persona"] = $this->persona_md->GetById($this->session->id);
+			$params["realizacion"] = $this->solicitud_md->GetByPerson($this->session->id);
+		}
+		
+		if ( $params["realizacion"] ) {
+			$params["realizacion"] = end($params["realizacion"]);
+			$params["apoyo"] = $this->apoyo_md->GetBySolicitud($params["realizacion"]["ID"]);
 		}
 		
 		$this->load->view('template/header', $header);
@@ -37,8 +47,8 @@ class Realizacion extends CI_Controller {
 		
 		array_push($data,'R');
 		array_push($data, $usr);
-		array_push($data,$this->input->post('tipoEvento'));
-		array_push($data,$this->input->post('evento'));
+		array_push($data, $this->input->post('tipoEvento'));
+		array_push($data, $this->input->post('evento'));
 		array_push($data, $this->input->post('institucion'));
 		array_push($data, $this->input->post('sede'));
 		array_push($data, $this->input->post('fechaInicio'));
@@ -48,7 +58,7 @@ class Realizacion extends CI_Controller {
 		array_push($data, NULL);
 		array_push($data, NULL);
 		array_push($data, NULL);
-		array_push($data, NULL);
+		array_push($data, $this->input->post('idioma'));
 		array_push($data, $this->input->post('objetivo'));
 		array_push($data, $this->input->post('beneficio'));
 		array_push($data, $this->input->post('tParticipantes'));
@@ -114,11 +124,11 @@ class Realizacion extends CI_Controller {
 		array_push($data, $this->input->post('banco'));
 		array_push($data, $this->input->post('sucursal'));
 		array_push($data, $this->input->post('cuentaBanco'));
-		array_push($data, $this->input->post('clabe'));
+		array_push($data, str_replace(" ", "", $this->input->post('clabe')));
 		
 		$id = $this->persona_md->SetCuentaBancaria($data,$usr);
 		
-		redirect(base_url("usuario"));
+		//redirect(base_url("usuario"));
 	}
 	
 		
@@ -132,7 +142,7 @@ class Realizacion extends CI_Controller {
 		$material=$this->input->post('material');
 		$otros=$this->input->post('otros');
 		$caf=$this->input->post('cafeteria');
-		$sol=$this->input->post("solicitud_id");
+		$sol=$this->input->post("idSolicitud");
 		if($aereo!=""&&$aereo>0){
 			$this->monto_md->InsertRecord(array(5,$sol,"R",$aereo,0,$this->input->post("espTAereo"),$this->input->post("moneda"),$this->input->post("moneda")));
 			

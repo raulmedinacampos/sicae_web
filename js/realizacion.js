@@ -115,11 +115,23 @@ function SaveData() {
 					$("#idSolicitud").val(data);
 					
 					$.post(
+						'/realizacion/expositores', 
+						$("#formRealizacion").serialize(), 
+						function(data) {}
+					);
+					
+					$.post(
 						'/realizacion/montos', 
-						$("#formSeminario").serialize(), 
+						$("#formRealizacion").serialize(), 
 						function(data) {}
 					);
 				}
+			);
+			
+			$.post(
+				'/realizacion/datos-banco', 
+				$("#formRealizacion").serialize(), 
+				function(data) {}
 			);
 			
 			$("#modalAviso .modal-title").html('Información actualizada');

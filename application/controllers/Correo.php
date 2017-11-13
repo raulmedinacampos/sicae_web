@@ -7,7 +7,8 @@ class Correo extends CI_Controller {
 	}
 	
 	public function recuperar_pass() {
-		$curp = $this->input->post("curp");
+		$curp=$_GET["curp"];
+		//$curp = $this->input->post("curp");
 		$curp = strtoupper($curp);
 		
 		$usr = $this->persona_md->GetByCURP($curp);
@@ -15,7 +16,8 @@ class Correo extends CI_Controller {
 		print_r($curp);
 		
 		if ( $usr ) {
-			$correo = $usr->EMAIL;
+			//$correo = $usr->EMAIL;
+			$correo = "raulmedinacampos@hotmail.com";
 			$nom = trim($usr->NOMBRE." ".$usr->APELLIDO_P." ".$usr->APELLIDO_M);
 			$usuario = $usr->CURP;
 			$pass = $usr->PASSWORD;
@@ -26,25 +28,30 @@ class Correo extends CI_Controller {
 					<p>CURP: <strong>'.$usuario.'</strong><br />';
 			
 			if ( $usr->TIPO_PERSONA_ID == 1 || $usr->TIPO_PERSONA_ID == 3 ) {
-				$body += 'Contraseña: <strong>'.$pass.'</strong></p>';
+				$body .= 'Contraseña: <strong>'.$pass.'</strong></p>';
 			}
 			
 			if ( $usr->TIPO_PERSONA_ID == 2 ) {
-				$body += 'Escuela: <strong>'.$escuela.'</strong></p>';
+				$body .= 'Escuela: <strong>'.$escuela.'</strong></p>';
 			}
 			
-			$body += '<p>En caso de seguir teniendo problemas para acceder al sistema te puedes comunicar al 5729 6000, extensiones 65033, 65095, 65145.</p>';
+			$body .= '<p>En caso de seguir teniendo problemas para acceder al sistema te puedes comunicar al 5729 6000, extensiones 65033, 65095, 65145.</p>';
 			
-			$config["protocol"] = "smtp";
-			$config["smtp_host"] = "correo.cofaa.ipn.mx";
-			$config["smtp_port"] = "25";
-			$config["smtp_user"] = "";
-			$config["smtp_pass"] = "";
-			$config["mailtype"] = "html";
+			//*
+			$config = Array(
+						'protocol'	=> 'smtp',
+						'smtp_host'	=> 'ssl://smtp.googlemail.com',
+						'smtp_port'	=> 465,
+						'smtp_user'	=> '***********@gmail.com',
+						'smtp_pass'	=> '******',
+						'mailtype'	=> 'html',
+						'newline'	=> "\r\n"
+					);
+			//*/
 			
 			$this->email->initialize($config);
-			$this->email->from('no-reply@cofaa.ipn.mx', 'Apoyos Económicos IPN');
-			$this->email->to($correo, $nom);
+			$this->email->from('apoyoseconomicos@cofaa.ipn.mx', 'Apoyos Económicos IPN');
+			$this->email->to($correo);
 			$this->email->subject("Recuperación de contraseña");
 			$this->email->message($body);
 			
