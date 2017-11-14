@@ -6,6 +6,33 @@ class Realizacion extends CI_Controller {
 	}
 	
 	public function index() {
+		$this->load->model("solicitud_md");
+	
+		$realizacion = $this->solicitud_md->GetByPerson($this->session->id);
+	
+		if ( $realizacion && sizeof($realizacion) > 0 ) {
+			$this->listado();
+		} else {
+			$this->nueva();
+		}
+	}
+	
+	public function listado() {
+		$header["js"][] = "jquery.dataTables.min";
+		$header["js"][] = "solicitudes";
+	
+		$header["titulo"] = "Realización";
+	
+		$this->load->model("solicitud_md");
+	
+		$params["solicitudes"] = $this->solicitud_md->GetByPerson($this->session->id);
+	
+		$this->load->view('template/header', $header);
+		$this->load->view('listados/realizacion', $params);
+		$this->load->view('template/footer');
+	}
+	
+	public function nueva() {
 		$header["js"][] = "realizacion";
 		
 		$header['titulo'] = "Realización";
@@ -21,17 +48,21 @@ class Realizacion extends CI_Controller {
 		$this->load->model("monto_md");
 		$this->load->model("apoyo_md");
 		
+		$idSol = $this->input->post("hdnID");
+		
 		$params["escuelas"] = $this->escuela_md->GetAll();
 		$params["tipos_evento"] = $this->tipo_evento_md->GetAllOrganizer();
 		$params["monedas"] = $this->moneda_md->GetAll();
 		
-		if ( $this->session->rol ) {
-			$params["persona"] = $this->persona_md->GetById($this->session->id);
-			$params["realizacion"] = $this->solicitud_md->GetByPerson($this->session->id);
+		if ( $idSol ) {
+			$params["realizacion"] = $this->solicitud_md->GetById($idSol);
 		}
 		
-		if ( $params["realizacion"] ) {
-			$params["realizacion"] = end($params["realizacion"]);
+		if ( $this->session->rol ) {
+			$params["persona"] = $this->persona_md->GetById($this->session->id);
+		}
+		
+		if ( isset($params["realizacion"]) ) {
 			$params["apoyo"] = $this->apoyo_md->GetBySolicitud($params["realizacion"]["ID"]);
 		}
 		

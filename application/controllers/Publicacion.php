@@ -1,6 +1,33 @@
 <?php
 class Publicacion extends CI_Controller {
 	public function index() {
+		$this->load->model("solicitud_md");
+	
+		$publicacion = $this->solicitud_md->GetByTypePerson(6, $this->session->id);
+	
+		if ( $publicacion && sizeof($publicacion) > 0 ) {
+			$this->listado();
+		} else {
+			$this->nueva();
+		}
+	}
+	
+	public function listado() {
+		$header["js"][] = "jquery.dataTables.min";
+		$header["js"][] = "solicitudes";
+	
+		$header["titulo"] = "Publicaciones";
+	
+		$this->load->model("solicitud_md");
+	
+		$params["solicitudes"] = $this->solicitud_md->GetByTypePerson(6, $this->session->id);
+	
+		$this->load->view('template/header', $header);
+		$this->load->view('listados/publicacion', $params);
+		$this->load->view('template/footer');
+	}
+	
+	public function nueva() {
 		$header["js"][] = "jquery.placeholder.min";
 		$header["js"][] = "publicaciones";
 		
@@ -11,11 +38,15 @@ class Publicacion extends CI_Controller {
 		$this->load->model("coautor_md");
 		$this->load->model("monto_md");
 		
-		$params["monedas"] = $this->moneda_md->GetAll();
-		$params["publicacion"] = $this->solicitud_md->GetByTypePerson(6, $this->session->id);
+		$idSol = $this->input->post("hdnID");
 		
-		if ( $params["publicacion"] ) {
-			$params["publicacion"] = end($params["publicacion"]);
+		$params["monedas"] = $this->moneda_md->GetAll();
+		
+		if ( $idSol ) {
+			$params["publicacion"] = $this->solicitud_md->GetById($idSol);
+		}
+		
+		if ( isset($params["publicacion"]) ) {
 			$params["coautores"] = $this->coautor_md->GetBySolicitud($params["publicacion"]["ID"]);
 			$params["costo"] = $this->monto_md->GetByTypeReq("1", $params["publicacion"]["ID"]);
 		}

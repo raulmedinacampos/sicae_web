@@ -67,17 +67,17 @@ function ToggleProfData() {
 }
 
 function CalculateTesis() {
-	var ctl = $("#cTLicenciatura");
-	var itl = $("#iTLicenciatura");
-	var ctm = $("#cTMaestria");
-	var itm = $("#iTMaestria");
-	var ctd = $("#cTDoctorado");
-	var itd = $("#iTDoctorado");
+	var lic = ($("#tTLicenciatura").val()) ? parseInt($("#tTLicenciatura").val()) : 0;
+	var mae = ($("#tTMaestria").val()) ? parseInt($("#tTMaestria").val()) : 0;
+	var doc = ($("#tTDoctorado").val()) ? parseInt($("#tTDoctorado").val()) : 0;
+	
+	$("#hdnTotalTesis").val(lic + mae + doc);
 	
 	$("#cTLicenciatura, #iTLicenciatura").keyup(function() {
 		if ( $("#cTLicenciatura").val() && $("#iTLicenciatura").val() ) {
 			var suma = parseInt($("#cTLicenciatura").val()) + parseInt($("#iTLicenciatura").val());
 			$("#tTLicenciatura").val(suma);
+			lic = suma;
 		}
 	});
 	
@@ -85,6 +85,7 @@ function CalculateTesis() {
 		if ( $("#cTMaestria").val() && $("#iTMaestria").val() ) {
 			var suma = parseInt($("#cTMaestria").val()) + parseInt($("#iTMaestria").val());
 			$("#tTMaestria").val(suma);
+			mae = suma;
 		}
 	});
 	
@@ -92,7 +93,28 @@ function CalculateTesis() {
 		if( $("#cTDoctorado").val() && $("#iTDoctorado").val() ) {
 			var suma = parseInt($("#cTDoctorado").val()) + parseInt($("#iTDoctorado").val());
 			$("#tTDoctorado").val(suma);
+			doc = suma;
 		}
+	});
+	
+	$("#cTLicenciatura, #iTLicenciatura, #cTMaestria, #iTMaestria, #cTDoctorado, #iTDoctorado").keyup(function() {
+		$("#hdnTotalTesis").val(lic + mae + doc);
+	});
+}
+
+function CalculateProjects() {
+	var a1 = ($("#tipoProyecto6").val()) ? 1 : 0;
+	var a2 = ($("#tipoProyecto7").val()) ? 1 : 0;
+	var a3 = ($("#tipoProyecto8").val()) ? 1 : 0;
+	
+	$("#hdnTotalProy").val(a1 + a2 + a3);
+	
+	$('select[name="tipoProyecto[]"]').change(function() {
+		a1 = ($("#tipoProyecto6").val()) ? 1 : 0;
+		a2 = ($("#tipoProyecto7").val()) ? 1 : 0;
+		a3 = ($("#tipoProyecto8").val()) ? 1 : 0;
+		
+		$("#hdnTotalProy").val(a1 + a2 + a3);
 	});
 }
 
@@ -200,6 +222,10 @@ function Validate() {
 		errorPlacement: function(error, element) {
 			if ( element.attr("type") == "radio" ) {
 				error.insertAfter(element.parent().parent());
+			} else if ( element.attr("name") == "hdnTotalTesis" ) {
+				error.insertAfter(".error-tesis");
+			} else if ( element.attr("name") == "hdnTotalProy" ) {
+				error.insertAfter(".error-proyecto");
 			} else if ( element.parent(".input-group").length ) {
 				error.insertAfter(element.parent());
 			} else {
@@ -404,6 +430,12 @@ function Validate() {
 			unidAprendizaje: {
 				required: true
 			},
+			hdnTotalTesis: {
+				min: 1
+			},
+			hdnTotalProy: {
+				min: 1
+			},
 			banco: {
 				required: true
 			},
@@ -449,6 +481,8 @@ function Validate() {
 			unidAprendizaje: {
 				maxlength: "El texto no debe exceder los 100 caracteres"
 			},
+			hdnTotalTesis : "Debes contar por lo menos con un trabajo de dirección de tesis",
+			hdnTotalProy : "Debes contar por lo menos con un proyecto",
 			sucursal: {
 				maxlength: "El número de sucursal no puede de más de seis dígitos"
 			},
@@ -474,14 +508,21 @@ function Validate() {
 		required: function(element) {
 			return $("#tipoProyecto6").val() != "";
 		}
-	});
+	});*/
 	
-	$("#espTP7").rules("add", {
-		required: function(element) {
-			return $("#tipoProyecto7").val() == "Otros";
+	/*$("#espTP7").rules("add", {
+		required: {
+			function(element) {
+				return $("#tipoProyecto7").val() == "Otros";
+			}
 		}
-	});
-	
+	});*/
+	/*$("#accordion7 input").each(function() {
+		$(this).rules("add", {
+			required: true
+		});
+	});*/
+	/*
 	$("#registro7").rules("add", {
 		required: function(element) {
 			return $("#tipoProyecto7").val() != "";
@@ -518,6 +559,7 @@ $gmx(document).ready(function() {
 	TooglePasswordFields();
 	ToggleProfData();
 	CalculateTesis();
+	CalculateProjects();
 	EnableProjectDesc();
 	SaveData();
 	Validate();

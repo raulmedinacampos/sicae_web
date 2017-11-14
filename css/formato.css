@@ -49,10 +49,10 @@
 }
 
 .montos .cantidad {
-	padding: 0pt 8pt 0pt 8pt;
+	padding: 0pt 15pt 0pt 8pt;
 	background-color: #8C5069;
 	color: #FFFFFF;
-	text-align: center;
+	text-align: right;
 }
 
 .montos td.descripcion {
@@ -60,11 +60,11 @@
 }
 
 .montos .total {
-	padding: 6pt 8pt 6pt 8pt;
+	padding: 6pt 15pt 6pt 8pt;
 	background-color: #6C1D45;
 	color: #FFFFFF;
 	font-size: 12pt;
-	text-align: center;
+	text-align: right;
 }
 
 .tabla {
@@ -84,7 +84,6 @@
 .tesis {
 	padding: 5pt;
 	margin-right: 5pt;
-	border: 0.8pt solid #555555;
 }
 
 .text-center {

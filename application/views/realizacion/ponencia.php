@@ -204,7 +204,7 @@
 				}
 			}
 			?>
-			<input type="hidden" id="hdnTotalCoautores" value="<?php echo sizeof($coautores); ?>" />
+			<input type="hidden" id="hdnTotalCoautores" value="<?php if(isset($coautores)) {echo sizeof($coautores);} ?>" />
 		</div>
 		
 		<div role="tabpanel" class="tab-pane" id="monto">

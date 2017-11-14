@@ -106,11 +106,11 @@ class Formato extends CI_Controller {
 		$dirLic = $this->direccion_md->GetByNvPr(3, $persona["ID"]);
 		$dirMaes = $this->direccion_md->GetByNvPr(4, $persona["ID"]);
 		$dirDoc = $this->direccion_md->GetByNvPr(5, $persona["ID"]);
-		$tDirLic = ($dirLic["TOTAL"] == "0") ? "No" : 'Sí <span class="tesis">'.$dirLic["TOTAL"].'</span><span class="tesis">'.$dirLic["CONCLUIDAS"].'</span><span class="tesis">'.$dirLic["INTERNAS"].'</span>';
-		$tDirMaes = ($dirMaes["TOTAL"] == "0") ? "No" : 'Sí <span class="tesis">'.$dirMaes["TOTAL"].'</span><span class="tesis">'.$dirMaes["CONCLUIDAS"].'</span><span class="tesis">'.$dirMaes["INTERNAS"].'</span>';
-		$tDirDoc = ($dirDoc["TOTAL"] == "0") ? "No" : 'Sí <span class="tesis">'.$dirDoc["TOTAL"].'</span><span class="tesis">'.$dirDoc["CONCLUIDAS"].'</span><span class="tesis">'.$dirDoc["INTERNAS"].'</span>';
+		$tDirLic = ($dirLic["TOTAL"] == "0") ? "No" : 'Sí <span class="tesis">T: '.$dirLic["TOTAL"].', </span><span class="tesis">C: '.$dirLic["CONCLUIDAS"].', </span><span class="tesis">I: '.$dirLic["INTERNAS"].'</span>';
+		$tDirMaes = ($dirMaes["TOTAL"] == "0") ? "No" : 'Sí <span class="tesis">T: '.$dirMaes["TOTAL"].', </span><span class="tesis">C: '.$dirMaes["CONCLUIDAS"].', </span><span class="tesis">I: '.$dirMaes["INTERNAS"].'</span>';
+		$tDirDoc = ($dirDoc["TOTAL"] == "0") ? "No" : 'Sí <span class="tesis">T: '.$dirDoc["TOTAL"].', </span><span class="tesis">C: '.$dirDoc["CONCLUIDAS"].', </span><span class="tesis">I: '.$dirDoc["INTERNAS"].'</span>';
 		
-		$proyectos = $this->proyecto_md->GetByPersona($persona["ID"]);
+		$proyectos = $this->proyecto_md->GetByPerson($persona["ID"]);
 		$ponencias = $this->ponencia_md->GetBySolicitud($solicitud["ID"]);
 		$coautores = $this->coautor_md->GetBySolicitud($solicitud["ID"]);
 		$tAereo = $this->monto_md->GetByTypeReq("5", $solicitud["ID"]);
@@ -180,7 +180,7 @@ class Formato extends CI_Controller {
 		$moneda = ($tAereo["S_MONEDA_ID"] == 1) ? 'USD $' : '$';
 		$montoTotal = $tAereo["SOLICITADO"] + $tTerrestre["SOLICITADO"] + $seguroInt["SOLICITADO"] + $estancia["SOLICITADO"] + $inscripcion["SOLICITADO"];
 		
-		$pdf = $this->pdf->load("", "Letter", "", "DejaVuSerif", 14, 14, 45, 18, 6, 8);
+		$pdf = $this->pdf->load("", "Letter", "", "Arial", 14, 14, 45, 18, 6, 8);
 		$pdf->SetHTMLHeader($header);
 		$pdf->SetHTMLFooter($footer);
 		$pdf->WriteHTML($stylesheet, 1);
@@ -354,16 +354,14 @@ class Formato extends CI_Controller {
 									<tr class="even">
 										<th>Tipo y número de registro</td>
 										<th>Tipo de participación</td>
-										<th>Proyecto de investigación</td>
 									</tr>';
 		$i = 0;
 		foreach ( $proyectos as $val ) {
 			if ( $i < 7 ) {
 				$html .= '
 									<tr>
-										<td>'.$val["REGISTRO"].'</td>
+										<td>'.$val["TIPO"]."-".$val["REGISTRO"].'</td>
 										<td>'.$val["DESCRIPCION"].'</td>
-										<td>'.$val["NOMBRE"].'</td>
 									</tr>';
 			}
 			$i++;
@@ -396,6 +394,39 @@ class Formato extends CI_Controller {
 		$pdf->WriteHTML($html);
 		
 		$pdf->AddPage();
+		
+		/* Estancia de investigación */
+		if ( $solicitud["TIPO_EVENTO_ID"] == 3 ) {
+			$html = '	<p class="seccion">Evento y actividad académica a realizar</p>
+						<table class="tabla">
+							<tr>
+								<td colspan="4">Nombre del evento: '.$solicitud["NOMBRE_EVENTO"].'</td>
+							</tr>
+							<tr>
+								<td colspan="4">Sede: '.$solicitud["SEDE"].'</td>
+							</tr>
+							<tr>
+								<td colspan="4">Objetivo: '.$solicitud["OBJETIVO"].'</td>
+							</tr>
+							<tr>
+								<td colspan="4">Beneficio institucional: '.$solicitud["BENEFICIO"].'</td>
+							</tr>
+							<tr>
+								<td colspan="4">Progama de trabajo: '.$solicitud["OTRO"].'</td>
+							</tr>
+							<tr>
+								<td colspan="4">Itinerario: '.$solicitud["ITINERARIO"].'</td>
+							</tr>
+							<tr>
+								<td colspan="2">Fechas: del '.$solicitud["FECHA_INICIAL"].' al '.$solicitud["FECHA_FINAL"].'</td>
+							</tr>
+						</table>';
+		}
+		
+		/* Obtención de grado */
+		if ( $solicitud["TIPO_EVENTO_ID"] == 4 ) {
+			$html = '';
+		}
 		
 		/* Ponencia */
 		if ( $solicitud["TIPO_EVENTO_ID"] == 5 ) {
@@ -448,40 +479,22 @@ class Formato extends CI_Controller {
 						</table>';
 		}
 		
-		/* Estancia de investigación */
-		if ( $solicitud["TIPO_EVENTO_ID"] == 3 ) {
-			$html = '	<p class="seccion">Evento y actividad académica a realizar</p>
-						<table class="tabla">
-							<tr>
-								<td colspan="4">Nombre del evento: '.$solicitud["NOMBRE_EVENTO"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Sede: '.$solicitud["SEDE"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Objetivo: '.$solicitud["OBJETIVO"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Beneficio institucional: '.$solicitud["BENEFICIO"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Progama de trabajo: '.$solicitud["OTRO"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Itinerario: '.$solicitud["ITINERARIO"].'</td>
-							</tr>
-							<tr>
-								<td colspan="2">Fechas: del '.$solicitud["FECHA_INICIAL"].' al '.$solicitud["FECHA_FINAL"].'</td>
-							</tr>
-						</table>';
+		/* Publicaciones */
+		if ( $solicitud["TIPO_EVENTO_ID"] == 6 ) {
+			$html = '';
+		}
+		
+		/* Seminarios y otros */
+		if ( $solicitud["TIPO_EVENTO_ID"] == 1 || $solicitud["TIPO_EVENTO_ID"] == 2 || $solicitud["TIPO_EVENTO_ID"] == 7 || $solicitud["TIPO_EVENTO_ID"] == 8 ) {
+			$html = '';
 		}
 		
 		$html .= '	<p class="seccion">Monto solicitado</p>
 					<h6>Apoyo solicitado para:</h6>
 					<table class="montos">
 						<tr>
-							<td>Transporte aéreo:<br /><span class="descripcion">(Viaje redondo, clase turista)</span></td>
-							<td class="cantidad">'.$moneda.number_format($tAereo["SOLICITADO"], 2).'</td>
+							<td width="27%">Transporte aéreo:<br /><span class="descripcion">(Viaje redondo, clase turista)</span></td>
+							<td width="27%" class="cantidad">'.$moneda.number_format($tAereo["SOLICITADO"], 2).'</td>
 							<td class="descripcion">Transporte aéreo: '.$tAereo["JUSTIFICACION"].'</td>
 						</tr>
 						<tr>
@@ -507,8 +520,8 @@ class Formato extends CI_Controller {
 					</table>';
 		
 		$html .= '	<div class="firmas">
-						<div class="firmaIzq">Juan Gabriel Molina Zavaleta</div>
-						<div class="firmaDer">Firma del director Dra. Mónica Rosalía Jaime Fonseca y sello de la U.A.</div>
+						<div class="firmaIzq">'.$persona["NOMBRE"]." ".$apellidos.'</div>
+						<div class="firmaDer">Firma del director '.$centro["NOMBRE_DIRECTOR"].' y sello de la U.A.</div>
 					</div>';
 		
 		$pdf->WriteHTML($html);

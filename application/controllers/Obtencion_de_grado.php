@@ -1,6 +1,33 @@
 <?php
 class Obtencion_de_grado extends CI_Controller {
 	public function index() {
+		$this->load->model("solicitud_md");
+	
+		$grado = $this->solicitud_md->GetByTypePerson(4, $this->session->id);
+	
+		if ( $grado && sizeof($grado) > 0 ) {
+			$this->listado();
+		} else {
+			$this->nueva();
+		}
+	}
+	
+	public function listado() {
+		$header["js"][] = "jquery.dataTables.min";
+		$header["js"][] = "solicitudes";
+	
+		$header["titulo"] = "Obtención de grado";
+	
+		$this->load->model("solicitud_md");
+	
+		$params["solicitudes"] = $this->solicitud_md->GetByTypePerson(4, $this->session->id);
+	
+		$this->load->view('template/header', $header);
+		$this->load->view('listados/grado', $params);
+		$this->load->view('template/footer');
+	}
+	
+	public function nueva() {
 		$header["js"][] = "grado";
 		
 		$header['titulo'] = "Obtención de grado";
@@ -13,11 +40,15 @@ class Obtencion_de_grado extends CI_Controller {
 		$this->load->model("monto_md");
 		$this->load->model("apoyo_md");
 		
-		$params["monedas"] = $this->moneda_md->GetAll();
-		$params["grado"] = $this->solicitud_md->GetByTypePerson(4, $this->session->id);
+		$idSol = $this->input->post("hdnID");
 		
-		if ( $params["grado"] ) {
-			$params["grado"] = end($params["grado"]);
+		$params["monedas"] = $this->moneda_md->GetAll();
+		
+		if ( $idSol ) {
+			$params["grado"] = $this->solicitud_md->GetById($idSol);
+		}
+		
+		if ( isset($params["grado"]) ) {
 			$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["grado"]["ID"]);
 			$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["grado"]["ID"]);
 			$params["seguro_int"] = $this->monto_md->GetByTypeReq("11", $params["grado"]["ID"]);

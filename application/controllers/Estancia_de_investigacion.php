@@ -1,6 +1,33 @@
 <?php
 class Estancia_de_investigacion extends CI_Controller {
 	public function index() {
+		$this->load->model("solicitud_md");
+	
+		$estancia = $this->solicitud_md->GetByTypePerson(3, $this->session->id);
+	
+		if ( $estancia && sizeof($estancia) > 0 ) {
+			$this->listado();
+		} else {
+			$this->nueva();
+		}
+	}
+	
+	public function listado() {
+		$header["js"][] = "jquery.dataTables.min";
+		$header["js"][] = "solicitudes";
+	
+		$header["titulo"] = "Estancia de investigación";
+	
+		$this->load->model("solicitud_md");
+	
+		$params["solicitudes"] = $this->solicitud_md->GetByTypePerson(3, $this->session->id);
+	
+		$this->load->view('template/header', $header);
+		$this->load->view('listados/estancia', $params);
+		$this->load->view('template/footer');
+	}
+	
+	public function nueva() {
 		$header["js"][] = "estancia";
 		
 		$header["titulo"] = "Estancia de investigación";
@@ -10,11 +37,15 @@ class Estancia_de_investigacion extends CI_Controller {
 		$this->load->model("monto_md");
 		$this->load->model("apoyo_md");
 		
-		$params["monedas"] = $this->moneda_md->GetAll();
-		$params["estancia"] = $this->solicitud_md->GetByTypePerson(3, $this->session->id);
+		$idSol = $this->input->post("hdnID");
 		
-		if ( $params["estancia"] ) {
-			$params["estancia"] = end($params["estancia"]);
+		$params["monedas"] = $this->moneda_md->GetAll();
+		
+		if ( $idSol ) {
+			$params["estancia"] = $this->solicitud_md->GetById($idSol);
+		}
+		
+		if ( isset($params["estancia"]) ) {
 			$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["estancia"]["ID"]);
 			$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["estancia"]["ID"]);
 			$params["seguro_int"] = $this->monto_md->GetByTypeReq("11", $params["estancia"]["ID"]);

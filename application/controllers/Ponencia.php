@@ -1,6 +1,33 @@
 <?php
 class Ponencia extends CI_Controller {
 	public function index() {
+		$this->load->model("solicitud_md");
+		
+		$ponencia = $this->solicitud_md->GetByTypePerson(5, $this->session->id);
+		
+		if ( $ponencia && sizeof($ponencia) > 0 ) {
+			$this->listado();
+		} else {
+			$this->nueva();
+		}
+	}
+	
+	public function listado() {
+		$header["js"][] = "jquery.dataTables.min";
+		$header["js"][] = "solicitudes";
+		
+		$header["titulo"] = "Ponencia";
+		
+		$this->load->model("solicitud_md");
+		
+		$params["solicitudes"] = $this->solicitud_md->GetByTypePerson(5, $this->session->id);
+		
+		$this->load->view('template/header', $header);
+		$this->load->view('listados/ponencia', $params);
+		$this->load->view('template/footer');
+	}
+	
+	public function nueva() {
 		$header["js"][] = "jquery.placeholder.min";
 		$header["js"][] = "ponencia";
 		
@@ -13,11 +40,15 @@ class Ponencia extends CI_Controller {
 		$this->load->model("monto_md");
 		$this->load->model("apoyo_md");
 		
-		$params["monedas"] = $this->moneda_md->GetAll();
-		$params["ponencia"] = $this->solicitud_md->GetByTypePerson(5, $this->session->id);
+		$idSol = $this->input->post("hdnID");
 		
-		if ( $params["ponencia"] ) {
-			$params["ponencia"] = end($params["ponencia"]);
+		$params["monedas"] = $this->moneda_md->GetAll();
+		
+		if ( $idSol ) {
+			$params["ponencia"] = $this->solicitud_md->GetById($idSol);
+		}
+		
+		if ( isset($params["ponencia"]) ) {
 			$params["titulos"] = $this->ponencia_md->GetBySolicitud($params["ponencia"]["ID"]);
 			$params["coautores"] = $this->coautor_md->GetBySolicitud($params["ponencia"]["ID"]);
 			$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["ponencia"]["ID"]);

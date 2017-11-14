@@ -1,6 +1,68 @@
 <?php
 class Seminario extends CI_Controller {
 	public function index() {
+		$this->load->model("solicitud_md");
+		
+		$total = 0;
+	
+		$seminario = $this->solicitud_md->GetByTypePerson(1, $this->session->id);
+		$total += sizeof($seminario);
+		
+		$seminario = $this->solicitud_md->GetByTypePerson(2, $this->session->id);
+		$total += sizeof($seminario);
+		
+		$seminario = $this->solicitud_md->GetByTypePerson(7, $this->session->id);
+		$total += sizeof($seminario);
+		
+		$seminario = $this->solicitud_md->GetByTypePerson(8, $this->session->id);
+		$total += sizeof($seminario);
+	
+		if ( $total > 0 ) {
+			$this->listado();
+		} else {
+			$this->nuevo();
+		}
+	}
+	
+	public function listado() {
+		$header["js"][] = "jquery.dataTables.min";
+		$header["js"][] = "solicitudes";
+	
+		$header["titulo"] = "Publicaciones";
+	
+		$this->load->model("solicitud_md");
+		
+		$solicitudes = array();
+		
+		$s1 = $this->solicitud_md->GetByTypePerson(1, $this->session->id);
+		$s2 = $this->solicitud_md->GetByTypePerson(2, $this->session->id);
+		$s3 = $this->solicitud_md->GetByTypePerson(7, $this->session->id);
+		$s4 = $this->solicitud_md->GetByTypePerson(8, $this->session->id);
+		
+		foreach ( $s1 as $val ) {
+			array_push($solicitudes, $s1);
+		}
+		
+		foreach ( $s2 as $val ) {
+			array_push($solicitudes, $s2);
+		}
+		
+		foreach ( $s3 as $val ) {
+			array_push($solicitudes, $s3);
+		}
+		
+		foreach ( $s4 as $val ) {
+			array_push($solicitudes, $val);
+		}
+		
+		$params["solicitudes"] = $solicitudes;
+	
+		$this->load->view('template/header', $header);
+		$this->load->view('listados/seminario', $params);
+		$this->load->view('template/footer');
+	}
+	
+	public function nuevo() {
 		$header["js"][] = "seminario";
 		
 		$header["titulo"] = "Seminarios y otros";
@@ -11,24 +73,16 @@ class Seminario extends CI_Controller {
 		$this->load->model("monto_md");
 		$this->load->model("apoyo_md");
 		
+		$idSol = $this->input->post("hdnID");
+		
 		$params["tipos_evento"] = $this->tipo_evento_md->GetAll();
 		$params["monedas"] = $this->moneda_md->GetAll();
-		$params["seminario"] = $this->solicitud_md->GetByTypePerson(1, $this->session->id);
 		
-		if ( !$params["seminario"] ) {
-			$params["seminario"] = $this->solicitud_md->GetByTypePerson(2, $this->session->id);
+		if ( $idSol ) {
+			$params["seminario"] = $this->solicitud_md->GetById($idSol);
 		}
 		
-		if ( !$params["seminario"] ) {
-			$params["seminario"] = $this->solicitud_md->GetByTypePerson(7, $this->session->id);
-		}
-		
-		if ( !$params["seminario"] ) {
-			$params["seminario"] = $this->solicitud_md->GetByTypePerson(8, $this->session->id);
-		}
-		
-		if ( $params["seminario"] ) {
-			$params["seminario"] = end($params["seminario"]);
+		if ( isset($params["seminario"]) ) {
 			$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["seminario"]["ID"]);
 			$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["seminario"]["ID"]);
 			$params["estancia"] = $this->monto_md->GetByTypeReq("2", $params["seminario"]["ID"]);

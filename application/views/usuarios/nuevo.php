@@ -131,7 +131,7 @@
 			<div class="row oculto">
 				<div class="form-group col-sm-4">
 					<label>Contraseña<span class="form-text">*</span>:</label>
-					<input type="password" id="password" name="password" maxlength="8" class="form-control" placeholder="Nueva contraseña" />
+					<input type="password" id="password" name="password" maxlength="8" class="form-control" placeholder="Nueva contraseña (8 caracteres)" />
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Confirmar contraseña<span class="form-text">*</span>:</label>
@@ -588,6 +588,9 @@
 			<p>A continuación, ingresa el total de direcciones de tesis concluidas 
 				en <?php echo date('Y')-1; ?> y <?php echo date('Y'); ?> por nivel, 
 				seguido de cuantas de estas están concluidas y cuantas son institucionales</p>
+			<div class="error-tesis form-group">
+				<input type="hidden" id="hdnTotalTesis" name="hdnTotalTesis" value="" />
+			</div>
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h5 class="panel-title">Direcciones de tesis de licenciatura:</h5>
@@ -678,7 +681,7 @@
 					</select>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Publicaciones nacionales<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Selecciona el número de publicaciones nacionales realizadas"></span></label>
+					<label>Publicaciones nacionales: <span class="icon-infocircle" data-toggle="tooltip" title="Selecciona el número de publicaciones nacionales realizadas"></span></label>
 					<select id="publNacionales" name="publNacionales" class="form-control">
 						<option value="">Selecciona</option>
 						<?php
@@ -691,7 +694,7 @@
 					</select>
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Publicaciones internacionales<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Selecciona el número de publicaciones internacionales realizadas"></span></label>
+					<label>Publicaciones internacionales: <span class="icon-infocircle" data-toggle="tooltip" title="Selecciona el número de publicaciones internacionales realizadas"></span></label>
 					<select id="publInt" name="publInt" class="form-control">
 						<option value="">Selecciona</option>
 						<?php
@@ -730,6 +733,9 @@
 				}
 		?>
 		<div role="tabpanel" class="tab-pane" id="proyectos">
+			<div class="error-proyecto form-group">
+				<input type="hidden" id="hdnTotalProy" name="hdnTotalProy" value="" />
+			</div>
 			<div class="panel-group ficha-collapse" id="accordion6">
 				<div class="panel panel-default">
 					<div class="panel-heading">

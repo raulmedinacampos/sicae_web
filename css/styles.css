@@ -227,6 +227,10 @@ h3.titulo {
 	margin-top: 15px;
 }
 
+.panel-body > a span.glyphicon-trash {
+	float: right;
+}
+
 .panel-sm {
 	margin-bottom: 80px;
 	background-color: #EAEAEA;
@@ -298,4 +302,10 @@ h3.titulo {
 
 .wizard-steps li.completed a {
 	color: #FFFFFF;
+}
+
+
+/********** Listado de solicitudes **********/
+#lSolicitud hr.red {
+	margin-bottom: 20px;
 }

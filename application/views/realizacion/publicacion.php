@@ -14,7 +14,7 @@
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Título del artículo en inglés y en español<span class="form-text">*</span>:</label>
-					<textarea id="titulo" name="titulo" rows="3" class="form-control" placeholder="Anota el nombre del artículo a publicar en inglés y en español separado por un salto de línea.\nEl nombre de la ponencia deberá coincidir con los demás documentos (oficio, carta de aceptación y el extenso del artículo)."><?php if(isset($publicacion)&& ($publicacion)) {echo $publicacion["NOMBRE_EVENTO"];} ?></textarea>
+					<textarea id="titulo" name="titulo" rows="3" class="form-control" placeholder="Anota el nombre del artículo a publicar en inglés y en español separado por un salto de línea. El nombre de la ponencia deberá coincidir con los demás documentos (oficio, carta de aceptación y el extenso del artículo)."><?php if(isset($publicacion)&& ($publicacion)) {echo $publicacion["NOMBRE_EVENTO"];} ?></textarea>
 					<input type="hidden" id="idSolicitud" name="idSolicitud" value="<?php if(isset($publicacion)&& ($publicacion)) {echo $publicacion["ID"];} ?>" />
 				</div>
 			</div>
@@ -53,7 +53,7 @@
 					<div class="panel-heading">
 						<h4 class="panel-title">
 							<a data-parent="#accordion1" data-toggle="collapse" href="#panel-1" aria-expanded="true" aria-controls="panel-1">
-								Coautor 1
+								Coautor 1 
 							</a>
 						</h4>
 						<button type="button" class="collpase-button" data-parent="#accordion1" data-toggle="collapse" href="#panel-1"></button>
@@ -95,6 +95,7 @@
 					</div>
 					<div class="panel-collapse collapse in" id="panel-<?php echo $i; ?>">
 						<div class="panel-body">
+							<!-- <a href="#"><span class="glyphicon glyphicon-trash"></span></a> -->
 							<div class="row">
 								<div class="form-group col-sm-4">
 									<label>Nombre(s):</label>

@@ -14,16 +14,12 @@
 								nuestra información más relevante para la solicitud de apoyo económico.</p>
 							<p>Pasos para capturar correctamente la información:</p>
 							<ol>
-								<li>Identificar las ocho pestañas que están contenidas en el formulario.</li>
-								<li>Los campos que inicien con (*) son obligatorios, el resto pueden quedar vacíos.</li>
-								<li>Llenar inicialmente la pestaña "Información Personal" (cuando termine ésta, se habilitarán las pestañas restantes según sea el caso).</li>
-								<li>Llenar las pestañas habilitadas posteriores.</li>
-								<li>Los campos incorrectos son iluminados de rojo, puede posicionar el cursor sobre el icono y mostrará cómo se debe llenar.</li>
-								<li>Cuando esté completamente seguro de lo capturado, de click al botón "Enviar datos".</li>
-								<li>Si al enviar los datos recibe la leyenda "Hay campos vacíos o con errores. Verifique", deberá navegar por las diferentes pestañas para buscar el error.</li>
-								<li>Si al enviar los datos recibe la leyenda "Registro Correcto. OK", de click al botón de aceptar y el sistema le mostrará su contraseña.</li>
-								<li>Guarde su contraseña, con ella solicitará apoyos económicos en "Inicio de sesión".</li>
-								<li>Una vez se haya registrado, no podrá registrarse nuevamente.</li>
+								<li>Seleccionar el tipo de usuario (profesor/alumno). Dar click en siguiente.</li>
+								<li>Llenar inicialmente la pantalla "Registro de usuario nuevo". Dar click en guardar.</li>
+								<li>Posteriormente se habilitarán las pestañas de Información Personal, Datos Escolares, Grados Académicos y Datos Bancarios. Al finalizar la captura de la información deberá dar click en guardar.</li>
+								<li>Los campos marcados con (*) son obligatorios.</li>
+								<li>Si no se captura correctamente un dato o existe algún error se desplegará un mensaje indicando que hay campos pendientes de llenar.</li>
+								<li>Una vez hecho el registro como nuevo usuario no podrán registrarse nuevamente.</li>
 							</ol>
 							<div class="row">
 								<div class="form-group col-sm-12 text-center">

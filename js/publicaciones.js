@@ -1,12 +1,11 @@
-function Init() {
+var i = 2;
+
+	function Init() {
 	$('[data-toggle="tooltip"]').tooltip();
-	
-	$('textarea[placeholder]').placeholder();
 }
 
 function AddCoauthor() {
 	var total = $("#hdnTotalCoautores").val();
-	var i = 2;
 	
 	if ( total > 2 ) {
 		i = total;
@@ -38,6 +37,7 @@ function AddCoauthor() {
 			panel += '</div>';
 			panel += '<div class="panel-collapse collapse in" id="panel-'+i+'">';
 			panel += '<div class="panel-body">';
+			//panel += '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>';
 			panel += '<div class="row">';
 			panel += '<div class="form-group col-sm-4">';
 			panel += '<label>Nombre(s):</label>';
@@ -54,16 +54,34 @@ function AddCoauthor() {
 			panel += '</div></div>';  // .panel-body y .collapse
 			panel += '</div>';  // .panel
 			panel += '</div>';  // .ficha-collapse
-			elem.after(panel);
+			
+			if ( elem.length > 0 ) {
+				elem.after(panel);
+			} else {
+				$(".tab-pane > .row").after(panel);
+			}
 			
 			$(".panel-collapse").each(function() {
 				if ( "panel-"+i != $(this).attr("id") ) {
 					$(this).collapse('hide');
 				}
 			});
+			
+			DeleteCoauthor();
 
 			i++;
 		}
+	});
+}
+
+function DeleteCoauthor() {
+	$("#coautores .panel-body a").click(function(e) {
+		e.preventDefault();
+		
+		var panel = $(this).parents(".panel-group");
+		panel.remove();
+		
+		i--;
 	});
 }
 
@@ -167,6 +185,7 @@ function Validate() {
 $gmx(document).ready(function() {
 	Init();
 	AddCoauthor();
+	//DeleteCoauthor();
 	SaveData();
 	Validate();
 })

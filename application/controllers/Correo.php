@@ -37,17 +37,28 @@ class Correo extends CI_Controller {
 			
 			$body .= '<p>En caso de seguir teniendo problemas para acceder al sistema te puedes comunicar al 5729 6000, extensiones 65033, 65095, 65145.</p>';
 			
-			//*
+			//*587 para COFAA 
 			$config = Array(
-						'protocol'	=> 'smtp',
-						'smtp_host'	=> 'ssl://smtp.googlemail.com',
-						'smtp_port'	=> 465,
-						'smtp_user'	=> '***********@gmail.com',
-						'smtp_pass'	=> '******',
-						'mailtype'	=> 'html',
-						'newline'	=> "\r\n"
-					);
-			//*/
+				'protocol'	=> 'smtp',
+				'smtp_host'	=> 'ssl://smtp.googlemail.com',
+				'smtp_port'	=> 465,
+				'smtp_user'	=> 'desarrollo.uds@gmail.com',
+				'smtp_pass'	=> 'D3sarroll0',
+				'mailtype'	=> 'html',
+				'newline'	=> "\r\n"
+			);
+			
+			/*$config = Array(
+				'protocol'	=> 'smtp',
+				'smtp_crypto'=>'tls',
+				'smtp_host'	=> 'correo.cofaa.ipn.mx',
+				'smtp_port'	=> 587,
+				'smtp_user'	=> 'rmedina@cofaa.ipn.mx',
+				'smtp_pass'	=> 'M3din4Cr',
+				'mailtype'	=> 'html',
+				'newline'	=> "\r\n"
+			);*/
+			
 			
 			$this->email->initialize($config);
 			$this->email->from('apoyoseconomicos@cofaa.ipn.mx', 'Apoyos Económicos IPN');
