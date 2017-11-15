@@ -60,6 +60,7 @@
 					</div>
 					<div class="panel-collapse collapse in" id="panel-1">
 						<div class="panel-body">
+							<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
 							<div class="row">
 								<div class="form-group col-sm-4">
 									<label>Nombre(s):</label>
@@ -95,7 +96,7 @@
 					</div>
 					<div class="panel-collapse collapse in" id="panel-<?php echo $i; ?>">
 						<div class="panel-body">
-							<!-- <a href="#"><span class="glyphicon glyphicon-trash"></span></a> -->
+							<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
 							<div class="row">
 								<div class="form-group col-sm-4">
 									<label>Nombre(s):</label>

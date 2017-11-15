@@ -110,6 +110,23 @@ class Usuario extends CI_Controller {
 		}
 	}
 	
+	public function validar_curpE() {
+		$curp = $this->input->post("curp");
+		
+		$curp = strtoupper($curp);
+		
+		$valid = $this->persona_md->CheckEditCURP($this->session->id, $curp);
+		
+		//print_r($valid);
+		//echo $this->session->id;
+		
+		if ( $valid ) {
+			echo "false";
+		} else {
+			echo "true";
+		}
+	}
+	
 	public function agregar() {
 		$data=array();
 		

@@ -48,10 +48,20 @@ class Persona_md extends CI_Model {
     	$query = $this->db->get(self::tabla);
     	
     	if ( $query->num_rows() > 0 ) {
+   			return $query->row();
+    	}
+    }
+    
+    function CheckEditCURP($id, $curp) {
+    	$this->db->where('ID !=', $id);
+    	$this->db->where('CURP', $curp);
+    	$query = $this->db->get(self::tabla);
+    	
+    	if ( $query->num_rows() > 0 ) {
     		return $query->row();
     	}
     }
-	
+    
     function InsertRecord($data) {
     	
     	$this->db->set('CENTRO_ADSCRIPCION', $data[0]);

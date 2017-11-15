@@ -7,17 +7,13 @@ class Correo extends CI_Controller {
 	}
 	
 	public function recuperar_pass() {
-		$curp=$_GET["curp"];
-		//$curp = $this->input->post("curp");
+		$curp = $this->input->post("curp");
 		$curp = strtoupper($curp);
 		
 		$usr = $this->persona_md->GetByCURP($curp);
 		
-		print_r($curp);
-		
 		if ( $usr ) {
-			//$correo = $usr->EMAIL;
-			$correo = "raulmedinacampos@hotmail.com";
+			$correo = $usr->EMAIL;
 			$nom = trim($usr->NOMBRE." ".$usr->APELLIDO_P." ".$usr->APELLIDO_M);
 			$usuario = $usr->CURP;
 			$pass = $usr->PASSWORD;
@@ -50,11 +46,12 @@ class Correo extends CI_Controller {
 			
 			/*$config = Array(
 				'protocol'	=> 'smtp',
-				'smtp_crypto'=>'tls',
+				//'smtp_crypto'=>'tls',
 				'smtp_host'	=> 'correo.cofaa.ipn.mx',
 				'smtp_port'	=> 587,
 				'smtp_user'	=> 'rmedina@cofaa.ipn.mx',
 				'smtp_pass'	=> 'M3din4Cr',
+				'$_smtp_auth' => true,
 				'mailtype'	=> 'html',
 				'newline'	=> "\r\n"
 			);*/

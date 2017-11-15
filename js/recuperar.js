@@ -7,10 +7,14 @@ function SendMail() {
 		e.preventDefault();
 		
 		if ( $("#formRecuperar").valid() ) {
+			$("body").append('<div class="loading-layer"><img alt="" src="/images/loading.gif" /></div>');
+			$("body").css("overflow", "hidden");
 			$.post(
 				'/correo/recuperar-pass', 
 				$("#formRecuperar").serialize(), 
-				function(data){
+				function(data) {
+					$("body .loading-layer").remove();
+					$("body").css("overflow", "auto");
 					if ( data == "1" ) {
 						$("#modalAviso .modal-title").html('Contraseña recuperada');
 						$("#modalAviso .modal-body").html('<div class="alert alert-success">Se ha enviado un correo electrónico con tus datos de acceso.<br />En caso de no verlo te pedimos revisar la carpeta de correo no deseado.</div>');

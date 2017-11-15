@@ -40,15 +40,15 @@ class Seminario extends CI_Controller {
 		$s4 = $this->solicitud_md->GetByTypePerson(8, $this->session->id);
 		
 		foreach ( $s1 as $val ) {
-			array_push($solicitudes, $s1);
+			array_push($solicitudes, $val);
 		}
 		
 		foreach ( $s2 as $val ) {
-			array_push($solicitudes, $s2);
+			array_push($solicitudes, $val);
 		}
 		
 		foreach ( $s3 as $val ) {
-			array_push($solicitudes, $s3);
+			array_push($solicitudes, $val);
 		}
 		
 		foreach ( $s4 as $val ) {

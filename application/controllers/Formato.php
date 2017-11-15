@@ -193,9 +193,9 @@ class Formato extends CI_Controller {
 			$html .= '<p class="seccion">Datos generales</p>
 					<table class="tabla">
 						<tr>
-							<td>CURP: '.$persona["CURP"].'</td>
 							<td>Apellidos: '.$apellidos.'</td>
 							<td>Nombre(s): '.$persona["NOMBRE"].'</td>
+							<td>&nbsp;</td>
 						</tr>
 						<tr>
 							<td>Solicitud: '.$solicitud["ID"].'</td>
@@ -474,7 +474,7 @@ class Formato extends CI_Controller {
 							</tr>
 							<tr>
 								<td colspan="2">Fechas: del '.$solicitud["FECHA_INICIAL"].' al '.$solicitud["FECHA_FINAL"].'</td>
-								<td colspan="2">Idioma: </td>
+								<td colspan="2">Idioma: '.$solicitud["OTRO"].'</td>
 							</tr>
 						</table>';
 		}

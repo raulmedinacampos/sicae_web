@@ -254,6 +254,10 @@ function Validate() {
 			curp: {
 				required: true,
 				minlength: 18,
+				remote: {
+					url: "/usuario/validar-curpE",
+					type: "post"
+				}
 			},
 			rfc: {
 				required: true,
@@ -456,7 +460,8 @@ function Validate() {
 		messages: {
 			rPerfil: "Seleccione un tipo de usuario",
 			curp: {
-				minlength: "El CURP es incorrecto"
+				minlength: "El CURP es incorrecto",
+				remote: "Este CURP ya está registrado"
 			},
 			rfc: {
 				minlength: "El RFC es incorrecto"

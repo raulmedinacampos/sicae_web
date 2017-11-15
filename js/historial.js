@@ -20,6 +20,27 @@ function Init() {
 	});
 }
 
+function OpenModal() {
+	$("table tr td:nth-of-type(5) a").click(function(e) {
+		e.preventDefault();
+		
+		var id = $(this).data("id");
+		
+		$.post(
+			'/realizacion/requisitos', 
+			{"id": id}, 
+			function(data) {
+				var d = $.parseJSON(data);
+				
+				$("#modalRequisitos .modal-title").html(d.titulo);
+				$("#modalRequisitos .modal-body").html(d.texto);
+				
+				$("#modalRequisitos").modal("show");
+			}
+		);
+	});
+}
+
 function SendForm() {
 	$("table tr td:last-of-type a").click(function(e) {
 		e.preventDefault();
@@ -35,5 +56,6 @@ function SendForm() {
 
 $(function() {
 	Init();
+	OpenModal();
 	SendForm();
 });

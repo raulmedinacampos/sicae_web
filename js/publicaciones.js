@@ -37,7 +37,7 @@ function AddCoauthor() {
 			panel += '</div>';
 			panel += '<div class="panel-collapse collapse in" id="panel-'+i+'">';
 			panel += '<div class="panel-body">';
-			//panel += '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>';
+			panel += '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>';
 			panel += '<div class="row">';
 			panel += '<div class="form-group col-sm-4">';
 			panel += '<label>Nombre(s):</label>';
@@ -185,7 +185,7 @@ function Validate() {
 $gmx(document).ready(function() {
 	Init();
 	AddCoauthor();
-	//DeleteCoauthor();
+	DeleteCoauthor();
 	SaveData();
 	Validate();
 })
