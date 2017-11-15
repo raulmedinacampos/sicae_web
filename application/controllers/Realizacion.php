@@ -300,7 +300,7 @@ Este documento podrá quedar pendiente si al momento de presentar su solicitud n
 				
 				if ( $solicitud["TIPO_PERSONA_ID"] == 1 ) { // Requisitos de docente
 					
-					$datos["titulo"] .= "Requisitos de solicitante de nivel ";
+					$datos["titulo"] .= "<br />Requisitos de solicitante de nivel ";
 					
 					switch ($solicitud["NIVEL_ID"]) { // Requisitos por nivel de docencia
 						case 1:
@@ -311,7 +311,7 @@ Este documento podrá quedar pendiente si al momento de presentar su solicitud n
 								<li>Formación de Recursos Humanos.- Presentar diploma de 'Formación y Actualización Docente para un Nuevo modelo Educativo' de 'Competencias Docentes en el Nivel Medio Superior' y/o 'Especialización en Competencias Docentes para Educación Media Superior'</li>
 								<li>Constancia de participación en eventos de formación docente y/o actualización profesional, Programa Institucional de Tutorías (PIT), Orientación Juvenil (Maestro tutor), Recuperación Académica Estudiantil o de Formación de Emprendedores</li>
 							</ul><br/>
-							<h1>Observaciones</h1>
+							<h3>Observaciones</h3>
 							En el caso de contar con evidencia de Dirección de Tesis y participar en proyectos de Investigación, no será necesario presentar los puntos 2 y 3 señalados anteriormente.
 La productividad en instituciones externas deberá estar soportada con convenio inter-institucional.
 Si el Profesor solicitante es becario EDD, no es necesario que presente evidencia de Docencia.
@@ -326,7 +326,7 @@ Si el Profesor solicitante es director de proyecto SIP y en su ficha de producti
 								<li>Formación de Recursos Humanos.- Será suficiente con presentar 'Acta de registro de tema de tesis y designación de dirección de tesis' y 'Acta de examen profesional y/o de grado' de cualquiera de los dos años anteriores</li>
 								<li>Actividades de Investigación.- Si es proyecto SIP no es necesario presentar evidencias, ya que esta información será verificada con la base de consulta que nos proporciona la Secretaría de Investigación y Posgrado</li>
 							</ul><br/>
-							<h1>Observaciones</h1>
+							<h3>Observaciones</h3>
 							La productividad en instituciones externas deberá estar soportada con convenio inter-institucional.
 Si el Profesor solicitante es becario EDD, no es necesario que presente evidencia de Docencia.
 Si el Profesor solicitante es becario SIBE y presentó carga académica no es necesario que presente evidencia de Docencia.
@@ -341,7 +341,7 @@ Si el Profesor solicitante es director de proyecto SIP y en su ficha de producti
 								<li>Formación de Recursos Humanos.- Será suficiente con presentar 'Acta de registro de tema de tesis y designación de dirección de tesis' y 'Acta de examen profesional y/o de grado' de cualquiera de los dos años anteriores</li>
 								<li>Actividades de Investigación.- Si es proyecto SIP no es necesario presentar evidencias, ya que esta información será verificada con la base de consulta que nos proporciona la Secretaría de Investigación y Posgrado</li>
 							</ul><br/>
-							<h1>Observaciones</h1>
+							<h3>Observaciones</h3>
 							La productividad en instituciones externas deberá estar soportada con convenio inter-institucional.
 Si el Profesor solicitante es becario EDD, no es necesario que presente evidencia de Docencia.
 Si el Profesor solicitante es becario SIBE y presentó carga académica no es necesario que presente evidencia de Docencia.
@@ -361,7 +361,8 @@ Si el Profesor solicitante es director de proyecto SIP y en su ficha de producti
 						<li>Programa Académico del evento, incluyendo días de duración y horario</li>
 						<li>Programa financiero del evento que incluya costos desglosados por cada concepto (Transporte aéreo y/o terrestre de expositores, viáticos, etc)</li>
 						<li>Resumen curricular de cada expositor</li>
-						<li><h1>OBSERVACIONES:</h1>
+						<li>
+						<h3>OBSERVACIONES:</h3>
 Las solicitudes para la realización de eventos que no cuenten con el visto bueno del Titular del área de coordinación académica correspondiente, se devolverán con oficio señalando la improcedencia.
 Los eventos de realización deberán estar relacionados con las áreas de formación académica de la dependencia politécnica que los solicite y ser para beneficio principalmente del personal de carrera en servicio del IPN.
 El concepto de pago de honorarios será exclusivo para expositores externos al Instituto.

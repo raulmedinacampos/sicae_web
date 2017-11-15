@@ -15,6 +15,9 @@
 		<tbody>
 			<?php
 			foreach ( $solicitudes as $val ) {
+				if ( $val["TIPO_EVENTO_ID"] == 3) {
+					$val["NOMBRE_EVENTO"] = $val["ORGANIZA"];
+				}
 			?>
 			<tr>
 				<td><?php echo $val["ID"]; ?></td>

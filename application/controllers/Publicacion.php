@@ -48,7 +48,7 @@ class Publicacion extends CI_Controller {
 		
 		if ( isset($params["publicacion"]) ) {
 			$params["coautores"] = $this->coautor_md->GetBySolicitud($params["publicacion"]["ID"]);
-			$params["costo"] = $this->monto_md->GetByTypeReq("1", $params["publicacion"]["ID"]);
+			$params["costo"] = $this->monto_md->GetByTypeReq("9", $params["publicacion"]["ID"]);
 		}
 		
 		$this->load->view('template/header', $header);
@@ -142,7 +142,7 @@ class Publicacion extends CI_Controller {
 		$sol=$this->input->post("idSolicitud");
 		if($costo!=""&&$costo>0){
 			$this->monto_md->CleanSol($sol);
-			$this->monto_md->InsertRecord(array(1,$sol,"A",$costo,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
+			$this->monto_md->InsertRecord(array(9,$sol,"A",$costo,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
 		}
 		echo $sol;
 		

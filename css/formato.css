@@ -17,13 +17,18 @@
 }
 
 .firmaIzq, 
+.firmaCentr, 
 .firmaDer {
-	width: 46%;
 	padding-top: 5pt;
 	border-top: 2pt solid #6C1D45;
 }
 
 .firmaIzq {
+	float: left;
+}
+
+.firmaCentr {
+	margin-left: 10pt;
 	float: left;
 }
 
