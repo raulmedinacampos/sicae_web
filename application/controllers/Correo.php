@@ -17,7 +17,7 @@ class Correo extends CI_Controller {
 			$nom = trim($usr->NOMBRE." ".$usr->APELLIDO_P." ".$usr->APELLIDO_M);
 			$usuario = $usr->CURP;
 			$pass = $usr->PASSWORD;
-			$escuela = "";
+			$escuela = $usr->NOMBRE_COMPLETO;
 			$body = '<h2>'.$nom.':</h2>
 					<p>Has solicitado la recuperación de tu contraseña del Sistema de Apoyos Económicos.</p>
 					<p>A continuación te enviamos los datos solicitados.</p>

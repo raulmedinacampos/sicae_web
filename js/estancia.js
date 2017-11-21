@@ -152,4 +152,8 @@ $gmx(document).ready(function() {
 	ToogleInsurance();
 	SaveData();
 	Validate();
+	
+	if ( $("#rdbLI").is(":checked") ) {
+		$(".oculto").css("display", "block");
+	}
 });

@@ -63,6 +63,12 @@ class Realizacion extends CI_Controller {
 		}
 		
 		if ( isset($params["realizacion"]) ) {
+			$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["realizacion"]["ID"]);
+			$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["realizacion"]["ID"]);
+			$params["honorarios"] = $this->monto_md->GetByTypeReq("6", $params["realizacion"]["ID"]);
+			$params["viaticos"] = $this->monto_md->GetByTypeReq("7", $params["realizacion"]["ID"]);
+			$params["material"] = $this->monto_md->GetByTypeReq("8", $params["realizacion"]["ID"]);
+			$params["cafeteria"] = $this->monto_md->GetByTypeReq("10", $params["realizacion"]["ID"]);
 			$params["apoyo"] = $this->apoyo_md->GetBySolicitud($params["realizacion"]["ID"]);
 		}
 		
@@ -95,7 +101,7 @@ class Realizacion extends CI_Controller {
 		array_push($data, $this->input->post('tParticipantes'));
 		array_push($data, $this->input->post('tExpositores'));
 		array_push($data, NULL);
-		array_push($data, NULL);
+		array_push($data, $this->input->post('duracion'));
 		array_push($data, NULL);
 		
 		if ( $this->input->post("idSolicitud") == 0 )
@@ -168,28 +174,35 @@ class Realizacion extends CI_Controller {
 		$this->load->model("apoyo_md");
 		$aereo=$this->input->post('aereo');
 		$terrestre=$this->input->post('terrestre');
-		$pago_exp=$this->input->post('pExpositores');
-		$viat_exp=$this->input->post('vExpositores');
+		$pago_exp=$this->input->post('honorarios');
+		$viat_exp=$this->input->post('viaticos');
 		$material=$this->input->post('material');
-		$otros=$this->input->post('otros');
+		$otros=$this->input->post('otrosGastos');
 		$caf=$this->input->post('cafeteria');
 		$sol=$this->input->post("idSolicitud");
+		
+		$this->monto_md->CleanSol($sol);
+		
 		if($aereo!=""&&$aereo>0){
 			$this->monto_md->InsertRecord(array(5,$sol,"R",$aereo,0,$this->input->post("espTAereo"),$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
+		
 		if($terrestre!=""&&$terrestre>0){
 			$this->monto_md->InsertRecord(array(4,$sol,"R",$terrestre,0,$this->input->post("espTTerrestre"),$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
+		
 		if($pago_exp!=""&&$pago_exp>0){
 			$this->monto_md->InsertRecord(array(6,$sol,"R",$pago_exp,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
+		
 		if($viat_exp!=""&&$viat_exp>0){
 			$this->monto_md->InsertRecord(array(7,$sol,"R",$viat_exp,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
+		
 		if($material!=""&&$material>0){
 			$this->monto_md->InsertRecord(array(8,$sol,"R",$material,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
 			
@@ -198,11 +211,14 @@ class Realizacion extends CI_Controller {
 			$this->monto_md->InsertRecord(array(9,$sol,"R",$otros,0,$this->input->post("espOtros"),$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
+		
 		if($caf!=""&&$caf>0){
 			$this->monto_md->InsertRecord(array(10,$sol,"R",$caf,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
+		
 		if($this->input->post("apoyo")==1){
+			$this->apoyo_md->CleanSupport($sol);
 			$data=array();
 			
 			array_push($data,$sol);

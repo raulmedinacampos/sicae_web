@@ -297,4 +297,8 @@ $gmx(document).ready(function() {
 	if ( total > 2 ) {
 		i = total;
 	}
+	
+	if ( $("#rdbLI").is(":checked") ) {
+		$(".oculto").css("display", "block");
+	}
 });

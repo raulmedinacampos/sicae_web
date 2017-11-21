@@ -139,20 +139,23 @@ class Seminario extends CI_Controller {
 		$inscripcion=$this->input->post('inscripcion');
 		$estancia=$this->input->post('estancia');
 		$sol=$this->input->post("idSolicitud");
+		
+		$this->monto_md->CleanSol($sol);
+		
 		if($aereo!=""&&$aereo>0){
-			$this->monto_md->InsertRecord(array(5,$sol,"a",$aereo,0,$this->input->post("espTAereo"),$this->input->post("moneda"),$this->input->post("moneda")));
+			$this->monto_md->InsertRecord(array(5,$sol,"A",$aereo,0,$this->input->post("espTAereo"),$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
 		if($terrestre!=""&&$terrestre>0){
-			$this->monto_md->InsertRecord(array(4,$sol,"a",$terrestre,0,$this->input->post("espTTerrestre"),$this->input->post("moneda"),$this->input->post("moneda")));
+			$this->monto_md->InsertRecord(array(4,$sol,"A",$terrestre,0,$this->input->post("espTTerrestre"),$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
 		if($inscripcion!=""&&$inscripcion>0){
-			$this->monto_md->InsertRecord(array(3,$sol,"a",$inscripcion,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
+			$this->monto_md->InsertRecord(array(3,$sol,"A",$inscripcion,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
 		if($estancia!=""&&$estancia>0){
-			$this->monto_md->InsertRecord(array(2,$sol,"a",$estancia,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
+			$this->monto_md->InsertRecord(array(2,$sol,"A",$estancia,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
 		if($this->input->post("apoyo")==1){

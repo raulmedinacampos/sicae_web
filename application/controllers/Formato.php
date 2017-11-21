@@ -31,6 +31,7 @@ class Formato extends CI_Controller {
 			$this->load->model("profesor_md");
 			$this->load->model("nombramiento_md");
 			$this->load->model("materia_md");
+			$this->load->model("publicacion_md");
 			
 			switch ( $solicitud["TIPO_EVENTO_ID"] ) {
 				case 3:
@@ -58,6 +59,9 @@ class Formato extends CI_Controller {
 			$acad = $this->profesor_md->GetById($persona["ID"]);
 			$nombramiento = $this->nombramiento_md->GetById($acad["NOMBRAMIENTO"]);
 			$materias = $this->materia_md->GetByPerson($persona["ID"]);
+			$publiNac = $this->publicacion_md->GetCtByPersonaNc($persona["ID"], 1);
+			$publiInt = $this->publicacion_md->GetCtByPersonaNc($persona["ID"], 0);
+			
 			
 			$tipoNom = explode("-", $nombramiento["DESCRIPCION"]);
 			$tipoNom = $tipoNom[1];
@@ -85,11 +89,16 @@ class Formato extends CI_Controller {
 			$mat = trim($mat, ", ");
 		}
 		
+		if ( $persona["TIPO_PERSONA_ID"] == 2 ) {
+			$this->load->model("expositor_md");
+			
+			$titulo = "Realización de eventos académicos";
+			
+			$expositores = $this->expositor_md->GetBySolicitud($solicitud["ID"]);
+		}
+		
 		if ( $persona["TIPO_PERSONA_ID"] == 3 ) {
 			$this->load->model("alumno_md");
-			
-			$acad = $this->alumno_md->GetById($persona["ID"]);
-			$centroSip = $this->centro_md->GetById($acad["SIP_ESCUELA"]);
 			
 			switch ( $solicitud["TIPO_EVENTO_ID"] ) {
 				case 3:
@@ -101,6 +110,9 @@ class Formato extends CI_Controller {
 				default:
 					break;
 			}
+			
+			$acad = $this->alumno_md->GetById($persona["ID"]);
+			$centroSip = $this->centro_md->GetById($acad["SIP_ESCUELA"]);
 			
 			$bifi = ($acad["PIFI"] == 0) ? "No" : "Sí";
 			$conacyt = ($acad["CONACYT"] == 0) ? "No" : "Sí";
@@ -125,6 +137,14 @@ class Formato extends CI_Controller {
 		$estancia = $this->monto_md->GetByTypeReq("2", $solicitud["ID"]);
 		$inscripcion = $this->monto_md->GetByTypeReq("3", $solicitud["ID"]);
 		$publicacion = $this->monto_md->GetByTypeReq("9", $solicitud["ID"]);
+		
+		// Realización
+		$pExpo = $this->monto_md->GetByTypeReq("6", $solicitud["ID"]);
+		$viaticos = $this->monto_md->GetByTypeReq("7", $solicitud["ID"]);
+		$material = $this->monto_md->GetByTypeReq("8", $solicitud["ID"]);
+		$cafeteria = $this->monto_md->GetByTypeReq("10", $solicitud["ID"]);
+		
+		// Apoyo
 		$apoyo = $this->apoyo_md->GetBySolicitud($solicitud["ID"]);
 		
 		$ch = curl_init();
@@ -135,21 +155,24 @@ class Formato extends CI_Controller {
 		
 		/******* Header *******/
 		$header = '	<div id="header">
-						<table width="100%">
-							<tr>
-								<td><img alt="" src="'.base_url("images/sep.png").'" width="180" /></td>
-								<td align="center"><img alt="" src="'.base_url("images/ipn.png").'" width="40" /></td>
-								<td align="right"><img alt="" src="'.base_url("images/cofaa.png").'" width="200" /></td>
+						<table>
+							<tr class="header">
+								<td><img alt="" src="'.base_url("images/gobmx.png").'" width="70" /></td>
+							</tr>
+							<tr class="titulo">
+								<td align="center">
+									Comisión de Operación y Fomento de Actividades Académicas del IPN<br />
+									Dirección de Especialización Docente e Investigación Científica y Tecnológica
+								</td>
 							</tr>
 						</table>
-						<h1 class="text-center">Dirección de Especialización Docente e Investigación Científica y Tecnológica</h1>
 						<h2 class="text-center">Formato COFAA para solicitar apoyos económicos</h2>
 						<h3 class="text-center">'.$titulo.'</h3>
 					</div>';
 		
 		
 		/******* Footer *******/
-		$footer = '	<div id="footer">
+		$footer = '	<div id="nota">
 						<p class="text-center">IMPORTANTE<p>
 						<p class="text-justified">La subscripción de este documento implica el reconocimiento de todas las 
 						obligaciones inherentes al Reglamento para el otorgamiento de Becas de Estudio, 
@@ -163,6 +186,18 @@ class Formato extends CI_Controller {
 						y Desclasificación de la Información de las Dependencias y Entidades de la 
 						Administración Pública Federal, así como lo previsto en los Lineamientos de 
 						Protección de Datos Personales.</p>
+					</div>
+					<div id="footer">
+						<table width="100%">
+							<tr>
+								<td width="21.5%"><img alt="" src="'.base_url("images/sep.png").'" width="120" /></td>
+								<td width="7%"><img alt="" src="'.base_url("images/ipn.png").'" width="25" /></td>
+								<td width="27%"><img alt="" src="'.base_url("images/cofaa.png").'" width="150" /></td>
+								<td><strong>Contacto:</strong><br />Tres Guerras No. 27, Colonia Centro, 
+									Cuauhtémoc, C.P. 06040, México, CDMX<br />Teléfono: 5729 6000 
+									Ext. 65033, 65095, 65145.</td>
+							</tr>
+						</table>
 					</div>';
 		
 		/******* Inicializacion ********/
@@ -185,9 +220,11 @@ class Formato extends CI_Controller {
 		$nivel_otro = implode(", ", array_column($nivel_otro, "NOMBRE"));
 		
 		$moneda = ($tAereo["S_MONEDA_ID"] == 1) ? 'USD $' : '$';
+		$monedaAp = ($apoyo["MONEDA_ID"] == 1) ? 'USD $' : '$';
 		$montoTotal = $tAereo["SOLICITADO"] + $tTerrestre["SOLICITADO"] + $seguroInt["SOLICITADO"] + $estancia["SOLICITADO"] + $inscripcion["SOLICITADO"] + $publicacion["SOLICITADO"];
+		$montoRealizacion = $pExpo["SOLICITADO"] + $viaticos["SOLICITADO"] + $tAereo["SOLICITADO"] + $tTerrestre["SOLICITADO"] + $material["SOLICITADO"] + $cafeteria["SOLICITADO"];
 		
-		$pdf = $this->pdf->load("", "Letter", "", "Arial", 14, 14, 45, 18, 6, 8);
+		$pdf = $this->pdf->load("", "Letter", "", "Arial", 14, 14, 48, 30, 6, 6);
 		$pdf->SetHTMLHeader($header);
 		$pdf->SetHTMLFooter($footer);
 		$pdf->WriteHTML($stylesheet, 1);
@@ -213,6 +250,32 @@ class Formato extends CI_Controller {
 							<td>RFC: '.$persona["RFC"].'</td>
 							<td>No. empleado: '.$acad["NO_EMPLEADO"].'</td>
 							<td>Sexo: '.$genero.'</td>
+						</tr>
+						<tr>
+							<td>Teléfono: '.$persona["TELEFONO"].'</td>
+							<td>Extensión: '.$persona["EXTENSION"].'</td>
+							<td>E-mail: '.$persona["EMAIL"].'</td>
+						</tr>
+					</table>';
+		}
+		
+		if ( $persona["TIPO_PERSONA_ID"] == 2 ) {
+			$html .= '<p class="seccion">Datos generales coordinador</p>
+					<table class="tabla">
+						<tr>
+							<td>Apellidos: '.$apellidos.'</td>
+							<td>Nombre(s): '.$persona["NOMBRE"].'</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>Solicitud: '.$solicitud["ID"].'</td>
+							<td>Centro de adscripción: '.$centro["NOMBRE_EXTRACORTO"].'</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>RFC: '.$persona["RFC"].'</td>
+							<td>Tipo de evento: '.$tipoEvento["DESCRIPCION"].'</td>
+							<td>&nbsp;</td>
 						</tr>
 						<tr>
 							<td>Teléfono: '.$persona["TELEFONO"].'</td>
@@ -342,8 +405,8 @@ class Formato extends CI_Controller {
 						</tr>
 						<tr>
 							<td colspan="2">Publicaciones realizadas:<br /><span class="descripcion">(En los 2 últimos años)</span></td>
-							<td class="descripcion">Nacionales: </td>
-							<td class="descripcion">Internacionales: </td>
+							<td class="descripcion">Nacionales: '.$publiNac.'</td>
+							<td class="descripcion">Internacionales: '.$publiInt.'</td>
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
@@ -351,6 +414,9 @@ class Formato extends CI_Controller {
 						</tr>
 						<tr>
 							<td colspan="5">Las materias que imparte corresponden a: '.$nivAcad["NOMBRE"].'</td>
+						</tr>
+						<tr>
+							<td colspan="5">&nbsp;</td>
 						</tr>
 						<tr>
 							<td colspan="5"><strong>Proyectos de investigación:</strong></td>
@@ -380,14 +446,57 @@ class Formato extends CI_Controller {
 					</table>';
 		}
 		
+		if ( $persona["TIPO_PERSONA_ID"] == 2 ) {
+			$html .= '	<p class="seccion">Evento y actividad académica a realizar</p>
+							<table class="tabla">
+								<tr>
+									<td colspan="4">Nombre del evento: '.$solicitud["NOMBRE_EVENTO"].'</td>
+								</tr>
+								<tr>
+									<td colspan="4">Dirigido a: '.$solicitud["ID"].'</td>
+								</tr>
+								<tr>
+									<td colspan="4">Idioma: '.$solicitud["OTRO"].'</td>
+								</tr>
+								<tr>
+									<td colspan="4">Sede: '.$solicitud["SEDE"].'</td>
+								</tr>
+								<tr>
+									<td colspan="2">Fechas: del '.$solicitud["FECHA_INICIAL"].' al '.$solicitud["FECHA_FINAL"].'</td>
+								</tr>
+								<tr>
+									<td>No. expositores: '.$solicitud["EXPOSITORES"].'</td>
+									<td>No. participantes:'.$solicitud["PARTICIPANTES"].'</td>
+									<td>No. horas: '.$solicitud["HORAS_TOTALES"].'</td>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+									<td colspan="4">Objetivo: '.$solicitud["OBJETIVO"].'</td>
+								</tr>';
+				
+				if ( $solicitud["DA_JUSTIFICACION"] ) {
+					$html .= '	<tr>
+									<td colspan="4">&nbsp;</td>
+								</tr>
+								<tr>
+									<td colspan="4"><strong>Días adicionales al evento</strong></td>
+								</tr>
+								<tr>
+									<td colspan="4">Justificación: '.$solicitud["DA_JUSTIFICACION"].'</td>
+								</tr>
+								<tr>
+									<td colspan="2">Fechas: del '.$solicitud["DA_FECHA_SALIDA"].' al '.$solicitud["DA_FECHA_REGRESO"].'</td>
+								</tr>';
+				}
+				
+				$html .= '	</table>';
+		}
+		
 		if ( $persona["TIPO_PERSONA_ID"] == 3 ) {
 			$html .= '<p class="seccion">Proyecto SIP</p>
 					<table class="tabla">
 						<tr>
 							<td>Registro: '.$acad["SIP_REGISTRO"].'</td>
-						</tr>
-						<tr>
-							<td>Nombre: '.$acad["SIP_NOMBRE"].'</td>
 						</tr>
 						<tr>
 							<td>Unidad de adscripción del proyecto: '.$centroSip["NOMBRE_EXTRACORTO"].'</td>
@@ -402,263 +511,439 @@ class Formato extends CI_Controller {
 		
 		$pdf->AddPage();
 		
-		/* Estancia de investigación */
-		if ( $solicitud["TIPO_EVENTO_ID"] == 3 ) {
-			$html = '	<p class="seccion">Evento y actividad académica a realizar</p>
-						<table class="tabla">
-							<tr>
-								<td colspan="4">Universidad: '.$solicitud["ORGANIZA"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Nombre del evento: '.$solicitud["NOMBRE_EVENTO"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Sede: '.$solicitud["SEDE"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Objetivo: '.$solicitud["OBJETIVO"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Beneficio institucional: '.$solicitud["BENEFICIO"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Programa de trabajo: '.$solicitud["OTRO"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Itinerario: '.$solicitud["ITINERARIO"].'</td>
-							</tr>
-							<tr>
-								<td colspan="2">Fechas: del '.$solicitud["FECHA_INICIAL"].' al '.$solicitud["FECHA_FINAL"].'</td>
-							</tr>
-						</table>';
-		}
-		
-		/* Obtención de grado */
-		if ( $solicitud["TIPO_EVENTO_ID"] == 4 ) {
-			$html = '	<p class="seccion">Evento y actividad académica a realizar</p>
-						<table class="tabla">
-							<tr>
-								<td>Grado a obtener: '.$solicitud["NOMBRE_EVENTO"].'</td>
-							</tr>
-							<tr>
-								<td>Institución: '.$solicitud["ORGANIZA"].'</td>
-							</tr>
-							<tr>
-								<td>Sede: '.$solicitud["SEDE"].'</td>
-							</tr>
-							<tr>
-								<td>Fecha de examen: '.$solicitud["OTRO"].'</td>
-							</tr>
-							<tr>
-								<td>Fechas: del '.$solicitud["FECHA_INICIAL"].' al '.$solicitud["FECHA_FINAL"].'</td>
-							</tr>
-							<tr>
-								<td>Itinerario: '.$solicitud["ITINERARIO"].'</td>
-							</tr>
-						</table>';
-		}
-		
-		/* Ponencia */
-		if ( $solicitud["TIPO_EVENTO_ID"] == 5 ) {
-			$html = '	<p class="seccion">Evento y actividad académica a realizar</p>
-						<table class="tabla">';
-			
-			$i = 0;
-			
-			foreach ( $ponencias as $val ) {
-				$html .= '	<tr>';
+		/* Profesor o alumnno */
+		if ( $persona["TIPO_PERSONA_ID"] == 1 || $persona["TIPO_PERSONA_ID"] == 3) {
+			/* Estancia de investigación */
+			if ( $solicitud["TIPO_EVENTO_ID"] == 3 ) {
+				$html = '	<p class="seccion">Evento y actividad académica a realizar</p>
+							<table class="tabla">
+								<tr>
+									<td colspan="4">Universidad: '.$solicitud["ORGANIZA"].'</td>
+								</tr>
+								<tr>
+									<td colspan="4">Sede: '.$solicitud["SEDE"].'</td>
+								</tr>
+								<tr>
+									<td colspan="4">Objetivo: '.$solicitud["OBJETIVO"].'</td>
+								</tr>
+								<tr>
+									<td colspan="4">Beneficio institucional: '.$solicitud["BENEFICIO"].'</td>
+								</tr>
+								<tr>
+									<td colspan="4">Programa de trabajo: '.$solicitud["OTRO"].'</td>
+								</tr>
+								<tr>
+									<td colspan="4">Itinerario: '.$solicitud["ITINERARIO"].'</td>
+								</tr>
+								<tr>
+									<td colspan="2">Fechas: del '.$solicitud["FECHA_INICIAL"].' al '.$solicitud["FECHA_FINAL"].'</td>
+								</tr>';
 				
-				if ( $persona["TIPO_PERSONA_ID"] == 1 ) {
-					if ( $i == 0) {
-						$html .= '	<td rowspan="'.sizeof($ponencias).'" valign="top" width="10%">Título de ponencia: </td>';
-					}
-					
-					$html .= '		<td colspan="3">['.$val["ID"]."] ".$val["NOMBRE"].'</td>
+				if ( $solicitud["DA_JUSTIFICACION"] ) {
+					$html .= '	<tr>
+									<td colspan="4">&nbsp;</td>
+								</tr>
+								<tr>
+									<td colspan="4"><strong>Días adicionales al evento</strong></td>
+								</tr>
+								<tr>
+									<td colspan="4">Justificación: '.$solicitud["DA_JUSTIFICACION"].'</td>
+								</tr>
+								<tr>
+									<td colspan="2">Fechas: del '.$solicitud["DA_FECHA_SALIDA"].' al '.$solicitud["DA_FECHA_REGRESO"].'</td>
 								</tr>';
-					
-					$i++;
 				}
-			}
-			
-			if ( $persona["TIPO_PERSONA_ID"] == 3 ) {
-				$html .= '		<td valign="top" width="10%">Título de ponencia: </td>
-									<td colspan="3">'.$val["NOMBRE"].'</td>
-								</tr>';
-			}
-			
-			$i = 0;
-			
-			foreach ( $coautores as $val ) {
-				$coautoresString .= trim($val["APELLIDO_P"]." ".$val["APELLIDO_M"]." ".$val["NOMBRE"]).", ";
-				$html .= '	<tr>';
 				
-				if ( $persona["TIPO_PERSONA_ID"] == 1 ) {
-					if ( $i == 0) {
-						$html .= '	<td rowspan="'.sizeof($coautores).'" valign="top" width="10%">Coautor: </td>';
-					}
-						
-					$html .= '		<td colspan="3">['.$val["PONENCIA_ID"]."] ".trim($val["APELLIDO_P"]." ".$val["APELLIDO_M"]." ".$val["NOMBRE"]).'</td>
-								</tr>';
-						
-					$i++;
-				}
+				$html .= '	</table>';
 			}
 			
-			if ( $persona["TIPO_PERSONA_ID"] == 3 ) {
-				$html .= '		<td valign="top" width="10%">Coautor: </td>
-									<td colspan="3">'.$coautoresString.'</td>
+			/* Obtención de grado */
+			if ( $solicitud["TIPO_EVENTO_ID"] == 4 ) {
+				$html = '	<p class="seccion">Evento y actividad académica a realizar</p>
+							<table class="tabla">
+								<tr>
+									<td>Grado a obtener: '.$solicitud["NOMBRE_EVENTO"].'</td>
+								</tr>
+								<tr>
+									<td>Institución: '.$solicitud["ORGANIZA"].'</td>
+								</tr>
+								<tr>
+									<td>Sede: '.$solicitud["SEDE"].'</td>
+								</tr>
+								<tr>
+									<td>Fecha de examen: '.$solicitud["OTRO"].'</td>
+								</tr>
+								<tr>
+									<td>Fechas: del '.$solicitud["FECHA_INICIAL"].' al '.$solicitud["FECHA_FINAL"].'</td>
+								</tr>
+								<tr>
+									<td>Itinerario: '.$solicitud["ITINERARIO"].'</td>
 								</tr>';
+				
+				if ( $solicitud["DA_JUSTIFICACION"] ) {
+					$html .= '	<tr>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+									<td><strong>Días adicionales al evento</strong></td>
+								</tr>
+								<tr>
+									<td>Justificación: '.$solicitud["DA_JUSTIFICACION"].'</td>
+								</tr>
+								<tr>
+									<td>Fechas: del '.$solicitud["DA_FECHA_SALIDA"].' al '.$solicitud["DA_FECHA_REGRESO"].'</td>
+								</tr>';
+				}
+				
+				$html .= '	</table>';
+			}
+			
+			/* Ponencia */
+			if ( $solicitud["TIPO_EVENTO_ID"] == 5 ) {
+				$html = '	<p class="seccion">Evento y actividad académica a realizar</p>
+							<table class="tabla">';
+				
+				$i = 0;
+				
+				foreach ( $ponencias as $val ) {
+					$html .= '	<tr>';
+					
+					if ( $persona["TIPO_PERSONA_ID"] == 1 ) {
+						if ( $i == 0) {
+							$html .= '	<td rowspan="'.sizeof($ponencias).'" valign="top" width="10%">Título de ponencia: </td>';
+						}
+						
+						$html .= '		<td colspan="3">['.$val["ID"]."] ".$val["NOMBRE"].'</td>
+									</tr>';
+						
+						$i++;
+					}
+				}
+				
+				if ( $persona["TIPO_PERSONA_ID"] == 3 ) {
+					$html .= '		<td valign="top" width="10%">Título de ponencia: </td>
+										<td colspan="3">'.$val["NOMBRE"].'</td>
+									</tr>';
+				}
+				
+				$i = 0;
+				
+				foreach ( $coautores as $val ) {
+					$coautoresString .= trim($val["APELLIDO_P"]." ".$val["APELLIDO_M"]." ".$val["NOMBRE"]).", ";
+					$html .= '	<tr>';
+					
+					if ( $persona["TIPO_PERSONA_ID"] == 1 ) {
+						if ( $i == 0) {
+							$html .= '	<td rowspan="'.sizeof($coautores).'" valign="top" width="10%">Coautor: </td>';
+						}
+							
+						$html .= '		<td colspan="3">['.$val["PONENCIA_ID"]."] ".trim($val["APELLIDO_P"]." ".$val["APELLIDO_M"]." ".$val["NOMBRE"]).'</td>
+									</tr>';
+							
+						$i++;
+					}
+				}
+				
+				if ( $persona["TIPO_PERSONA_ID"] == 3 ) {
+					$html .= '		<td valign="top" width="10%">Coautor: </td>
+										<td colspan="3">'.$coautoresString.'</td>
+									</tr>';
+				}
+				
+				$html .= '		<tr>
+									<td colspan="4">Evento: '.$solicitud["NOMBRE_EVENTO"].'</td>
+								</tr>
+								<tr>
+									<td colspan="4">Sede: '.$solicitud["SEDE"].'</td>
+								</tr>
+								<tr>
+									<td colspan="4">Institución que organiza: '.$solicitud["ORGANIZA"].'</td>
+								</tr>
+								<tr>
+									<td colspan="2">Fechas: del '.$solicitud["FECHA_INICIAL"].' al '.$solicitud["FECHA_FINAL"].'</td>';
+				if ( $persona["TIPO_PERSONA_ID"] == 1 ) {
+					$html .= '		<td colspan="2">Idioma: '.$solicitud["OTRO"].'</td>';
+				}
+				
+				$html .= '		</tr>';
+				
+				if ( $solicitud["DA_JUSTIFICACION"] ) {
+					$html .= '	<tr>
+									<td colspan="4">&nbsp;</td>
+								</tr>
+								<tr>
+									<td colspan="4"><strong>Días adicionales al evento</strong></td>
+								</tr>
+								<tr>
+									<td colspan="4">Justificación: '.$solicitud["DA_JUSTIFICACION"].'</td>
+								</tr>
+								<tr>
+									<td colspan="2">Fechas: del '.$solicitud["DA_FECHA_SALIDA"].' al '.$solicitud["DA_FECHA_REGRESO"].'</td>
+								</tr>';
+				}
+				
+				$html .= '	</table>';
+			}
+			
+			/* Publicaciones */
+			if ( $solicitud["TIPO_EVENTO_ID"] == 6 ) {
+				$coautoresString = "";
+				
+				foreach ( $coautores as $val ) {
+					$coautoresString .= trim($val["APELLIDO_P"]." ".$val["APELLIDO_M"]." ".$val["NOMBRE"]).", ";
+				}
+				$coautoresString = trim($coautoresString, ", ");
+				
+				$html = '	<p class="seccion">Evento y actividad académica a realizar</p>
+							<table class="tabla">
+								<tr>
+									<td>Nombre del artículo: '.$solicitud["NOMBRE_EVENTO"].'</td>
+								</tr>
+								<tr>
+									<td>Coautor: '.$coautoresString.'</td>
+								</tr>
+								<tr>
+									<td>Nombre de la revista: '.$solicitud["ORGANIZA"].'</td>
+								</tr>
+								<tr>
+									<td>ISSN: '.$solicitud["OTRO"].'</td>
+								</tr>
+								<tr>
+									<td>Sede: '.$solicitud["SEDE"].'</td>
+								</tr>
+							</table>';
+			}
+			
+			/* Seminarios y otros */
+			if ( $solicitud["TIPO_EVENTO_ID"] == 1 || $solicitud["TIPO_EVENTO_ID"] == 2 || $solicitud["TIPO_EVENTO_ID"] == 7 || $solicitud["TIPO_EVENTO_ID"] == 8 ) {
+				$html = '	<p class="seccion">Evento y actividad académica a realizar</p>
+							<table class="tabla">
+								<tr>
+									<td colspan="4">Evento: '.$solicitud["NOMBRE_EVENTO"].'</td>
+								</tr>
+								<tr>
+									<td colspan="4">Sede: '.$solicitud["SEDE"].'</td>
+								</tr>
+								<tr>
+									<td colspan="4">Organiza: '.$solicitud["ORGANIZA"].'</td>
+								</tr>
+								<tr>
+									<td colspan="4">Objetivo: '.$solicitud["OBJETIVO"].'</td>
+								</tr>
+								<tr>
+									<td colspan="4">Beneficio institucional: '.$solicitud["BENEFICIO"].'</td>
+								</tr>
+								<tr>
+									<td colspan="4">Itinerario: '.$solicitud["ITINERARIO"].'</td>
+								</tr>
+								<tr>
+									<td colspan="2">Fechas: del '.$solicitud["FECHA_INICIAL"].' al '.$solicitud["FECHA_FINAL"].'</td>
+								</tr>';
+				
+				if ( $solicitud["DA_JUSTIFICACION"] ) {
+					$html .= '	<tr>
+									<td colspan="4">&nbsp;</td>
+								</tr>
+								<tr>
+									<td colspan="4"><strong>Días adicionales al evento</strong></td>
+								</tr>
+								<tr>
+									<td colspan="4">Justificación: '.$solicitud["DA_JUSTIFICACION"].'</td>
+								</tr>
+								<tr>
+									<td colspan="2">Fechas: del '.$solicitud["DA_FECHA_SALIDA"].' al '.$solicitud["DA_FECHA_REGRESO"].'</td>
+								</tr>';
+				}
+				
+				$html .= '	</table>';
+			}
+			
+			$html .= '	<p class="seccion">Monto solicitado</p>
+						<table class="montos">';
+			
+			if ( $apoyo["INSTITUCION"] ) {
+				$html .= '	<tr>
+								<td colspan="3"><strong>Apoyos con los que ya se cuenta:</strong></td>
+							</tr>
+							<tr>
+								<td colspan="3">Institución: '.$apoyo["INSTITUCION"].'</td>
+							</tr>
+							<tr>
+								<td colspan="3">Monto: '.$monedaAp.number_format($apoyo["MONTO"], 2).'</td>
+							</tr>
+							<tr>
+								<td colspan="3">Especificación del apoyo: '.$apoyo["ESPECIFICACION"].'</td>
+							</tr>
+							<tr>
+								<td colspan="3">&nbsp;</td>
+							</tr>';
 			}
 			
 			$html .= '		<tr>
-								<td colspan="4">Evento: '.$solicitud["NOMBRE_EVENTO"].'</td>
+								<td colspan="3"><strong>Apoyo solicitado para:</strong></td>
+							</tr>';
+			
+			/* Que no sean publicaciones */
+			if ( $solicitud["TIPO_EVENTO_ID"] != 6 ) {
+				$html .= '	<tr>
+								<td width="27%">Transporte aéreo:<br /><span class="descripcion">(Viaje redondo, clase turista)</span></td>
+								<td width="27%" class="cantidad">'.$moneda.number_format($tAereo["SOLICITADO"], 2).'</td>
+								<td class="descripcion">Transporte aéreo: '.$tAereo["JUSTIFICACION"].'</td>
 							</tr>
 							<tr>
-								<td colspan="4">Sede: '.$solicitud["SEDE"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Institución que organiza: '.$solicitud["ORGANIZA"].'</td>
-							</tr>
-							<tr>
-								<td colspan="2">Fechas: del '.$solicitud["FECHA_INICIAL"].' al '.$solicitud["FECHA_FINAL"].'</td>';
-			if ( $persona["TIPO_PERSONA_ID"] == 1 ) {
-				$html .= '		<td colspan="2">Idioma: '.$solicitud["OTRO"].'</td>';
+								<td>Transporte terrestre:<br /><span class="descripcion">(Viaje redondo)</span></td>
+								<td class="cantidad">'.$moneda.number_format($tTerrestre["SOLICITADO"], 2).'</td>
+								<td class="descripcion">Transporte terrestre: '.$tTerrestre["JUSTIFICACION"].'</td>
+							</tr>';
 			}
 			
-			$html .= '		</tr>
-						</table>';
-		}
-		
-		/* Publicaciones */
-		if ( $solicitud["TIPO_EVENTO_ID"] == 6 ) {
-			$coautoresString = "";
-			
-			foreach ( $coautores as $val ) {
-				$coautoresString .= trim($val["APELLIDO_P"]." ".$val["APELLIDO_M"]." ".$val["NOMBRE"]).", ";
+			/* Que no sea estancia, grado o publicación */
+			if ( $solicitud["TIPO_EVENTO_ID"] != 3 && $solicitud["TIPO_EVENTO_ID"] != 4 && $solicitud["TIPO_EVENTO_ID"] != 6 ) {
+				$html .= '	<tr>
+								<td>Gastos de estancia:<br /><span class="descripcion">(Viáticos)</span></td>
+								<td class="cantidad">'.$moneda.number_format($estancia["SOLICITADO"], 2).'</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td>Inscripción:</td>
+								<td class="cantidad">'.$moneda.number_format($inscripcion["SOLICITADO"], 2).'</td>
+								<td>&nbsp;</td>
+							</tr>';
 			}
-			$coautoresString = trim($coautoresString, ", ");
 			
-			$html = '	<p class="seccion">Evento y actividad académica a realizar</p>
-						<table class="tabla">
-							<tr>
-								<td>Nombre del artículo: '.$solicitud["NOMBRE_EVENTO"].'</td>
+			/* Publicaciones */
+			if ( $solicitud["TIPO_EVENTO_ID"] == 6 ) {
+				$html .= '	<tr>
+								<td width="27%">Costo publicación:</td>
+								<td width="27%" class="cantidad">'.$moneda.number_format($publicacion["SOLICITADO"], 2).'</td>
+								<td>&nbsp;</td>
+							</tr>';
+			}
+			
+			/* Seguro internacional para alumnos */
+			if ( $persona["TIPO_PERSONA_ID"] == 3 && ($solicitud["TIPO_EVENTO_ID"] == 5 || $solicitud["TIPO_EVENTO_ID"] == 3) ) {
+				$html .= '	<tr>
+								<td width="27%">Seguro de viaje:</td>
+								<td width="27%" class="cantidad">'.$moneda.number_format($seguroInt["SOLICITADO"], 2).'</td>
+								<td>&nbsp;</td>
+							</tr>';
+			}
+			
+			/* Otros gastos ponencia */
+			if ( $solicitud["TIPO_EVENTO_ID"] == 5 ) {
+				$html .= '	<tr>
+								<td width="27%">Otros:<br /><span class="descripcion">Especificación:</span></td>
+								<td width="27%" class="cantidad">'.$moneda.number_format($publicacion["SOLICITADO"], 2).'</td>
+								<td>&nbsp;</td>
+							</tr>';
+			}
+			
+			$html .= '		<tr>
+								<td><strong>TOTAL:</strong></td>
+								<td class="total">'.$moneda.number_format($montoTotal, 2).'</td>
+								<td>&nbsp;</td>
+							</tr>
+					</table>';
+		} // Fin profesor o alumno
+		
+		if ( $persona["TIPO_PERSONA_ID"] == 2 ) {
+			$html = '	<p class="seccion">Relación de expositores</p>
+							<table class="tabla">';
+			foreach ( $expositores as $k=>$val ) {
+				$html .= '		<tr>
+									<td>Nombre: '.trim($val["NOMBRE"]." ".$val["APELLIDO_P"]." ".$val["APELLIDO_M"]).'</td>
+								</tr>
+								<tr>
+									<td>Procedencia: '.$val["PROCEDENCIA"].'</td>
+								</tr>
+								<tr>
+									<td>Trabajo actual: '.$val["DEDICACION"].'</td>
+								</tr>
+								<tr>
+									<td>Doctorado: '.$val["DOCTORADO"].'</td>
+								</tr>';
+				if ( $k < sizeof($expositores)-1 ) {
+					$html .= '
+								<tr>
+									<td>&nbsp;</td>
+								</tr>';
+				}
+			}
+			$html .= '		</table>';
+			
+			$html .= '	<p class="seccion">Monto solicitado</p>
+						<table class="montos">';
+			
+			if ( $apoyo["INSTITUCION"] ) {
+				$html .= '	<tr>
+								<td colspan="3"><strong>Apoyos con los que ya se cuenta:</strong></td>
 							</tr>
 							<tr>
-								<td>Coautor: '.$coautoresString.'</td>
+								<td colspan="3">Institución: '.$apoyo["INSTITUCION"].'</td>
 							</tr>
 							<tr>
-								<td>Nombre de la revista: '.$solicitud["ORGANIZA"].'</td>
+								<td colspan="3">Monto: '.$monedaAp.number_format($apoyo["MONTO"], 2).'</td>
 							</tr>
 							<tr>
-								<td>ISSN: '.$solicitud["OTRO"].'</td>
+								<td colspan="3">Especificación del apoyo: '.$apoyo["ESPECIFICACION"].'</td>
 							</tr>
 							<tr>
-								<td>Sede: '.$solicitud["SEDE"].'</td>
+								<td colspan="3">&nbsp;</td>
+							</tr>';
+			}
+			
+			$html .= '		<tr>
+								<td colspan="3"><strong>Apoyo solicitado para:</strong></td>
 							</tr>
-						</table>';
+							<tr>
+								<td width="27%">Pago expositores:</td>
+								<td width="27%" class="cantidad">'.$moneda.number_format($pExpo["SOLICITADO"], 2).'</td>
+								<td class="descripcion">&nbsp;</td>
+							</tr>
+							<tr>
+								<td>Viáticos:</td>
+								<td class="cantidad">'.$moneda.number_format($viaticos["SOLICITADO"], 2).'</td>
+								<td class="descripcion">&nbsp;</td>
+							</tr>
+							<tr>
+								<td>Transporte aéreo:</td>
+								<td class="cantidad">'.$moneda.number_format($tAereo["SOLICITADO"], 2).'</td>
+								<td class="descripcion">&nbsp;</td>
+							</tr>
+							<tr>
+								<td>Transporte terrestre:</td>
+								<td class="cantidad">'.$moneda.number_format($tTerrestre["SOLICITADO"], 2).'</td>
+								<td class="descripcion">&nbsp;</td>
+							</tr>
+							<tr>
+								<td>Material didactico:</td>
+								<td class="cantidad">'.$moneda.number_format($material["SOLICITADO"], 2).'</td>
+								<td class="descripcion">&nbsp;</td>
+							</tr>
+							<tr>
+								<td>Cafetería:</td>
+								<td class="cantidad">'.$moneda.number_format($cafeteria["SOLICITADO"], 2).'</td>
+								<td class="descripcion">&nbsp;</td>
+							</tr>
+							<tr>
+								<td><strong>TOTAL:</strong></td>
+								<td class="total">'.$moneda.number_format($montoRealizacion, 2).'</td>
+								<td>&nbsp;</td>
+							</tr>
+					</table>';
 		}
-		
-		/* Seminarios y otros */
-		if ( $solicitud["TIPO_EVENTO_ID"] == 1 || $solicitud["TIPO_EVENTO_ID"] == 2 || $solicitud["TIPO_EVENTO_ID"] == 7 || $solicitud["TIPO_EVENTO_ID"] == 8 ) {
-			$html = '	<p class="seccion">Evento y actividad académica a realizar</p>
-						<table class="tabla">
-							<tr>
-								<td colspan="4">Evento: '.$solicitud["NOMBRE_EVENTO"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Sede: '.$solicitud["SEDE"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Organiza: '.$solicitud["ORGANIZA"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Objetivo: '.$solicitud["OBJETIVO"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Beneficio institucional: '.$solicitud["BENEFICIO"].'</td>
-							</tr>
-							<tr>
-								<td colspan="4">Itinerario: '.$solicitud["ITINERARIO"].'</td>
-							</tr>
-							<tr>
-								<td colspan="2">Fechas: del '.$solicitud["FECHA_INICIAL"].' al '.$solicitud["FECHA_FINAL"].'</td>
-							</tr>
-						</table>';
-		}
-		
-		$html .= '	<p class="seccion">Monto solicitado</p>
-					<h6>Apoyo solicitado para:</h6>
-					<table class="montos">';
-		
-		/* Que no sean publicaciones */
-		if ( $solicitud["TIPO_EVENTO_ID"] != 6 ) {
-			$html .= '	<tr>
-							<td width="27%">Transporte aéreo:<br /><span class="descripcion">(Viaje redondo, clase turista)</span></td>
-							<td width="27%" class="cantidad">'.$moneda.number_format($tAereo["SOLICITADO"], 2).'</td>
-							<td class="descripcion">Transporte aéreo: '.$tAereo["JUSTIFICACION"].'</td>
-						</tr>
-						<tr>
-							<td>Transporte terrestre:<br /><span class="descripcion">(Viaje redondo)</span></td>
-							<td class="cantidad">'.$moneda.number_format($tTerrestre["SOLICITADO"], 2).'</td>
-							<td class="descripcion">Transporte terrestre: '.$tTerrestre["JUSTIFICACION"].'</td>
-						</tr>';
-		}
-		
-		/* Que no sea estancia, grado o publicación */
-		if ( $solicitud["TIPO_EVENTO_ID"] != 3 && $solicitud["TIPO_EVENTO_ID"] != 4 && $solicitud["TIPO_EVENTO_ID"] != 6 ) {
-			$html .= '	<tr>
-							<td>Gastos de estancia:<br /><span class="descripcion">(Viáticos)</span></td>
-							<td class="cantidad">'.$moneda.number_format($estancia["SOLICITADO"], 2).'</td>
-							<td>&nbsp;</td>
-						</tr>
-						<tr>
-							<td>Inscripción:</td>
-							<td class="cantidad">'.$moneda.number_format($inscripcion["SOLICITADO"], 2).'</td>
-							<td>&nbsp;</td>
-						</tr>';
-		}
-		
-		if ( $persona["TIPO_PERSONA_ID"] == 3 && $solicitud["TIPO_EVENTO_ID"] == 3 ) {
-			$html .= '	<tr>
-							<td>Gastos de estancia:<br /><span class="descripcion">(Viáticos)</span></td>
-							<td class="cantidad">'.$moneda.number_format($estancia["SOLICITADO"], 2).'</td>
-							<td>&nbsp;</td>
-						</tr>
-						<tr>
-							<td>Inscripción:</td>
-							<td class="cantidad">'.$moneda.number_format($inscripcion["SOLICITADO"], 2).'</td>
-							<td>&nbsp;</td>
-						</tr>';
-		}
-		
-		/* Publicaciones */
-		if ( $solicitud["TIPO_EVENTO_ID"] == 6 ) {
-			$html .= '	<tr>
-							<td width="27%">Costo publicación:</td>
-							<td width="27%" class="cantidad">'.$moneda.number_format($publicacion["SOLICITADO"], 2).'</td>
-							<td>&nbsp;</td>
-						</tr>';
-		}
-		
-		if ( $persona["TIPO_PERSONA_ID"] == 3 && ($solicitud["TIPO_EVENTO_ID"] == 5 || $solicitud["TIPO_EVENTO_ID"] == 3) ) {
-			$html .= '	<tr>
-							<td width="27%">Otros:<br /><span class="descripcion">Especificación:</span></td>
-							<td width="27%" class="cantidad">'.$moneda.number_format($seguroInt["SOLICITADO"], 2).'</td>
-							<td>&nbsp;</td>
-						</tr>';
-		}
-		
-		$html .= '		<tr>
-							<td><strong>TOTAL:</strong></td>
-							<td class="total">'.$moneda.number_format($montoTotal, 2).'</td>
-							<td>&nbsp;</td>
-						</tr>
-				</table>';
 		
 		if ( $persona["TIPO_PERSONA_ID"] == 1 ) {
 			$html .= '	<div class="firmas">
 							<div class="firmaIzq" style="width:46%;">'.$persona["NOMBRE"]." ".$apellidos.'</div>
 							<div class="firmaDer" style="width:46%;">Firma del director '.$centro["NOMBRE_DIRECTOR"].' y sello de la U.A.</div>
+						</div>';
+		}
+		
+		if ( $persona["TIPO_PERSONA_ID"] == 2 ) {
+			$html .= '	<div class="firmas">
+							<div class="firmaIzq" style="width:46%;">Firma del director(a) de la U.A. '.$centro["NOMBRE_DIRECTOR"].'</div>
+							<div class="firmaDer" style="width:46%;">Vo. Bo. del titular del Área de Coordinación Académica Correspondiente</div>
 						</div>';
 		}
 		

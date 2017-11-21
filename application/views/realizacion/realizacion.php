@@ -181,28 +181,28 @@
 					<label>Pago de honorarios a expositores:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="" name="" class="form-control" placeholder="Honorarios de expositores" />
+						<input type="text" id="honorarios" name="honorarios" class="form-control" placeholder="Honorarios de expositores" value="<?php if(isset($honorarios)) {echo $honorarios["SOLICITADO"];} ?>" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Viáticos a expositores:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="" name="" class="form-control" placeholder="Viáticos de expositores" />
+						<input type="text" id="viaticos" name="viaticos" class="form-control" placeholder="Viáticos de expositores" value="<?php if(isset($viaticos)) {echo $viaticos["SOLICITADO"];} ?>" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Transporte aéreo:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="" name="" class="form-control" placeholder="Monto del viaje redondo" />
+						<input type="text" id="aereo" name="aereo" class="form-control" placeholder="Monto del viaje redondo" value="<?php if(isset($tAereo)) {echo $tAereo["SOLICITADO"];} ?>" />
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>+ Especifica:</label>
-					<input type="text" id="" name="" class="form-control" placeholder="Indica el itinerario de vuelo, en clase turista" />
+					<input type="text" id="espTAereo" name="espTAereo" class="form-control" placeholder="Indica el itinerario de vuelo, en clase turista" value="<?php if(isset($tAereo)) {echo $tAereo["JUSTIFICACION"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
@@ -210,12 +210,12 @@
 					<label>Transporte terrestre:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="" name="" class="form-control" placeholder="Monto del viaje redondo" />
+						<input type="text" id="terrestre" name="terrestre" class="form-control" placeholder="Monto del viaje redondo" value="<?php if(isset($tTerrestre)) {echo $tTerrestre["SOLICITADO"];} ?>" />
 					</div>
 				</div>
 				<div class="form-group col-sm-8">
 					<label>+ Especifica:</label>
-					<input type="text" id="" name="" class="form-control" placeholder="Indica el itinerario del traslado" />
+					<input type="text" id="espTTerrestre" name="espTTerrestre" class="form-control" placeholder="Indica el itinerario del traslado" value="<?php if(isset($tTerrestre)) {echo $tTerrestre["JUSTIFICACION"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
@@ -223,28 +223,28 @@
 					<label>Material didáctico:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="" name="" class="form-control" placeholder="Costo de material didáctico" />
+						<input type="text" id="material" name="material" class="form-control" placeholder="Costo de material didáctico" value="<?php if(isset($material)) {echo $material["SOLICITADO"];} ?>" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Servicio de cafetería:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="" name="" class="form-control" placeholder="Costo de servicio de cafetería" />
+						<input type="text" id="cafeteria" name="cafeteria" class="form-control" placeholder="Costo de servicio de cafetería" value="<?php if(isset($cafeteria)) {echo $cafeteria["SOLICITADO"];} ?>" />
 					</div>
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Otros gastos:</label>
 					<div class="input-group">
 						<div class="input-group-addon">$</div>
-						<input type="text" id="" name="" class="form-control" placeholder="Otros gastos" />
+						<input type="text" id="otrosGastos" name="otrosGastos" class="form-control" placeholder="Otros gastos" value="<?php if(isset($otros_gastos)) {echo $otros_gastos["SOLICITADO"];} ?>" />
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Especifica tus otros gastos:</label>
-					<input type="text" id="" name="" class="form-control" placeholder="Describe los otros gastos" />
+					<input type="text" id="espOtros" name="espOtros" class="form-control" placeholder="Describe los otros gastos" value="<?php if(isset($otros_gastos)) {echo $otros_gastos["JUSTIFICACION"];} ?>" />
 				</div>
 			</div>
 			
@@ -265,7 +265,7 @@
 									<label>¿Cuentas con otros apoyos?<span class="form-text">*</span>:</label>
 									<div>
 										<label class="radio-inline">
-											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($apoyo) ) {echo 'checked="checked"';} ?> value="1" /> Sí
+											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($apoyo) ) {echo 'checked="checked"';} ?>value="1" /> Sí
 										</label>
 										<label class="radio-inline">
 											<input type="radio" id="rdbApN" name="apoyo" <?php if ( !isset($apoyo) && isset($estancia) ) {echo 'checked="checked"';} ?> value="0" /> No
@@ -276,13 +276,13 @@
 							<div class="row">
 								<div class="form-group col-sm-4">
 									<label>Institución que apoya:</label>
-									<input type="text" id="institucionAp" name="institucionAp" class="form-control" placeholder="Ingresa el nombre de la institución" />
+									<input type="text" id="institucionAp" name="institucionAp" class="form-control" placeholder="Ingresa el nombre de la institución" value="<?php if(isset($apoyo)) {echo $apoyo["INSTITUCION"];} ?>" />
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Monto con el que apoya:</label>
 									<div class="input-group">
 										<div class="input-group-addon">$</div>
-										<input type="text" id="montoAp" name="montoAp" class="form-control" placeholder="Monto del apoyo adicional" />
+										<input type="text" id="montoAp" name="montoAp" class="form-control" placeholder="Monto del apoyo adicional" value="<?php if(isset($apoyo)) {echo $apoyo["MONTO"];} ?>" />
 									</div>
 								</div>
 								<div class="form-group col-sm-4">
@@ -292,7 +292,7 @@
 										<?php
 										foreach ( $monedas as $val ) {
 										?>
-										<option value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE; ?></option>
+										<option <?php if ( isset($apoyo) && $apoyo["MONEDA_ID"] == $val->ID ) {echo 'selected="selected"';} ?> value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE; ?></option>
 										<?php
 										}
 										?>
@@ -302,7 +302,7 @@
 							<div class="row">
 								<div class="form-group col-sm-12">
 									<label>Especificación del apoyo:</label>
-									<textarea id="especificacionAp" name="especificacionAp" rows="3" class="form-control" placeholder="Ingresa la especificación del apoyo"></textarea>
+									<textarea id="especificacionAp" name="especificacionAp" rows="3" class="form-control" placeholder="Ingresa la especificación del apoyo"><?php if(isset($apoyo)) {echo $apoyo["ESPECIFICACION"];} ?></textarea>
 								</div>
 							</div>
 						</div>

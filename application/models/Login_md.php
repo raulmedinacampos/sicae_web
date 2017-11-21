@@ -17,7 +17,7 @@ class Login_md extends CI_Model {
 	
 	public function IsOrganizer($usuario, $escuela) {
 		$query = $this->db->select("ID, TIPO_PERSONA_ID, NOMBRE, APELLIDO_P, APELLIDO_M, CURP, CENTRO_ADSCRIPCION");
-		$query = $this->db->where(array("CURP"=>$usuario,"CENTRO_ADSCRIPCION"=>$escuela));
+		$query = $this->db->where(array("CURP"=>$usuario,"CENTRO_ADSCRIPCION"=>$escuela,"TIPO_PERSONA_ID"=>2));
 		$query = $this->db->get('PERSONA');
 		return $query->row();
 	}

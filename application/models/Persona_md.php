@@ -38,8 +38,12 @@ class Persona_md extends CI_Model {
     }
     
     function GetByCURP($curp) {
+    	$this->db->select("p.CENTRO_ADSCRIPCION, p.TIPO_PERSONA_ID, p.NOMBRE, p.APELLIDO_P, p.APELLIDO_M");
+    	$this->db->select("p.EMAIL, p.CURP, p.USERNAME, p.PASSWORD, c.NOMBRE_COMPLETO");
+    	$this->db->from(self::tabla." p");
+    	$this->db->join("CENTRO c", "c.ID = p.CENTRO_ADSCRIPCION");
     	$this->db->where(array('CURP'=>$curp));
-    	$query = $this->db->get(self::tabla);
+    	$query = $this->db->get();
     	return $query->row();
     }
     
@@ -87,7 +91,7 @@ class Persona_md extends CI_Model {
         $this->db->insert(self::tabla,$this);
         
         $this->db->select("ID");
-        $this->db->where("EMAIL", $data[8]);
+        $this->db->where(array("TIPO_PERSONA_ID"=>$data[1],"EMAIL"=>$data[8]));
         $query = $this->db->get(self::tabla);
         
         $usr = $query->row();

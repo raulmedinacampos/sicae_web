@@ -7,7 +7,7 @@
 
 .firmas {
 	position: absolute;
-	bottom: 90pt;
+	bottom: 120pt;
 	left: 0;
 	width: 87%;
 	padding: 0 40pt;
@@ -75,15 +75,9 @@
 .tabla {
 	width: 100%;
 	font-size: 8pt;
-	border-left-width: 0.5pt;
-	border-left-style: solid;
-	border-left-color: #CCCCCC;
-	border-right-width: 0.5pt;
-	border-right-style: solid;
-	border-right-color: #CCCCCC;
-	border-bottom-width: 0.5pt;
-	border-bottom-style: solid;
-	border-bottom-color: #CCCCCC;
+	border-left: 0.5pt solid #CCCCCC;
+	border-right: 0.5pt solid #CCCCCC;
+	border-bottom: 0.5pt solid #CCCCCC;
 }
 
 .tesis {
@@ -120,12 +114,12 @@
 
 .seccion {
 	margin-bottom: 0pt;
+	padding-top: 3pt;
 	padding-bottom: 2pt;
-	border-bottom-width: 2pt;
-	border-bottom-style: solid;
-	border-bottom-color: #6C1D45;
-	font-size: 9pt;
-	font-weight: bold;
+	border: 0.5pt solid #CCCCCC;
+	background-color: #E7E7E6;
+	font-size: 10pt;
+	text-align: center;
 }
 
 /*****************************/
@@ -150,11 +144,45 @@
 	font-size: 10pt;
 }
 
+#header table {
+	width: 100%;
+	border-collapse: collapse;
+	border: 0.5pt solid #CCCCCC;
+}
+
+#header .header {
+	background-color: #47494A;
+}
+
+#header .header td {
+	padding: 10pt 0 10pt 10pt;
+}
+
+#header .titulo {
+	background-color: #E7E7E6;
+	font-size: 10pt;
+}
+
+#header .titulo td {
+	padding: 6pt 0;
+}
+
 /*****************************/
 
 
 /* Footer */
-#footer {
+#nota {
 	font-size: 6pt;
 }
+
+#footer {
+	margin-top: 8pt;
+	border-top: 1.2pt solid #47494A;
+}
+
+#footer table tr td {
+	padding-top: 3pt;
+	font-size: 6.5pt;
+}
+
 /*****************************/

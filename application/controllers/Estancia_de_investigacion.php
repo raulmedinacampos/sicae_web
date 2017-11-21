@@ -97,9 +97,10 @@ class Estancia_de_investigacion extends CI_Controller {
 		$this->load->model("apoyo_md");
 		$aereo=$this->input->post('aereo');
 		$terrestre=$this->input->post('terrestre');
+		$seguro=$this->input->post('seguroViaje');
 		$sol=$this->input->post("idSolicitud");
 		
-		$this->monto_md->CleanAmount($sol);
+		$this->monto_md->CleanSol($sol);
 		
 		if($aereo!=""&&$aereo>0){
 			$this->monto_md->InsertRecord(array(5,$sol,"A",$aereo,0,$this->input->post("espTAereo"),$this->input->post("moneda"),$this->input->post("moneda")));
@@ -108,6 +109,11 @@ class Estancia_de_investigacion extends CI_Controller {
 		
 		if($terrestre!=""&&$terrestre>0){
 			$this->monto_md->InsertRecord(array(4,$sol,"A",$terrestre,0,$this->input->post("espTTerrestre"),$this->input->post("moneda"),$this->input->post("moneda")));
+			
+		}
+		
+		if($seguro!=""&&$seguro>0){
+			$this->monto_md->InsertRecord(array(11,$sol,"A",$seguro,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
 		
