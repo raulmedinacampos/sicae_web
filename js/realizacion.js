@@ -1,3 +1,5 @@
+var i = 2;
+
 function Init() {
 	$(".datepicker").datepicker();
 	
@@ -5,7 +7,11 @@ function Init() {
 }
 
 function AddOrganizer() {
-	var i = 2;
+	var total = $("#hdnTotalExp").val();
+	
+	if ( total > 2 ) {
+		i = total;
+	}
 	
 	$("#btnAgregarExpositor").click(function(e) {
 		e.preventDefault();
@@ -29,61 +35,61 @@ function AddOrganizer() {
 			exp += '<div class="row">';
 			exp += '<div class="form-group col-sm-4">';
 			exp += '<label>Nombre(s):</label>';
-			exp += '<input type="text" id="" name="" class="form-control" />';
+			exp += '<input type="text" id="exNombre'+i+'" name="exNombre[]" class="form-control" />';
 			exp += '</div>';
 			exp += '<div class="form-group col-sm-4">';
 			exp += '<label>Primer apellido</label>';
-			exp += '<input type="text" id="" name="" class="form-control" />';
+			exp += '<input type="text" id="exApP'+i+'" name="exApP[]" class="form-control" />';
 			exp += '</div>';
 			exp += '<div class="form-group col-sm-4">';
 			exp += '<label>Segundo apellido</label>';
-			exp += '<input type="text" id="" name="" class="form-control" />';
+			exp += '<input type="text" id="exApM'+i+'" name="exApM[]" class="form-control" />';
 			exp += '</div>';
 			exp += '</div>';
 			exp += '<div class="row">';
 			exp += '<div class="form-group col-sm-6">';
 			exp += '<label>Procedencia</label>';
-			exp += '<input type="text" id="" name="" class="form-control" />';
+			exp += '<input type="text" id="exProcedencia'+i+'" name="exProcedencia[]" class="form-control" />';
 			exp += '</div>';
 			exp += '<div class="form-group col-sm-6">';
 			exp += '<label>Trabajo actual</label>';
-			exp += '<input type="text" id="" name="" class="form-control" />';
+			exp += '<input type="text" id="exOcupacion'+i+'" name="exOcupacion[]" class="form-control" />';
 			exp += '</div>';
 			exp += '</div>';
 			exp += '<div class="row">';
 			exp += '<div class="form-group col-sm-6">';
 			exp += '<label>Licenciatura</label>';
-			exp += '<input type="text" id="" name="" class="form-control" />';
+			exp += '<input type="text" id="exLicenciatura'+i+'" name="exLicenciatura[]" class="form-control" />';
 			exp += '</div>';
 			exp += '<div class="form-group col-sm-6">';
 			exp += '<label>Maestría</label>';
-			exp += '<input type="text" id="" name="" class="form-control" />';
+			exp += '<input type="text" id="exMaestria'+i+'" name="exMaestria[]" class="form-control" />';
 			exp += '</div>';
 			exp += '</div>';
 			exp += '<div class="row">';
 			exp += '<div class="form-group col-sm-6">';
 			exp += '<label>Doctorado</label>';
-			exp += '<input type="text" id="" name="" class="form-control" />';
+			exp += '<input type="text" id="exDoctorado'+i+'" name="exDoctorado[]" class="form-control" />';
 			exp += '</div>';
 			exp += '<div class="form-group col-sm-6">';
 			exp += '<label>Especialidad</label>';
-			exp += '<input type="text" id="" name="" class="form-control" />';
+			exp += '<input type="text" id="exEspecialidad'+i+'" name="exEspecialidad[]" class="form-control" />';
 			exp += '</div>';
 			exp += '</div>';
 			exp += '<div class="row">';
 			exp += '<div class="form-group col-sm-6">';
 			exp += '<label>Actividad del expositor</label>';
-			exp += '<input type="text" id="" name="" class="form-control" />';
+			exp += '<input type="text" id="exActividad'+i+'" name="exActividad[]" class="form-control" />';
 			exp += '</div>';
 			exp += '<div class="form-group col-sm-6">';
 			exp += '<label>Tema a exponer</label>';
-			exp += '<input type="text" id="" name="" class="form-control" />';
+			exp += '<input type="text" id="exTema'+i+'" name="exTema[]" class="form-control" />';
 			exp += '</div>';
 			exp += '</div>';
 			exp += '<div class="row">';
 			exp += '<div class="form-group col-sm-6">';
 			exp += '<label>Horario</label>';
-			exp += '<input type="text" id="" name="" class="form-control" />';
+			exp += '<input type="text" id="exHorario'+i+'" name="exHorario[]" class="form-control" />';
 			exp += '</div>';
 			exp += '</div>';
 			exp += '</div>';
@@ -126,12 +132,6 @@ function SaveData() {
 						function(data) {}
 					);
 				}
-			);
-			
-			$.post(
-				'/realizacion/datos-banco', 
-				$("#formRealizacion").serialize(), 
-				function(data) {}
 			);
 			
 			$("#modalAviso .modal-title").html('Información actualizada');
@@ -238,20 +238,6 @@ function Validate() {
 			},
 			monedaAp: {
 				required: "#rdbApS:checked"
-			},
-			banco: {
-				required: true
-			},
-			sucursal: {
-				required: true,
-				digits: true
-			},
-			cuentaBanco: {
-				required: true,
-				digits: true
-			},
-			clabe: {
-				required: true,
 			}
 		},
 		messages: {

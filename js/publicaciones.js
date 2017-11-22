@@ -1,6 +1,6 @@
 var i = 2;
 
-	function Init() {
+function Init() {
 	$('[data-toggle="tooltip"]').tooltip();
 }
 

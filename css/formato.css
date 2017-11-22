@@ -112,6 +112,10 @@
 	padding: 2pt 2pt 2pt 2pt;
 }
 
+.registros tr th {
+	text-align: left;
+}
+
 .seccion {
 	margin-bottom: 0pt;
 	padding-top: 3pt;

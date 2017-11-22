@@ -44,6 +44,7 @@ class Realizacion extends CI_Controller {
 		$this->load->model("solicitud_md");
 		$this->load->model("tipo_evento_md");
 		$this->load->model("escuela_md");
+		$this->load->model("expositor_md");
 		$this->load->model("moneda_md");
 		$this->load->model("monto_md");
 		$this->load->model("apoyo_md");
@@ -63,11 +64,14 @@ class Realizacion extends CI_Controller {
 		}
 		
 		if ( isset($params["realizacion"]) ) {
+			list($params["realizacion"]["IDIOMA"], $params["realizacion"]["DIRIGIDO"])= explode("|", $params["realizacion"]["OTRO"].'|');
+			$params["expositores"] = $this->expositor_md->GetBySolicitud($params["realizacion"]["ID"]);
 			$params["tAereo"] = $this->monto_md->GetByTypeReq("5", $params["realizacion"]["ID"]);
 			$params["tTerrestre"] = $this->monto_md->GetByTypeReq("4", $params["realizacion"]["ID"]);
 			$params["honorarios"] = $this->monto_md->GetByTypeReq("6", $params["realizacion"]["ID"]);
 			$params["viaticos"] = $this->monto_md->GetByTypeReq("7", $params["realizacion"]["ID"]);
 			$params["material"] = $this->monto_md->GetByTypeReq("8", $params["realizacion"]["ID"]);
+			$params["otros_gastos"] = $this->monto_md->GetByTypeReq("9", $params["realizacion"]["ID"]);
 			$params["cafeteria"] = $this->monto_md->GetByTypeReq("10", $params["realizacion"]["ID"]);
 			$params["apoyo"] = $this->apoyo_md->GetBySolicitud($params["realizacion"]["ID"]);
 		}
@@ -95,7 +99,7 @@ class Realizacion extends CI_Controller {
 		array_push($data, NULL);
 		array_push($data, NULL);
 		array_push($data, NULL);
-		array_push($data, $this->input->post('idioma'));
+		array_push($data, $this->input->post('idioma').'|'.$this->input->post('dirigido'));
 		array_push($data, $this->input->post('objetivo'));
 		array_push($data, $this->input->post('beneficio'));
 		array_push($data, $this->input->post('tParticipantes'));
@@ -117,10 +121,10 @@ class Realizacion extends CI_Controller {
 		$sol=$this->input->post("idSolicitud");
 		$res=array();
 		$nombres=$this->input->post("exNombre");
-		$apps=$this->input->post("exApP");//Revisar name del campo en la vista de las ponencias que se agregan
+		$apps=$this->input->post("exApP");
 		$apms=$this->input->post("exApM");
 		$proc=$this->input->post("exProcedencia");
-		$ded=$this->input->post("exDedicacion");
+		$ded=$this->input->post("exOcupacion");
 		$lic=$this->input->post("exLicenciatura");
 		$maes=$this->input->post("exMaestria");
 		$doc=$this->input->post("exDoctorado");
@@ -128,27 +132,32 @@ class Realizacion extends CI_Controller {
 		$tema=$this->input->post("exTema");
 		$act=$this->input->post("exActividad");
 		$horario=$this->input->post("exHorario");
+		
+		$this->expositor_md->CleanSol($sol);
+		
 		foreach($nombres as $ky=>$vl){
-			$data=array();
-			array_push($data,$sol);
-			array_push($data,"R");
-			array_push($data,NULL);
-			array_push($data,$vl);
-			array_push($data,$apps[$ky]);
-			array_push($data,$apms[$ky]);
-			array_push($data,$proc[$ky]);
-			array_push($data,$ded[$ky]);
-			array_push($data,$lic[$ky]);
-			array_push($data,$maes[$ky]);
-			array_push($data,$doc[$ky]);
-			array_push($data,$esp[$ky]);
-			array_push($data,$tema[$ky]);
-			array_push($data,$act[$ky]);
-			array_push($data,$horario[$ky]);
+			if ( $vl ) {
+				$data=array();
+				array_push($data,$sol);
+				array_push($data,"R");
+				array_push($data,NULL);
+				array_push($data,$vl);
+				array_push($data,$apps[$ky]);
+				array_push($data,$apms[$ky]);
+				array_push($data,$proc[$ky]);
+				array_push($data,$ded[$ky]);
+				array_push($data,$lic[$ky]);
+				array_push($data,$maes[$ky]);
+				array_push($data,$doc[$ky]);
+				array_push($data,$esp[$ky]);
+				array_push($data,$tema[$ky]);
+				array_push($data,$act[$ky]);
+				array_push($data,$horario[$ky]);
+					
+				$rs=$this->expositor_md->insertRecord($data);
 				
-			$rs=$this->expositor_md->insertRecord($data);
-			
-			array_push($res,$rs);
+				array_push($res,$rs);
+			}
 		}
 		
 		echo json_encode($res);//Son los id de los expositores agregados
@@ -217,12 +226,13 @@ class Realizacion extends CI_Controller {
 			
 		}
 		
+		$this->apoyo_md->CleanSupport($sol);
+		
 		if($this->input->post("apoyo")==1){
-			$this->apoyo_md->CleanSupport($sol);
 			$data=array();
 			
 			array_push($data,$sol);
-			array_push($data,"A");
+			array_push($data,"R");
 			array_push($data,$this->input->post("monedaAp"));
 			array_push($data,$this->input->post("institucionAp"));
 			array_push($data,$this->input->post("montoAp"));

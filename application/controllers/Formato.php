@@ -8,6 +8,7 @@ class Formato extends CI_Controller {
 	public function index() {
 		$this->load->model("persona_md");
 		$this->load->model("solicitud_md");
+		$this->load->model("homoclave_md");
 		$this->load->model("tipo_evento_md");
 		$this->load->model("nivel_academico_md");
 		$this->load->model("centro_md");
@@ -26,6 +27,7 @@ class Formato extends CI_Controller {
 		$titulo = "Asistencia ";
 		$persona = $this->persona_md->GetById($usr);
 		$solicitud = $this->solicitud_md->GetById($id_solicitud);
+		$homoclave = $this->homoclave_md->GetById($solicitud["TIPO_EVENTO_ID"]);
 		
 		if ( $persona["TIPO_PERSONA_ID"] == 1 ) {
 			$this->load->model("profesor_md");
@@ -143,6 +145,7 @@ class Formato extends CI_Controller {
 		$viaticos = $this->monto_md->GetByTypeReq("7", $solicitud["ID"]);
 		$material = $this->monto_md->GetByTypeReq("8", $solicitud["ID"]);
 		$cafeteria = $this->monto_md->GetByTypeReq("10", $solicitud["ID"]);
+		$otros = $this->monto_md->GetByTypeReq("9", $solicitud["ID"]);
 		
 		// Apoyo
 		$apoyo = $this->apoyo_md->GetBySolicitud($solicitud["ID"]);
@@ -166,7 +169,7 @@ class Formato extends CI_Controller {
 								</td>
 							</tr>
 						</table>
-						<h2 class="text-center">Formato COFAA para solicitar apoyos económicos</h2>
+						<h2 class="text-center">Formato '.$homoclave["NOMBRE"].' para solicitar apoyos económicos</h2>
 						<h3 class="text-center">'.$titulo.'</h3>
 					</div>';
 		
@@ -222,7 +225,7 @@ class Formato extends CI_Controller {
 		$moneda = ($tAereo["S_MONEDA_ID"] == 1) ? 'USD $' : '$';
 		$monedaAp = ($apoyo["MONEDA_ID"] == 1) ? 'USD $' : '$';
 		$montoTotal = $tAereo["SOLICITADO"] + $tTerrestre["SOLICITADO"] + $seguroInt["SOLICITADO"] + $estancia["SOLICITADO"] + $inscripcion["SOLICITADO"] + $publicacion["SOLICITADO"];
-		$montoRealizacion = $pExpo["SOLICITADO"] + $viaticos["SOLICITADO"] + $tAereo["SOLICITADO"] + $tTerrestre["SOLICITADO"] + $material["SOLICITADO"] + $cafeteria["SOLICITADO"];
+		$montoRealizacion = $pExpo["SOLICITADO"] + $viaticos["SOLICITADO"] + $tAereo["SOLICITADO"] + $tTerrestre["SOLICITADO"] + $material["SOLICITADO"] + $cafeteria["SOLICITADO"] + $otros["SOLICITADO"];
 		
 		$pdf = $this->pdf->load("", "Letter", "", "Arial", 14, 14, 48, 30, 6, 6);
 		$pdf->SetHTMLHeader($header);
@@ -923,6 +926,11 @@ class Formato extends CI_Controller {
 							<tr>
 								<td>Cafetería:</td>
 								<td class="cantidad">'.$moneda.number_format($cafeteria["SOLICITADO"], 2).'</td>
+								<td class="descripcion">&nbsp;</td>
+							</tr>
+							<tr>
+								<td>Otros gastos:</td>
+								<td class="cantidad">'.$moneda.number_format($otros["SOLICITADO"], 2).'</td>
 								<td class="descripcion">&nbsp;</td>
 							</tr>
 							<tr>

@@ -6,7 +6,6 @@
 		<li role="presentation" class="active"><a href="#evento" aria-controls="evento" role="tab" data-toggle="tab">Datos del evento</a></li>
 		<li role="presentation"><a href="#expositores" aria-controls="expositores" role="tab" data-toggle="tab">Expositores</a></li>
 		<li role="presentation"><a href="#monto" aria-controls="monto" role="tab" data-toggle="tab">Monto solicitado</a></li>
-		<li role="presentation"><a href="#bancarios" aria-controls="bancarios" role="tab" data-toggle="tab">Datos bancarios</a></li>
 	</ul>
 
 	<!-- Tab panes -->
@@ -35,7 +34,7 @@
 			<div class="row">
 				<div class="form-group col-sm-4">
 					<label>Idioma del evento<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Ingresa el idioma del evento (inglés, español, otro)"></span></label>
-					<input type="text" id="idioma" name="idioma" class="form-control" placeholder="Ingresa el idioma del evento" value="<?php if(isset($realizacion) && ($realizacion)) {echo $realizacion["OTRO"];} ?>" />
+					<input type="text" id="idioma" name="idioma" class="form-control" placeholder="Ingresa el idioma del evento" value="<?php if(isset($realizacion) && ($realizacion)) {echo $realizacion["IDIOMA"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
 					<label>Sede<span class="form-text">*</span>:</label>
@@ -75,7 +74,7 @@
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>A quién va dirigido el evento<span class="form-text">*</span>:</label>
-					<input type="text" id="dirigido" name="dirigido" class="form-control" placeholder="Ingresa a quién va dirigido el evento" value="<?php if(isset($realizacion) && ($realizacion)) {echo $realizacion["ID"];} ?>" />
+					<input type="text" id="dirigido" name="dirigido" class="form-control" placeholder="Ingresa a quién va dirigido el evento" value="<?php if(isset($realizacion) && ($realizacion)) {echo $realizacion["DIRIGIDO"];} ?>" />
 				</div>
 			</div>
 			<div class="row">
@@ -100,6 +99,10 @@
 				</div>
 			</div>
 			
+			<?php
+			$i = "";
+			if ( (empty($expositores) && isset($realizacion)) || (!isset($realizacion)) ) {
+			?>
 			<div class="panel-group ficha-collapse" id="accordion1">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -115,65 +118,150 @@
 							<div class="row">
 								<div class="form-group col-sm-4">
 									<label>Nombre(s)<span class="form-text">*</span>:</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el nombre del expositor" />
+									<input type="text" id="exNombre1" name="exNombre[]" class="form-control" placeholder="Ingresa el nombre del expositor" />
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Primer apellido<span class="form-text">*</span>:</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el primer apellido" />
+									<input type="text" id="exApP1" name="exApP[]" class="form-control" placeholder="Ingresa el primer apellido" />
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Segundo apellido:</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el segundo apellido" />
+									<input type="text" id="exApM1" name="exApM[]" class="form-control" placeholder="Ingresa el segundo apellido" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-8">
 									<label>Procedencia:</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Ingresa la procedencia del expositor" />
+									<input type="text" id="exProcedencia1" name="exProcedencia[]" class="form-control" placeholder="Ingresa la procedencia del expositor" />
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Trabajo actual:</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Ingresa el trabajo actual del expositor" />
+									<input type="text" id="exOcupacion1" name="exOcupacion[]" class="form-control" placeholder="Ingresa el trabajo actual del expositor" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
 									<label>Licenciatura:</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Estudios de licenciatura" />
+									<input type="text" id="exLicenciatura1" name="exLicenciatura[]" class="form-control" placeholder="Estudios de licenciatura" />
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Maestría:</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Estudios de maestría" />
+									<input type="text" id="exMaestria1" name="exMaestria[]" class="form-control" placeholder="Estudios de maestría" />
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Doctorado:</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Estudios de doctorado" />
+									<input type="text" id="exDoctorado1" name="exDoctorado[]" class="form-control" placeholder="Estudios de doctorado" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-4">
 									<label>Especialidad:</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Estudios de especialidad" />
+									<input type="text" id="exEspecialidad1" name="exEspecialidad[]" class="form-control" placeholder="Estudios de especialidad" />
 								</div>
 								<div class="form-group col-sm-8">
 									<label>Actividad del expositor:</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Actividad del expositor" />
+									<input type="text" id="exActividad1" name="exActividad[]" class="form-control" placeholder="Actividad del expositor" />
 								</div>
 							</div>
 							<div class="row">
 								<div class="form-group col-sm-8">
 									<label>Tema a exponer:</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Tema a exponer" />
+									<input type="text" id="exTema1" name="exTema[]" class="form-control" placeholder="Tema a exponer" />
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Horario:</label>
-									<input type="text" id="" name="" class="form-control" placeholder="Horario de la exposición" />
+									<input type="text" id="exHorario1" name="exHorario[]" class="form-control" placeholder="Horario de la exposición" />
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<?php
+			} else {
+				$i = 1;
+				foreach ( $expositores as $val ) {
+			?>
+			<div class="panel-group ficha-collapse" id="accordion<?php echo $i; ?>">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h4 class="panel-title">
+						<a data-parent="#accordion1" data-toggle="collapse" href="#panel-<?php echo $i; ?>" aria-expanded="true" aria-controls="panel-<?php echo $i; ?>">
+							Expositor <?php echo $i; ?>
+						</a>
+						</h4>
+						<button type="button" class="collpase-button" data-parent="#accordion<?php echo $i; ?>" data-toggle="collapse" href="#panel-<?php echo $i; ?>"></button>
+					</div>
+					<div class="panel-collapse collapse in" id="panel-<?php echo $i; ?>">
+						<div class="panel-body">
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<label>Nombre(s)<span class="form-text">*</span>:</label>
+									<input type="text" id="exNombre<?php echo $i; ?>" name="exNombre[]" class="form-control" placeholder="Ingresa el nombre del expositor" value="<?php echo $val["NOMBRE"]; ?>" />
+								</div>
+								<div class="form-group col-sm-4">
+									<label>Primer apellido<span class="form-text">*</span>:</label>
+									<input type="text" id="exApP<?php echo $i; ?>" name="exApP[]" class="form-control" placeholder="Ingresa el primer apellido" value="<?php echo $val["APELLIDO_P"]; ?>" />
+								</div>
+								<div class="form-group col-sm-4">
+									<label>Segundo apellido:</label>
+									<input type="text" id="exApM<?php echo $i; ?>" name="exApM[]" class="form-control" placeholder="Ingresa el segundo apellido" value="<?php echo $val["APELLIDO_M"]; ?>" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-8">
+									<label>Procedencia:</label>
+									<input type="text" id="exProcedencia<?php echo $i; ?>" name="exProcedencia[]" class="form-control" placeholder="Ingresa la procedencia del expositor" value="<?php echo $val["PROCEDENCIA"]; ?>" />
+								</div>
+								<div class="form-group col-sm-4">
+									<label>Trabajo actual:</label>
+									<input type="text" id="exOcupacion<?php echo $i; ?>" name="exOcupacion[]" class="form-control" placeholder="Ingresa el trabajo actual del expositor" value="<?php echo $val["DEDICACION"]; ?>" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<label>Licenciatura:</label>
+									<input type="text" id="exLicenciatura<?php echo $i; ?>" name="exLicenciatura[]" class="form-control" placeholder="Estudios de licenciatura" value="<?php echo $val["LICENCIATURA"]; ?>" />
+								</div>
+								<div class="form-group col-sm-4">
+									<label>Maestría:</label>
+									<input type="text" id="exMaestria<?php echo $i; ?>" name="exMaestria[]" class="form-control" placeholder="Estudios de maestría" value="<?php echo $val["MAESTRIA"]; ?>" />
+								</div>
+								<div class="form-group col-sm-4">
+									<label>Doctorado:</label>
+									<input type="text" id="exDoctorado<?php echo $i; ?>" name="exDoctorado[]" class="form-control" placeholder="Estudios de doctorado" value="<?php echo $val["DOCTORADO"]; ?>" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-4">
+									<label>Especialidad:</label>
+									<input type="text" id="exEspecialidad<?php echo $i; ?>" name="exEspecialidad[]" class="form-control" placeholder="Estudios de especialidad" value="<?php echo $val["ESPECIALIDAD"]; ?>" />
+								</div>
+								<div class="form-group col-sm-8">
+									<label>Actividad del expositor:</label>
+									<input type="text" id="exActividad<?php echo $i; ?>" name="exActividad[]" class="form-control" placeholder="Actividad del expositor" value="<?php echo $val["ACTIVIDAD"]; ?>" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-sm-8">
+									<label>Tema a exponer:</label>
+									<input type="text" id="exTema<?php echo $i; ?>" name="exTema[]" class="form-control" placeholder="Tema a exponer" value="<?php echo $val["TEMA"]; ?>" />
+								</div>
+								<div class="form-group col-sm-4">
+									<label>Horario:</label>
+									<input type="text" id="exHorario<?php echo $i; ?>" name="exHorario[]" class="form-control" placeholder="Horario de la exposición" value="<?php echo $val["HORARIO"]; ?>" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php
+				$i++;
+				}
+			}
+			?>
+			<input type="hidden" id="hdnTotalExp" value="<?php echo $i; ?>" />
 		</div>
 		<div role="tabpanel" class="tab-pane" id="monto">
 			<div class="row">
@@ -268,7 +356,7 @@
 											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($apoyo) ) {echo 'checked="checked"';} ?>value="1" /> Sí
 										</label>
 										<label class="radio-inline">
-											<input type="radio" id="rdbApN" name="apoyo" <?php if ( !isset($apoyo) && isset($estancia) ) {echo 'checked="checked"';} ?> value="0" /> No
+											<input type="radio" id="rdbApN" name="apoyo" <?php if ( !isset($apoyo) && isset($realizacion) ) {echo 'checked="checked"';} ?> value="0" /> No
 										</label>
 									</div>
 								</div>
@@ -307,30 +395,6 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-		</div>
-		<div role="tabpanel" class="tab-pane" id="bancarios">
-			<h5 class="text-justify">Los datos bancarios que se ingresen deben 
-				corresponder a la cuenta de la escuela o centro solicitante.</h5>
-			<div class="row">
-				<div class="form-group col-sm-4">
-					<label>Banco<span class="form-text">*</span>:</label>
-					<input type="text" id="banco" name="banco" class="form-control" placeholder="Ingresa el nombre del banco" value="<?php if(isset($persona) && ($persona)) {echo $persona["BANCO_NOMBRE"];} ?>" />
-				</div>
-				<div class="form-group col-sm-4">
-					<label>Número de sucursal<span class="form-text">*</span>:</label>
-					<input type="text" id="sucursal" name="sucursal" class="form-control" placeholder="Ingresa el número de sucursal" value="<?php if(isset($persona) && ($persona)) {echo $persona["BANCO_SUCURSAL"];} ?>" />
-				</div>
-				<div class="form-group col-sm-4">
-					<label>Número de cuenta<span class="form-text">*</span>:</label>
-					<input type="text" id="cuentaBanco" name="cuentaBanco" maxlength="12" class="form-control" placeholder="Ingresa tu número de cuenta" value="<?php if(isset($persona) && ($persona)) {echo $persona["BANCO_CUENTA"];} ?>" />
-				</div>
-			</div>
-			<div class="row">
-				<div class="form-group col-sm-4">
-					<label>Cuenta CLABE<span class="form-text">*</span>: <span class="icon-infocircle" data-toggle="tooltip" title="Ingresa la Clave Bancaria Estandarizada"></span></label>
-					<input type="text" id="clabe" name="clabe" class="form-control" data-mask="999 999 99999999999 9" placeholder="Ingresa la CLABE interbancaria" value="<?php if(isset($persona) && ($persona)) {echo $persona["BANCO_CLABE"];} ?>" />
 				</div>
 			</div>
 		</div>

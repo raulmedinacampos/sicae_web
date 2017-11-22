@@ -51,7 +51,12 @@ class Expositor_md extends CI_Model {
     }
 	
     function InsertRecord($data) {
+    	$this->db->select_max('ID');
+    	$query = $this->db->get(self::tabla);
+    	$id = $query->row();
+    	$id = $id->ID + 1;
     	
+    	$this->db->set('ID', $id);
     	$this->db->set('SOLICITUD_ID', $data[0]);
     	$this->db->set('TIPO_SOLICITUD', $data[1]);
     	$this->db->set('PERSONA_ID', $data[2]);
@@ -100,6 +105,11 @@ class Expositor_md extends CI_Model {
 		$this->db->update(self::tabla, $this, array('ID' => $id));
 		
 		return $id;
+    }
+    
+    function CleanSol($sol) {
+    	$this->db->where(array('SOLICITUD_ID'=>$sol));
+    	$query = $this->db->delete(self::tabla);
     }
 
     /*function Disable($id) {

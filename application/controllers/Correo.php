@@ -35,13 +35,14 @@ class Correo extends CI_Controller {
 			
 			//*587 para COFAA 
 			$config = Array(
-				'protocol'	=> 'smtp',
-				'smtp_host'	=> 'ssl://smtp.googlemail.com',
-				'smtp_port'	=> 465,
-				'smtp_user'	=> 'desarrollo.uds@gmail.com',
-				'smtp_pass'	=> 'D3sarroll0',
-				'mailtype'	=> 'html',
-				'newline'	=> "\r\n"
+				'protocol'		=> 'smtp',
+				'smtp_host'		=> 'smtp.googlemail.com',
+				'smtp_port'		=> 587,
+				'smtp_user'		=> 'desarrollo.uds@gmail.com',
+				'smtp_pass'		=> 'D3sarroll0',
+				'smtp_crypto'	=> 'tls',
+				'mailtype'		=> 'html',
+				'newline'		=> "\r\n"
 			);
 			
 			/*$config = Array(
@@ -50,7 +51,7 @@ class Correo extends CI_Controller {
 				'smtp_host'	=> 'correo.cofaa.ipn.mx',
 				'smtp_port'	=> 587,
 				'smtp_user'	=> 'rmedina@cofaa.ipn.mx',
-				'smtp_pass'	=> 'M3din4Cr',
+				'smtp_pass'	=> '*******',
 				'$_smtp_auth' => true,
 				'mailtype'	=> 'html',
 				'newline'	=> "\r\n"

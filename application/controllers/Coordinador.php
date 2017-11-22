@@ -87,10 +87,10 @@ class Coordinador extends CI_Controller {
 		array_push($data,$this->input->post('sexo'));
 		array_push($data,$this->input->post('telefono'));
 		array_push($data,$this->input->post('extension'));
-		array_push($data,NULL);
-		array_push($data,NULL);
-		array_push($data,NULL);
-		array_push($data,NULL);
+		array_push($data, $this->input->post('banco'));
+		array_push($data, $this->input->post('sucursal'));
+		array_push($data, $this->input->post('cuentaBanco'));
+		array_push($data, str_replace(" ", "", $this->input->post('clabe')));
 		array_push($data,NULL);
 		
 		$this->persona_md->UpdateRecord($data,$id);
