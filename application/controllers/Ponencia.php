@@ -172,7 +172,7 @@ class Ponencia extends CI_Controller {
 			
 		}
 		
-		if($seguro!=""&&$seguro>0){
+		if($seguro!=""&&$seguro>0&&$this->input->post('lugar')=="I"){
 			$this->monto_md->InsertRecord(array(11,$sol,"A",$seguro,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
@@ -192,7 +192,9 @@ class Ponencia extends CI_Controller {
 			
 		}
 		
-		if($this->input->post("apoyo")==1){
+		$this->apoyo_md->CleanSupport($sol);
+		
+		if ( $this->input->post("apoyo") == 1 ) {
 			$data=array();
 			
 			array_push($data,$sol);

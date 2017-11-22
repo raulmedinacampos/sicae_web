@@ -228,7 +228,7 @@ class Realizacion extends CI_Controller {
 		
 		$this->apoyo_md->CleanSupport($sol);
 		
-		if($this->input->post("apoyo")==1){
+		if( $this->input->post("apoyo") == 1 ) {
 			$data=array();
 			
 			array_push($data,$sol);

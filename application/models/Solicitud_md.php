@@ -148,6 +148,9 @@ class Solicitud_md extends CI_Model {
 		}
 		else{
 			$this->db->set('DIAS_ADICIONALES',0);
+			$this->db->set('DA_JUSTIFICACION', NULL);
+			$this->db->set('DA_FECHA_SALIDA', NULL);
+			$this->db->set('DA_FECHA_REGRESO', NULL);
 		}
     	$this->db->set('ITINERARIO', $data[12]);
     	$this->db->set('OTRO', $data[13]);

@@ -101,15 +101,20 @@ class Obtencion_de_grado extends CI_Controller {
 		$aereo=$this->input->post('aereo');
 		$terrestre=$this->input->post('terrestre');
 		$sol=$this->input->post("idSolicitud");
+		
 		if($aereo!=""&&$aereo>0){
 			$this->monto_md->InsertRecord(array(5,$sol,"A",$aereo,0,$this->input->post("espTAereo"),$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
+		
 		if($terrestre!=""&&$terrestre>0){
 			$this->monto_md->InsertRecord(array(4,$sol,"A",$terrestre,0,$this->input->post("espTTerrestre"),$this->input->post("moneda"),$this->input->post("moneda")));
 			
 		}
-		if($this->input->post("apoyo")==1){
+		
+		$this->apoyo_md->CleanSupport($sol);
+		
+		if ( $this->input->post("apoyo") == 1 ) {
 			$data=array();
 			
 			array_push($data,$sol);

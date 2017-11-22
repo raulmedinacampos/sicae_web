@@ -104,21 +104,19 @@ class Estancia_de_investigacion extends CI_Controller {
 		
 		if($aereo!=""&&$aereo>0){
 			$this->monto_md->InsertRecord(array(5,$sol,"A",$aereo,0,$this->input->post("espTAereo"),$this->input->post("moneda"),$this->input->post("moneda")));
-			
 		}
 		
 		if($terrestre!=""&&$terrestre>0){
 			$this->monto_md->InsertRecord(array(4,$sol,"A",$terrestre,0,$this->input->post("espTTerrestre"),$this->input->post("moneda"),$this->input->post("moneda")));
-			
 		}
 		
-		if($seguro!=""&&$seguro>0){
+		if($seguro!=""&&$seguro>0&&$this->input->post('lugar')=="I"){
 			$this->monto_md->InsertRecord(array(11,$sol,"A",$seguro,0,"",$this->input->post("moneda"),$this->input->post("moneda")));
-			
 		}
+		
+		$this->apoyo_md->CleanSupport($sol);
 		
 		if( $this->input->post("apoyo") == 1 ) {
-			$this->apoyo_md->CleanSupport($sol);
 			$data=array();
 			
 			array_push($data,$sol);

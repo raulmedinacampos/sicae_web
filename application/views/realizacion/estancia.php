@@ -191,7 +191,7 @@
 											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($apoyo) ) {echo 'checked="checked"';} ?> value="1" /> Sí
 										</label>
 										<label class="radio-inline">
-											<input type="radio" id="rdbApN" name="apoyo" <?php if ( !isset($apoyo) && isset($estancia) && ($estancia) ) {echo 'checked="checked"';} ?> value="0" /> No
+											<input type="radio" id="rdbApN" name="apoyo" <?php if ( !isset($apoyo) && isset($estancia) ) {echo 'checked="checked"';} ?> value="0" /> No
 										</label>
 									</div>
 								</div>

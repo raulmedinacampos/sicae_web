@@ -26,7 +26,8 @@ function AddOrganizer() {
 			exp += '<h4 class="panel-title">';
 			exp += '<a data-parent="#accordion'+i+'" data-toggle="collapse" href="#panel-'+i+'" aria-expanded="true" aria-controls="panel-'+i+'">';
 			exp += 'Expositor '+i;
-			exp += '</a>';
+			exp += '</a> ';
+			exp += '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>';
 			exp += '</h4>';
 			exp += '<button type="button" class="collpase-button collapsed" data-parent="#accordion'+i+'" data-toggle="collapse" href="#panel-'+i+'"></button>';
 			exp += '</div>';
@@ -34,69 +35,72 @@ function AddOrganizer() {
 			exp += '<div class="panel-body">';
 			exp += '<div class="row">';
 			exp += '<div class="form-group col-sm-4">';
-			exp += '<label>Nombre(s):</label>';
-			exp += '<input type="text" id="exNombre'+i+'" name="exNombre[]" class="form-control" />';
+			exp += '<label>Nombre(s)<span class="form-text">*</span>:</label>';
+			exp += '<input type="text" id="exNombre'+i+'" name="exNombre[]" class="form-control" placeholder="Ingresa el nombre del expositor" />';
 			exp += '</div>';
 			exp += '<div class="form-group col-sm-4">';
-			exp += '<label>Primer apellido</label>';
-			exp += '<input type="text" id="exApP'+i+'" name="exApP[]" class="form-control" />';
+			exp += '<label>Primer apellido<span class="form-text">*</span>:</label>';
+			exp += '<input type="text" id="exApP'+i+'" name="exApP[]" class="form-control" placeholder="Ingresa el primer apellido" />';
 			exp += '</div>';
 			exp += '<div class="form-group col-sm-4">';
-			exp += '<label>Segundo apellido</label>';
-			exp += '<input type="text" id="exApM'+i+'" name="exApM[]" class="form-control" />';
+			exp += '<label>Segundo apellido:</label>';
+			exp += '<input type="text" id="exApM'+i+'" name="exApM[]" class="form-control" placeholder="Ingresa el segundo apellido" />';
 			exp += '</div>';
 			exp += '</div>';
 			exp += '<div class="row">';
-			exp += '<div class="form-group col-sm-6">';
-			exp += '<label>Procedencia</label>';
-			exp += '<input type="text" id="exProcedencia'+i+'" name="exProcedencia[]" class="form-control" />';
+			exp += '<div class="form-group col-sm-8">';
+			exp += '<label>Procedencia:</label>';
+			exp += '<input type="text" id="exProcedencia'+i+'" name="exProcedencia[]" class="form-control" placeholder="Ingresa la procedencia del expositor" />';
 			exp += '</div>';
-			exp += '<div class="form-group col-sm-6">';
-			exp += '<label>Trabajo actual</label>';
-			exp += '<input type="text" id="exOcupacion'+i+'" name="exOcupacion[]" class="form-control" />';
-			exp += '</div>';
-			exp += '</div>';
-			exp += '<div class="row">';
-			exp += '<div class="form-group col-sm-6">';
-			exp += '<label>Licenciatura</label>';
-			exp += '<input type="text" id="exLicenciatura'+i+'" name="exLicenciatura[]" class="form-control" />';
-			exp += '</div>';
-			exp += '<div class="form-group col-sm-6">';
-			exp += '<label>Maestría</label>';
-			exp += '<input type="text" id="exMaestria'+i+'" name="exMaestria[]" class="form-control" />';
+			exp += '<div class="form-group col-sm-4">';
+			exp += '<label>Trabajo actual:</label>';
+			exp += '<input type="text" id="exOcupacion'+i+'" name="exOcupacion[]" class="form-control" placeholder="Ingresa el trabajo actual del expositor" />';
 			exp += '</div>';
 			exp += '</div>';
 			exp += '<div class="row">';
-			exp += '<div class="form-group col-sm-6">';
-			exp += '<label>Doctorado</label>';
-			exp += '<input type="text" id="exDoctorado'+i+'" name="exDoctorado[]" class="form-control" />';
+			exp += '<div class="form-group col-sm-4">';
+			exp += '<label>Licenciatura:</label>';
+			exp += '<input type="text" id="exLicenciatura'+i+'" name="exLicenciatura[]" class="form-control" placeholder="Estudios de licenciatura" />';
 			exp += '</div>';
-			exp += '<div class="form-group col-sm-6">';
-			exp += '<label>Especialidad</label>';
-			exp += '<input type="text" id="exEspecialidad'+i+'" name="exEspecialidad[]" class="form-control" />';
+			exp += '<div class="form-group col-sm-4">';
+			exp += '<label>Maestría:</label>';
+			exp += '<input type="text" id="exMaestria'+i+'" name="exMaestria[]" class="form-control" placeholder="Estudios de maestría" />';
 			exp += '</div>';
-			exp += '</div>';
-			exp += '<div class="row">';
-			exp += '<div class="form-group col-sm-6">';
-			exp += '<label>Actividad del expositor</label>';
-			exp += '<input type="text" id="exActividad'+i+'" name="exActividad[]" class="form-control" />';
-			exp += '</div>';
-			exp += '<div class="form-group col-sm-6">';
-			exp += '<label>Tema a exponer</label>';
-			exp += '<input type="text" id="exTema'+i+'" name="exTema[]" class="form-control" />';
+			exp += '<div class="form-group col-sm-4">';
+			exp += '<label>Doctorado:</label>';
+			exp += '<input type="text" id="exDoctorado'+i+'" name="exDoctorado[]" class="form-control" placeholder="Estudios de doctorado" />';
 			exp += '</div>';
 			exp += '</div>';
 			exp += '<div class="row">';
-			exp += '<div class="form-group col-sm-6">';
-			exp += '<label>Horario</label>';
-			exp += '<input type="text" id="exHorario'+i+'" name="exHorario[]" class="form-control" />';
+			exp += '<div class="form-group col-sm-4">';
+			exp += '<label>Especialidad:</label>';
+			exp += '<input type="text" id="exEspecialidad'+i+'" name="exEspecialidad[]" class="form-control" placeholder="Estudios de especialidad" />';
+			exp += '</div>';
+			exp += '<div class="form-group col-sm-8">';
+			exp += '<label>Actividad del expositor:</label>';
+			exp += '<input type="text" id="exActividad'+i+'" name="exActividad[]" class="form-control" placeholder="Actividad del expositor" />';
+			exp += '</div>';
+			exp += '</div>';
+			exp += '<div class="row">';
+			exp += '<div class="form-group col-sm-8">';
+			exp += '<label>Tema a exponer:</label>';
+			exp += '<input type="text" id="exTema'+i+'" name="exTema[]" class="form-control" placeholder="Tema a exponer" />';
+			exp += '</div>';
+			exp += '<div class="form-group col-sm-4">';
+			exp += '<label>Horario:</label>';
+			exp += '<input type="text" id="exHorario'+i+'" name="exHorario[]" class="form-control" placeholder="Horario de la exposición" />';
 			exp += '</div>';
 			exp += '</div>';
 			exp += '</div>';
 			exp += '</div>';
 			exp += '</div>';
 			exp += '</div>';
-			elem.after(exp);
+			
+			if ( elem.length > 0 ) {
+				elem.after(exp);
+			} else {
+				$("#expositores > .row").after(exp);
+			}
 			
 			$(".panel-collapse").each(function() {
 				if ( "panel-"+i != $(this).attr("id") ) {
@@ -105,7 +109,31 @@ function AddOrganizer() {
 			});
 
 			i++;
+			
+			DeleteOrganizer();
 		}
+	});
+}
+
+function DeleteOrganizer() {
+	$("#expositores .panel-title a:last-of-type").click(function(e) {
+		e.preventDefault();
+		
+		var panel = $(this).parents(".panel-group");
+		panel.remove();
+		
+		i = ($("#expositores .panel-group").length) + 1;
+		
+		SetTextTitle();
+	});
+}
+
+function SetTextTitle() {
+	var k = 1;
+	
+	$("#expositores .panel-title a:first-of-type").each(function() {
+		$(this).text("Expositor " + k);
+		k++;
 	});
 }
 
@@ -261,6 +289,7 @@ function Validate() {
 $gmx(document).ready(function() {
 	Init();
 	AddOrganizer();
+	DeleteOrganizer();
 	SaveData();
 	Validate();
 });

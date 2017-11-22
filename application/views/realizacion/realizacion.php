@@ -110,6 +110,7 @@
 						<a data-parent="#accordion1" data-toggle="collapse" href="#panel-1" aria-expanded="true" aria-controls="panel-1">
 							Expositor 1
 						</a>
+						<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
 						</h4>
 						<button type="button" class="collpase-button" data-parent="#accordion1" data-toggle="collapse" href="#panel-1"></button>
 					</div>
@@ -189,6 +190,7 @@
 						<a data-parent="#accordion1" data-toggle="collapse" href="#panel-<?php echo $i; ?>" aria-expanded="true" aria-controls="panel-<?php echo $i; ?>">
 							Expositor <?php echo $i; ?>
 						</a>
+						<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
 						</h4>
 						<button type="button" class="collpase-button" data-parent="#accordion<?php echo $i; ?>" data-toggle="collapse" href="#panel-<?php echo $i; ?>"></button>
 					</div>
@@ -353,7 +355,7 @@
 									<label>¿Cuentas con otros apoyos?<span class="form-text">*</span>:</label>
 									<div>
 										<label class="radio-inline">
-											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($apoyo) ) {echo 'checked="checked"';} ?>value="1" /> Sí
+											<input type="radio" id="rdbApS" name="apoyo" <?php if ( isset($apoyo) ) {echo 'checked="checked"';} ?> value="1" /> Sí
 										</label>
 										<label class="radio-inline">
 											<input type="radio" id="rdbApN" name="apoyo" <?php if ( !isset($apoyo) && isset($realizacion) ) {echo 'checked="checked"';} ?> value="0" /> No
