@@ -107,9 +107,11 @@ class Ponencia extends CI_Controller {
 		$ponencias=$this->input->post("tituloPonencia");
 		$res=array();
 		$this->ponencia_md->CleanSol($sol);
+		$i = 1;
 		foreach($ponencias as $pn){
-			$id_pon=$this->ponencia_md->insertRecord(array($sol,"A",$pn));
+			$id_pon=$this->ponencia_md->insertRecord(array($i,$sol,"A",$pn));
 			array_push($res,$id_pon);
+			$i++;
 		}
 		
 		echo json_encode($res);//Son los id de las ponencias que se dieron de alta, ya que pueden ser más de una.

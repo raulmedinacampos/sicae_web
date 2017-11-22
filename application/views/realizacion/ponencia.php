@@ -129,6 +129,7 @@
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Ponencia 1. Título de ponencia en inglés y español</label>
+					<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
 					<textarea id="tituloPonencia1" name="tituloPonencia[]" rows="3" class="form-control" placeholder="Anota el nombre de tu ponencia en inglés y en español separados por un salto de línea.\nNOTA: El nombre de la ponencia deberá coincidir con los demás documentos (oficio, carta de aceptación, resumen y ponencia completa)"></textarea>
 				</div>
 			</div>
@@ -140,6 +141,7 @@
 			<div class="row">
 				<div class="form-group col-sm-12">
 					<label>Ponencia <?php echo $i; ?>. Título de ponencia en inglés y español</label>
+					<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
 					<textarea id="tituloPonencia<?php echo $i; ?>" name="tituloPonencia[]" rows="3" class="form-control" placeholder="Anota el nombre de tu ponencia en inglés y en español separados por un salto de línea.\nNOTA: El nombre de la ponencia deberá coincidir con los demás documentos (oficio, carta de aceptación, resumen y ponencia completa)"><?php echo $val["NOMBRE"]; ?></textarea>
 				</div>
 			</div>

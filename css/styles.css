@@ -324,6 +324,31 @@ h3.titulo {
 }
 
 
+/********** Ponencias ***********/
+#coautores h5 {
+	display: inline;
+}
+
+#coautores h5 + a {
+	margin-left: 10px;
+	color: #656565;
+}
+
+#coautores h5 + a span {
+	top: 2px;
+}
+
+#ponencias label + a {
+	top: 2px;
+	margin-left: 10px;
+	color: #656565;
+}
+
+#coautores .coauth > div {
+	margin-bottom: 12px;
+}
+
+
 /********** Listado de solicitudes **********/
 #lSolicitud hr.red {
 	margin-bottom: 20px;

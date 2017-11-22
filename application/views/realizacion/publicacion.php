@@ -55,12 +55,12 @@
 							<a data-parent="#accordion1" data-toggle="collapse" href="#panel-1" aria-expanded="true" aria-controls="panel-1">
 								Coautor 1 
 							</a>
+							<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
 						</h4>
 						<button type="button" class="collpase-button" data-parent="#accordion1" data-toggle="collapse" href="#panel-1"></button>
 					</div>
 					<div class="panel-collapse collapse in" id="panel-1">
 						<div class="panel-body">
-							<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
 							<div class="row">
 								<div class="form-group col-sm-4">
 									<label>Nombre(s):</label>
@@ -91,24 +91,24 @@
 							<a data-parent="#accordion<?php echo $i; ?>" data-toggle="collapse" href="#panel-<?php echo $i; ?>" aria-expanded="true" aria-controls="panel-<?php echo $i; ?>">
 								Coautor <?php echo $i; ?>
 							</a>
+							<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
 						</h4>
 						<button type="button" class="collpase-button" data-parent="#accordion<?php echo $i; ?>" data-toggle="collapse" href="#panel-<?php echo $i; ?>"></button>
 					</div>
 					<div class="panel-collapse collapse in" id="panel-<?php echo $i; ?>">
 						<div class="panel-body">
-							<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
 							<div class="row">
 								<div class="form-group col-sm-4">
 									<label>Nombre(s):</label>
-									<input type="text" id="coNombre1" name="coNombre[]" class="form-control" placeholder="Nombre del coautor" value="<?php if(!empty($coautores)) {echo $val["NOMBRE"];} ?>" />
+									<input type="text" id="coNombre<?php echo $i; ?>" name="coNombre[]" class="form-control" placeholder="Nombre del coautor" value="<?php if(!empty($coautores)) {echo $val["NOMBRE"];} ?>" />
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Primer apellido:</label>
-									<input type="text" id="coApP1" name="coApP[]" class="form-control" placeholder="Primer apellido del coautor" value="<?php if(!empty($coautores)) {echo $val["APELLIDO_P"];} ?>" />
+									<input type="text" id="coApP<?php echo $i; ?>" name="coApP[]" class="form-control" placeholder="Primer apellido del coautor" value="<?php if(!empty($coautores)) {echo $val["APELLIDO_P"];} ?>" />
 								</div>
 								<div class="form-group col-sm-4">
 									<label>Segundo apellido:</label>
-									<input type="text" id="coApM1" name="coApM[]" class="form-control" placeholder="Segundo apellido del coautor" value="<?php if(!empty($coautores)) {echo $val["APELLIDO_M"];} ?>" />
+									<input type="text" id="coApM<?php echo $i; ?>" name="coApM[]" class="form-control" placeholder="Segundo apellido del coautor" value="<?php if(!empty($coautores)) {echo $val["APELLIDO_M"];} ?>" />
 								</div>
 							</div>
 						</div>

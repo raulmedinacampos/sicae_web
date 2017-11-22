@@ -51,24 +51,19 @@ class Coautor_md extends CI_Model {
     }
 	
     function InsertRecord($data) {
-    	$this->db->select_max('ID');
-    	$query = $this->db->get(self::tabla);
-    	$id = $query->row();
-    	$id = $id->ID + 1;
-    	 
-    	$this->db->set('ID', $id);
-    	$this->db->set('PONENCIA_ID', $data[0]);
-    	$this->db->set('SOLICITUD_ID', $data[1]);
-    	$this->db->set('TIPO_SOLICITUD', $data[2]);
-    	$this->db->set('PERSONA_ID', $data[3]);
-    	$this->db->set('NOMBRE', $data[4]);
-    	$this->db->set('APELLIDO_P', $data[5]);
-    	$this->db->set('APELLIDO_M', $data[6]);
+    	$this->db->set('ID', $data[0]);
+    	$this->db->set('PONENCIA_ID', $data[1]);
+    	$this->db->set('SOLICITUD_ID', $data[2]);
+    	$this->db->set('TIPO_SOLICITUD', $data[3]);
+    	$this->db->set('PERSONA_ID', $data[4]);
+    	$this->db->set('NOMBRE', $data[5]);
+    	$this->db->set('APELLIDO_P', $data[6]);
+    	$this->db->set('APELLIDO_M', $data[7]);
 		
         $this->db->insert(self::tabla,$this);
         
 		$this->db->select("ID");
-        $this->db->where(array("PONENCIA_ID"=>$data[0],"PERSONA_ID"=>$data[3]));
+        $this->db->where(array("PONENCIA_ID"=>$data[1],"PERSONA_ID"=>$data[4]));
         $query = $this->db->get(self::tabla);
         
         $usr = $query->row();

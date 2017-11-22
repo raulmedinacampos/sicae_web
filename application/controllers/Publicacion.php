@@ -109,16 +109,24 @@ class Publicacion extends CI_Controller {
 	
 	public function coautores() {
 		$this->load->model("coautor_md");
+		$this->load->model("ponencia_md");
+		
 		$sol=$this->input->post("idSolicitud");
+		$ponencia=$this->input->post('titulo');
+		$this->ponencia_md->CleanSol($sol);
+		$id_pon=$this->ponencia_md->insertRecord(array(1, $sol, "A" ,$ponencia));
+		
 		$res=array();
 		$nombres=$this->input->post("coNombre");
 		$apps=$this->input->post("coApP");
 		$apms=$this->input->post("coApM");
+		$pn = 1;
+		$i = 1;
 		//$pn=$this->input->post('id_publicacion');
-		$pn=1;
 		$this->coautor_md->CleanSol($sol);
 		foreach($nombres as $ky=>$vl){
 			$data=array();
+			array_push($data,$i);
 			array_push($data,$pn);
 			array_push($data,$sol);
 			array_push($data,"A");
@@ -130,6 +138,7 @@ class Publicacion extends CI_Controller {
 			$rs=$this->coautor_md->insertRecord($data);
 			
 			array_push($res,$rs);
+			$i++;
 		}
 		
 		echo json_encode($res);//Son los id de los coautores agregados

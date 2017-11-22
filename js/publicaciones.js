@@ -31,13 +31,13 @@ function AddCoauthor() {
 			panel += '<h4 class="panel-title">';
 			panel += '<a data-parent="#accordion'+i+'" data-toggle="collapse" href="#panel-'+i+'" aria-expanded="true" aria-controls="panel-'+i+'">';
 			panel += 'Coautor '+i;
-			panel += '</a>';
+			panel += '</a> ';
+			panel += '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>';
 			panel += '</h4>';
 			panel += '<button type="button" class="collpase-button collapsed" data-parent="#accordion'+i+'" data-toggle="collapse" href="#panel-'+i+'"></button>';
 			panel += '</div>';
 			panel += '<div class="panel-collapse collapse in" id="panel-'+i+'">';
 			panel += '<div class="panel-body">';
-			panel += '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>';
 			panel += '<div class="row">';
 			panel += '<div class="form-group col-sm-4">';
 			panel += '<label>Nombre(s):</label>';
@@ -58,7 +58,7 @@ function AddCoauthor() {
 			if ( elem.length > 0 ) {
 				elem.after(panel);
 			} else {
-				$(".tab-pane > .row").after(panel);
+				$("#coautores > .row").after(panel);
 			}
 			
 			$(".panel-collapse").each(function() {
@@ -75,13 +75,24 @@ function AddCoauthor() {
 }
 
 function DeleteCoauthor() {
-	$("#coautores .panel-body a").click(function(e) {
+	$("#coautores .panel-title a:last-of-type").click(function(e) {
 		e.preventDefault();
 		
 		var panel = $(this).parents(".panel-group");
 		panel.remove();
 		
-		i--;
+		i = ($("#coautores .panel-group").length) + 1;
+		
+		SetTextTitle();
+	});
+}
+
+function SetTextTitle() {
+	var k = 1;
+	
+	$("#coautores .panel-title a:first-of-type").each(function() {
+		$(this).text("Coautor " + k);
+		k++;
 	});
 }
 
@@ -174,6 +185,9 @@ function Validate() {
 			},
 			sede: {
 				required: true
+			},
+			costo: {
+				moneda: true
 			}
 		},
 		messages: {

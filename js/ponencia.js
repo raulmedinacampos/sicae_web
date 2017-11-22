@@ -1,4 +1,6 @@
-var i = 2
+var i = 2;
+var j = 2;
+var z = new Array();
 
 function Init() {
 	$(".datepicker").datepicker();
@@ -21,6 +23,12 @@ function ToogleInsurance() {
 }
 
 function AddSpeechTitle() {
+	var total = $("#hdnTotalExp").val();
+	
+	if ( total > 2 ) {
+		i = total;
+	}
+	
 	$("#btnAgregarPonencia").click(function(e) {
 		e.preventDefault();
 		
@@ -31,11 +39,44 @@ function AddSpeechTitle() {
 			input = '<div class="row">';
 			input += '<div class="form-group col-sm-12">';
 			input += '<label>Ponencia '+i+'. Título de la ponencia en inglés y español</label>';
+			input += '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>';
 			input += '<textarea id="tituloPonencia'+i+'" name="tituloPonencia[]" rows="3" class="form-control" placeholder="Anota el nombre de tu ponencia en inglés y en español separados por un salto de línea."></textarea>';
 			input += '</div></div>';
-			elem.after(input);
+			
+			if ( elem.length > 0 ) {
+				elem.after(input);
+			} else {
+				$("#ponencias > .row").after(input);
+			}
+			
 			i++;
+			
+			DeleteSpeechTitle();
 		}
+	});
+}
+
+function DeleteSpeechTitle() {
+	$("#ponencias label + a").click(function(e) {
+		e.preventDefault();
+		
+		if ( i > 2 ) {
+			var panel = $(this).parents(".row");
+			panel.remove();
+			
+			i = ($("#ponencias .row").length);
+			
+			SetTextTitle();
+		}
+	});
+}
+
+function SetTextTitle() {
+	var k = 1;
+	
+	$("#ponencias .row label").each(function() {
+		$(this).text("Ponencia " + k + ". Título de la ponencia en inglés y español");
+		k++;
 	});
 }
 
@@ -45,14 +86,13 @@ function DrawCoauthor() {
 		var aria = "true";
 		var collapse = "in";
 		var collapsed = "";
-		var z = new Array();
 		var ca = $("#hdnTotalCoautores").val();
 		
 		if ( ca == "" ) {
-			$("#coautores").html("");
+			//$("#coautores").html("");
 		}
 		
-		for ( x=1; x<i; x++ ) {
+		for ( var x=1; x<i; x++ ) {
 			z[x] = 2;
 			if ( x > 1 ) {
 				aria = "false";
@@ -75,7 +115,10 @@ function DrawCoauthor() {
 			panel += '<button id="btnAgregarCoautor'+x+'" data-c="'+x+'" class="btn btn-sm btn-primary btnAgregarCoautor">';
 			panel += '<span class="glyphicon glyphicon-plus"></span> Agregar coautor';
 			panel += '</button>';
-			panel += '<h5>Coautor 1</h5>';
+			panel += '<div class="coauth"><div>';
+			panel += '<h5>Coautor 1</h5> ';
+			panel += '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>';
+			panel += '</div>';
 			panel += '<div class="row">';
 			panel += '<div class="form-group col-sm-4">';
 			panel += '<label>Nombre(s):</label>';
@@ -88,7 +131,7 @@ function DrawCoauthor() {
 			panel += '<div class="form-group col-sm-4">';
 			panel += '<label>Segundo apellido:</label>';
 			panel += '<input type="text" id="coApM'+x+'_1" name="coApM_'+x+'[]" class="form-control" placeholder="Segundo apellido del coautor" />';
-			panel += '</div></div>';  //.row
+			panel += '</div></div></div>';  //.row
 			panel += '</div></div>';  // .panel-body y .collapse
 			panel += '</div>';  // .panel
 			panel += '</div>';  // .ficha-collapse
@@ -97,7 +140,7 @@ function DrawCoauthor() {
 				$("#coautores").append(panel);
 			}
 			
-			
+			DeleteCoauthor();
 		}
 		
 		$(".btnAgregarCoautor").click(function(e) {
@@ -108,24 +151,55 @@ function DrawCoauthor() {
 			var elem = $(this).parent(".panel-body");
 			
 			if ( z[(idC)] < 4 ) {
-				coautor = '<h5>Coautor '+z[(idC)]+'</h5>';
+				coautor = '<div class="coauth"><div>';
+				coautor += '<h5>Coautor '+z[(idC)]+'</h5> ';
+				coautor += '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>';
+				coautor += '</div>';
 				coautor += '<div class="row">';
 				coautor += '<div class="form-group col-sm-4">';
 				coautor += '<label>Nombre(s):</label>';
-				coautor += '<input type="text" id="coNombre'+idC+'_'+z[(idC)]+'" name="coNombre_'+idC+'[]" class="form-control" placeholder="Nombre del autor" />';
+				coautor += '<input type="text" id="coNombre'+idC+'_'+z[(idC)]+'" name="coNombre_'+idC+'[]" class="form-control" placeholder="Nombre del coautor" />';
 				coautor += '</div>';
 				coautor += '<div class="form-group col-sm-4">';
 				coautor += '<label>Primer apellido:</label>';
-				coautor += '<input type="text" id="coApP'+idC+'_'+z[(idC)]+'" name="coApP_'+idC+'[]" class="form-control" placeholder="Primer apellido del autor" />';
+				coautor += '<input type="text" id="coApP'+idC+'_'+z[(idC)]+'" name="coApP_'+idC+'[]" class="form-control" placeholder="Primer apellido del coautor" />';
 				coautor += '</div>';
 				coautor += '<div class="form-group col-sm-4">';
 				coautor += '<label>Segundo apellido:</label>';
-				coautor += '<input type="text" id="coApM'+idC+'_'+z[(idC)]+'" name="coApM_'+idC+'[]" class="form-control" placeholder="Segundo apellido del autor" />';
-				coautor += '</div></div>';  //.row
+				coautor += '<input type="text" id="coApM'+idC+'_'+z[(idC)]+'" name="coApM_'+idC+'[]" class="form-control" placeholder="Segundo apellido del coautor" />';
+				coautor += '</div></div></div>';  //.row
 				
 				$(elem).append(coautor);
 				z[idC]++;
+				
+				DeleteCoauthor();
 			}
+		});
+	});
+}
+
+function DeleteCoauthor() {
+	$("#coautores div h5 + a").click(function(e) {
+		e.preventDefault();
+		
+		if ( 3 > 2 ) {
+			var panel = $(this).parents("div.coauth");
+			panel.remove();
+			
+			//i = ($("#ponencias .row").length);
+			
+			SetTextCoauthor();
+		}
+	});
+}
+
+function SetTextCoauthor() {
+	$("#coautores .panel-group").each(function() {
+		var k = 1;
+		
+		$(this).find(".coauth h5").each(function(index) {
+			$(this).text("Coautor " + k);
+			k++;
 		});
 	});
 }
@@ -288,6 +362,7 @@ $gmx(document).ready(function() {
 	Init();
 	ToogleInsurance();
 	AddSpeechTitle();
+	DeleteSpeechTitle();
 	DrawCoauthor();
 	SaveData();
 	Validate();
