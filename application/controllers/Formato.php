@@ -98,6 +98,7 @@ class Formato extends CI_Controller {
 			
 			$expositores = $this->expositor_md->GetBySolicitud($solicitud["ID"]);
 			$homoclave = $this->homoclave_md->GetById(9); // ID para realización
+			list($solicitud["IDIOMA"], $solicitud["DIRIGIDO"])= explode("|", $solicitud["OTRO"].'|');
 			
 			$filasExp = sizeof($expositores) / 2;
 			$restExp = sizeof($expositores) % 2;
@@ -461,10 +462,10 @@ class Formato extends CI_Controller {
 									<td colspan="4">Nombre del evento: '.$solicitud["NOMBRE_EVENTO"].'</td>
 								</tr>
 								<tr>
-									<td colspan="4">Dirigido a: '.$solicitud["ID"].'</td>
+									<td colspan="4">Dirigido a: '.$solicitud["DIRIGIDO"].'</td>
 								</tr>
 								<tr>
-									<td colspan="4">Idioma: '.$solicitud["OTRO"].'</td>
+									<td colspan="4">Idioma: '.$solicitud["IDIOMA"].'</td>
 								</tr>
 								<tr>
 									<td colspan="4">Sede: '.$solicitud["SEDE"].'</td>
