@@ -24,9 +24,17 @@ class Login_md extends CI_Model {
 	
 	public function validarUsr($rol) {
 		$cimt = & get_instance();
-		$ses_rol = $cimt->session->userdata('rol_id');
+		$sess_rol = $cimt->session->userdata('rol');
 		
 		if($rol!=$sess_rol){
+			$this->Logout();
+		}
+	}
+	
+	public function validarSesAct() {
+		$cimt = & get_instance();
+		
+		if(!$cimt->session->userdata('id')||!$cimt->session->userdata('nom')||!$cimt->session->userdata('rol')){
 			$this->Logout();
 		}
 	}

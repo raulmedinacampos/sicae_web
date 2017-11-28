@@ -34,9 +34,10 @@ function AddSpeechTitle() {
 		
 		var input;
 		var elem = $(this).parents(".tab-pane").children(".row").last();
+		console.log(elem);
 		
 		if ( i < 4 ) {
-			input = '<div class="row">';
+			input = '<div class="row" data-numpon="'+i+'">';
 			input += '<div class="form-group col-sm-12">';
 			input += '<label>Ponencia '+i+'. Título de la ponencia en inglés y español</label>';
 			input += '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>';
@@ -62,11 +63,14 @@ function DeleteSpeechTitle() {
 		
 		if ( i > 2 ) {
 			var panel = $(this).parents(".row");
+			var numpon = panel.data("numpon");
+			var coautAccord=$("#accordion-c"+numpon);
+			console.log(panel);
 			panel.remove();
-			
+			coautAccord.remove();
 			i = ($("#ponencias .row").length);
-			
 			SetTextTitle();
+			SetCoauthTextTitle();
 		}
 	});
 }
@@ -76,6 +80,18 @@ function SetTextTitle() {
 	
 	$("#ponencias .row label").each(function() {
 		$(this).text("Ponencia " + k + ". Título de la ponencia en inglés y español");
+		$(this).parents(".row").data("numpon",k);
+		k++;
+	});
+}
+
+
+function SetCoauthTextTitle() {
+	var k = 1;
+	
+	$("#coautores .panel-group").each(function() {
+		var coautAccord="accordion-c"+k;
+		$(this).attr("id",coautAccord);
 		k++;
 	});
 }
@@ -93,54 +109,62 @@ function DrawCoauthor() {
 		}
 		
 		for ( var x=1; x<i; x++ ) {
+			
 			z[x] = 2;
-			if ( x > 1 ) {
-				aria = "false";
-				collapse = "";
-				collapsed = "collapsed";
+			
+			
+			var idpanel="#accordion-c"+x;
+			if($(idpanel).length<1){
+				if ( x > 1 ) {
+					aria = "false";
+					collapse = "";
+					collapsed = "collapsed";
+				}
+				
+				panel = '<div class="panel-group ficha-collapse" id="accordion-c'+x+'">';
+				panel += '<div class="panel panel-default">';
+				panel += '<div class="panel-heading">';
+				panel += '<h4 class="panel-title">';
+				panel += '<a data-parent="#accordion-c'+x+'" data-toggle="collapse" href="#panel-c'+x+'" aria-expanded="'+aria+'" aria-controls="panel-c'+x+'">';
+				panel += 'Ponencia '+x;
+				panel += '</a>';
+				panel += '</h4>';
+				panel += '<button type="button" class="collpase-button '+collapsed+'" data-parent="#accordion-c'+x+'" data-toggle="collapse" href="#panel-c'+x+'"></button>';
+				panel += '</div>';
+				panel += '<div class="panel-collapse collapse '+collapse+'" id="panel-c'+x+'">';
+				panel += '<div class="panel-body">';
+				panel += '<button id="btnAgregarCoautor'+x+'" data-c="'+x+'" class="btn btn-sm btn-primary btnAgregarCoautor">';
+				panel += '<span class="glyphicon glyphicon-plus"></span> Agregar coautor';
+				panel += '</button>';
+				panel += '<div class="coauth"><div>';
+				panel += '<h5>Coautor 1</h5> ';
+				panel += '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>';
+				panel += '</div>';
+				panel += '<div class="row">';
+				panel += '<div class="form-group col-sm-4">';
+				panel += '<label>Nombre(s):</label>';
+				panel += '<input type="text" id="coNombre'+x+'_1" name="coNombre_'+x+'[]" class="form-control" placeholder="Nombre del coautor" />';
+				panel += '</div>';
+				panel += '<div class="form-group col-sm-4">';
+				panel += '<label>Primer apellido:</label>';
+				panel += '<input type="text" id="coApP'+x+'_1" name="coApP_'+x+'[]" class="form-control" placeholder="Primer apellido del coautor" />';
+				panel += '</div>';
+				panel += '<div class="form-group col-sm-4">';
+				panel += '<label>Segundo apellido:</label>';
+				panel += '<input type="text" id="coApM'+x+'_1" name="coApM_'+x+'[]" class="form-control" placeholder="Segundo apellido del coautor" />';
+				panel += '</div></div></div>';  //.row
+				panel += '</div></div>';  // .panel-body y .collapse
+				panel += '</div>';  // .panel
+				panel += '</div>';  // .ficha-collapse
+				//alert("entra al for i vale"+i);
+				
+				/*if ( ca == "" ) {
+					$("#coautores").append(panel);
+				}*/
+					$("#coautores").append(panel);
+				
+				//DeleteCoauthor();
 			}
-			
-			panel = '<div class="panel-group ficha-collapse" id="accordion-c'+x+'">';
-			panel += '<div class="panel panel-default">';
-			panel += '<div class="panel-heading">';
-			panel += '<h4 class="panel-title">';
-			panel += '<a data-parent="#accordion-c'+x+'" data-toggle="collapse" href="#panel-c'+x+'" aria-expanded="'+aria+'" aria-controls="panel-c'+x+'">';
-			panel += 'Ponencia '+x;
-			panel += '</a>';
-			panel += '</h4>';
-			panel += '<button type="button" class="collpase-button '+collapsed+'" data-parent="#accordion-c'+x+'" data-toggle="collapse" href="#panel-c'+x+'"></button>';
-			panel += '</div>';
-			panel += '<div class="panel-collapse collapse '+collapse+'" id="panel-c'+x+'">';
-			panel += '<div class="panel-body">';
-			panel += '<button id="btnAgregarCoautor'+x+'" data-c="'+x+'" class="btn btn-sm btn-primary btnAgregarCoautor">';
-			panel += '<span class="glyphicon glyphicon-plus"></span> Agregar coautor';
-			panel += '</button>';
-			panel += '<div class="coauth"><div>';
-			panel += '<h5>Coautor 1</h5> ';
-			panel += '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>';
-			panel += '</div>';
-			panel += '<div class="row">';
-			panel += '<div class="form-group col-sm-4">';
-			panel += '<label>Nombre(s):</label>';
-			panel += '<input type="text" id="coNombre'+x+'_1" name="coNombre_'+x+'[]" class="form-control" placeholder="Nombre del coautor" />';
-			panel += '</div>';
-			panel += '<div class="form-group col-sm-4">';
-			panel += '<label>Primer apellido:</label>';
-			panel += '<input type="text" id="coApP'+x+'_1" name="coApP_'+x+'[]" class="form-control" placeholder="Primer apellido del coautor" />';
-			panel += '</div>';
-			panel += '<div class="form-group col-sm-4">';
-			panel += '<label>Segundo apellido:</label>';
-			panel += '<input type="text" id="coApM'+x+'_1" name="coApM_'+x+'[]" class="form-control" placeholder="Segundo apellido del coautor" />';
-			panel += '</div></div></div>';  //.row
-			panel += '</div></div>';  // .panel-body y .collapse
-			panel += '</div>';  // .panel
-			panel += '</div>';  // .ficha-collapse
-			
-			if ( ca == "" ) {
-				$("#coautores").append(panel);
-			}
-			
-			DeleteCoauthor();
 		}
 		
 		$(".btnAgregarCoautor").click(function(e) {
@@ -186,7 +210,11 @@ function DeleteCoauthor() {
 			var panel = $(this).parents("div.coauth");
 			panel.remove();
 			
-			//i = ($("#ponencias .row").length);
+			z.forEach(function(elem, index) {
+				z[index] = ($("#coautores #accordion-c"+index+" .coauth").length) + 1;
+			});
+			
+			//i = ($("#coautores .panel-group .coauth").length) - 1;
 			
 			SetTextCoauthor();
 		}
@@ -359,14 +387,6 @@ function Validate() {
 }
 
 $gmx(document).ready(function() {
-	Init();
-	ToogleInsurance();
-	AddSpeechTitle();
-	DeleteSpeechTitle();
-	DrawCoauthor();
-	SaveData();
-	Validate();
-	
 	var total = $("#hdnTotalTitulos").val();
 	
 	if ( total > 2 ) {
@@ -376,4 +396,13 @@ $gmx(document).ready(function() {
 	if ( $("#rdbLI").is(":checked") ) {
 		$(".oculto").css("display", "block");
 	}
+	Init();
+	ToogleInsurance();
+	AddSpeechTitle();
+	DeleteSpeechTitle();
+	DrawCoauthor();
+	SaveData();
+	Validate();
+	
+	
 });

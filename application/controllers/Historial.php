@@ -1,5 +1,10 @@
 <?php
 class Historial extends CI_Controller {
+	public function __construct(){
+		parent::__construct();
+		$this->load->model('login_md');
+		$this->login_md->validarSesAct();
+	}
 	public function index() {
 		$header["js"][] = "jquery.dataTables.min";
 		$header["js"][] = "historial";

@@ -126,7 +126,7 @@
 			$i = "";
 			if ( (empty($titulos) && isset($ponencia)) || (!isset($ponencia)) ) {
 			?>
-			<div class="row">
+			<div class="row" data-numpon="1">
 				<div class="form-group col-sm-12">
 					<label>Ponencia 1. Título de ponencia en inglés y español</label>
 					<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
@@ -138,7 +138,7 @@
 				$i = 1;
 				foreach ( $titulos as $val ) {
 			?>
-			<div class="row">
+			<div class="row" data-numpon="1">
 				<div class="form-group col-sm-12">
 					<label>Ponencia <?php echo $i; ?>. Título de ponencia en inglés y español</label>
 					<a href="#"><span class="glyphicon glyphicon-trash"></span></a>

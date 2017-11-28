@@ -118,15 +118,16 @@ class Solicitud_md extends CI_Model {
     	$this->db->set('HORAS_TOTALES', $data[19]);
     	$this->db->set('MONTO', $data[20]);
 		
-        $this->db->insert(self::tabla,$this);
+        if($this->db->insert(self::tabla,$this))
+			return $id;	
         
-        $this->db->select("ID");
+        /*$this->db->select("ID");
         $this->db->where(array("TIPO"=>$data[0],"PERSONA_ID"=>$data[1],"TIPO_EVENTO_ID"=>$data[2]));
         $query = $this->db->get(self::tabla);
         
         $usr = $query->row();
         
-		return $usr->ID;
+		return $usr->ID;*/
     }
 	
     function UpdateRecord($data,$id) {

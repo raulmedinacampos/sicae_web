@@ -2,7 +2,9 @@
 class Usuario extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
+		$this->load->model('login_md');
 		$this->load->model('persona_md');
+		$this->login_md->validarSesAct();
 	}
 	
 	public function index() {

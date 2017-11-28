@@ -97,6 +97,11 @@ class Formato extends CI_Controller {
 			$titulo = "Realización de eventos académicos";
 			
 			$expositores = $this->expositor_md->GetBySolicitud($solicitud["ID"]);
+			$homoclave = $this->homoclave_md->GetById(9); // ID para realización
+			
+			$filasExp = sizeof($expositores) / 2;
+			$restExp = sizeof($expositores) % 2;
+			$iEx = 0;
 		}
 		
 		if ( $persona["TIPO_PERSONA_ID"] == 3 ) {
@@ -493,6 +498,38 @@ class Formato extends CI_Controller {
 				}
 				
 				$html .= '	</table>';
+				
+				if ( sizeof($expositores) > 6 ) {  // Primera parte de expositores en caso de que sean muchos
+					$html .= '	<p class="seccion">Relación de expositores</p>
+							<table class="tabla">';
+					for ( $iEx = 0; $iEx < 6; $iEx += 2 ) {
+						$html .= '		<tr>
+									<td width="50%">Nombre: '.trim($expositores[$iEx]["NOMBRE"]." ".$expositores[$iEx]["APELLIDO_P"]." ".$expositores[$iEx]["APELLIDO_M"]).'</td>
+									<td width="50%">Nombre: '.trim($expositores[$iEx+1]["NOMBRE"]." ".$expositores[$iEx+1]["APELLIDO_P"]." ".$expositores[$iEx+1]["APELLIDO_M"]).'</td>
+								</tr>
+								<tr>
+									<td>Procedencia: '.$expositores[$iEx]["PROCEDENCIA"].'</td>
+									<td>Procedencia: '.$expositores[$iEx+1]["PROCEDENCIA"].'</td>
+								</tr>
+								<tr>
+									<td>Trabajo actual: '.$expositores[$iEx]["DEDICACION"].'</td>
+									<td>Trabajo actual: '.$expositores[$iEx+1]["DEDICACION"].'</td>
+								</tr>
+								<tr>
+									<td>Doctorado: '.$expositores[$iEx]["DOCTORADO"].'</td>
+									<td>Doctorado: '.$expositores[$iEx+1]["DOCTORADO"].'</td>
+								</tr>';
+						if ( $iEx < 4 ) {
+							$html .= '
+								<tr>
+									<td>&nbsp;'.$iEx.'</td>
+									<td>&nbsp;aa</td>
+								</tr>';
+						}
+					}
+					
+					$html .= '		</table>';
+				}
 		}
 		
 		if ( $persona["TIPO_PERSONA_ID"] == 3 ) {
@@ -852,26 +889,47 @@ class Formato extends CI_Controller {
 		if ( $persona["TIPO_PERSONA_ID"] == 2 ) {
 			$html = '	<p class="seccion">Relación de expositores</p>
 							<table class="tabla">';
-			foreach ( $expositores as $k=>$val ) {
+			for ( $i=$iEx; $i<$filasExp; $i+=2 ) {
 				$html .= '		<tr>
-									<td>Nombre: '.trim($val["NOMBRE"]." ".$val["APELLIDO_P"]." ".$val["APELLIDO_M"]).'</td>
+									<td width="50%">Nombre: '.trim($expositores[$i]["NOMBRE"]." ".$expositores[$i]["APELLIDO_P"]." ".$expositores[$i]["APELLIDO_M"]).'</td>
+									<td width="50%">Nombre: '.trim($expositores[$i+1]["NOMBRE"]." ".$expositores[$i+1]["APELLIDO_P"]." ".$expositores[$i+1]["APELLIDO_M"]).'</td>
 								</tr>
 								<tr>
-									<td>Procedencia: '.$val["PROCEDENCIA"].'</td>
+									<td>Procedencia: '.$expositores[$i]["PROCEDENCIA"].'</td>
+									<td>Procedencia: '.$expositores[$i+1]["PROCEDENCIA"].'</td>
 								</tr>
 								<tr>
-									<td>Trabajo actual: '.$val["DEDICACION"].'</td>
+									<td>Trabajo actual: '.$expositores[$i]["DEDICACION"].'</td>
+									<td>Trabajo actual: '.$expositores[$i+1]["DEDICACION"].'</td>
 								</tr>
 								<tr>
-									<td>Doctorado: '.$val["DOCTORADO"].'</td>
+									<td>Doctorado: '.$expositores[$i]["DOCTORADO"].'</td>
+									<td>Doctorado: '.$expositores[$i+1]["DOCTORADO"].'</td>
 								</tr>';
-				if ( $k < sizeof($expositores)-1 ) {
+				if ( $i < $filasExp ) {
 					$html .= '
 								<tr>
 									<td>&nbsp;</td>
 								</tr>';
 				}
 			}
+			
+			if ( $restExp > 0 ) {
+				$k = sizeof($expositores)-1;
+				$html .= '		<tr>
+									<td width="50%">Nombre: '.trim($expositores[$k]["NOMBRE"]." ".$expositores[$k]["APELLIDO_P"]." ".$expositores[$k]["APELLIDO_M"]).'</td>
+								</tr>
+								<tr>
+									<td>Procedencia: '.$expositores[$k]["PROCEDENCIA"].'</td>
+								</tr>
+								<tr>
+									<td>Trabajo actual: '.$expositores[$k]["DEDICACION"].'</td>
+								</tr>
+								<tr>
+									<td>Doctorado: '.$expositores[$k]["DOCTORADO"].'</td>
+								</tr>';
+			}
+			
 			$html .= '		</table>';
 			
 			$html .= '	<p class="seccion">Monto solicitado</p>

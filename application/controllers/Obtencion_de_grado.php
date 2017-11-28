@@ -1,5 +1,12 @@
 <?php
 class Obtencion_de_grado extends CI_Controller {
+	
+	public function __construct(){
+		parent::__construct();
+		$this->load->model('login_md');
+		$this->login_md->validarSesAct();
+	}
+	
 	public function index() {
 		$this->load->model("solicitud_md");
 	
