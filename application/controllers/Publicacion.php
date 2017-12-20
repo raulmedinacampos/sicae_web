@@ -67,6 +67,8 @@ class Publicacion extends CI_Controller {
 		$this->load->model("solicitud_md");
 		$this->load->model("publicacion_md");
 		$usr=$this->session->userdata('id');
+		
+		$id = $this->solicitud_md->GetNextId("A");
 		$res=array();
 		$data=array();
 		
@@ -91,6 +93,7 @@ class Publicacion extends CI_Controller {
 		array_push($data, NULL);
 		array_push($data, NULL);
 		array_push($data, NULL);
+		array_push($data, $id);  // ID
 		
 		if ( $this->input->post("idSolicitud") == 0 )
 			$id = $this->solicitud_md->InsertRecord($data);

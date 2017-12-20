@@ -35,12 +35,30 @@ class Monto_md extends CI_Model {
 	
     function GetBySolicitud($id) {
     	$this->db->where(array('SOLICITUD_ID'=>$id));
+    	
+    	if ( $this->session->rol == 1 || $this->session->rol == 3 ) {
+    		$this->db->where("TIPO_SOLICITUD", "A");
+    	}
+    	
+    	if ( $this->session->rol == 2 ) {
+    		$this->db->where("TIPO_SOLICITUD", "R");
+    	}
+    	
         $query = $this->db->get(self::tabla);
         return $query->result_array();
     }
     
     function GetByTypeReq($tipo, $id) {
     	$this->db->where(array('TIPO_MONTO_ID'=>$tipo, 'SOLICITUD_ID'=>$id));
+    	
+    	if ( $this->session->rol == 1 || $this->session->rol == 3 ) {
+    		$this->db->where("TIPO_SOLICITUD", "A");
+    	}
+    	
+    	if ( $this->session->rol == 2 ) {
+    		$this->db->where("TIPO_SOLICITUD", "R");
+    	}
+    	
     	$query = $this->db->get(self::tabla);
     	return $query->row_array();
     }

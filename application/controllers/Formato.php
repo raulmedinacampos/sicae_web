@@ -79,10 +79,10 @@ class Formato extends CI_Controller {
 			$sabatico = ($acad["SABATICO"] == 0) ? "No" : "Sí";
 			$goceSueldo = ($acad["LIC_SUELDO"] == 0) ? "No" : "Sí";
 			
-			$edd = ($acad["EDD"] == 0) ? "No" : "Sí";
-			$excl = ($acad["EXCLUSIVIDAD"] == 0) ? "No" : "Sí";
-			$sni = ($acad["SNI"] == 0) ? "No" : "Sí";
-			$edi = ($acad["EDI"] == 0) ? "No" : "Sí";
+			$edd = ($acad["EDD"] == 0) ? "No" : "Sí. Nivel ".$acad["EDD"];
+			$excl = ($acad["EXCLUSIVIDAD"] == 0) ? "No" : "Sí. Nivel ".$acad["EXCLUSIVIDAD"];
+			$sni = ($acad["SNI"] == 0) ? "No" : "Sí. Nivel ".$acad["SNI"];
+			$edi = ($acad["EDI"] == 0) ? "No" : "Sí. Nivel ".$acad["EDI"];
 			
 			$mat = "";
 			foreach ( $materias as $val ) {
@@ -230,6 +230,9 @@ class Formato extends CI_Controller {
 		
 		$moneda = ($tAereo["S_MONEDA_ID"] == 1) ? 'USD $' : '$';
 		$monedaAp = ($apoyo["MONEDA_ID"] == 1) ? 'USD $' : '$';
+		if ( $publicacion["SOLICITADO"] ) {
+			$moneda = ($publicacion["S_MONEDA_ID"] == 1) ? 'USD $' : '$';
+		}
 		$montoTotal = $tAereo["SOLICITADO"] + $tTerrestre["SOLICITADO"] + $seguroInt["SOLICITADO"] + $estancia["SOLICITADO"] + $inscripcion["SOLICITADO"] + $publicacion["SOLICITADO"];
 		$montoRealizacion = $pExpo["SOLICITADO"] + $viaticos["SOLICITADO"] + $tAereo["SOLICITADO"] + $tTerrestre["SOLICITADO"] + $material["SOLICITADO"] + $cafeteria["SOLICITADO"] + $otros["SOLICITADO"];
 		
@@ -320,7 +323,13 @@ class Formato extends CI_Controller {
 					</table>';
 		}
 		
-		$html .= '	<p class="seccion">Datos bancarios</p>
+		$html .= '	<p class="seccion">Datos bancarios';
+		
+		if ( $persona["TIPO_PERSONA_ID"] == 2 ) {
+			$html .= ' de la escuela o centro';
+		}
+		
+		$html .= '	</p>
 					<table class="tabla">
 						<tr>
 							<td width="50%">Banco: '.$persona["BANCO_NOMBRE"].'</td>
@@ -481,6 +490,9 @@ class Formato extends CI_Controller {
 								</tr>
 								<tr>
 									<td colspan="4">Objetivo: '.$solicitud["OBJETIVO"].'</td>
+								</tr>
+								<tr>
+									<td colspan="4">Beneficio institucional: '.$solicitud["BENEFICIO"].'</td>
 								</tr>';
 				
 				if ( $solicitud["DA_JUSTIFICACION"] ) {
@@ -649,46 +661,34 @@ class Formato extends CI_Controller {
 				foreach ( $ponencias as $val ) {
 					$html .= '	<tr>';
 					
-					if ( $persona["TIPO_PERSONA_ID"] == 1 ) {
-						if ( $i == 0) {
-							$html .= '	<td rowspan="'.sizeof($ponencias).'" valign="top" width="10%">Título de ponencia: </td>';
-						}
-						
-						$html .= '		<td colspan="3">['.$val["ID"]."] ".$val["NOMBRE"].'</td>
-									</tr>';
-						
-						$i++;
+					if ( $i == 0) {
+						$html .= '	<td rowspan="'.sizeof($ponencias).'" valign="top" width="10%">Título de ponencia: </td>';
 					}
-				}
-				
-				if ( $persona["TIPO_PERSONA_ID"] == 3 ) {
-					$html .= '		<td valign="top" width="10%">Título de ponencia: </td>
-										<td colspan="3">'.$val["NOMBRE"].'</td>
-									</tr>';
+					
+					$html .= '		<td colspan="3">['.$val["ID"]."] ".$val["NOMBRE"].'</td>
+								</tr>';
+					
+					$i++;
 				}
 				
 				$i = 0;
 				
-				foreach ( $coautores as $val ) {
-					$coautoresString .= trim($val["APELLIDO_P"]." ".$val["APELLIDO_M"]." ".$val["NOMBRE"]).", ";
+				foreach ( $ponencias as $p ) {
 					$html .= '	<tr>';
 					
-					if ( $persona["TIPO_PERSONA_ID"] == 1 ) {
-						if ( $i == 0) {
-							$html .= '	<td rowspan="'.sizeof($coautores).'" valign="top" width="10%">Coautor: </td>';
-						}
-							
-						$html .= '		<td colspan="3">['.$val["PONENCIA_ID"]."] ".trim($val["APELLIDO_P"]." ".$val["APELLIDO_M"]." ".$val["NOMBRE"]).'</td>
-									</tr>';
-							
-						$i++;
+					if ( $i == 0) {
+						$html .= '	<td rowspan="'.sizeof($ponencias).'" valign="top" width="10%">Coautor: </td>';
 					}
-				}
-				
-				if ( $persona["TIPO_PERSONA_ID"] == 3 ) {
-					$html .= '		<td valign="top" width="10%">Coautor: </td>
-										<td colspan="3">'.$coautoresString.'</td>
-									</tr>';
+					
+					$html .= '		<td colspan="3">';
+					foreach ( $coautores as $val ) {
+						if ( $p["ID"] == $val["PONENCIA_ID"] ) {
+							$html .= '['.$val["PONENCIA_ID"]."] ".trim($val["APELLIDO_P"]." ".$val["APELLIDO_M"]." ".$val["NOMBRE"]).'&nbsp;&nbsp;&nbsp;';
+						}
+					}
+					
+					$html .= '		</td></tr>';
+					$i++;
 				}
 				
 				$html .= '		<tr>
@@ -800,27 +800,8 @@ class Formato extends CI_Controller {
 			}
 			
 			$html .= '	<p class="seccion">Monto solicitado</p>
-						<table class="montos">';
-			
-			if ( $apoyo["INSTITUCION"] ) {
-				$html .= '	<tr>
-								<td colspan="3"><strong>Apoyos con los que ya se cuenta:</strong></td>
-							</tr>
+						<table class="montos">
 							<tr>
-								<td colspan="3">Institución: '.$apoyo["INSTITUCION"].'</td>
-							</tr>
-							<tr>
-								<td colspan="3">Monto: '.$monedaAp.number_format($apoyo["MONTO"], 2).'</td>
-							</tr>
-							<tr>
-								<td colspan="3">Especificación del apoyo: '.$apoyo["ESPECIFICACION"].'</td>
-							</tr>
-							<tr>
-								<td colspan="3">&nbsp;</td>
-							</tr>';
-			}
-			
-			$html .= '		<tr>
 								<td colspan="3"><strong>Apoyo solicitado para:</strong></td>
 							</tr>';
 			
@@ -883,14 +864,34 @@ class Formato extends CI_Controller {
 								<td><strong>TOTAL:</strong></td>
 								<td class="total">'.$moneda.number_format($montoTotal, 2).'</td>
 								<td>&nbsp;</td>
+							</tr>';
+			
+			if ( $apoyo["INSTITUCION"] ) {
+				$html .= '	<tr>
+								<td colspan="3">&nbsp;</td>
 							</tr>
-					</table>';
+							<tr>
+								<td colspan="3"><strong>Apoyos con los que ya se cuenta:</strong></td>
+							</tr>
+							<tr>
+								<td colspan="3">Institución: '.$apoyo["INSTITUCION"].'</td>
+							</tr>
+							<tr>
+								<td colspan="3">Monto: '.$monedaAp.number_format($apoyo["MONTO"], 2).'</td>
+							</tr>
+							<tr>
+								<td colspan="3">Especificación del apoyo: '.$apoyo["ESPECIFICACION"].'</td>
+							</tr>';
+			}
+			
+			$html .= '	</table>';
 		} // Fin profesor o alumno
 		
 		if ( $persona["TIPO_PERSONA_ID"] == 2 ) {
 			$html = '	<p class="seccion">Relación de expositores</p>
 							<table class="tabla">';
-			for ( $i=$iEx; $i<$filasExp; $i+=2 ) {
+			//echo $iEx." - ".$filasExp;exit();
+			for ( $i=$iEx; $i<=$filasExp; $i+=2 ) {
 				$html .= '		<tr>
 									<td width="50%">Nombre: '.trim($expositores[$i]["NOMBRE"]." ".$expositores[$i]["APELLIDO_P"]." ".$expositores[$i]["APELLIDO_M"]).'</td>
 									<td width="50%">Nombre: '.trim($expositores[$i+1]["NOMBRE"]." ".$expositores[$i+1]["APELLIDO_P"]." ".$expositores[$i+1]["APELLIDO_M"]).'</td>
@@ -934,27 +935,8 @@ class Formato extends CI_Controller {
 			$html .= '		</table>';
 			
 			$html .= '	<p class="seccion">Monto solicitado</p>
-						<table class="montos">';
-			
-			if ( $apoyo["INSTITUCION"] ) {
-				$html .= '	<tr>
-								<td colspan="3"><strong>Apoyos con los que ya se cuenta:</strong></td>
-							</tr>
+						<table class="montos">
 							<tr>
-								<td colspan="3">Institución: '.$apoyo["INSTITUCION"].'</td>
-							</tr>
-							<tr>
-								<td colspan="3">Monto: '.$monedaAp.number_format($apoyo["MONTO"], 2).'</td>
-							</tr>
-							<tr>
-								<td colspan="3">Especificación del apoyo: '.$apoyo["ESPECIFICACION"].'</td>
-							</tr>
-							<tr>
-								<td colspan="3">&nbsp;</td>
-							</tr>';
-			}
-			
-			$html .= '		<tr>
 								<td colspan="3"><strong>Apoyo solicitado para:</strong></td>
 							</tr>
 							<tr>
@@ -970,12 +952,12 @@ class Formato extends CI_Controller {
 							<tr>
 								<td>Transporte aéreo:</td>
 								<td class="cantidad">'.$moneda.number_format($tAereo["SOLICITADO"], 2).'</td>
-								<td class="descripcion">&nbsp;</td>
+								<td class="descripcion">Transporte aéreo: '.$tAereo["JUSTIFICACION"].'</td>
 							</tr>
 							<tr>
 								<td>Transporte terrestre:</td>
 								<td class="cantidad">'.$moneda.number_format($tTerrestre["SOLICITADO"], 2).'</td>
-								<td class="descripcion">&nbsp;</td>
+								<td class="descripcion">Transporte terrestre: '.$tTerrestre["JUSTIFICACION"].'</td>
 							</tr>
 							<tr>
 								<td>Material didactico:</td>
@@ -990,14 +972,33 @@ class Formato extends CI_Controller {
 							<tr>
 								<td>Otros gastos:</td>
 								<td class="cantidad">'.$moneda.number_format($otros["SOLICITADO"], 2).'</td>
-								<td class="descripcion">&nbsp;</td>
+								<td class="descripcion">Otros gastos: '.$otros["JUSTIFICACION"].'</td>
 							</tr>
 							<tr>
 								<td><strong>TOTAL:</strong></td>
 								<td class="total">'.$moneda.number_format($montoRealizacion, 2).'</td>
 								<td>&nbsp;</td>
+							</tr>';
+
+			if ( $apoyo["INSTITUCION"] ) {
+				$html .= '	<tr>
+								<td colspan="3">&nbsp;</td>
 							</tr>
-					</table>';
+							<tr>
+								<td colspan="3"><strong>Apoyos con los que ya se cuenta:</strong></td>
+							</tr>
+							<tr>
+								<td colspan="3">Institución: '.$apoyo["INSTITUCION"].'</td>
+							</tr>
+							<tr>
+								<td colspan="3">Monto: '.$monedaAp.number_format($apoyo["MONTO"], 2).'</td>
+							</tr>
+							<tr>
+								<td colspan="3">Especificación del apoyo: '.$apoyo["ESPECIFICACION"].'</td>
+							</tr>';
+			}
+			
+			$html .= '	</table>';
 		}
 		
 		if ( $persona["TIPO_PERSONA_ID"] == 1 ) {

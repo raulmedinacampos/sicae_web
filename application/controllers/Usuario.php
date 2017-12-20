@@ -4,10 +4,11 @@ class Usuario extends CI_Controller {
 		parent::__construct();
 		$this->load->model('login_md');
 		$this->load->model('persona_md');
-		$this->login_md->validarSesAct();
 	}
 	
 	public function index() {
+		$this->login_md->validarSesAct();
+		
 		$header['js'][] = "bootstrap-show-password.min";
 		$header["js"][] = "jquery.placeholder.min";
 		$header["js"][] = "usuario";

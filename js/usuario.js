@@ -74,27 +74,21 @@ function CalculateTesis() {
 	$("#hdnTotalTesis").val(lic + mae + doc);
 	
 	$("#cTLicenciatura, #iTLicenciatura").keyup(function() {
-		if ( $("#cTLicenciatura").val() && $("#iTLicenciatura").val() ) {
-			var suma = parseInt($("#cTLicenciatura").val()) + parseInt($("#iTLicenciatura").val());
-			$("#tTLicenciatura").val(suma);
-			lic = suma;
-		}
+		var suma = ($("#cTLicenciatura").val()) ? parseInt($("#cTLicenciatura").val()) : 0;
+		$("#tTLicenciatura").val($("#cTLicenciatura").val());
+		lic = suma;
 	});
 	
 	$("#cTMaestria, #iTMaestria").keyup(function() {
-		if ( $("#cTMaestria").val() && $("#iTMaestria").val() ) {
-			var suma = parseInt($("#cTMaestria").val()) + parseInt($("#iTMaestria").val());
-			$("#tTMaestria").val(suma);
-			mae = suma;
-		}
+		var suma = ($("#cTMaestria").val()) ? parseInt($("#cTMaestria").val()) : 0;
+		$("#tTMaestria").val($("#cTMaestria").val());
+		mae = suma;
 	});
 	
 	$("#cTDoctorado, #iTDoctorado").keyup(function() {
-		if( $("#cTDoctorado").val() && $("#iTDoctorado").val() ) {
-			var suma = parseInt($("#cTDoctorado").val()) + parseInt($("#iTDoctorado").val());
-			$("#tTDoctorado").val(suma);
-			doc = suma;
-		}
+		var suma = ($("#cTDoctorado").val()) ? parseInt($("#cTDoctorado").val()) : 0;
+		$("#tTDoctorado").val($("#cTDoctorado").val());
+		doc = suma;
 	});
 	
 	$("#cTLicenciatura, #iTLicenciatura, #cTMaestria, #iTMaestria, #cTDoctorado, #iTDoctorado").keyup(function() {

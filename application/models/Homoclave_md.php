@@ -12,7 +12,7 @@ class Homoclave_md extends CI_Model {
 	function GetAll() {
 		$this->db->order_by("NOMBRE");
         $query = $this->db->get(self::tabla);
-        return $query->result();
+        return $query->result_array();
     }
     
     function GetById($id) {

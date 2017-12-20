@@ -24,7 +24,7 @@
 				?>
 				<tr>
 					<td><?php echo $val["ID"]; ?></td>
-					<td><?php echo $val["NOMBRE_EVENTO"]; ?></td>
+					<td><?php echo $val["ORGANIZA"]; ?></td>
 					<td><?php echo $val["FECHA_INICIAL"]." - ".$val["FECHA_FINAL"]; ?></td>
 					<td class="text-center"><a href="#" data-id="<?php echo $val['ID']; ?>"><span class="glyphicon glyphicon-pencil"></span></a></td>
 				</tr>

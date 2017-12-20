@@ -4,11 +4,12 @@ class Coordinador extends CI_Controller {
 		parent::__construct();
 		$this->load->model('login_md');
 		$this->load->model('persona_md');
-		$this->login_md->validarSesAct();
-		$this->login_md->validarUsr(2);
 	}
 	
 	public function index() {
+		$this->login_md->validarSesAct();
+		$this->login_md->validarUsr(2);
+		
 		$header["js"][] = "coordinador";
 		
 		$header['titulo'] = "Coordinador";

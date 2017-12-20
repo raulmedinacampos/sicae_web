@@ -65,12 +65,11 @@ function DeleteSpeechTitle() {
 			var panel = $(this).parents(".row");
 			var numpon = panel.data("numpon");
 			var coautAccord=$("#accordion-c"+numpon);
-			console.log(panel);
+			//console.log(panel);
 			panel.remove();
 			coautAccord.remove();
 			i = ($("#ponencias .row").length);
 			SetTextTitle();
-			SetCoauthTextTitle();
 		}
 	});
 }
@@ -92,12 +91,55 @@ function SetCoauthTextTitle() {
 	$("#coautores .panel-group").each(function() {
 		var coautAccord="accordion-c"+k;
 		$(this).attr("id",coautAccord);
+		var curel=$(this).find(".panel-title a");//título de los coautores
+		curel.text("Ponencia "+k);
+		curel.data("parent","#"+coautAccord);
+		curel.attr("href","#panel-c"+k);
+		
+		curel=$(this).find("button.collpase-button");//botones de abrir-cerrar acordeon
+		curel.data("parent","#"+coautAccord);
+		curel.attr("href","#panel-c"+k);
+		
+		curel=$(this).find(".panel-collapse");//panel contenedor de coautores
+		curel.attr("id","panel-c"+k);
+		
+		curel=curel.find(".btnAgregarCoautor");
+		curel.remove();
+		
+		curel=$(this).find(".panel-collapse .panel-body");//panel contenedor de boton y datos
+		
+		boton = '<button id="btnAgregarCoautor'+k+'" data-c="'+k+'" class="btn btn-sm btn-primary btnAgregarCoautor">';
+		boton += '<span class="glyphicon glyphicon-plus"></span> Agregar coautor';
+		boton += '</button>';
+		
+		curel.prepend(boton);
+		
+		curel=curel.find(".coauth .row input");//Todos los input que ya existan
+		
+		changeCoauthInput(curel,k);
+		
 		k++;
 	});
 }
 
+function changeCoauthInput(inputs,k){
+	inputs.each(function(index) {
+			var idele=$(this).attr("id");
+			idele=idele.split("_");
+			var idxinp=idele[1];
+			var nomvar=idele[0].substring(0,idele[0].length-1);
+			idele=nomvar+k+"_"+idxinp;
+			$(this).attr("id",idele);
+			$(this).attr("name",nomvar+"_"+k+"[]");
+			
+		});
+	
+}
+
 function DrawCoauthor() {
 	$('a[aria-controls="coautores"]').on('shown.bs.tab', function (e) {
+		
+		SetCoauthTextTitle();
 		var panel;
 		var aria = "true";
 		var collapse = "in";
@@ -163,9 +205,11 @@ function DrawCoauthor() {
 				}*/
 					$("#coautores").append(panel);
 				
-				//DeleteCoauthor();
+				DeleteCoauthor();
 			}
 		}
+		
+		DeleteCoauthor();
 		
 		$(".btnAgregarCoautor").click(function(e) {
 			e.preventDefault();
@@ -174,7 +218,7 @@ function DrawCoauthor() {
 			var coautor = "";
 			var elem = $(this).parent(".panel-body");
 			
-			if ( z[(idC)] < 4 ) {
+			if ( z[(idC)] < 9 ) {
 				coautor = '<div class="coauth"><div>';
 				coautor += '<h5>Coautor '+z[(idC)]+'</h5> ';
 				coautor += '<a href="#"><span class="glyphicon glyphicon-trash"></span></a>';
@@ -195,10 +239,14 @@ function DrawCoauthor() {
 				
 				$(elem).append(coautor);
 				z[idC]++;
-				
 				DeleteCoauthor();
 			}
 		});
+		
+			z.forEach(function(elem, index) {
+				z[index] = ($("#coautores #accordion-c"+index+" .coauth").length) + 1;
+			});
+				
 	});
 }
 
@@ -217,6 +265,7 @@ function DeleteCoauthor() {
 			//i = ($("#coautores .panel-group .coauth").length) - 1;
 			
 			SetTextCoauthor();
+			DeleteCoauthor();
 		}
 	});
 }

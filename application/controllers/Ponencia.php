@@ -75,6 +75,8 @@ class Ponencia extends CI_Controller {
 	public function guardar() {
 		$this->load->model("solicitud_md");
 		$usr=$this->session->userdata('id');
+		
+		$id = $this->solicitud_md->GetNextId("A");
 		$data=array();
 		
 		array_push($data,'A');
@@ -98,6 +100,7 @@ class Ponencia extends CI_Controller {
 		array_push($data, NULL);
 		array_push($data, NULL);
 		array_push($data, NULL);
+		array_push($data, $id);  // ID
 		
 		if ( $this->input->post("idSolicitud") == 0 )
 			$id = $this->solicitud_md->InsertRecord($data);
@@ -137,8 +140,10 @@ class Ponencia extends CI_Controller {
 			$nombres=$this->input->post("coNombre_".$ctpn);
 			$apps=$this->input->post("coApP_".$ctpn);//Revisar name del campo en la vista de las ponencias que se agregan
 			$apms=$this->input->post("coApM_".$ctpn);
+			$i = 1;
 			foreach($nombres as $ky=>$vl){
 				$data=array();
+				array_push($data,$i);
 				array_push($data,$pn);
 				array_push($data,$sol);
 				array_push($data,"A");
@@ -151,6 +156,7 @@ class Ponencia extends CI_Controller {
 				$rs=$this->coautor_md->insertRecord($data);
 				
 				array_push($res,$rs);
+				$i++;
 			}
 			$ctpn++;
 		}

@@ -35,12 +35,30 @@ class Coautor_md extends CI_Model {
 	
 	function GetBySolicitud($id) {
 		$this->db->where(array('SOLICITUD_ID'=>$id));
+		
+		if ( $this->session->rol == 1 || $this->session->rol == 3 ) {
+			$this->db->where("TIPO_SOLICITUD", "A");
+		}
+		
+		if ( $this->session->rol == 2 ) {
+			$this->db->where("TIPO_SOLICITUD", "R");
+		}
+		
         $query = $this->db->get(self::tabla);
         return $query->result_array();
     }
 	
     function GetByPonencia($id) {
 		$this->db->where(array('PONENCIA_ID'=>$id));
+		
+		if ( $this->session->rol == 1 || $this->session->rol == 3 ) {
+			$this->db->where("TIPO_SOLICITUD", "A");
+		}
+		
+		if ( $this->session->rol == 2 ) {
+			$this->db->where("TIPO_SOLICITUD", "R");
+		}
+		
         $query = $this->db->get(self::tabla);
         return $query->result_array();
     }
@@ -61,14 +79,8 @@ class Coautor_md extends CI_Model {
     	$this->db->set('APELLIDO_M', $data[7]);
 		
         $this->db->insert(self::tabla,$this);
-        
-		$this->db->select("ID");
-        $this->db->where(array("PONENCIA_ID"=>$data[1],"PERSONA_ID"=>$data[4]));
-        $query = $this->db->get(self::tabla);
-        
-        $usr = $query->row();
-        
-		return $usr->ID;
+       
+		return $id;
     }
 	
     function UpdateRecord($data,$id) {

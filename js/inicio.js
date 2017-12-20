@@ -70,21 +70,16 @@ function OpenNewOrganizerModal() {
 	$("#btnNuevoCoordinador").click(function(e) {
 		e.preventDefault();
 		
-		$('#formNuevo input[type="text"]').each(function() {
+		$('#formNuevoCoordinador input[type="text"]').each(function() {
 			$(this).val("");
 		});
 		
-		$('#formNuevo input[type="password"]').each(function() {
+		$('#formNuevoCoordinador input[type="password"]').each(function() {
 			$(this).val("");
 		});
 		
-		$("#formNuevo select").each(function() {
+		$("#formNuevoCoordinador select").each(function() {
 			$(this).val("");
-		});
-		
-		$(".radio-perfil input").each(function() {
-			$(this).prop("checked", false);
-			$(this).parent().children("div").removeClass("active");
 		});
 		
 		$("#perfil").addClass("active");

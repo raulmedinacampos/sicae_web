@@ -86,6 +86,8 @@ class Realizacion extends CI_Controller {
 	public function guardar() {
 		$this->load->model("solicitud_md");
 		$usr=$this->session->userdata('id');
+		
+		$id = $this->solicitud_md->GetNextId("R");
 		$data=array();
 		
 		array_push($data,'R');
@@ -109,6 +111,7 @@ class Realizacion extends CI_Controller {
 		array_push($data, NULL);
 		array_push($data, $this->input->post('duracion'));
 		array_push($data, NULL);
+		array_push($data, $id);  // ID
 		
 		if ( $this->input->post("idSolicitud") == 0 )
 			$id = $this->solicitud_md->InsertRecord($data);
@@ -266,59 +269,65 @@ class Realizacion extends CI_Controller {
 						$datos["titulo"] .= "Ponencia";
 						$datos["texto"] .= "
 						<ul>
-							<li>Las solicitudes de Apoyos Económicos serán avaladas por el Director de la Unidad Académica mediante oficio original que deberá contener los siguientes datos: nombre del solicitante, número de empleado, nombre, sede y fecha del evento</li>
-							<li> El formato Único que genera el SICAE, firmado por el solicitante, con firma y sello del director de la Unidad Académica</li>
-							<li>Resumen de la ponencia presentada ante el comité evaluador del evento</li>
-							<li>Ponencia completa en formato de Word, conteniendo la metodología (Introducción, desarrollo, conclusiones y bibliografía)</li>
-							<li>Carta de aceptación de la ponencia en hoja membretada, firmada por el comité organizador del evento y con el nombre de la ponencia, en caso de haberla recibido por correo electrónico, deberá anexar la impresión del mismo.
-Este documento podrá quedar pendiente si al momento de presentar su solicitud no se contara con ella</li>
+							<li>Oficio de solicitud con los siguientes datos: nombre del solicitante, nombre, sede y fecha del evento. con firma autógrafa del titular de la dependencia politécnica y el sello.</li>
+							<li>Formato COFAA que genera el SICAE con las firmas autógrafas del solicitante y el titular de la dependencia politécnica, así como el sello correspondiente.</li>
+							<li>Estado de cuenta bancaria a nombre del solicitante con el número de la cuenta clabe interbancaria.</li>
+							<li>Encuesta de calidad.</li>
+							<li>Resumen de la ponencia se&ntilde;alando la dependencia de adscripción y los coautores.</li>
+							<li>Ponencia en extenso que incluya introducción, desarrollo y bibliografía, adscripción y nombre de los coautores.</li>
+							<li>Carta de aceptación de ponencia (el titulo debe ser igual del resumen y ponencia).</li>
+							<li>Tríptico o documento oficial del evento.</li>
 							";
 						break;
 					case 6:
 						$datos["titulo"] .= "Publicación de Artículo";
 						$datos["texto"] .= "
 						<ul>
-							<li>Las solicitudes de Apoyos Económicos serán avaladas por el Director de la Unidad Académica mediante oficio original que deberá contener los siguientes datos: nombre del solicitante, número de empleado, nombre, sede y fecha del evento.</li>
-							<li> El formato Único que genera el SICAE, firmado por el solicitante, con firma y sello del director de la Unidad Académica.</li>
-							<li>Artículo a publicar en formato Word</li>
-							<li>Cotización de la revista en donde se publicará el artículo</li>
-							<li>Anexar evidencia de que la revista esta indexada al Citation Index ( ISNN y Dirección electrónica)</li>
-							<li>Carta de aceptación del artículo a publicar en hoja membretada, firmada por el comité organizador del evento y con el nombre del artículo a publicar, en caso de haberla recibido por correo electrónico, deberá anexar la impresión del mismo</li>
+							<li>Oficio de solicitud con los siguientes datos: nombre del solicitante, nombre, sede y fecha del evento. con firma autógrafa del titular de la dependencia politécnica y el sello.</li>
+							<li>Formato COFAA que genera el SICAE con las firmas autógrafas del solicitante y el titular de la dependencia politécnica, así como el sello correspondiente.</li>
+							<li>Estado de cuenta bancaria a nombre del solicitante con el número de la cuenta clabe interbancaria.</li>
+							<li>Encuesta de calidad.</li>
+							<li>Carta de aceptación del artículo por parte de la revista correspondiente.</li>
+							<li>Extenso del artículo a publicar que se&ntilde;ale la dependencia politécnica de adscripción y los nombres de lo coautores.</li>
+							<li>Cotización emitida por la revista donde se publicará el artículo.</li>
 							";
 						break;
 					case 3:
 						$datos["titulo"] .= "Estancia de Investigación";
 						$datos["texto"] .= "
 						<ul>
-							<li>Las solicitudes de Apoyos Económicos serán avaladas por el Director de la Unidad Académica mediante oficio original que deberá contener los siguientes datos: nombre del solicitante, número de empleado, nombre, sede y fecha del evento</li>
-							<li>El formato Único que genera el SICAE, firmado por el solicitante, con firma y sello del director de la Unidad Académica</li>
-							<li>Carta de invitación de la institución en donde se realizará la estancia, en hoja membretada y firmada por el anfitrión de la estancia</li>
-							<li>Programa de trabajo detallado y calendarizado, avalado por el anfitrión de la estancia</li>
-							<li>En caso de que la estancia exceda los 15 días hábiles reglamentarios para ausentarse de sus labores, se deberá anexar copia de la Licencia con goce de sueldo u oficio que justifique el año o semestre sabático</li>
-							<li>Si existe convenio entre el IPN y la institución en donde se realizara la estancia, deberá anexar la copia del mismo</li>
-							<li>NOTA: En el caso de estancias de investigación, el apoyo se autorizara sólo para transporte aéreo y/o terrestre</li>
+							<li>Oficio de solicitud con los siguientes datos: nombre del solicitante, nombre, sede y fecha del evento. con firma autógrafa del titular de la dependencia politécnica y el sello.</li>
+							<li>Formato COFAA que genera el SICAE con las firmas autógrafas del solicitante y el titular de la dependencia politécnica, así como el sello correspondiente.</li>
+							<li>Estado de cuenta bancaria a nombre del solicitante con el número de la cuenta clabe interbancaria.</li>
+							<li>Encuesta de calidad.</li>
+							<li>Carta de invitación de la institución donde se realizará la estancia, en hoja membretada y firmada por el anfitrión de la misma.</li>
+							<li>Programa de trabajo detallado y calendarizado, avalado por el anfitrión de la estancia.</li>
+							<li>En caso de que la estancia exceda los 15 días hábiles reglamentarios para ausentarse de sus labores, se deberá anexar, copia de la Licencia con Goce de Sueldo u oficio de autorización del a&ntilde;o o semestre sabático.</li>
+							<li>Si existe convenio interinstitucional entre el IPN y la institución donde se llevará acabo la estancia, deberá anexar copia del mismo.</li>
 							";
 						break;
 					case 4:
 						$datos["titulo"] .= "Obtención de Grado";
 						$datos["texto"] .= "
 						<ul>
-							<li>Las solicitudes de Apoyos Económicos serán avaladas por el Director de la Unidad Académica mediante oficio original que deberá contener los siguientes datos: nombre del solicitante, número de empleado, nombre, sede y fecha del evento</li>
-							<li>El formato Único que genera el SICAE, firmado por el solicitante, con firma y sello del director de la Unidad Académica</li>
-							<li>Carta de la institución que autoriza la fecha para la presentación del examen de grado</li>
-							<li>En el caso de que exceda los 15 días hábiles reglamentarios para ausentarse de sus labores, se deberá anexar copia de la Licencia con goce de sueldo u oficio que justifique el año o semestre sabático</li>
-							<li>NOTA:Para la presentación de examen de grado, se autorizará únicamente transporte aéreo y/o terrestre</li>
+							<li>Oficio de solicitud con los siguientes datos: nombre del solicitante, nombre, sede y fecha del evento. con firma autógrafa del titular de la dependencia politécnica y el sello.</li>
+							<li>Formato COFAA que genera el SICAE con las firmas autógrafas del solicitante y el titular de la dependencia politécnica, así como el sello correspondiente.</li>
+							<li>Estado de cuenta bancaria a nombre del solicitante con el número de la cuenta clabe interbancaria.</li>
+							<li>Encuesta de calidad.</li>
+							<li>Carta de autorización de la fecha para la presentación del examen de grado.</li>
+							<li>Copia de la Licencia con Goce de Sueldo u oficio de autorización del a&ntilde;o o semestre sabático.</li>
 							";
 						break;
 					default:
 						$datos["titulo"] .= "Curso, Diplomado, Seminario y/o Taller";
 						$datos["texto"] .= "
 						<ul>
-							<li>Las solicitudes de Apoyos Económicos serán avaladas por el Director de la Unidad Académica mediante oficio original que deberá contener los siguientes datos: nombre del solicitante, número de empleado, nombre, sede y fecha del evento</li>
-							<li>El formato Único que genera el SICAE, firmado por el solicitante, con firma y sello del director de la Unidad Académica</li>
-							<li>Temario y programa del evento</li>
-							<li>Tríptico o documento oficial del evento</li>
-							<li>NOTA: Para la asistencia a cursos, diplomados, seminarios y/ o talleres podrá autorizarse transporte aéreo y/o terrestre, inscripción y gastos de estancia hasta por 5 días</li>
+							<li>Oficio de solicitud con los siguientes datos: nombre del solicitante, nombre, sede y fecha del evento. con firma autógrafa del titular de la dependencia politécnica y el sello.</li>
+							<li>Formato COFAA que genera el SICAE con las firmas autógrafas del solicitante y el titular de la dependencia politécnica, así como el sello correspondiente.</li>
+							<li>Estado de cuenta bancaria a nombre del solicitante con el número de la cuenta clabe interbancaria.</li>
+							<li>Encuesta de calidad.</li>
+							<li>Tríptico o documento oficial del evento.</li>
+							<li>Temario o programa del evento.</li>
 							";
 				}
 				
@@ -333,47 +342,30 @@ Este documento podrá quedar pendiente si al momento de presentar su solicitud n
 					switch ($solicitud["NIVEL_ID"]) { // Requisitos por nivel de docencia
 						case 1:
 							$datos["titulo"] .= "Medio Superior";
-							$datos["texto"] .= "
-							<ul>
-								<li>Docencia para el Nivel Medio Superior.- Acta de calificaciones de la unidad de aprendizaje de cualquiera de los semestres de dos años anteriores a la solicitud</li>
-								<li>Formación de Recursos Humanos.- Presentar diploma de 'Formación y Actualización Docente para un Nuevo modelo Educativo' de 'Competencias Docentes en el Nivel Medio Superior' y/o 'Especialización en Competencias Docentes para Educación Media Superior'</li>
-								<li>Constancia de participación en eventos de formación docente y/o actualización profesional, Programa Institucional de Tutorías (PIT), Orientación Juvenil (Maestro tutor), Recuperación Académica Estudiantil o de Formación de Emprendedores</li>
-							</ul><br/>
-							<h3>Observaciones</h3>
-							En el caso de contar con evidencia de Dirección de Tesis y participar en proyectos de Investigación, no será necesario presentar los puntos 2 y 3 señalados anteriormente.
-La productividad en instituciones externas deberá estar soportada con convenio inter-institucional.
-Si el Profesor solicitante es becario EDD, no es necesario que presente evidencia de Docencia.
-Si el Profesor solicitante es becario SIBE y presentó carga académica no es necesario que presente evidencia de Docencia.
-Si el Profesor solicitante es director de proyecto SIP y en su ficha de productividad refiere Dirección de Tesis no es necesario que presente evidencia";
+							$datos["texto"] .= '
+							<ol style="list-style-type: upper-roman;">
+								<li>Actas de calificaciones</li>
+								<li>Constancia de algunos de los Diplomados en:<br />a) Formación y Actualización Docente para un Nuevo Modelo Educativo.<br />b) Competencias Docentes en el Nivel Medio Superior.<br />c) Especialización en Competencias Docentes para la Educación Media Superior.</li>
+								<li>Constancia de participación en los últimos dos a&ntilde;os en eventos de formación o actualización profesional.</li>
+								<li>Constancia de asignación de alumnos con participación en alguno de los siguientes programas:<br />a) Institucional de Tutorías PIT.<br />b) Formación de Emprendedores.<br />c) Aquellos que establezca la Secretaría Académica.</li>
+							</ol>
+							<p>Si cuenta con evidencia de dirección de tesis y proyectos de investigación como director o participante, no es necesario presentar lo se&ntilde;alado en los puntos II, III y IV.</p>';
 							break;
 						case 2:
 							$datos["titulo"] .= "Superior";
-							$datos["texto"] .= "
-							<ul>
-								<li>Docencia para el Nivel Superior.- Acta de calificaciones de la unidad de aprendizaje de cualquiera de los semestres de dos años anteriores a la presentación de la solicitud</li>
-								<li>Formación de Recursos Humanos.- Será suficiente con presentar 'Acta de registro de tema de tesis y designación de dirección de tesis' y 'Acta de examen profesional y/o de grado' de cualquiera de los dos años anteriores</li>
-								<li>Actividades de Investigación.- Si es proyecto SIP no es necesario presentar evidencias, ya que esta información será verificada con la base de consulta que nos proporciona la Secretaría de Investigación y Posgrado</li>
-							</ul><br/>
-							<h3>Observaciones</h3>
-							La productividad en instituciones externas deberá estar soportada con convenio inter-institucional.
-Si el Profesor solicitante es becario EDD, no es necesario que presente evidencia de Docencia.
-Si el Profesor solicitante es becario SIBE y presentó carga académica no es necesario que presente evidencia de Docencia.
-Si el Profesor solicitante es director de proyecto SIP y en su ficha de productividad refiere Dirección de Tesis no es necesario que presente evidencia";
+							$datos["texto"] .= '
+							<ol style="list-style-type: upper-roman;">
+								<li>Actas de calificaciones</li>
+								<li>Actas de examen profesional y constancia de asignación de director de tesis firmadas por el titular de la dependencia politécnica, de la subdirección académica, del departamento de titulación profesional o del<br />secretario ejecutivo del comité de trabajos terminales.</li>
+							</ol>';
 							break;
 						case 5:
 							$datos["titulo"] .= "Posgrado";
-							$datos["texto"] .= "
-							<ul>
-								<li>Actas de calificaciones y/o constancia de docencia firmada por el Director de Posgrado</li>
-								<li>Para el Nivel Posgrado Acta de calificaciones de la unidad de aprendizaje de cualquiera de los semestres de dos años anteriores a la presentación de la solicitud y/o Constancia de docencia con el Visto Bueno de la Dirección de Posgrado</li>
-								<li>Formación de Recursos Humanos.- Será suficiente con presentar 'Acta de registro de tema de tesis y designación de dirección de tesis' y 'Acta de examen profesional y/o de grado' de cualquiera de los dos años anteriores</li>
-								<li>Actividades de Investigación.- Si es proyecto SIP no es necesario presentar evidencias, ya que esta información será verificada con la base de consulta que nos proporciona la Secretaría de Investigación y Posgrado</li>
-							</ul><br/>
-							<h3>Observaciones</h3>
-							La productividad en instituciones externas deberá estar soportada con convenio inter-institucional.
-Si el Profesor solicitante es becario EDD, no es necesario que presente evidencia de Docencia.
-Si el Profesor solicitante es becario SIBE y presentó carga académica no es necesario que presente evidencia de Docencia.
-Si el Profesor solicitante es director de proyecto SIP y en su ficha de productividad refiere Dirección de Tesis no es necesario que presente evidencia";
+							$datos["texto"] .= '
+							<ol style="list-style-type: upper-roman;">
+								<li>Actas de calificaciones, por lo menos de una unidad de aprendizaje o constancia de docencia firmada por el Director de Posgrado de la<br />SIP:</li>
+								<li>Actas de examen de grado, en caso de aparecer como segundo vocal, además deberá integrar el formato SIP‐14 BIS (Acta de revisión de tesis).</li>
+							</ol>';
 							break;
 					}
 				}
@@ -382,21 +374,22 @@ Si el Profesor solicitante es director de proyecto SIP y en su ficha de producti
 				
 				
 			} else  {	// REALIZACION
-				
-				$datos["texto"] .= "	<ul>
-						<li>Las solicitudes de Apoyos Económicos serán avaladas por el Director de la Unidad Académica mediante oficio original que deberá contener los siguientes datos: nombre del coordinador del evento, número de empleado, nombre, sede y fecha del evento</li>
-						<li>El formato Único que genera el SICAE, firmado por el coordinador del evento, con firma de visto bueno del titular del área de coordinación académica correspondiente y la firma y sello del director de la Unidad Académica</li>
-						<li>Programa Académico del evento, incluyendo días de duración y horario</li>
-						<li>Programa financiero del evento que incluya costos desglosados por cada concepto (Transporte aéreo y/o terrestre de expositores, viáticos, etc)</li>
-						<li>Resumen curricular de cada expositor</li>
-						<li>
-						<h3>OBSERVACIONES:</h3>
-Las solicitudes para la realización de eventos que no cuenten con el visto bueno del Titular del área de coordinación académica correspondiente, se devolverán con oficio señalando la improcedencia.
-Los eventos de realización deberán estar relacionados con las áreas de formación académica de la dependencia politécnica que los solicite y ser para beneficio principalmente del personal de carrera en servicio del IPN.
-El concepto de pago de honorarios será exclusivo para expositores externos al Instituto.
-Los conceptos de materiales y otros gastos podrán ser considerados tomando en cuenta la importancia y trascendencia del evento para el Instituto.
-Se podrá autorizar un apoyo para la realización de un evento académico organizado por varias Instituciones con corresponsabilidad en los gastos y en los que obtengan financiamiento de otras fuentes</li>
-					</ul>";
+				$datos["titulo"] = "Requisitos de solicitud de realización de eventos";
+				$datos["texto"] .= "<ul>
+						<li>Oficio de solicitud con los siguientes datos: nombre, sede y fecha del evento. Con firma autógrafa del titular de la dependencia politécnica y el sello.</li>
+						<li>Formato COFAA que genera el SICAE con las firmas autógrafas del titular de la dependencia politécnica y el titular del área de coordinación académica, y los sellos de correspondientes.</li>
+						<li>Estado de cuenta bancaria a nombre de la dependencia politécnica solicitante con el número de la cuenta clabe interbancaria.</li>
+						<li>Encuesta de calidad.</li>
+						<li>Programa académico del evento, incluyendo duración y horario.</li>
+						<li>Programa financiero del evento que incluya costos desglosados para cada expositor y concepto (honorarios, transporte y pago de viáticos), monto total y fuentes de financiamiento.</li>
+						<li>Información del evento (tríptico o folleto).</li>
+						<li>Relación y resumen curricular de expositores, indicando número de horas de participación de cada uno.</li>
+						</ul>
+						<h4>Nota:</h4>
+						<ul>
+						<li>El apoyo se autorizará preferentemente para los conceptos de transporte, pago de honorarios y viáticos de expositores.</li>
+						<li>Los conceptos de materiales, otros gastos y cafetería, podrán ser autorizados con el COTEBAL considerando el beneficio a la comunidad politécnica.</li>
+						</ul>";
 				
 			}
 			

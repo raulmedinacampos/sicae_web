@@ -138,7 +138,7 @@
 				$i = 1;
 				foreach ( $titulos as $val ) {
 			?>
-			<div class="row" data-numpon="1">
+			<div class="row" data-numpon="<?php echo $i; ?>">
 				<div class="form-group col-sm-12">
 					<label>Ponencia <?php echo $i; ?>. Título de ponencia en inglés y español</label>
 					<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
@@ -177,19 +177,24 @@
 							foreach ( $coautores as $co ) {
 								if ( $t["ID"] == $co["PONENCIA_ID"] ) {
 							?>
-							<h5>Coautor <?php echo $j; ?></h5>
-							<div class="row">
-								<div class="form-group col-sm-4">
-									<label>Nombre(s):</label>
-									<input type="text" id="coNombre<?php echo $i."_".$j; ?>" name="coNombre_<?php echo $j; ?>[]" class="form-control" placeholder="Nombre del coautor" value="<?php if(isset($coautores) && ($coautores)) {echo $co["NOMBRE"];} ?>" />
+							<div class="coauth">
+								<div>
+									<h5>Coautor <?php echo $j; ?></h5>
+									<a href="#"><span class="glyphicon glyphicon-trash"></span></a>
 								</div>
-								<div class="form-group col-sm-4">
-									<label>Primer apellido:</label>
-									<input type="text" id="coApP<?php echo $i."_".$j; ?>" name="coApP_<?php echo $j; ?>[]" class="form-control" placeholder="Primer apellido del coautor" value="<?php if(isset($coautores) && ($coautores)) {echo $co["APELLIDO_P"];}?>" />
-								</div>
-								<div class="form-group col-sm-4">
-									<label>Segundo apellido:</label>
-									<input type="text" id="coApM<?php echo $i."_".$j; ?>" name="coApM_<?php echo $j; ?>[]" class="form-control" placeholder="Segundo apellido del coautor" value="<?php if(isset($coautores) && ($coautores)) {echo $co["APELLIDO_M"];}?>" />
+								<div class="row">
+									<div class="form-group col-sm-4">
+										<label>Nombre(s):</label>
+										<input type="text" id="coNombre<?php echo $i."_".$j; ?>" name="coNombre_<?php echo $j; ?>[]" class="form-control" placeholder="Nombre del coautor" value="<?php if(isset($coautores) && ($coautores)) {echo $co["NOMBRE"];} ?>" />
+									</div>
+									<div class="form-group col-sm-4">
+										<label>Primer apellido:</label>
+										<input type="text" id="coApP<?php echo $i."_".$j; ?>" name="coApP_<?php echo $j; ?>[]" class="form-control" placeholder="Primer apellido del coautor" value="<?php if(isset($coautores) && ($coautores)) {echo $co["APELLIDO_P"];}?>" />
+									</div>
+									<div class="form-group col-sm-4">
+										<label>Segundo apellido:</label>
+										<input type="text" id="coApM<?php echo $i."_".$j; ?>" name="coApM_<?php echo $j; ?>[]" class="form-control" placeholder="Segundo apellido del coautor" value="<?php if(isset($coautores) && ($coautores)) {echo $co["APELLIDO_M"];}?>" />
+									</div>
 								</div>
 							</div>
 							<?php

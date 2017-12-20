@@ -29,12 +29,21 @@ class Apoyo_md extends CI_Model {
     */
     function GetById($id) {
     	$this->db->where(array('SOLICITUD_ID'=>$id));
-        $query = $this->db->get(self::tabla);
+    	$query = $this->db->get(self::tabla);
         return $query->row_array();
     }
     
     function GetBySolicitud($id) {
     	$this->db->where(array('SOLICITUD_ID'=>$id));
+    	
+    	if ( $this->session->rol == 1 || $this->session->rol == 3 ) {
+    		$this->db->where("TIPO_SOLICITUD", "A");
+    	}
+    	
+    	if ( $this->session->rol == 2 ) {
+    		$this->db->where("TIPO_SOLICITUD", "R");
+    	}
+    	
     	$query = $this->db->get(self::tabla);
     	return $query->row_array();
     }

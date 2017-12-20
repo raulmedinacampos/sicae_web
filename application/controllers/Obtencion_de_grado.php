@@ -70,6 +70,8 @@ class Obtencion_de_grado extends CI_Controller {
 	public function guardar() {
 		$this->load->model("solicitud_md");
 		$usr=$this->session->userdata('id');
+		
+		$id = $this->solicitud_md->GetNextId("A");
 		$data=array();
 		
 		array_push($data,'A');
@@ -93,6 +95,7 @@ class Obtencion_de_grado extends CI_Controller {
 		array_push($data, NULL);
 		array_push($data, NULL);
 		array_push($data, NULL);
+		array_push($data, $id);  // ID
 		
 		if ( $this->input->post("idSolicitud") == 0 )
 			$id = $this->solicitud_md->InsertRecord($data);
@@ -108,6 +111,8 @@ class Obtencion_de_grado extends CI_Controller {
 		$aereo=$this->input->post('aereo');
 		$terrestre=$this->input->post('terrestre');
 		$sol=$this->input->post("idSolicitud");
+		
+		$this->monto_md->CleanSol($sol);
 		
 		if($aereo!=""&&$aereo>0){
 			$this->monto_md->InsertRecord(array(5,$sol,"A",$aereo,0,$this->input->post("espTAereo"),$this->input->post("moneda"),$this->input->post("moneda")));

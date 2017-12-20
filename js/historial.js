@@ -16,7 +16,9 @@ function Init() {
 		    "sZeroRecords": "No se encontraron resultados"
 	    },
 	    "bLengthChange": false,
-		"pageLength": 15
+		"pageLength": 15,
+		"ordering": true,
+		"order":[[1, 'asc'],[0, 'asc']]
 	});
 }
 
@@ -46,10 +48,13 @@ function SendForm() {
 		e.preventDefault();
 		
 		var id = $(this).data("id");
+		var homoclave = $(this).data("hc");
 		
 		$("#hdnID").val(id);
 		
 		$("#formFormato").submit();
+		
+		startEncuestaHC(5000, homoclave);
 	});
 }
 

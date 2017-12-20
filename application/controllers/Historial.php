@@ -11,8 +11,19 @@ class Historial extends CI_Controller {
 		
 		$header["titulo"] = "Historial de asistencia";
 		
+		$this->load->model("homoclave_md");
 		$this->load->model("solicitud_md");
-		$params["solicitudes"] = $this->solicitud_md->GetByPerson($this->session->id);
+		
+		$params["homoclaves"] = $this->homoclave_md->GetAll();
+		$params["solicitudes"] = $this->solicitud_md->GetHistoryByPerson($this->session->id);
+		
+		if ( $this->session->rol == 1 || $this->session->rol == 3 ) {
+			$params["tipo"] = "asistencia";
+		}
+		
+		if ( $this->session->rol == 2 ) {
+			$params["tipo"] = "realización";
+		}
 		
 		$this->load->view('template/header', $header);
 		$this->load->view('historial/listado', $params);

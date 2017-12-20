@@ -66,6 +66,8 @@ class Estancia_de_investigacion extends CI_Controller {
 	public function guardar() {
 		$this->load->model("solicitud_md");
 		$usr=$this->session->userdata('id');
+		
+		$id = $this->solicitud_md->GetNextId("A");
 		$data=array();
 		
 		array_push($data,'A');
@@ -89,6 +91,7 @@ class Estancia_de_investigacion extends CI_Controller {
 		array_push($data, NULL);
 		array_push($data, NULL);
 		array_push($data, NULL);
+		array_push($data, $id);  // ID
 		
 		if ( $this->input->post("idSolicitud") == 0 )
 			$id = $this->solicitud_md->InsertRecord($data);
