@@ -97,6 +97,9 @@ function Validate() {
 			itinerario: {
 				required: true
 			},
+			moneda: {
+				required: true
+			},
 			apoyo: {
 				required: true
 			},

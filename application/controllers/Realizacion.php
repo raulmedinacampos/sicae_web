@@ -140,9 +140,11 @@ class Realizacion extends CI_Controller {
 		
 		$this->expositor_md->CleanSol($sol);
 		
+		$i = 1;
 		foreach($nombres as $ky=>$vl){
 			if ( $vl ) {
 				$data=array();
+				array_push($data,$i);
 				array_push($data,$sol);
 				array_push($data,"R");
 				array_push($data,NULL);
@@ -162,6 +164,7 @@ class Realizacion extends CI_Controller {
 				$rs=$this->expositor_md->insertRecord($data);
 				
 				array_push($res,$rs);
+				$i++;
 			}
 		}
 		

@@ -415,6 +415,9 @@ function Validate() {
 			otrosGastos: {
 				moneda: true
 			},
+			moneda: {
+				required: true
+			},
 			apoyo: {
 				required: true
 			},

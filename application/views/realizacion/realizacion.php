@@ -332,9 +332,22 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="form-group col-sm-12">
+				<div class="form-group col-sm-8">
 					<label>Especifica tus otros gastos:</label>
 					<input type="text" id="espOtros" name="espOtros" class="form-control" placeholder="Describe los otros gastos" value="<?php if(isset($otros_gastos)) {echo $otros_gastos["JUSTIFICACION"];} ?>" />
+				</div>
+				<div class="form-group col-sm-4">
+					<label>Tipo de moneda<span class="form-text">*</span>:</label>
+					<select id="moneda" name="moneda" class="form-control">
+						<option value="">Selecciona</option>
+						<?php
+						foreach ( $monedas as $val ) {
+						?>
+						<option <?php if ( isset($tTerrestre) && $tTerrestre["S_MONEDA_ID"] == $val->ID ) {echo 'selected="selected"'; } ?> value="<?php echo $val->ID; ?>"><?php echo $val->NOMBRE; ?></option>
+						<?php
+						}
+						?>
+					</select>
 				</div>
 			</div>
 			

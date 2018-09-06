@@ -188,6 +188,9 @@ function Validate() {
 			},
 			costo: {
 				moneda: true
+			},
+			moneda: {
+				required: true
 			}
 		},
 		messages: {

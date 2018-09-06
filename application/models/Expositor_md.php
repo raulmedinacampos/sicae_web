@@ -69,32 +69,27 @@ class Expositor_md extends CI_Model {
     }
 	
     function InsertRecord($data) {
-    	$this->db->select_max('ID');
-    	$query = $this->db->get(self::tabla);
-    	$id = $query->row();
-    	$id = $id->ID + 1;
-    	
-    	$this->db->set('ID', $id);
-    	$this->db->set('SOLICITUD_ID', $data[0]);
-    	$this->db->set('TIPO_SOLICITUD', $data[1]);
-    	$this->db->set('PERSONA_ID', $data[2]);
-    	$this->db->set('NOMBRE', $data[3]);
-    	$this->db->set('APELLIDO_P', $data[4]);
-    	$this->db->set('APELLIDO_M', $data[5]);
-		$this->db->set('PROCEDENCIA', $data[6]);
-		$this->db->set('DEDICACION', $data[7]);
-		$this->db->set('LICENCIATURA', $data[8]);
-		$this->db->set('MAESTRIA', $data[9]);
-		$this->db->set('DOCTORADO', $data[10]);
-		$this->db->set('ESPECIALIDAD', $data[11]);
-		$this->db->set('TEMA', $data[12]);
-		$this->db->set('ACTIVIDAD', $data[13]);
-		$this->db->set('HORARIO', $data[14]);
+    	$this->db->set('ID', $data[0]);
+    	$this->db->set('SOLICITUD_ID', $data[1]);
+    	$this->db->set('TIPO_SOLICITUD', $data[2]);
+    	$this->db->set('PERSONA_ID', $data[3]);
+    	$this->db->set('NOMBRE', $data[4]);
+    	$this->db->set('APELLIDO_P', $data[5]);
+    	$this->db->set('APELLIDO_M', $data[6]);
+		$this->db->set('PROCEDENCIA', $data[7]);
+		$this->db->set('DEDICACION', $data[8]);
+		$this->db->set('LICENCIATURA', $data[9]);
+		$this->db->set('MAESTRIA', $data[10]);
+		$this->db->set('DOCTORADO', $data[11]);
+		$this->db->set('ESPECIALIDAD', $data[12]);
+		$this->db->set('TEMA', $data[13]);
+		$this->db->set('ACTIVIDAD', $data[14]);
+		$this->db->set('HORARIO', $data[15]);
 		
         $this->db->insert(self::tabla,$this);
         
 		$this->db->select("ID");
-        $this->db->where(array("SOLICITUD_ID"=>$data[0],"NOMBRE"=>$data[3],"APELLIDO_P"=>$data[4],"TEMA"=>$data[12]));
+        $this->db->where(array("SOLICITUD_ID"=>$data[1],"NOMBRE"=>$data[4],"APELLIDO_P"=>$data[5],"TEMA"=>$data[13]));
         $query = $this->db->get(self::tabla);
         
         $usr = $query->row();

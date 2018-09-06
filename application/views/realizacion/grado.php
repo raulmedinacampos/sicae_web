@@ -89,7 +89,7 @@
 					<input type="text" id="espTTerrestre" name="espTTerrestre" class="form-control" placeholder="Indica el itinerario del traslado" value="<?php if(isset($tTerrestre)) {echo $tTerrestre["JUSTIFICACION"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Tipo de moneda:</label>
+					<label>Tipo de moneda<span class="form-text">*</span>:</label>
 					<select id="moneda" name="moneda" class="form-control">
 						<option value="">Selecciona</option>
 						<?php

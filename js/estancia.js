@@ -127,6 +127,9 @@ function Validate() {
 				},
 				moneda: true
 			},
+			moneda: {
+				required: true
+			},
 			apoyo: {
 				required: true
 			},

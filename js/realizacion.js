@@ -254,6 +254,9 @@ function Validate() {
 			beneficio: {
 				required: true
 			},
+			moneda: {
+				required: true
+			},
 			apoyo: {
 				required: true
 			},

@@ -283,7 +283,7 @@
 					<input type="text" id="espOtros" name="espOtros" class="form-control" placeholder="Describe el uso de este monto" value="<?php if(isset($otros_gastos)) {echo $otros_gastos["JUSTIFICACION"];} ?>" />
 				</div>
 				<div class="form-group col-sm-4">
-					<label>Tipo de moneda:</label>
+					<label>Tipo de moneda<span class="form-text">*</span>:</label>
 					<select id="moneda" name="moneda" class="form-control">
 						<option value="">Selecciona</option>
 						<?php
